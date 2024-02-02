@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace XRPL.Core.Domain.Clients.Requests
+namespace XRPL.Core.Domain.Requests
 {
 
     public abstract class ParameterBase

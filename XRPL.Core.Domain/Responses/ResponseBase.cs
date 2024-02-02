@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace XRPL.Core.Domain.Clients.Responses
+namespace XRPL.Core.Domain.Responses
 {
     public abstract class ResultBase
     {

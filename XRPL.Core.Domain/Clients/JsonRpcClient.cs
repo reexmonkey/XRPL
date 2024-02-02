@@ -1,8 +1,8 @@
 ﻿using ServiceStack;
 using System.Net.Http.Headers;
 using System.Text;
-using XRPL.Core.Domain.Clients.Requests;
-using XRPL.Core.Domain.Clients.Responses;
+using XRPL.Core.Domain.Requests;
+using XRPL.Core.Domain.Responses;
 
 namespace XRPL.Core.Domain.Clients
 {
@@ -11,7 +11,7 @@ namespace XRPL.Core.Domain.Clients
     /// </summary>
     public class JsonRpcClient : IDisposable
     {
-        private const string mediaType = "application/json";
+        private const string contentType = "application/json";
         private readonly HttpClient client;
         private readonly Uri uri;
         private readonly Encoding encoding;
@@ -36,7 +36,7 @@ namespace XRPL.Core.Domain.Clients
         {
             var json = request.ToJson();
 
-            using var content = new StringContent(json, encoding, mediaType);
+            using var content = new StringContent(json, encoding, contentType);
             var message = new HttpRequestMessage(HttpMethod.Post, uri) { Content = content };
 
             using var response = client.Send(message, cancellationToken);
@@ -52,7 +52,7 @@ namespace XRPL.Core.Domain.Clients
         {
             var json = request.ToJson();
 
-            using var content = new StringContent(json, encoding, mediaType);
+            using var content = new StringContent(json, encoding, contentType);
             using var response = await client.PostAsync(uri, content, cancellationToken);
             response.EnsureSuccessStatusCode();
 
@@ -68,7 +68,7 @@ namespace XRPL.Core.Domain.Clients
             {
                 if (disposing)
                 {
-                    // TODO: dispose managed state (managed objects)
+                    client.Dispose();
                 }
 
                 // TODO: free unmanaged resources (unmanaged objects) and override finalizer

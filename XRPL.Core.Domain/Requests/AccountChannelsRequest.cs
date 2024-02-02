@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace XRPL.Core.Domain.Clients.Requests
+namespace XRPL.Core.Domain.Requests
 {
     /// <summary>
     /// Represents the parameters of an account's payment channels.
