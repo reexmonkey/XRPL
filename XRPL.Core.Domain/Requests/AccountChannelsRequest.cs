@@ -35,7 +35,7 @@ namespace XRPL.Core.Domain.Requests
         /// The ledger index of the ledger to use, or a shortcut string to choose a ledger automatically.
         /// </summary>
         [DataMember(Name = "ledger_index")]
-        public uint LedgerIndex { get; set; }
+        public string? LedgerIndex { get; set; }
 
         /// <summary>
         /// Limit the number of transactions to retrieve.
@@ -70,7 +70,7 @@ namespace XRPL.Core.Domain.Requests
         /// <summary>
         /// Initializes a new instance of the <see cref="AccountChannelsRequest"/> class with the specified parameters.
         /// </summary>
-        /// <param name="parameters">The parameters of the channel payments.</param>
+        /// <param name="parameters">The parameters of the request.</param>
         public AccountChannelsRequest(AccountChannelsParameters[] parameters) : this()
         {
             ArgumentNullException.ThrowIfNull(parameters);

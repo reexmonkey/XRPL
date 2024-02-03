@@ -30,9 +30,9 @@ namespace XRPL.Core.Domain.Clients
             encoding = new UTF8Encoding(false, true);
         }
 
-        #region Account Methods
-
-        public AccountChannelsResponse Post(AccountChannelsRequest request, CancellationToken cancellationToken)
+        private TResponse Post<TRequest, TResponse>(TRequest request, CancellationToken cancellationToken)
+            where TRequest : class
+            where TResponse : class
         {
             var json = request.ToJson();
 
@@ -45,10 +45,10 @@ namespace XRPL.Core.Domain.Clients
             using var reader = new StreamReader(response.Content.ReadAsStream(cancellationToken));
             var result = reader.ReadToEnd();
 
-            return result.FromJson<AccountChannelsResponse>();
+            return result.FromJson<TResponse>();
         }
 
-        public async Task<AccountChannelsResponse> PostAsync(AccountChannelsRequest request, CancellationToken cancellationToken)
+        private async Task<TResponse> PostAsync<TRequest, TResponse>(TRequest request, CancellationToken cancellationToken)
         {
             var json = request.ToJson();
 
@@ -57,8 +57,23 @@ namespace XRPL.Core.Domain.Clients
             response.EnsureSuccessStatusCode();
 
             var result = await response.Content.ReadAsStringAsync(cancellationToken);
-            return result.FromJson<AccountChannelsResponse>();
+            return result.FromJson<TResponse>();
         }
+
+        #region Account Methods
+
+        public AccountChannelsResponse Post(AccountChannelsRequest request, CancellationToken cancellationToken)
+            => Post<AccountChannelsRequest, AccountChannelsResponse>(request, cancellationToken);
+
+        public Task<AccountChannelsResponse> PostAsync(AccountChannelsRequest request, CancellationToken cancellationToken)
+            => PostAsync<AccountChannelsRequest, AccountChannelsResponse>(request, cancellationToken);
+
+
+        public AccountCurrenciesResponse Post(AccountCurrenciesRequest request, CancellationToken cancellationToken)
+            => Post<AccountCurrenciesRequest, AccountCurrenciesResponse>(request, cancellationToken);
+
+        public Task<AccountCurrenciesResponse> PostAsync(AccountCurrenciesRequest request, CancellationToken cancellationToken)
+            => PostAsync<AccountCurrenciesRequest, AccountCurrenciesResponse>(request, cancellationToken);
 
         #endregion Account Methods
 
