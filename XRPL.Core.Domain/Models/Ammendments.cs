@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 namespace XRPL.Core.Domain.Models
 {
     /// <summary>
-    /// Represents a ledger entry type that contains a list of ammendments, which are currently active.
+    /// Represents a ledger entry that describes a list of currently active ammendments.
     /// </summary>
-    public class Ammendments: LedgerEntryBase
+    public class Ammendments : LedgerEntryBase
     {
         /// <summary>
         /// Array of 256-bit amendment IDs for all currently enabled amendments. If omitted, there are no enabled amendments.
@@ -19,20 +19,19 @@ namespace XRPL.Core.Domain.Models
         public string[]? AmendmentIDs { get; set; }
 
         /// <summary>
-        /// A bit-map of boolean flags enabled for this object. Currently, the protocol defines no flags for Amendments objects. The value is always 0
-        /// </summary>
-        public override uint Flags { get => base.Flags; set => base.Flags = value; }
-
-        /// <summary>
-        /// The value 0x0066, mapped to the string Amendments, indicates that this object describes the status of amendments to the XRP Ledger.
-        /// </summary>
-        public override string? LedgerEntryType { get => base.LedgerEntryType; set => base.LedgerEntryType = value; }
-
-        /// <summary>
-        /// Array of objects describing the status of amendments that have majority support but are not yet enabled. 
+        /// Array of objects describing the status of amendments that have majority support but are not yet enabled.
         /// If omitted, there are no pending amendments with majority support
         /// </summary>
         public Majority[]? Majorities { get; set; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Ammendments"/> class.
+        /// </summary>
+        public Ammendments()
+        {
+            Flags = 0;
+            LedgerEntryType = "0x0066";
+        }
     }
 
     /// <summary>

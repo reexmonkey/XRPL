@@ -1,0 +1,113 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace XRPL.Core.Domain.Models
+{
+    /// <summary>
+    /// Specifies a ledger entry that describes a check, similar to a paper personal check, which can be cashed by its destination to get money from its sender.
+    /// </summary>
+    /// <typeparam name="TCurrency">The type of currency supported by the check.</typeparam>
+    public abstract class Check<TCurrency>: LedgerEntryBase
+        where TCurrency : class
+    {
+        /// <summary>
+        /// The sender of the <see cref="Check{TCurrency}"/>. Cashing the <see cref="Check{TCurrency}"/> debits this address's balance.
+        /// </summary>
+        public string? Account { get; set; }
+
+        /// <summary>
+        /// The intended recipient of the Check. Only this address can cash the Check, using a CheckCash transaction.
+        /// </summary>
+        public string? Destination { get; set; }
+
+        /// <summary>
+        /// A hint indicating which page of the destination's owner directory links to this object, in case the directory consists of multiple pages.
+        /// </summary>
+        public string? DestinationNode { get; set; }
+
+        /// <summary>
+        /// An arbitrary tag to further specify the destination for this Check, such as a hosted recipient at the destination address.
+        /// </summary>
+        public uint DestinationTag { get; set; }
+
+        /// <summary>
+        /// Indicates the time after which this <see cref="Check{TCurrency}"/> is considered expired. See Specifying Time for details.
+        /// </summary>
+        public uint Expiration { get; set; }
+
+        /// <summary>
+        /// Arbitrary 256-bit hash provided by the sender as a specific reason or identifier for this <see cref="Check{TCurrency}"/>.
+        /// </summary>
+        public string? InvoiceID { get; set; }
+
+        /// <summary>
+        /// A hint indicating which page of the sender's owner directory links to this object, in case the directory consists of multiple pages.
+        /// </summary>
+        public string? OwnerNode { get; set; }
+
+        /// <summary>
+        /// The identifying hash of the transaction that most recently modified this object.
+        /// </summary>
+        public string? PreviousTxnID { get; set; }
+
+        /// <summary>
+        /// The index of the ledger that contains the transaction that most recently modified this object.
+        /// </summary>
+        public uint PreviousTxnLgrSeq { get; set;}
+
+        /// <summary>
+        /// The maximum amount of currency this <see cref="Check{TCurrency}"/> can debit the sender. 
+        /// <para/> If the <see cref="Check{TCurrency}"/> is successfully cashed, the destination is credited in the same currency for up to this amount.
+        /// </summary>
+        public TCurrency? SendMax { get; set; }
+
+        /// <summary>
+        /// The sequence number of the CheckCreate transaction that created this check.
+        /// </summary>
+        public uint Sequence { get; set; }
+
+        /// <summary>
+        /// An arbitrary tag to further specify the source for this <see cref="Check{TCurrency}"/>, such as a hosted recipient at the sender's address.
+        /// </summary>
+        public uint SourceTag { get; set; }
+
+        /// <summary>
+        /// Initializes the new instance of the <see cref="Check{TCurrency}"/> class.
+        /// </summary>
+        public Check()
+        {
+            LedgerEntryType = "0x0043";
+        }
+
+    }
+
+    /// <summary>
+    /// Represents an XRP check.
+    /// </summary>
+    public sealed class XrpCheck: Check<string>
+    {
+        
+    }
+
+    /// <summary>
+    /// Reprsents a token check.
+    /// </summary>
+    public sealed class TokenCheck: Check<TokenCurrency>
+    {
+        
+    }
+
+    public class TokenCurrency
+    {
+        [DataMember(Name = "value")]
+        public string? Value { get; set; }
+
+        [DataMember(Name = "currency")]
+        public string? Currency { get; set; }
+    }
+
+}

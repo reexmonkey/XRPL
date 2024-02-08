@@ -30,7 +30,7 @@ namespace XRPL.Core.Domain.Models
         public string? Issuer { get; set; }
     }
 
-    public class TokenCurrencyAmount: CurrencyAmountBase<TokenAmount>
+    public sealed class TokenCurrencyAmount: CurrencyAmountBase<TokenAmount>
     {
 
     }

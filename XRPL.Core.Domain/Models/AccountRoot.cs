@@ -7,11 +7,10 @@ using System.Threading.Tasks;
 namespace XRPL.Core.Domain.Models
 {
     /// <summary>
-    /// Represents a ledger entry type that describes a single account. 
+    /// Represents a ledger entry that describes a single account.
     /// </summary>
-    public class AccountRoot: LedgerEntryBase
+    public class AccountRoot : LedgerEntryBase
     {
-
         protected AccountRootFlags flags;
 
         /// <summary>
@@ -20,15 +19,15 @@ namespace XRPL.Core.Domain.Models
         public string? Account { get; set; }
 
         /// <summary>
-        /// The identifying hash of the transaction most recently sent by this account. 
-        /// <para/>This field must be enabled to use the <see cref="AccountTxnID"/> transaction field. 
+        /// The identifying hash of the transaction most recently sent by this account.
+        /// <para/>This field must be enabled to use the <see cref="AccountTxnID"/> transaction field.
         /// To enable it, send an AccountSet transaction with the asfAccountTxnID flag enabled.
         /// </summary>
         public string? AccountTxnID { get; set; }
 
         /// <summary>
-        /// The ledger entry ID of the corresponding AMM ledger entry. 
-        /// <para/> Set during account creation; cannot be modified. 
+        /// The ledger entry ID of the corresponding AMM ledger entry.
+        /// <para/> Set during account creation; cannot be modified.
         /// If present, indicates that this is a special AMM AccountRoot; always omitted on non-AMM accounts.
         /// </summary>
         public string? AMMID { get; set; }
@@ -39,20 +38,20 @@ namespace XRPL.Core.Domain.Models
         public string? Balance { get; set; }
 
         /// <summary>
-        /// How many total of this account's issued non-fungible tokens have been burned. 
+        /// How many total of this account's issued non-fungible tokens have been burned.
         /// <para/>This number is always equal or less than MintedNFTokens.
         /// </summary>
         public uint BurnedNFTokens { get; set; }
 
         /// <summary>
-        /// A domain associated with this account. 
-        /// <para/>In JSON, this is the hexadecimal for the ASCII representation of the domain. 
-        /// Cannot be more than 256 bytes in length. 
+        /// A domain associated with this account.
+        /// <para/>In JSON, this is the hexadecimal for the ASCII representation of the domain.
+        /// Cannot be more than 256 bytes in length.
         /// </summary>
-        public string? Domain { get; set;}
+        public string? Domain { get; set; }
 
         /// <summary>
-        /// The md5 hash of an email address. 
+        /// The md5 hash of an email address.
         /// <para/>Clients can use this to look up an avatar through services such as Gravatar.
         /// </summary>
         public string? EmailHash { get; set; }
@@ -63,19 +62,14 @@ namespace XRPL.Core.Domain.Models
         public uint FirstNFTokenSequence { get; set; }
 
         /// <summary>
-        /// The value 0x0061, mapped to the string <see cref="AccountRoot"/>, indicates that this is an <see cref="AccountRoot"/> object.
-        /// </summary>
-        public override string? LedgerEntryType { get; set; }
-
-        /// <summary>
-        /// A public key that may be used to send encrypted messages to this account. 
-        /// <para/> In JSON, uses hexadecimal. 
+        /// A public key that may be used to send encrypted messages to this account.
+        /// <para/> In JSON, uses hexadecimal.
         /// Must be exactly 33 bytes, with the first byte indicating the key type: 0x02 or 0x03 for secp256k1 keys, 0xED for Ed25519 keys.
         /// </summary>
         public string? MessageKey { get; set; }
 
         /// <summary>
-        /// How many total non-fungible tokens have been minted by and on behalf of this account. 
+        /// How many total non-fungible tokens have been minted by and on behalf of this account.
         /// </summary>
         public uint MintedNFTokens { get; set; }
 
@@ -92,7 +86,7 @@ namespace XRPL.Core.Domain.Models
         /// <summary>
         /// The identifying hash of the transaction that most recently modified this object.
         /// </summary>
-        public string? PreviousTxnID { get; set;}
+        public string? PreviousTxnID { get; set; }
 
         /// <summary>
         /// The index of the ledger that contains the transaction that most recently modified this object.
@@ -110,8 +104,8 @@ namespace XRPL.Core.Domain.Models
         public uint Sequence { get; set; }
 
         /// <summary>
-        /// How many Tickets this account owns in the ledger. 
-        /// <para/>This is updated automatically to ensure that the account stays within the hard limit of 250 Tickets at a time. 
+        /// How many Tickets this account owns in the ledger.
+        /// <para/>This is updated automatically to ensure that the account stays within the hard limit of 250 Tickets at a time.
         /// This field is omitted if the account has zero Tickets.
         /// </summary>
         public uint TicketCount { get; set; }
@@ -140,20 +134,28 @@ namespace XRPL.Core.Domain.Models
         /// Set of bit-flags for this ledger entry.
         /// </summary>
         public override uint Flags { get => (uint)flags; set => flags = (AccountRootFlags)value; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AccountRoot"/> class.
+        /// </summary>
+        public AccountRoot()
+        {
+            LedgerEntryType = "0x0061";
+        }
     }
 
     /// <summary>
     /// Represents an account root to be used with an Automated Market Maker (AMM).
     /// </summary>
-    public sealed class SpecialAccountRoot: AccountRoot
+    public sealed class SpecialAccountRoot : AccountRoot
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SpecialAccountRoot"/> class.
         /// </summary>
-        public SpecialAccountRoot() 
+        public SpecialAccountRoot()
         {
-            flags = AccountRootFlags.lsfDisableMaster 
-                | AccountRootFlags.lsfDepositAuth 
+            flags = AccountRootFlags.lsfDisableMaster
+                | AccountRootFlags.lsfDepositAuth
                 | AccountRootFlags.lsfDefaultRipple;
         }
     }
@@ -162,7 +164,7 @@ namespace XRPL.Core.Domain.Models
     /// Represents options you can change with an Account Set transaction.
     /// </summary>
     [Flags]
-    public enum AccountRootFlags: uint
+    public enum AccountRootFlags : uint
     {
         /// <summary>
         /// Enable Clawback for this account.
@@ -205,7 +207,7 @@ namespace XRPL.Core.Domain.Models
         lsfDisallowIncomingTrustline = 0x20000000,
 
         /// <summary>
-        /// Client applications should not send XRP to this account. 
+        /// Client applications should not send XRP to this account.
         /// <para/>(Advisory; not enforced by the protocol.)
         /// </summary>
         lsfDisallowXRP = 0x00080000,

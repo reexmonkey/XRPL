@@ -23,12 +23,12 @@ namespace XRPL.Core.Domain.Models
         /// <para/> In JSON, this field is represented with different names depending on the context and API method. 
         /// (Note, even though this is specified as "optional" in the code, every ledger entry should have one unless it's legacy data from very early in the XRP Ledger's history.)
         /// </summary>
-        public virtual string? LedgerIndex { get => Index; set => Index = value; }
+        public string? LedgerIndex { get => Index; set => Index = value; }
 
         /// <summary>
         /// The type of ledger entry. Valid ledger entry types include <see cref="AccountRoot"/>, Offer, RippleState, and others.
         /// </summary>
-        public virtual string? LedgerEntryType { get; set; }
+        public string? LedgerEntryType { get; set; }
 
         /// <summary>
         /// Set of bit-flags for this ledger entry.
