@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace XRPL.Core.Domain.Models
+namespace XRPL.Core.Domain.LedgerEntries
 {
     /// <summary>
     /// Specifies a ledger entry that contains a set of common fields.

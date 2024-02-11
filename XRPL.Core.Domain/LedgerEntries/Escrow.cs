@@ -4,8 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace XRPL.Core.Domain.Models
+namespace XRPL.Core.Domain.LedgerEntries
 {
+    /// <summary>
+    /// Represents an escrow, which holds XRP until specific conditions are met.
+    /// </summary>
     public class Escrow : LedgerEntryBase
     {
         /// <summary>

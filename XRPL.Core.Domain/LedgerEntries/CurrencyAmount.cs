@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace XRPL.Core.Domain.Models
+namespace XRPL.Core.Domain.LedgerEntries
 {
     public abstract class CurrencyAmountBase<TAmount>
         where TAmount : class

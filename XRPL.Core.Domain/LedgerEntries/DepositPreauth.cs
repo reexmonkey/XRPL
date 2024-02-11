@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace XRPL.Core.Domain.Models
+namespace XRPL.Core.Domain.LedgerEntries
 {
     /// <summary>
     /// Represents a type that tracks a preauthorization from one account to another. 
