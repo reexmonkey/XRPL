@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace XRPL.Core.Domain.LedgerEntries
+namespace XRPL.Core.Domain.Entries
 {
     /// <summary>
     /// Represents a type that tracks a preauthorization from one account to another. 
@@ -48,7 +48,7 @@ namespace XRPL.Core.Domain.LedgerEntries
         /// </summary>
         public DepositPreauth()
         {
-            LedgerEntryType = "0x0070";
+            LedgerEntryType = "DepositPreauth";
         }
     }
 }

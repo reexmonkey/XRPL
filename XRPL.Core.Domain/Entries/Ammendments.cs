@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace XRPL.Core.Domain.LedgerEntries
+namespace XRPL.Core.Domain.Entries
 {
     /// <summary>
     /// Represents a ledger entry that describes a list of currently active ammendments.
@@ -30,7 +30,7 @@ namespace XRPL.Core.Domain.LedgerEntries
         public Ammendments()
         {
             Flags = 0;
-            LedgerEntryType = "0x0066";
+            LedgerEntryType = "Amendments";
         }
     }
 

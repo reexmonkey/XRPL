@@ -4,15 +4,14 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using XRPL.Core.Domain.Models;
 
-namespace XRPL.Core.Domain.LedgerEntries
+namespace XRPL.Core.Domain.Entries
 {
     /// <summary>
     /// Specifies a ledger entry that describes a check, similar to a paper personal check, which can be cashed by its destination to get money from its sender.
     /// </summary>
-    /// <typeparam name="TCurrency">The type of currency supported by the check.</typeparam>
-    public abstract class Check<TCurrency>: LedgerEntryBase
-        where TCurrency : class
+    public abstract class Check: LedgerEntryBase
     {
         /// <summary>
         /// The sender of the <see cref="Check{TCurrency}"/>. Cashing the <see cref="Check{TCurrency}"/> debits this address's balance.
@@ -59,11 +58,7 @@ namespace XRPL.Core.Domain.LedgerEntries
         /// </summary>
         public uint PreviousTxnLgrSeq { get; set;}
 
-        /// <summary>
-        /// The maximum amount of currency this <see cref="Check{TCurrency}"/> can debit the sender. 
-        /// <para/> If the <see cref="Check{TCurrency}"/> is successfully cashed, the destination is credited in the same currency for up to this amount.
-        /// </summary>
-        public TCurrency? SendMax { get; set; }
+
 
         /// <summary>
         /// The sequence number of the CheckCreate transaction that created this check.
@@ -80,7 +75,7 @@ namespace XRPL.Core.Domain.LedgerEntries
         /// </summary>
         public Check()
         {
-            LedgerEntryType = "0x0043";
+            LedgerEntryType = "Check";
         }
 
     }
@@ -88,26 +83,27 @@ namespace XRPL.Core.Domain.LedgerEntries
     /// <summary>
     /// Represents an XRP check.
     /// </summary>
-    public sealed class XrpCheck: Check<string>
+    public sealed class XRPCheck: Check
     {
-        
+        /// <summary>
+        /// The maximum amount of currency this <see cref="Check"/> can debit the sender. 
+        /// <para/> If the <see cref="Check"/> is successfully cashed, the destination is credited in the same currency for up to this amount.
+        /// </summary>
+        public string? SendMax { get; set; }
     }
 
     /// <summary>
     /// Reprsents a token check.
     /// </summary>
-    public sealed class TokenCheck: Check<TokenCurrency>
+    public sealed class TokenCheck: Check
     {
-        
+        /// <summary>
+        /// The maximum amount of currency this <see cref="Check"/> can debit the sender. 
+        /// <para/> If the <see cref="Check"/> is successfully cashed, the destination is credited in the same currency for up to this amount.
+        /// </summary>
+        public TokenCurrency? SendMax { get; set; }   
     }
 
-    public class TokenCurrency
-    {
-        [DataMember(Name = "value")]
-        public string? Value { get; set; }
 
-        [DataMember(Name = "currency")]
-        public string? Currency { get; set; }
-    }
 
 }

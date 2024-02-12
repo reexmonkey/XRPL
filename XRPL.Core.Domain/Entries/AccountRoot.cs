@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace XRPL.Core.Domain.LedgerEntries
+namespace XRPL.Core.Domain.Entries
 {
     /// <summary>
     /// Represents a ledger entry that describes a single account.
@@ -140,7 +140,7 @@ namespace XRPL.Core.Domain.LedgerEntries
         /// </summary>
         public AccountRoot()
         {
-            LedgerEntryType = "0x0061";
+            LedgerEntryType = "AccountRoot";
         }
     }
 

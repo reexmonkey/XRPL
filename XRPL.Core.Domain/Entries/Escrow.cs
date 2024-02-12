@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace XRPL.Core.Domain.LedgerEntries
+namespace XRPL.Core.Domain.Entries
 {
     /// <summary>
     /// Represents an escrow, which holds XRP until specific conditions are met.
@@ -82,7 +82,7 @@ namespace XRPL.Core.Domain.LedgerEntries
         /// </summary>
         public Escrow()
         {
-            LedgerEntryType = "0x0075";
+            LedgerEntryType = "Escrow";
         }
     }
 }

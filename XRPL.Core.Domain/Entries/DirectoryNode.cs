@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace XRPL.Core.Domain.LedgerEntries
+namespace XRPL.Core.Domain.Entries
 {
     /// <summary>
     /// The DirectoryNode ledger entry type provides a list of links to other entries in the ledger's state data. 
@@ -73,7 +73,7 @@ namespace XRPL.Core.Domain.LedgerEntries
         /// </summary>
         public DirectoryNode()
         {
-            LedgerEntryType = "0x0064";
+            LedgerEntryType = "DirectoryNode";
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace XRPL.Core.Domain.LedgerEntries
+namespace XRPL.Core.Domain.Entries
 {
     /// <summary>
     /// Represents a ledger entry that contains the current base transaction cost and reserve amounts as determined by fee voting. 
@@ -37,7 +37,7 @@ namespace XRPL.Core.Domain.LedgerEntries
         /// </summary>
         public FeeSettings()
         {
-            LedgerEntryType = " 0x0073";
+            LedgerEntryType = "FeeSettings";
         }
     }
 }

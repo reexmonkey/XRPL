@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace XRPL.Core.Domain.LedgerEntries
+namespace XRPL.Core.Domain.Entries
 {
     /// <summary>
     /// Represents a ledger entry that contains a history of prior ledgers that led up to this ledger version, in the form of their hashes. 
@@ -30,7 +30,7 @@ namespace XRPL.Core.Domain.LedgerEntries
         /// </summary>
         public LedgerHashes()
         {
-            LedgerEntryType = "0x0068";
+            LedgerEntryType = "LedgerHashes";
         }
 
     }

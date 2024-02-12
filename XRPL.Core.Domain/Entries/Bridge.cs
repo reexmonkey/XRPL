@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using XRPL.Core.Domain.Models;
 
-namespace XRPL.Core.Domain.LedgerEntries
+namespace XRPL.Core.Domain.Entries
 {
     /// <summary>
     /// Represents a single cross-chain bridge that connects the XRP Ledger with another blockchain, 
@@ -21,13 +22,13 @@ namespace XRPL.Core.Domain.LedgerEntries
         /// The minimum amount, in XRP, required for an XChainAccountCreateCommit transaction. 
         /// <para/>If this isn't present, the XChainAccountCreateCommit transaction will fail. This field can only be present on XRP-XRP bridges.
         /// </summary>
-        public XrpCurrencyAmount? MinAccountCreateAmount { get; set; }
+        public XRPCurrencyAmount? MinAccountCreateAmount { get; set; }
 
         /// <summary>
         /// The total amount, in XRP, to be rewarded for providing a signature for cross-chain transfer or for signing for the cross-chain reward. 
         /// <para/>This amount will be split among the signers.
         /// </summary>
-        public XrpCurrencyAmount? SignatureReward { get; set; }
+        public XRPCurrencyAmount? SignatureReward { get; set; }
 
         /// <summary>
         /// A counter used to order the execution of account create transactions. 
@@ -54,6 +55,14 @@ namespace XRPL.Core.Domain.LedgerEntries
         /// The value of the next XChainClaimID to be created.
         /// </summary>
         public uint XChainClaimID { get; set; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Bridge"/> class.
+        /// </summary>
+        public Bridge()
+        {
+            LedgerEntryType = "Bridge";
+        }
     }
 
     /// <summary>
