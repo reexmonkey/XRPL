@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using XRPL.Core.Domain.Models;
@@ -8,10 +9,10 @@ using XRPL.Core.Domain.Models;
 namespace XRPL.Core.Domain.Entries
 {
     /// <summary>
-    /// Represents a single cross-chain bridge that connects the XRP Ledger with another blockchain, 
+    /// Represents a single cross-chain bridge that connects the XRP Ledger with another blockchain,
     /// such as its sidechain, and enables value in the form of XRP and other tokens (IOUs) to move efficiently between the two blockchains.
     /// </summary>
-    public class Bridge: LedgerEntryBase
+    public class Bridge : LedgerEntryBase
     {
         /// <summary>
         /// The account that submitted the XChainCreateBridge transaction on the blockchain
@@ -19,29 +20,29 @@ namespace XRPL.Core.Domain.Entries
         public string? Account { get; set; }
 
         /// <summary>
-        /// The minimum amount, in XRP, required for an XChainAccountCreateCommit transaction. 
+        /// The minimum amount, in XRP, required for an XChainAccountCreateCommit transaction.
         /// <para/>If this isn't present, the XChainAccountCreateCommit transaction will fail. This field can only be present on XRP-XRP bridges.
         /// </summary>
-        public XRPCurrencyAmount? MinAccountCreateAmount { get; set; }
+        public string? MinAccountCreateAmount { get; set; }
 
         /// <summary>
-        /// The total amount, in XRP, to be rewarded for providing a signature for cross-chain transfer or for signing for the cross-chain reward. 
+        /// The total amount, in XRP, to be rewarded for providing a signature for cross-chain transfer or for signing for the cross-chain reward.
         /// <para/>This amount will be split among the signers.
         /// </summary>
-        public XRPCurrencyAmount? SignatureReward { get; set; }
+        public string? SignatureReward { get; set; }
 
         /// <summary>
-        /// A counter used to order the execution of account create transactions. 
-        /// <para/>It is incremented every time a XChainAccountCreateCommit transaction is "claimed" on the destination chain. 
-        /// When the "claim" transaction is run on the destination chain, 
-        /// the XChainAccountClaimCount must match the value that the XChainAccountCreateCount had at the time the XChainAccountClaimCount was run on the source chain. 
-        /// This orders the claims so that they run in the same order that the XChainAccountCreateCommit transactions ran on the source chain, 
+        /// A counter used to order the execution of account create transactions.
+        /// <para/>It is incremented every time a XChainAccountCreateCommit transaction is "claimed" on the destination chain.
+        /// When the "claim" transaction is run on the destination chain,
+        /// the XChainAccountClaimCount must match the value that the XChainAccountCreateCount had at the time the XChainAccountClaimCount was run on the source chain.
+        /// This orders the claims so that they run in the same order that the XChainAccountCreateCommit transactions ran on the source chain,
         /// to prevent transaction replay
         /// </summary>
         public uint XChainAccountClaimCount { get; set; }
 
         /// <summary>
-        /// A counter used to order the execution of account create transactions. 
+        /// A counter used to order the execution of account create transactions.
         /// <para/>It is incremented every time a successful XChainAccountCreateCommit transaction is run for the source chain.
         /// </summary>
         public uint XChainAccountCreateCount { get; set; }
@@ -71,13 +72,13 @@ namespace XRPL.Core.Domain.Entries
     public class XChainBridge
     {
         /// <summary>
-        /// The door account on the issuing chain. 
+        /// The door account on the issuing chain.
         /// <para/>For an XRP-XRP bridge, this must be the genesis account (the account that is created when the network is first started, which contains all of the XRP).
         /// </summary>
         public string? IssuingChainDoor { get; set; }
 
         /// <summary>
-        /// The asset that is minted and burned on the issuing chain. 
+        /// The asset that is minted and burned on the issuing chain.
         /// <para/> For an IOU-IOU bridge, the issuer of the asset must be the door account on the issuing chain, to avoid supply issues.
         /// </summary>
         public Issue? IssuingChainIssue { get; set; }
@@ -90,7 +91,7 @@ namespace XRPL.Core.Domain.Entries
         /// <summary>
         /// The asset that is locked and unlocked on the locking chain.
         /// </summary>
-        public Issue? LockingChainIssue { get;set; }
+        public Issue? LockingChainIssue { get; set; }
     }
 
     /// <summary>
@@ -101,6 +102,21 @@ namespace XRPL.Core.Domain.Entries
         /// <summary>
         /// The currency of the issue.
         /// </summary>
+        [DataMember(Name = "currency")]
         public string? Currency { get; set; }
+    }
+
+    /// <summary>
+    /// Represents an XRP asset on an issuing chain.
+    /// </summary>
+    public sealed class XrpIssue : Issue
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="XrpIssue"/> class.
+        /// </summary>
+        public XrpIssue()
+        {
+            Currency = "XRP";
+        }
     }
 }

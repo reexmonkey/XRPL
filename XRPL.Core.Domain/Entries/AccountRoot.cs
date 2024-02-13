@@ -133,7 +133,7 @@ namespace XRPL.Core.Domain.Entries
         /// <summary>
         /// Set of bit-flags for this ledger entry.
         /// </summary>
-        public override uint Flags { get => (uint)flags; set => flags = (AccountRootFlags)value; }
+        public uint Flags { get => (uint)flags; set => flags = (AccountRootFlags)value; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AccountRoot"/> class.

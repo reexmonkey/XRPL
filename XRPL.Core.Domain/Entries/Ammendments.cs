@@ -29,7 +29,6 @@ namespace XRPL.Core.Domain.Entries
         /// </summary>
         public Ammendments()
         {
-            Flags = 0;
             LedgerEntryType = "Amendments";
         }
     }

@@ -16,12 +16,23 @@ namespace XRPL.Core.Domain.Entries
     /// When processing transactions, the network automatically removes any unfunded Offers that those transactions come across.
     /// (Otherwise, unfunded Offers remain, because only transactions can change the ledger state.)
     /// </summary>
-    public class Offer : LedgerEntryBase
+    /// <typeparam name="TPays">The type of amount and currency requested by the offer creator.</typeparam>
+    /// <typeparam name="TGets">The type of amount and currency provided by the offer creator.</typeparam>
+    public abstract class OfferBase<TPays, TGets> : LedgerEntryBase
+        where TPays : class
+        where TGets : class
     {
+        protected OfferFlags flags;
+
         /// <summary>
         /// The address of the account that owns this Offer.
         /// </summary>
         public string? Account { get; set; }
+
+        /// <summary>
+        /// Set of bit-flags for this ledger entry.
+        /// </summary>
+        public override uint Flags { get => (uint)flags; set => flags = (OfferFlags)value; }
 
         /// <summary>
         /// The ID of the Offer Directory that links to this Offer.
@@ -61,19 +72,68 @@ namespace XRPL.Core.Domain.Entries
         /// <summary>
         /// The remaining amount and type of currency requested by the Offer creator.
         /// </summary>
-        public TokenCurrency? TakerPays { get; set; }
+        public TPays? TakerPays { get; set; }
 
         /// <summary>
         /// The remaining amount and type of currency being provided by the Offer creator.
         /// </summary>
-        public TokenCurrency? TakerGets { get; set; }
+        public TGets? TakerGets { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Offer"/> class.
         /// </summary>
-        public Offer()
+        protected OfferBase()
         {
             LedgerEntryType = "Offer";
         }
+    }
+
+    /// <summary>
+    /// Represents the flags for an Offer.
+    /// </summary>
+    [Flags]
+    public enum OfferFlags : uint
+    {
+        lsfPassive = 0x00010000,
+        lsfSell = 0x00020000
+    }
+
+    /// <summary>
+    /// A ledger entry type that describes an offer to request XRP for a fungible token in the XRP Ledger's decentralized exchange.
+    /// (In finance, this is more traditionally known as an order.)
+    /// <para/>An OfferCreate transaction only creates an offer entry in the ledger
+    /// when the offer cannot be fully executed immediately by consuming other offers already in the ledger.
+    /// An offer can become unfunded through other activities in the network, while remaining in the ledger.
+    /// When processing transactions, the network automatically removes any unfunded offers that those transactions come across.
+    /// (Otherwise, unfunded offers remain, because only transactions can change the ledger state.)
+    /// </summary>
+    public sealed class XrpForFungibleTokenOffer : OfferBase<string, TokenAmount>
+    {
+    }
+
+    /// <summary>
+    /// A ledger entry type that describes an offer to request a fungible token for XRP in the XRP Ledger's decentralized exchange.
+    /// (In finance, this is more traditionally known as an order.)
+    /// <para/>An OfferCreate transaction only creates an offer entry in the ledger
+    /// when the offer cannot be fully executed immediately by consuming other offers already in the ledger.
+    /// An offer can become unfunded through other activities in the network, while remaining in the ledger.
+    /// When processing transactions, the network automatically removes any unfunded offers that those transactions come across.
+    /// (Otherwise, unfunded offers remain, because only transactions can change the ledger state.)
+    /// </summary>
+    public sealed class FungibleTokenForXrpOffer : OfferBase<TokenAmount, string>
+    {
+    }
+
+    /// <summary>
+    /// A ledger entry type that describes an offer to request a fungible token for another fungible token in the XRP Ledger's decentralized exchange.
+    /// (In finance, this is more traditionally known as an order.)
+    /// <para/>An OfferCreate transaction only creates an offer entry in the ledger
+    /// when the offer cannot be fully executed immediately by consuming other offers already in the ledger.
+    /// An offer can become unfunded through other activities in the network, while remaining in the ledger.
+    /// When processing transactions, the network automatically removes any unfunded offers that those transactions come across.
+    /// (Otherwise, unfunded offers remain, because only transactions can change the ledger state.)
+    /// </summary>
+    public sealed class FungibleTokenForFungibleTokenOffer : OfferBase<TokenAmount, TokenAmount>
+    {
     }
 }

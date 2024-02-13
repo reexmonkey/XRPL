@@ -12,20 +12,6 @@ namespace XRPL.Core.Domain.Entries
     public abstract class LedgerEntryBase
     {
         /// <summary>
-        /// The unique ID for this ledger entry.
-        /// <para/> In JSON, this field is represented with different names depending on the context and API method. 
-        /// (Note, even though this is specified as "optional" in the code, every ledger entry should have one unless it's legacy data from very early in the XRP Ledger's history.)
-        /// </summary>
-        public virtual string? Index { get; set; }
-
-        /// <summary>
-        /// The unique ID for this ledger entry.
-        /// <para/> In JSON, this field is represented with different names depending on the context and API method. 
-        /// (Note, even though this is specified as "optional" in the code, every ledger entry should have one unless it's legacy data from very early in the XRP Ledger's history.)
-        /// </summary>
-        public string? LedgerIndex { get => Index; set => Index = value; }
-
-        /// <summary>
         /// The type of ledger entry. Valid ledger entry types include <see cref="AccountRoot"/>, Offer, RippleState, and others.
         /// </summary>
         public string? LedgerEntryType { get; set; }

@@ -3,21 +3,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using XRPL.Core.Domain.Models;
 
 namespace XRPL.Core.Domain.Entries
 {
     /// <summary>
     /// Represents an offer to buy, sell or transfer an NFT.
     /// </summary>
-    public class NFTokenOffer : LedgerEntryBase
+    /// <typeparam name="TCurrencyAmount">The type of currency and amount to buy, sell or transfer the NFT.</typeparam>
+    public abstract class NFTokenOffer<TCurrencyAmount> : LedgerEntryBase
+        where TCurrencyAmount : class
     {
+        protected NFTokenOfferFlags flags;
+
         /// <summary>
         /// Amount expected or offered for the NFToken.
         /// <para/>If the token has the lsfOnlyXRP flag set, the amount must be specified in XRP.
         /// Sell offers that specify assets other than XRP must specify a non-zero amount.
         /// Sell offers that specify XRP can be 'free' (that is, the Amount field can be equal to "0").
         /// </summary>
-        public string? Amount { get; set; }
+        public TCurrencyAmount? Amount { get; set; }
+
+        /// <summary>
+        /// Set of bit-flags for this ledger entry.
+        /// </summary>
+        public override uint Flags { get => (uint)flags; set => flags = (NFTokenOfferFlags)value; }
 
         /// <summary>
         /// The AccountID for which this offer is intended. If present, only that account can accept the offer.
@@ -66,10 +76,35 @@ namespace XRPL.Core.Domain.Entries
         /// <summary>
         /// Initializes a new instance of the <see cref="NFTokenOffer"/> class.
         /// </summary>
-        public NFTokenOffer()
+        protected NFTokenOffer()
         {
             Flags = 1;
             LedgerEntryType = "NFTokenOffer";
         }
+    }
+
+    /// <summary>
+    /// Represents an offer to buy, sell or transfer an NFT with an amount of XRPs.
+    /// </summary>
+    public sealed class XrpToNFTTokenOffer : NFTokenOffer<string>
+    {
+    }
+
+    /// <summary>
+    /// Represents an offer to buy, sell or transfer an NFT with an amount of fungible tokens.
+    /// </summary>
+    public sealed class FungibleTokenToNFTTokenOffer : NFTokenOffer<TokenAmount>
+    {
+    }
+
+    /// <summary>
+    /// Represents a flag for a non-fungible token offer.
+    /// </summary>
+    public enum NFTokenOfferFlags : uint
+    {
+        /// <summary>
+        /// If enabled, the offer is a sell offer. Otherwise, the offer is a buy offer.
+        /// </summary>
+        lsfSellNFToken = 0x00000001
     }
 }
