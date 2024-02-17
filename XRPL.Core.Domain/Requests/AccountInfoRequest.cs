@@ -8,6 +8,29 @@ using System.Threading.Tasks;
 namespace XRPL.Core.Domain.Requests
 {
     /// <summary>
+    /// Represents a request to retrieve information about an account, its activity and its XRP balance.
+    /// </summary>
+    public class AccountInfoRequest : RequestBase<AccountInfoRequestParameters>
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AccountInfoRequest"/> class.
+        /// </summary>
+        public AccountInfoRequest() : base("account_info")
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AccountInfoRequest"/> class with specified parameters.
+        /// </summary>
+        /// <param name="parameters">The parameters of the request.</param>
+        public AccountInfoRequest(AccountInfoRequestParameters[]? parameters) : this()
+        {
+            ArgumentNullException.ThrowIfNull(parameters, nameof(parameters));
+            Parameters = parameters;
+        }
+    }
+
+    /// <summary>
     /// Represents the parameters of a request to retrieve information about an account, its activity and its XRP balance.
     /// </summary>
     public class AccountInfoRequestParameters: ParameterBase
@@ -43,26 +66,4 @@ namespace XRPL.Core.Domain.Requests
         public bool SignerLists { get; set; }
     }
 
-    /// <summary>
-    /// Represents a request to retrieve information about an account, its activity and its XRP balance.
-    /// </summary>
-    public class AccountInfoRequest : RequestBase<AccountInfoRequestParameters>
-    {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="AccountInfoRequest"/> class.
-        /// </summary>
-        public AccountInfoRequest() : base("account_info")
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="AccountInfoRequest"/> class with specified parameters.
-        /// </summary>
-        /// <param name="parameters">The parameters of the request.</param>
-        public AccountInfoRequest(AccountInfoRequestParameters[]? parameters): this()
-        {
-            ArgumentNullException.ThrowIfNull(parameters, nameof(parameters));
-            Parameters = parameters;
-        }
-    }
 }

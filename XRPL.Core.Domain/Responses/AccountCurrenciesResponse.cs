@@ -1,12 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.Serialization;
+using XRPL.Core.Domain.Requests;
 
 namespace XRPL.Core.Domain.Responses
 {
+    /// <summary>
+    /// Represents a response to a query to list currencies that an account can send or receive, based on its trust lines. 
+    /// </summary>
+    public class AccountCurrenciesResponse : ResponseBase<AccountCurrenciesResponseResult>
+    {
+    }
+
+    /// <summary>
+    /// Represents the result of the query to list currencies that an account can send or receive, based on its trust lines. 
+    /// </summary>
     public class AccountCurrenciesResponseResult : ResultBase
     {
         /// <summary>
@@ -38,9 +44,5 @@ namespace XRPL.Core.Domain.Responses
         /// </summary>
         [DataMember(Name = "validated")]
         public bool Validated { get; set; }
-    }
-
-    public class AccountCurrenciesResponse : ResponseBase<AccountCurrenciesResponseResult>
-    {
     }
 }

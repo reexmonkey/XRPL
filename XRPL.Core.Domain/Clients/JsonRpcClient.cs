@@ -44,7 +44,6 @@ namespace XRPL.Core.Domain.Clients
 
             using var reader = new StreamReader(response.Content.ReadAsStream(cancellationToken));
             var result = reader.ReadToEnd();
-
             return result.FromJson<TResponse>();
         }
 
@@ -68,12 +67,17 @@ namespace XRPL.Core.Domain.Clients
         public Task<AccountChannelsResponse> PostAsync(AccountChannelsRequest request, CancellationToken cancellationToken)
             => PostAsync<AccountChannelsRequest, AccountChannelsResponse>(request, cancellationToken);
 
-
         public AccountCurrenciesResponse Post(AccountCurrenciesRequest request, CancellationToken cancellationToken)
             => Post<AccountCurrenciesRequest, AccountCurrenciesResponse>(request, cancellationToken);
 
         public Task<AccountCurrenciesResponse> PostAsync(AccountCurrenciesRequest request, CancellationToken cancellationToken)
             => PostAsync<AccountCurrenciesRequest, AccountCurrenciesResponse>(request, cancellationToken);
+
+        public Task<AccountInfoResponse> PostAsync(AccountInfoRequest request, CancellationToken cancellationToken)
+            => PostAsync<AccountInfoRequest, AccountInfoResponse>(request, cancellationToken);
+
+        public Task<AccountLinesResponse> PostAsync(AccountLinesRequest request, CancellationToken cancellationToken)
+            => PostAsync<AccountLinesRequest, AccountLinesResponse>(request, cancellationToken);
 
         #endregion Account Methods
 

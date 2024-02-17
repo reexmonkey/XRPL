@@ -7,23 +7,6 @@ using System.Threading.Tasks;
 
 namespace XRPL.Core.Domain.Requests
 {
-
-    public abstract class ParameterBase
-    {
-        /// <summary>
-        /// The API version to use. If omitted, use version 1
-        /// </summary>
-        public uint ApiVersion { get; set; }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ParameterBase"/> class.
-        /// </summary>
-        public ParameterBase()
-        {
-            ApiVersion = 1u; 
-        }
-    }
-
     /// <summary>
     /// Represents a JSON-RPC request to a rippled server.
     /// </summary>
@@ -35,7 +18,7 @@ namespace XRPL.Core.Domain.Requests
         /// The name of the API method.
         /// </summary>
         [DataMember(Name = "method")]
-        public string Method { get;}
+        public string Method { get; }
 
         /// <summary>
         /// A one-item array containing a nested JSON object with the parameters to this method. You may omit this field if the method does not require any parameters.
@@ -53,6 +36,22 @@ namespace XRPL.Core.Domain.Requests
                 throw new ArgumentException($"'{nameof(method)}' cannot be null or empty.", nameof(method));
 
             Method = method;
+        }
+    }
+
+    public abstract class ParameterBase
+    {
+        /// <summary>
+        /// The API version to use. If omitted, use version 1
+        /// </summary>
+        public uint ApiVersion { get; set; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ParameterBase"/> class.
+        /// </summary>
+        public ParameterBase()
+        {
+            ApiVersion = 1u;
         }
     }
 }

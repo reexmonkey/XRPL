@@ -4,9 +4,66 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using XRPL.Core.Domain.Requests;
 
 namespace XRPL.Core.Domain.Responses
 {
+    /// <summary>
+    /// Represents a response to a request for information about an account's payment channels.
+    /// </summary>
+    public class AccountChannelsResponse : ResponseBase<AccountChannelsResult>
+    {
+    }
+
+    /// <summary>
+    /// Represents the result of a query about information of an account's payment channels.
+    /// </summary>
+    public class AccountChannelsResult : ResultBase
+    {
+        /// <summary>
+        /// The address of the source/owner of the payment channels. This corresponds to the account field of the request.
+        /// </summary>
+        [DataMember(Name = "account")]
+        public string? Account { get; set; }
+
+        /// <summary>
+        /// Payment channels owned by this account.
+        /// </summary>
+        [DataMember(Name = "channels")]
+        public Channel[]? Channels { get; set; }
+
+        /// <summary>
+        /// The identifying Hash of the ledger version used to generate this response.
+        /// </summary>
+        [DataMember(Name = "ledger_hash")]
+        public string? LedgerHash { get; set; }
+
+        /// <summary>
+        /// The Ledger Index of the ledger version used to generate this response.
+        /// </summary>
+        [DataMember(Name = "ledger_index")]
+        public uint LedgerIndex { get; set; }
+
+        /// <summary>
+        /// If true, the information in this response comes from a validated ledger version. Otherwise, the information is subject to change.
+        /// </summary>
+        [DataMember(Name = "validated")]
+        public bool? Validated { get; set; }
+
+        /// <summary>
+        /// The limit to how many channel objects were actually returned by this request.
+        /// </summary>
+        [DataMember(Name = "limit")]
+        public int? Limit { get; set; }
+
+        /// <summary>
+        /// Server-defined value for pagination. Pass this to the next call to resume getting results where this call left off.
+        /// Omitted when there are no additional pages after this one.
+        /// </summary>
+        [DataMember(Name = "marker")]
+        public object? Marker { get; set; }
+    }
+
     public class Channel
     {
         /// <summary>
@@ -90,61 +147,5 @@ namespace XRPL.Core.Domain.Responses
         /// </summary>
         [DataMember(Name = "destination_tag")]
         public uint? DestinationTag { get; set; }
-    }
-
-    /// <summary>
-    /// Represents the result of a query about information of an account's payment channels.
-    /// </summary>
-    public class AccountChannelsResult : ResultBase
-    {
-        /// <summary>
-        /// The address of the source/owner of the payment channels. This corresponds to the account field of the request.
-        /// </summary>
-        [DataMember(Name = "account")]
-        public string? Account { get; set; }
-
-        /// <summary>
-        /// Payment channels owned by this account.
-        /// </summary>
-        [DataMember(Name = "channels")]
-        public Channel[]? Channels { get; set; }
-
-        /// <summary>
-        /// The identifying Hash of the ledger version used to generate this response.
-        /// </summary>
-        [DataMember(Name = "ledger_hash")]
-        public string? LedgerHash { get; set; }
-
-        /// <summary>
-        /// The Ledger Index of the ledger version used to generate this response.
-        /// </summary>
-        [DataMember(Name = "ledger_index")]
-        public uint LedgerIndex { get; set; }
-
-        /// <summary>
-        /// If true, the information in this response comes from a validated ledger version. Otherwise, the information is subject to change.
-        /// </summary>
-        [DataMember(Name = "validated")]
-        public bool? Validated { get; set; }
-
-        /// <summary>
-        /// The limit to how many channel objects were actually returned by this request.
-        /// </summary>
-        [DataMember(Name = "limit")]
-        public int? Limit { get; set; }
-
-        /// <summary>
-        /// Server-defined value for pagination. Pass this to the next call to resume getting results where this call left off.
-        /// Omitted when there are no additional pages after this one.
-        /// </summary>
-        [DataMember(Name = "marker")]
-        public object? Marker { get; set; }
-    }
-
-    /// <summary>
-    /// Represents a response to a request for information about an account's payment channels.
-    /// </summary>
-    public class AccountChannelsResponse : ResponseBase<AccountChannelsResult>
-    {
     }
 }

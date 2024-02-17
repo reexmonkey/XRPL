@@ -7,15 +7,35 @@ using System.Threading.Tasks;
 
 namespace XRPL.Core.Domain.Responses
 {
-    public abstract class ResultBase
+    /// <summary>
+    /// Specifies a result-specific reponse to a query.
+    /// </summary>
+    /// <typeparam name="TResult">The type of result.</typeparam>
+    public abstract class ResponseBase<TResult>
+        where TResult : ResultBase
     {
         /// <summary>
-        /// The value success indicates the request was successfully received and understood by the server.
+        /// The result of the query; contents vary depending on the command.
         /// </summary>
-        [DataMember(Name = "status")]
-        public string? Status { get; set; }
+        [DataMember(Name = "result")]
+        public TResult? Result { get; set; }
+
+        /// <summary>
+        /// May contain one or more important warnings.
+        /// </summary>
+        [DataMember(Name = "warnings")]
+        public Warning[]? Warnings { get; set; }
+
+        /// <summary>
+        /// If true, this request and response have been forwarded from a Reporting Mode server to a P2P Mode server (and back) because the request requires data that is not available in Reporting Mode. The default is false.
+        /// </summary>
+        [DataMember(Name = "forwarded")]
+        public bool? Forwarded { get; set; }
     }
 
+    /// <summary>
+    /// Represents a warning.
+    /// </summary>
     public class Warning
     {
         /// <summary>
@@ -38,25 +58,15 @@ namespace XRPL.Core.Domain.Responses
         public object? Details { get; set; }
     }
 
-    public class ResponseBase<TResult>
-        where TResult : ResultBase
+    /// <summary>
+    /// Specifies the result to a query.
+    /// </summary>
+    public abstract class ResultBase
     {
         /// <summary>
-        /// The result of the query; contents vary depending on the command.
+        /// The value success indicates the request was successfully received and understood by the server.
         /// </summary>
-        [DataMember(Name = "result")]
-        public TResult? Result { get; set; }
-
-        /// <summary>
-        /// May contain one or more important warnings.
-        /// </summary>
-        [DataMember(Name = "warnings")]
-        public Warning[]? Warnings { get; set; }
-
-        /// <summary>
-        /// If true, this request and response have been forwarded from a Reporting Mode server to a P2P Mode server (and back) because the request requires data that is not available in Reporting Mode. The default is false.
-        /// </summary>
-        [DataMember(Name = "forwarded")]  
-        public bool? Forwarded { get; set; }
+        [DataMember(Name = "status")]
+        public string? Status { get; set; }
     }
 }
