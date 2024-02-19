@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace XRPL.Core.Domain.Responses
 {
     /// <summary>
-    /// Represents a response from the query to return information about an account's trust lines,
+    /// Represents a response to the request to return information about an account's trust lines,
     /// which contain balances in all non-XRP currencies and assets.
     /// </summary>
     public class AccountLinesResponse : ResponseBase<AccountLinesResult>

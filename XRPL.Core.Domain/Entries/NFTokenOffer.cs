@@ -86,14 +86,14 @@ namespace XRPL.Core.Domain.Entries
     /// <summary>
     /// Represents an offer to buy, sell or transfer an NFT with an amount of XRPs.
     /// </summary>
-    public sealed class XrpToNFTTokenOffer : NFTokenOffer<string>
+    public sealed class XRPToNFTokenOffer : NFTokenOffer<string>
     {
     }
 
     /// <summary>
     /// Represents an offer to buy, sell or transfer an NFT with an amount of fungible tokens.
     /// </summary>
-    public sealed class FungibleTokenToNFTTokenOffer : NFTokenOffer<TokenAmount>
+    public sealed class FTokenToNFTokenOffer : NFTokenOffer<TokenAmount>
     {
     }
 

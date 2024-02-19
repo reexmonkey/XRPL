@@ -18,7 +18,7 @@ namespace XRPL.Core.Domain.Entries
     /// </summary>
     /// <typeparam name="TPays">The type of amount and currency requested by the offer creator.</typeparam>
     /// <typeparam name="TGets">The type of amount and currency provided by the offer creator.</typeparam>
-    public abstract class OfferBase<TPays, TGets> : LedgerEntryBase
+    public abstract class Offer<TPays, TGets> : LedgerEntryBase
         where TPays : class
         where TGets : class
     {
@@ -82,7 +82,7 @@ namespace XRPL.Core.Domain.Entries
         /// <summary>
         /// Initializes a new instance of the <see cref="Offer"/> class.
         /// </summary>
-        protected OfferBase()
+        protected Offer()
         {
             LedgerEntryType = "Offer";
         }
@@ -107,7 +107,7 @@ namespace XRPL.Core.Domain.Entries
     /// When processing transactions, the network automatically removes any unfunded offers that those transactions come across.
     /// (Otherwise, unfunded offers remain, because only transactions can change the ledger state.)
     /// </summary>
-    public sealed class XrpForFungibleTokenOffer : OfferBase<string, TokenAmount>
+    public sealed class XRPToFTokenOffer : Offer<string, TokenAmount>
     {
     }
 
@@ -120,7 +120,7 @@ namespace XRPL.Core.Domain.Entries
     /// When processing transactions, the network automatically removes any unfunded offers that those transactions come across.
     /// (Otherwise, unfunded offers remain, because only transactions can change the ledger state.)
     /// </summary>
-    public sealed class FungibleTokenForXrpOffer : OfferBase<TokenAmount, string>
+    public sealed class FTokenToXRPOffer : Offer<TokenAmount, string>
     {
     }
 
@@ -133,7 +133,7 @@ namespace XRPL.Core.Domain.Entries
     /// When processing transactions, the network automatically removes any unfunded offers that those transactions come across.
     /// (Otherwise, unfunded offers remain, because only transactions can change the ledger state.)
     /// </summary>
-    public sealed class FungibleTokenForFungibleTokenOffer : OfferBase<TokenAmount, TokenAmount>
+    public sealed class FTokenToFTokenOffer : Offer<TokenAmount, TokenAmount>
     {
     }
 }

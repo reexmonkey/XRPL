@@ -79,6 +79,9 @@ namespace XRPL.Core.Domain.Clients
         public Task<AccountLinesResponse> PostAsync(AccountLinesRequest request, CancellationToken cancellationToken)
             => PostAsync<AccountLinesRequest, AccountLinesResponse>(request, cancellationToken);
 
+        public Task<AccountNFTsResponse> PostAsync(AccountNFTsRequest request, CancellationToken cancellationToken)
+            => PostAsync<AccountNFTsRequest, AccountNFTsResponse>(request, cancellationToken);
+
         #endregion Account Methods
 
         protected virtual void Dispose(bool disposing)

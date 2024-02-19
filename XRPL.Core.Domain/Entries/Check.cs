@@ -88,14 +88,14 @@ namespace XRPL.Core.Domain.Entries
     /// <summary>
     /// Represents an XRP check.
     /// </summary>
-    public sealed class XrpCheck : Check<string>
+    public sealed class XRPCheck : Check<string>
     {
     }
 
     /// <summary>
     /// Reprsents a fungible token check.
     /// </summary>
-    public sealed class FungibleTokenCheck : Check<TokenAmount>
+    public sealed class FTokenCheck : Check<TokenAmount>
     {
     }
 }
