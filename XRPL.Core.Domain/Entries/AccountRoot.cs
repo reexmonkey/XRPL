@@ -38,7 +38,7 @@ namespace XRPL.Core.Domain.Entries
         public string? Balance { get; set; }
 
         /// <summary>
-        /// How many total of this account's issued non-fungible tokens have been burned.
+        /// How many total of this account's issued non-tokens have been burned.
         /// <para/>This number is always equal or less than MintedNFTokens.
         /// </summary>
         public uint BurnedNFTokens { get; set; }
@@ -69,12 +69,12 @@ namespace XRPL.Core.Domain.Entries
         public string? MessageKey { get; set; }
 
         /// <summary>
-        /// How many total non-fungible tokens have been minted by and on behalf of this account.
+        /// How many total non-tokens have been minted by and on behalf of this account.
         /// </summary>
         public uint MintedNFTokens { get; set; }
 
         /// <summary>
-        /// Another account that can mint non-fungible tokens on behalf of this account.
+        /// Another account that can mint non-tokens on behalf of this account.
         /// </summary>
         public string? NFTokenMinter { get; set; }
 
@@ -116,7 +116,7 @@ namespace XRPL.Core.Domain.Entries
         public uint TickSize { get; set; }
 
         /// <summary>
-        /// A transfer fee to charge other users for sending currency issued by this account to each other.
+        /// A transfer fee to charge other users for sending token issued by this account to each other.
         /// </summary>
         public uint TransferRate { get; set; }
 

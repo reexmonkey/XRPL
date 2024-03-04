@@ -28,13 +28,13 @@ namespace XRPL.Core.Domain.Responses
         public string? LedgerIndex { get; set; }
 
         /// <summary>
-        /// Array of Currency Codes for currencies that this account can receive.
+        /// Array of Token Codes for currencies that this account can receive.
         /// </summary>
         [DataMember(Name = "receive_currencies")]
         public string[]? ReceiveCurrencies { get; set; }
 
         /// <summary>
-        /// Array of Currency Codes for currencies that this account can send.
+        /// Array of Token Codes for currencies that this account can send.
         /// </summary>
         [DataMember(Name = "send_currencies")]
         public string[]? SendCurrencies { get; set; }

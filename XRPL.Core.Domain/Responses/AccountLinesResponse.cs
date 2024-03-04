@@ -82,19 +82,19 @@ namespace XRPL.Core.Domain.Responses
         public string? Balance { get; set; }
 
         /// <summary>
-        /// A Currency Code identifying what currency this trust line can hold.
+        /// A Token Code identifying what token this trust line can hold.
         /// </summary>
-        [DataMember(Name = "currency")]
-        public string? Currency { get; set; }
+        [DataMember(Name = "token")]
+        public string? Token { get; set; }
 
         /// <summary>
-        /// The maximum amount of the given currency that this account is willing to owe the peer account
+        /// The maximum amount of the given token that this account is willing to owe the peer account
         /// </summary>
         [DataMember(Name = "limit")]
         public string? Limit { get; set; }
 
         /// <summary>
-        /// The maximum amount of currency that the counterparty account is willing to owe the perspective account
+        /// The maximum amount of token that the counterparty account is willing to owe the perspective account
         /// </summary>
         [DataMember(Name = "limit_peer")]
         public string? LimitPeer { get; set; }

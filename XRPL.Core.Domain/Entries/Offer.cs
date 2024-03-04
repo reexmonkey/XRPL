@@ -16,11 +16,9 @@ namespace XRPL.Core.Domain.Entries
     /// When processing transactions, the network automatically removes any unfunded Offers that those transactions come across.
     /// (Otherwise, unfunded Offers remain, because only transactions can change the ledger state.)
     /// </summary>
-    /// <typeparam name="TPays">The type of amount and currency requested by the offer creator.</typeparam>
-    /// <typeparam name="TGets">The type of amount and currency provided by the offer creator.</typeparam>
-    public abstract class Offer<TPays, TGets> : LedgerEntryBase
-        where TPays : class
-        where TGets : class
+    /// <typeparam name="TPays">The type of amount and token requested by the offer creator.</typeparam>
+    /// <typeparam name="TGets">The type of amount and token provided by the offer creator.</typeparam>
+    public abstract class Offer : LedgerEntryBase
     {
         protected OfferFlags flags;
 
@@ -70,22 +68,38 @@ namespace XRPL.Core.Domain.Entries
         public uint Sequence { get; set; }
 
         /// <summary>
-        /// The remaining amount and type of currency requested by the Offer creator.
-        /// </summary>
-        public TPays? TakerPays { get; set; }
-
-        /// <summary>
-        /// The remaining amount and type of currency being provided by the Offer creator.
-        /// </summary>
-        public TGets? TakerGets { get; set; }
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="Offer"/> class.
         /// </summary>
         protected Offer()
         {
             LedgerEntryType = "Offer";
         }
+    }
+
+    /// <summary>
+    /// The Offer ledger entry describes an Offer to exchange currencies in the XRP Ledger's decentralized exchange.
+    /// (In finance, this is more traditionally known as an order.)
+    /// <para/>An OfferCreate transaction only creates an Offer entry in the ledger
+    /// when the Offer cannot be fully executed immediately by consuming other Offers already in the ledger.
+    /// An Offer can become unfunded through other activities in the network, while remaining in the ledger.
+    /// When processing transactions, the network automatically removes any unfunded Offers that those transactions come across.
+    /// (Otherwise, unfunded Offers remain, because only transactions can change the ledger state.)
+    /// </summary>
+    /// <typeparam name="TPays">The type of amount and token requested by the offer creator.</typeparam>
+    /// <typeparam name="TGets">The type of amount and token provided by the offer creator.</typeparam>
+    public abstract class Offer<TPays, TGets> : Offer
+        where TPays : class
+        where TGets : class
+    {
+        /// <summary>
+        /// The remaining amount and type of token requested by the offer creator.
+        /// </summary>
+        public TPays? TakerPays { get; set; }
+
+        /// <summary>
+        /// The remaining amount and type of token being provided by the Offer creator.
+        /// </summary>
+        public TGets? TakerGets { get; set; }
     }
 
     /// <summary>
@@ -99,7 +113,7 @@ namespace XRPL.Core.Domain.Entries
     }
 
     /// <summary>
-    /// A ledger entry type that describes an offer to request XRP for a fungible token in the XRP Ledger's decentralized exchange.
+    /// A ledger entry type that describes an offer to request XRP for a token in the XRP Ledger's decentralized exchange.
     /// (In finance, this is more traditionally known as an order.)
     /// <para/>An OfferCreate transaction only creates an offer entry in the ledger
     /// when the offer cannot be fully executed immediately by consuming other offers already in the ledger.
@@ -107,12 +121,12 @@ namespace XRPL.Core.Domain.Entries
     /// When processing transactions, the network automatically removes any unfunded offers that those transactions come across.
     /// (Otherwise, unfunded offers remain, because only transactions can change the ledger state.)
     /// </summary>
-    public sealed class XRPToFTokenOffer : Offer<string, TokenAmount>
+    public sealed class XrpForTokenOffer : Offer<string, TokenAmount>
     {
     }
 
     /// <summary>
-    /// A ledger entry type that describes an offer to request a fungible token for XRP in the XRP Ledger's decentralized exchange.
+    /// A ledger entry type that describes an offer to request a token for XRP in the XRP Ledger's decentralized exchange.
     /// (In finance, this is more traditionally known as an order.)
     /// <para/>An OfferCreate transaction only creates an offer entry in the ledger
     /// when the offer cannot be fully executed immediately by consuming other offers already in the ledger.
@@ -120,12 +134,12 @@ namespace XRPL.Core.Domain.Entries
     /// When processing transactions, the network automatically removes any unfunded offers that those transactions come across.
     /// (Otherwise, unfunded offers remain, because only transactions can change the ledger state.)
     /// </summary>
-    public sealed class FTokenToXRPOffer : Offer<TokenAmount, string>
+    public sealed class TokenForXrpOffer : Offer<TokenAmount, string>
     {
     }
 
     /// <summary>
-    /// A ledger entry type that describes an offer to request a fungible token for another fungible token in the XRP Ledger's decentralized exchange.
+    /// A ledger entry type that describes an offer to request a token for another token in the XRP Ledger's decentralized exchange.
     /// (In finance, this is more traditionally known as an order.)
     /// <para/>An OfferCreate transaction only creates an offer entry in the ledger
     /// when the offer cannot be fully executed immediately by consuming other offers already in the ledger.
@@ -133,7 +147,7 @@ namespace XRPL.Core.Domain.Entries
     /// When processing transactions, the network automatically removes any unfunded offers that those transactions come across.
     /// (Otherwise, unfunded offers remain, because only transactions can change the ledger state.)
     /// </summary>
-    public sealed class FTokenToFTokenOffer : Offer<TokenAmount, TokenAmount>
+    public sealed class TokenForTokenOffer : Offer<TokenAmount, TokenAmount>
     {
     }
 }

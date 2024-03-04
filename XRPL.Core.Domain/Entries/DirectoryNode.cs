@@ -14,7 +14,7 @@ namespace XRPL.Core.Domain.Entries
     /// <para/>There are two kinds of Directories:
     /// <para/>Owner directories list other entries owned by an account, such as RippleState (trust line) or Offer entries.
     /// <para/>Offer directories list the offers available in the decentralized exchange. 
-    /// A single Offer directory contains all the offers that have the same exchange rate for the same token (currency code and issuer).
+    /// A single Offer directory contains all the offers that have the same exchange rate for the same token (token code and issuer).
     /// </summary>
     public class DirectoryNode : LedgerEntryBase
     {
@@ -45,10 +45,10 @@ namespace XRPL.Core.Domain.Entries
         public string? RootIndex { get; set; }
 
         /// <summary>
-        /// The currency code of the TakerGets amount from the offers in this directory.
+        /// The token code of the TakerGets amount from the offers in this directory.
         /// <para/> (Offer Directories only)
         /// </summary>
-        public string? TakerGetsCurrency { get; set; }
+        public string? TakerGetsToken { get; set; }
 
         /// <summary>
         /// The issuer of the TakerGets amount from the offers in this directory.
@@ -57,10 +57,10 @@ namespace XRPL.Core.Domain.Entries
         public string? TakerGetsIssuer { get; set; }
 
         /// <summary>
-        /// The currency code of the TakerPays amount from the offers in this directory.
+        /// The token code of the TakerPays amount from the offers in this directory.
         /// <para/>	(Offer Directories only)
         /// </summary>
-        public string? TakerPaysCurrency { get; set; }
+        public string? TakerPaysToken { get; set; }
 
         /// <summary>
         /// The issuer of the TakerPays amount from the offers in this directory.

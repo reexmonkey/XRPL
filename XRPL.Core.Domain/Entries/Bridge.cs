@@ -100,10 +100,10 @@ namespace XRPL.Core.Domain.Entries
     public class Issue
     {
         /// <summary>
-        /// The currency of the issue.
+        /// The token of the issue.
         /// </summary>
-        [DataMember(Name = "currency")]
-        public string? Currency { get; set; }
+        [DataMember(Name = "token")]
+        public string? Token { get; set; }
     }
 
     /// <summary>
@@ -116,7 +116,7 @@ namespace XRPL.Core.Domain.Entries
         /// </summary>
         public XrpIssue()
         {
-            Currency = "XRP";
+            Token = "XRP";
         }
     }
 }

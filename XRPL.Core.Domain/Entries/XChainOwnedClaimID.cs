@@ -15,9 +15,9 @@ namespace XRPL.Core.Domain.Entries
     /// <para/>An XChainCreateClaimID transaction is used to create a new XChainOwnedClaimID. 
     /// The ledger object is destroyed when the funds are successfully claimed on the destination chain.
     /// </summary>
-    /// <typeparam name="TCurrencyAmount">The type of amount and currency to claim in the XChainCommit transaction.</typeparam>
-    public abstract class XChainOwnedClaimIDBase<TCurrencyAmount> : LedgerEntryBase
-        where TCurrencyAmount : class
+    /// <typeparam name="TTokenAmount">The type of amount and token to claim in the XChainCommit transaction.</typeparam>
+    public abstract class XChainOwnedClaimIDBase<TTokenAmount> : LedgerEntryBase
+        where TTokenAmount : class
     {
         /// <summary>
         /// The account that owns this object.
@@ -50,7 +50,7 @@ namespace XRPL.Core.Domain.Entries
         /// <summary>
         /// Attestations collected from the witness servers. This includes the parameters needed to recreate the message that was signed, including the amount, which chain (locking or issuing), optional destination, and reward account for that signature
         /// </summary>
-        public XChainClaimAttestation<TCurrencyAmount>[]? XChainClaimAttestations { get; set; }
+        public XChainClaimAttestation<TTokenAmount>[]? XChainClaimAttestations { get; set; }
 
         /// <summary>
         /// The unique sequence number for a cross-chain transfer.
@@ -58,7 +58,7 @@ namespace XRPL.Core.Domain.Entries
         public string? XChainClaimID { get; set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="XChainOwnedClaimIDBase{TCurrencyAmount}"/> class.
+        /// Initializes a new instance of the <see cref="XChainOwnedClaimIDBase{TTokenAmount}"/> class.
         /// </summary>
         protected XChainOwnedClaimIDBase() 
         {
@@ -70,18 +70,18 @@ namespace XRPL.Core.Domain.Entries
     /// Represents an attestation collected from a witness server.
     /// <para/>This includes the parameters needed to recreate the message that was signed, including the amount, which chain (locking or issuing), optional destination, and reward account for that signature.
     /// </summary>
-    /// <typeparam name="TCurrencyAmount">The type of amount and currency to claim in the XChainCommit transaction.</typeparam>
-    public class XChainClaimAttestation<TCurrencyAmount> where TCurrencyAmount : class
+    /// <typeparam name="TTokenAmount">The type of amount and token to claim in the XChainCommit transaction.</typeparam>
+    public class XChainClaimAttestation<TTokenAmount> where TTokenAmount : class
     {
         /// <summary>
         /// An attestation from one witness server.
         /// </summary>
-        public XChainClaimAttestation<TCurrencyAmount>? XChainClaimProofSig { get; set; }
+        public XChainClaimAttestation<TTokenAmount>? XChainClaimProofSig { get; set; }
 
         /// <summary>
         /// The amount to claim in the XChainCommit transaction on the destination chain.
         /// </summary>
-        public TCurrencyAmount? Amount { get; set; }
+        public TTokenAmount? Amount { get; set; }
 
         /// <summary>
         /// The account that should receive this signer's share of the <see cref="Bridge.SignatureReward"/>.
@@ -124,14 +124,14 @@ namespace XRPL.Core.Domain.Entries
     }
 
     /// <summary>
-    /// Represents one cross-chain transfer of a fungible token and includes information of the account on the source chain 
+    /// Represents one cross-chain transfer of a token and includes information of the account on the source chain 
     /// that locks or burns the funds on the source chain.
     /// <para/>The XChainOwnedClaimID object must be acquired on the destination chain before submitting a XChainCommit on the source chain. 
     /// Its purpose is to prevent transaction replay attacks and is also used as a place to collect attestations from witness servers.
     /// <para/>An XChainCreateClaimID transaction is used to create a new XChainOwnedClaimID. 
     /// The ledger object is destroyed when the funds are successfully claimed on the destination chain.
     /// </summary>
-    public sealed class FTokenXChainOwnedClaimID: XChainOwnedClaimIDBase<TokenAmount>
+    public sealed class TokenXChainOwnedClaimID: XChainOwnedClaimIDBase<TokenAmount>
     {
 
     }

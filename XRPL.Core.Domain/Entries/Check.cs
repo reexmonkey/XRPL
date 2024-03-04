@@ -12,11 +12,11 @@ namespace XRPL.Core.Domain.Entries
     /// Specifies a ledger entry that describes a check, similar to a paper personal check,
     /// which can be cashed by its destination to get money from its sender.
     /// </summary>
-    public abstract class Check<TCurrencyAmount> : LedgerEntryBase
-        where TCurrencyAmount : class
+    public abstract class Check<TTokenAmount> : LedgerEntryBase
+        where TTokenAmount : class
     {
         /// <summary>
-        /// The sender of the <see cref="Check{TCurrency}"/>. Cashing the <see cref="Check{TCurrency}"/> debits this address's balance.
+        /// The sender of the <see cref="Check{TToken}"/>. Cashing the <see cref="Check{TToken}"/> debits this address's balance.
         /// </summary>
         public string? Account { get; set; }
 
@@ -36,12 +36,12 @@ namespace XRPL.Core.Domain.Entries
         public uint DestinationTag { get; set; }
 
         /// <summary>
-        /// Indicates the time after which this <see cref="Check{TCurrency}"/> is considered expired. See Specifying Time for details.
+        /// Indicates the time after which this <see cref="Check{TToken}"/> is considered expired. See Specifying Time for details.
         /// </summary>
         public uint Expiration { get; set; }
 
         /// <summary>
-        /// Arbitrary 256-bit hash provided by the sender as a specific reason or identifier for this <see cref="Check{TCurrency}"/>.
+        /// Arbitrary 256-bit hash provided by the sender as a specific reason or identifier for this <see cref="Check{TToken}"/>.
         /// </summary>
         public string? InvoiceID { get; set; }
 
@@ -61,10 +61,10 @@ namespace XRPL.Core.Domain.Entries
         public uint PreviousTxnLgrSeq { get; set; }
 
         /// <summary>
-        /// The maximum amount of currency this <see cref="Check"/> can debit the sender.
-        /// <para/> If the <see cref="Check"/> is successfully cashed, the destination is credited in the same currency for up to this amount.
+        /// The maximum amount of token this <see cref="Check"/> can debit the sender.
+        /// <para/> If the <see cref="Check"/> is successfully cashed, the destination is credited in the same token for up to this amount.
         /// </summary>
-        public TCurrencyAmount? SendMax { get; set; }
+        public TTokenAmount? SendMax { get; set; }
 
         /// <summary>
         /// The sequence number of the CheckCreate transaction that created this check.
@@ -72,12 +72,12 @@ namespace XRPL.Core.Domain.Entries
         public uint Sequence { get; set; }
 
         /// <summary>
-        /// An arbitrary tag to further specify the source for this <see cref="Check{TCurrency}"/>, such as a hosted recipient at the sender's address.
+        /// An arbitrary tag to further specify the source for this <see cref="Check{TToken}"/>, such as a hosted recipient at the sender's address.
         /// </summary>
         public uint SourceTag { get; set; }
 
         /// <summary>
-        /// Initializes the new instance of the <see cref="Check{TCurrency}"/> class.
+        /// Initializes the new instance of the <see cref="Check{TToken}"/> class.
         /// </summary>
         public Check()
         {
@@ -93,9 +93,9 @@ namespace XRPL.Core.Domain.Entries
     }
 
     /// <summary>
-    /// Reprsents a fungible token check.
+    /// Reprsents a token check.
     /// </summary>
-    public sealed class FTokenCheck : Check<TokenAmount>
+    public sealed class TokenCheck : Check<TokenAmount>
     {
     }
 }

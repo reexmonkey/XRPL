@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace XRPL.Core.Domain.Models
 {
     /// <summary>
-    /// Represents a single non-fungible token (NFT). 
+    /// Represents a single non-token (NFT). 
     /// <para/>It is not stored on its own, but is contained in a NFTokenPage object alongside other NFToken objects.
     /// </summary>
     public class NFToken
@@ -46,9 +46,9 @@ namespace XRPL.Core.Domain.Models
         lsfOnlyXRP = 0x0002,
 
         /// <summary>
-        /// If enabled, automatically create trust lines to hold transfer fees. Otherwise, buying or selling this NFToken for a fungible token amount fails if the issuer does not have a trust line for that token.
+        /// If enabled, automatically create trust lines to hold transfer fees. Otherwise, buying or selling this NFToken for a token amount fails if the issuer does not have a trust line for that token.
         /// </summary>
-        [Obsolete("If enabled, automatically create trust lines to hold transfer fees. Otherwise, buying or selling this NFToken for a fungible token amount fails if the issuer does not have a trust line for that token.")]
+        [Obsolete("If enabled, automatically create trust lines to hold transfer fees. Otherwise, buying or selling this NFToken for a token amount fails if the issuer does not have a trust line for that token.")]
         lsfTrustLine = 0x0004,
 
         /// <summary>

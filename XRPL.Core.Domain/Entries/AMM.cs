@@ -14,13 +14,13 @@ namespace XRPL.Core.Domain.Entries
     {
         /// <summary>
         /// The definition for one of the two assets this AMM holds.
-        /// <para/>In JSON, this is an object with currency and issuer fields.
+        /// <para/>In JSON, this is an object with token and issuer fields.
         /// </summary>
         public STIssue? Asset { get; set; }
 
         /// <summary>
         /// The definition for the other asset this AMM holds.
-        /// <para/>In JSON, this is an object with currency and issuer fields.
+        /// <para/>In JSON, this is an object with token and issuer fields.
         /// </summary>
         public STIssue? Asset2 { get; set; }
 
@@ -57,9 +57,9 @@ namespace XRPL.Core.Domain.Entries
     public class STIssue
     {
         /// <summary>
-        /// The currency of the asset.
+        /// The token of the asset.
         /// </summary>
-        public string? Currency { get; set; }
+        public string? Token { get; set; }
 
         /// <summary>
         /// The issuer of the asset.

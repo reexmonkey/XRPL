@@ -10,9 +10,9 @@ namespace XRPL.Core.Domain.Entries
     /// <summary>
     /// Represents an offer to buy, sell or transfer an NFT.
     /// </summary>
-    /// <typeparam name="TCurrencyAmount">The type of currency and amount to buy, sell or transfer the NFT.</typeparam>
-    public abstract class NFTokenOffer<TCurrencyAmount> : LedgerEntryBase
-        where TCurrencyAmount : class
+    /// <typeparam name="TAmount">The type of token and amount to buy, sell or transfer the NFT.</typeparam>
+    public abstract class NFTokenOffer<TAmount> : LedgerEntryBase
+        where TAmount : class
     {
         protected NFTokenOfferFlags flags;
 
@@ -22,7 +22,7 @@ namespace XRPL.Core.Domain.Entries
         /// Sell offers that specify assets other than XRP must specify a non-zero amount.
         /// Sell offers that specify XRP can be 'free' (that is, the Amount field can be equal to "0").
         /// </summary>
-        public TCurrencyAmount? Amount { get; set; }
+        public TAmount? Amount { get; set; }
 
         /// <summary>
         /// Set of bit-flags for this ledger entry.
@@ -86,19 +86,19 @@ namespace XRPL.Core.Domain.Entries
     /// <summary>
     /// Represents an offer to buy, sell or transfer an NFT with an amount of XRPs.
     /// </summary>
-    public sealed class XRPToNFTokenOffer : NFTokenOffer<string>
+    public sealed class XrpForNFTokenOffer : NFTokenOffer<string>
     {
     }
 
     /// <summary>
-    /// Represents an offer to buy, sell or transfer an NFT with an amount of fungible tokens.
+    /// Represents an offer to buy, sell or transfer an NFT with an amount of tokens.
     /// </summary>
-    public sealed class FTokenToNFTokenOffer : NFTokenOffer<TokenAmount>
+    public sealed class TokenForNFTokenOffer : NFTokenOffer<TokenAmount>
     {
     }
 
     /// <summary>
-    /// Represents a flag for a non-fungible token offer.
+    /// Represents a flag for a non-token offer.
     /// </summary>
     public enum NFTokenOfferFlags : uint
     {
