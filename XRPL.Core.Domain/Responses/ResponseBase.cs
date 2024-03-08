@@ -8,18 +8,10 @@ using System.Threading.Tasks;
 namespace XRPL.Core.Domain.Responses
 {
     /// <summary>
-    /// Specifies a result-specific reponse to a query.
+    /// Specifies a response that encapsulates information received from a rippled server.
     /// </summary>
-    /// <typeparam name="TResult">The type of result.</typeparam>
-    public abstract class ResponseBase<TResult>
-        where TResult : ResultBase
+    public abstract class ResponseBase
     {
-        /// <summary>
-        /// The result of the query; contents vary depending on the command.
-        /// </summary>
-        [DataMember(Name = "result")]
-        public TResult? Result { get; set; }
-
         /// <summary>
         /// May contain one or more important warnings.
         /// </summary>
@@ -56,6 +48,20 @@ namespace XRPL.Core.Domain.Responses
         /// </summary>
         [DataMember(Name = "details")]
         public object? Details { get; set; }
+    }
+
+    /// <summary>
+    /// Specifies a response that encapsulates information in a <typeparamref name="TResult"/> object received from a rippled server.
+    /// </summary>
+    /// <typeparam name="TResult">The type of result to encapsulate.</typeparam>
+    public abstract class ResponseBase<TResult> : ResponseBase
+        where TResult : ResultBase
+    {
+        /// <summary>
+        /// The result of the query; contents vary depending on the command.
+        /// </summary>
+        [DataMember(Name = "result")]
+        public TResult? Result { get; set; }
     }
 
     /// <summary>

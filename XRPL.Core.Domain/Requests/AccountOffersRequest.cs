@@ -4,13 +4,16 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using XRPL.Core.Domain.Contracts;
+using XRPL.Core.Domain.Responses;
 
 namespace XRPL.Core.Domain.Requests
 {
     /// <summary>
     /// Represents the request to retrieve a list of offers made by a given account that are outstanding as of a particular ledger version.
     /// </summary>
-    public class AccountOffersRequest : RequestBase<AccountOffersParameters>
+    [DataContract]
+    public class AccountOffersRequest : RequestBase<AccountOffersParameters>, IRelateTo<AccountOffersResponse>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AccountOffersRequest"/> class.
@@ -23,7 +26,8 @@ namespace XRPL.Core.Domain.Requests
     /// <summary>
     /// Represents the parameters of a request to retrieve a list of offers made by a given account that are outstanding as of a particular ledger version.
     /// </summary>
-    public class AccountOffersParameters: ParameterBase
+    [DataContract]
+    public class AccountOffersParameters : ParameterBase
     {
         /// <summary>
         /// Look up Offers placed by this account

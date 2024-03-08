@@ -1,24 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.Serialization;
 
 namespace XRPL.Core.Domain.Responses
 {
     /// <summary>
-    /// Represents a response to the request to return information about an account's trust lines,
-    /// which contain balances in all non-XRP currencies and assets.
+    /// Encapsulates information about an account's trust lines, which contain balances in all non-XRP currencies and assets.
     /// </summary>
+    [DataContract]
     public class AccountLinesResponse : ResponseBase<AccountLinesResult>
     {
     }
 
     /// <summary>
-    /// Represents the result of a query to return information about an account's trust lines,
-    /// which contain balances in all non-XRP currencies and assets.
+    /// Represents the result of an <see cref="AccountLinesResponse"/> object.
     /// </summary>
+    [DataContract]
     public class AccountLinesResult : ResultBase
     {
         /// <summary>

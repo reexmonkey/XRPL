@@ -1,17 +1,39 @@
-﻿using ServiceStack;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.Serialization;
+using XRPL.Core.Domain.Contracts;
+using XRPL.Core.Domain.Responses;
 
 namespace XRPL.Core.Domain.Requests
 {
     /// <summary>
+    /// Represents a request to get information about an account's payment channels.
+    /// <para/>  This includes only channels where the specified account is the channel's source, not the destination.
+    /// (A channel's "source" and "owner" are the same.)
+    /// All information retrieved is relative to a particular version of the ledger
+    /// </summary>
+    public class AccountChannelsRequest : RequestBase<AccountChannelsParameters>, IRelateTo<AccountChannelsResponse>
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AccountChannelsRequest"/> class.
+        /// </summary>
+        public AccountChannelsRequest() : base("account_channels")
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AccountChannelsRequest"/> class with the specified parameters.
+        /// </summary>
+        /// <param name="parameters">The parameters of the request.</param>
+        public AccountChannelsRequest(AccountChannelsParameters[] parameters) : this()
+        {
+            ArgumentNullException.ThrowIfNull(parameters);
+            Parameters = parameters;
+        }
+    }
+
+    /// <summary>
     /// Represents the parameters of an account's payment channels.
     /// </summary>
-    public class AccountChannelsParameters: ParameterBase
+    public class AccountChannelsParameters : ParameterBase
     {
         /// <summary>
         /// Look up channels where this account is the channel's owner/source
@@ -50,31 +72,5 @@ namespace XRPL.Core.Domain.Requests
         /// </summary>
         [DataMember(Name = "marker")]
         public object? Marker { get; set; }
-    }
-
-    /// <summary>
-    /// Represents a request to get information about an account's payment channels.
-    /// <para/>  This includes only channels where the specified account is the channel's source, not the destination.
-    /// (A channel's "source" and "owner" are the same.)
-    /// All information retrieved is relative to a particular version of the ledger
-    /// </summary>
-    public class AccountChannelsRequest : RequestBase<AccountChannelsParameters>
-    {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="AccountChannelsRequest"/> class.
-        /// </summary>
-        public AccountChannelsRequest() : base("account_channels")
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="AccountChannelsRequest"/> class with the specified parameters.
-        /// </summary>
-        /// <param name="parameters">The parameters of the request.</param>
-        public AccountChannelsRequest(AccountChannelsParameters[] parameters) : this()
-        {
-            ArgumentNullException.ThrowIfNull(parameters);
-            Parameters = parameters;
-        }
     }
 }

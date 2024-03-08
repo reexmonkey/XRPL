@@ -4,13 +4,16 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using XRPL.Core.Domain.Contracts;
+using XRPL.Core.Domain.Responses;
 
 namespace XRPL.Core.Domain.Requests
 {
     /// <summary>
     /// Represents a request to return a list of NFToken objects for the specified account.
     /// </summary>
-    public class AccountNFTsRequest : RequestBase<AccountNftsParameters>
+    [DataContract]
+    public class AccountNFTsRequest : RequestBase<AccountNftsParameters>, IRelateTo<AccountNFTsResponse>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AccountNFTsRequest"/> class.
@@ -23,6 +26,7 @@ namespace XRPL.Core.Domain.Requests
     /// <summary>
     /// Represents the parameters of a request to return a list of NFToken objects for the specified account.
     /// </summary>
+    [DataContract]
     public class AccountNftsParameters : ParameterBase
     {
         /// <summary>

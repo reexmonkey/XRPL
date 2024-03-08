@@ -1,23 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
-using XRPL.Core.Domain.Requests;
+﻿using System.Runtime.Serialization;
 
 namespace XRPL.Core.Domain.Responses
 {
     /// <summary>
-    /// Represents a response to a request for information about an account's payment channels.
+    /// Encapsulates information about an account's payment channels.
     /// </summary>
+    [DataContract]
     public class AccountChannelsResponse : ResponseBase<AccountChannelsResult>
     {
     }
 
     /// <summary>
-    /// Represents the result of a query about information of an account's payment channels.
+    /// Represents the result of an <see cref="AccountChannelsResponse"/> object.
     /// </summary>
+    [DataContract]
     public class AccountChannelsResult : ResultBase
     {
         /// <summary>
@@ -64,6 +60,10 @@ namespace XRPL.Core.Domain.Responses
         public object? Marker { get; set; }
     }
 
+    /// <summary>
+    /// Represents a payment channel.
+    /// </summary>
+    [DataContract]
     public class Channel
     {
         /// <summary>

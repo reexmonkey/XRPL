@@ -9,15 +9,17 @@ using XRPL.Core.Domain.Entries;
 namespace XRPL.Core.Domain.Responses
 {
     /// <summary>
-    /// Represents the response to the request to return the raw ledger format for all ledger entries owned by an account.
+    /// Encapsulates the raw ledger format for all ledger entries owned by an account.
     /// </summary>
+    [DataContract]
     public class AccountObjectsResponse : ResponseBase<AccountObjectsResult>
     {
     }
 
     /// <summary>
-    /// Represents the result of the query to return the raw ledger format for all ledger entries owned by an account.
+    /// Represents the result of an <see cref="AccountObjectsResponse"/> object.
     /// </summary>
+    [DataContract]
     public class AccountObjectsResult : ResultBase
     {
         /// <summary>

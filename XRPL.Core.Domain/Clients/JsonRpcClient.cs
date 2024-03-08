@@ -1,6 +1,7 @@
 ﻿using ServiceStack;
 using System.Net.Http.Headers;
 using System.Text;
+using XRPL.Core.Domain.Contracts;
 using XRPL.Core.Domain.Requests;
 using XRPL.Core.Domain.Responses;
 
@@ -9,81 +10,88 @@ namespace XRPL.Core.Domain.Clients
     /// <summary>
     /// Represents a JSON-RPC client that can send requests to a rippled server.
     /// </summary>
-    public class JsonRpcClient : IDisposable
+    /// <remarks>
+    /// Initializes a new instance of the <see cref="JsonRpcClient"/> for the given endpoint.
+    /// </remarks>
+    /// <param name="url">The URL of the rippled server to connect to.</param>
+    /// <exception cref="ArgumentException"><paramref name="url"/> is null.</exception>
+    public class JsonRpcClient(Uri uri) : IDisposable
     {
         private const string contentType = "application/json";
-        private readonly HttpClient client;
-        private readonly Uri uri;
-        private readonly Encoding encoding;
+        private readonly HttpClient client = new();
+        private readonly Uri uri = uri ?? throw new ArgumentNullException(nameof(uri));
+        private readonly Encoding encoding = new UTF8Encoding(false, true);
 
         private bool disposedValue;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="JsonRpcClient"/> for the given endpoint.
-        /// </summary>
-        /// <param name="url">The URL of the rippled server to connect to.</param>
-        /// <exception cref="ArgumentException"><paramref name="url"/> is null.</exception>
-        public JsonRpcClient(Uri uri)
-        {
-            this.uri = uri ?? throw new ArgumentNullException(nameof(uri));
-            client = new HttpClient();
-            encoding = new UTF8Encoding(false, true);
-        }
-
-        private TResponse Post<TRequest, TResponse>(TRequest request, CancellationToken cancellationToken)
-            where TRequest : class
-            where TResponse : class
+        private TResponse Post<TRequest, TResponse>(TRequest request, CancellationToken cancellation)
+            where TRequest : RequestBase, IRelateTo<TResponse>
+            where TResponse : ResponseBase
         {
             var json = request.ToJson();
 
             using var content = new StringContent(json, encoding, contentType);
             var message = new HttpRequestMessage(HttpMethod.Post, uri) { Content = content };
 
-            using var response = client.Send(message, cancellationToken);
+            using var response = client.Send(message, cancellation);
             response.EnsureSuccessStatusCode();
 
-            using var reader = new StreamReader(response.Content.ReadAsStream(cancellationToken));
+            using var reader = new StreamReader(response.Content.ReadAsStream(cancellation));
             var result = reader.ReadToEnd();
             return result.FromJson<TResponse>();
         }
 
-        private async Task<TResponse> PostAsync<TRequest, TResponse>(TRequest request, CancellationToken cancellationToken)
+        private async Task<TResponse> PostAsync<TRequest, TResponse>(TRequest request, CancellationToken cancellation)
+            where TRequest : IRelateTo<TResponse>
+            where TResponse : ResponseBase
         {
             var json = request.ToJson();
 
             using var content = new StringContent(json, encoding, contentType);
-            using var response = await client.PostAsync(uri, content, cancellationToken);
+            using var response = await client.PostAsync(uri, content, cancellation);
             response.EnsureSuccessStatusCode();
 
-            var result = await response.Content.ReadAsStringAsync(cancellationToken);
+            var result = await response.Content.ReadAsStringAsync(cancellation);
             return result.FromJson<TResponse>();
         }
 
         #region Account Methods
 
-        public AccountChannelsResponse Post(AccountChannelsRequest request, CancellationToken cancellationToken)
-            => Post<AccountChannelsRequest, AccountChannelsResponse>(request, cancellationToken);
+        public AccountChannelsResponse Post(AccountChannelsRequest request, CancellationToken cancellation)
+            => Post<AccountChannelsRequest, AccountChannelsResponse>(request, cancellation);
 
-        public Task<AccountChannelsResponse> PostAsync(AccountChannelsRequest request, CancellationToken cancellationToken)
-            => PostAsync<AccountChannelsRequest, AccountChannelsResponse>(request, cancellationToken);
+        public Task<AccountChannelsResponse> PostAsync(AccountChannelsRequest request, CancellationToken cancellation)
+            => PostAsync<AccountChannelsRequest, AccountChannelsResponse>(request, cancellation);
 
-        public AccountCurrenciesResponse Post(AccountCurrenciesRequest request, CancellationToken cancellationToken)
-            => Post<AccountCurrenciesRequest, AccountCurrenciesResponse>(request, cancellationToken);
+        public AccountCurrenciesResponse Post(AccountCurrenciesRequest request, CancellationToken cancellation)
+            => Post<AccountCurrenciesRequest, AccountCurrenciesResponse>(request, cancellation);
 
-        public Task<AccountCurrenciesResponse> PostAsync(AccountCurrenciesRequest request, CancellationToken cancellationToken)
-            => PostAsync<AccountCurrenciesRequest, AccountCurrenciesResponse>(request, cancellationToken);
+        public Task<AccountCurrenciesResponse> PostAsync(AccountCurrenciesRequest request, CancellationToken cancellation)
+            => PostAsync<AccountCurrenciesRequest, AccountCurrenciesResponse>(request, cancellation);
 
-        public Task<AccountInfoResponse> PostAsync(AccountInfoRequest request, CancellationToken cancellationToken)
-            => PostAsync<AccountInfoRequest, AccountInfoResponse>(request, cancellationToken);
+        public AccountInfoResponse Post(AccountInfoRequest request, CancellationToken cancellation)
+            => Post<AccountInfoRequest, AccountInfoResponse>(request, cancellation);
 
-        public Task<AccountLinesResponse> PostAsync(AccountLinesRequest request, CancellationToken cancellationToken)
-            => PostAsync<AccountLinesRequest, AccountLinesResponse>(request, cancellationToken);
+        public Task<AccountInfoResponse> PostAsync(AccountInfoRequest request, CancellationToken cancellation)
+            => PostAsync<AccountInfoRequest, AccountInfoResponse>(request, cancellation);
 
-        public Task<AccountNFTsResponse> PostAsync(AccountNFTsRequest request, CancellationToken cancellationToken)
-            => PostAsync<AccountNFTsRequest, AccountNFTsResponse>(request, cancellationToken);
+        public AccountLinesResponse Post(AccountLinesRequest request, CancellationToken cancellation)
+            => Post<AccountLinesRequest, AccountLinesResponse>(request, cancellation);
 
-        public Task<AccountObjectsResponse> PostAsync(AccountObjectsRequest request, CancellationToken cancellationToken)
-            => PostAsync<AccountObjectsRequest, AccountObjectsResponse>(request, cancellationToken);
+        public Task<AccountLinesResponse> PostAsync(AccountLinesRequest request, CancellationToken cancellation)
+            => PostAsync<AccountLinesRequest, AccountLinesResponse>(request, cancellation);
+
+        public AccountNFTsResponse Post(AccountNFTsRequest request, CancellationToken cancellation)
+            => Post<AccountNFTsRequest, AccountNFTsResponse>(request, cancellation);
+
+        public Task<AccountNFTsResponse> PostAsync(AccountNFTsRequest request, CancellationToken cancellation)
+            => PostAsync<AccountNFTsRequest, AccountNFTsResponse>(request, cancellation);
+
+        public AccountObjectsResponse Post(AccountObjectsRequest request, CancellationToken cancellation)
+            => Post<AccountObjectsRequest, AccountObjectsResponse>(request, cancellation);
+
+        public Task<AccountObjectsResponse> PostAsync(AccountObjectsRequest request, CancellationToken cancellation)
+            => PostAsync<AccountObjectsRequest, AccountObjectsResponse>(request, cancellation);
 
         #endregion Account Methods
 

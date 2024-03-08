@@ -1,23 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.Serialization;
 using XRPL.Core.Domain.Entries;
 
 namespace XRPL.Core.Domain.Responses
 {
     /// <summary>
-    /// Represents a response to a query to retrieve information about an account, its activity, and its XRP balance. 
+    /// Encapsulates information about an account, its activity, and its XRP balance.
     /// </summary>
+    [DataContract]
     public class AccountInfoResponse : ResponseBase<AccountInfoResult>
     {
     }
 
     /// <summary>
-    /// Represents the result of the query to retrieve information about an account, its activity, and its XRP balance. 
+    /// Represents the result of an <see cref="AccountInfoResponse"/> object.
     /// </summary>
+    [DataContract]
     public class AccountInfoResult : ResultBase
     {
         /// <summary>

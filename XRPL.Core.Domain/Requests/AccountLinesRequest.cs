@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.Serialization;
+using XRPL.Core.Domain.Contracts;
+using XRPL.Core.Domain.Responses;
 
 namespace XRPL.Core.Domain.Requests
 {
@@ -11,7 +8,8 @@ namespace XRPL.Core.Domain.Requests
     /// Represents a request to return information about an account's trust lines, which contain balances in all non-XRP currencies and assets.
     /// <para/>All information retrieved is relative to a particular version of the ledger.
     /// </summary>
-    public class AccountLinesRequest : RequestBase<AccountInfoRequestParameters>
+    [DataContract]
+    public class AccountLinesRequest : RequestBase<AccountInfoRequestParameters>, IRelateTo<AccountLinesResponse>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AccountInfoRequest"/> class.
@@ -24,6 +22,7 @@ namespace XRPL.Core.Domain.Requests
     /// <summary>
     /// Represents parameters to return information about an account's trust lines, which contain balances in all non-XRP currencies and assets.
     /// </summary>
+    [DataContract]
     public class AccountLinesParameters : ParameterBase
     {
         /// <summary>
@@ -51,9 +50,9 @@ namespace XRPL.Core.Domain.Requests
         public string? Peer { get; set; }
 
         /// <summary>
-        /// (Optional) Limit the number of trust lines to retrieve. 
-        /// <para/>The server may return less than the specified limit, even if there are more pages of results. 
-        /// Must be within the inclusive range 10 to 400. 
+        /// (Optional) Limit the number of trust lines to retrieve.
+        /// <para/>The server may return less than the specified limit, even if there are more pages of results.
+        /// Must be within the inclusive range 10 to 400.
         /// Positive values outside this range are replaced with the closest valid option. The default is 200.
         /// </summary>
         [DataMember(Name = "limit")]

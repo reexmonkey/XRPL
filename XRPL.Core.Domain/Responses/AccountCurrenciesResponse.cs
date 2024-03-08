@@ -1,18 +1,19 @@
 ﻿using System.Runtime.Serialization;
-using XRPL.Core.Domain.Requests;
 
 namespace XRPL.Core.Domain.Responses
 {
     /// <summary>
-    /// Represents a response to a query to list currencies that an account can send or receive, based on its trust lines. 
+    /// Encapsulates a list of currencies that an account can send or receive, based on its trust lines.
     /// </summary>
+    [DataContract]
     public class AccountCurrenciesResponse : ResponseBase<AccountCurrenciesResponseResult>
     {
     }
 
     /// <summary>
-    /// Represents the result of the query to list currencies that an account can send or receive, based on its trust lines. 
+    /// Represents the result of <see cref="AccountChannelsResponse"/> object.
     /// </summary>
+    [DataContract]
     public class AccountCurrenciesResponseResult : ResultBase
     {
         /// <summary>

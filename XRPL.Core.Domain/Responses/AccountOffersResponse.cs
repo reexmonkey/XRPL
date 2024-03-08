@@ -1,18 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
-using XRPL.Core.Domain.Entries;
+﻿using System.Runtime.Serialization;
 using XRPL.Core.Domain.Models;
+using XRPL.Core.Domain.Requests;
 
 namespace XRPL.Core.Domain.Responses
 {
+    /// <summary>
+    /// Encapsulates a list of offers made by a given account that are outstanding as of a particular ledger version.
+    /// </summary>
+    [DataContract]
     public class AccountOffersResponse : ResponseBase<AccountOffersResult>
     {
     }
 
+    /// <summary>
+    /// Represents the result of an <see cref="AccountOffersResponse"/> object.
+    /// </summary>
+    [DataContract]
     public class AccountOffersResult : ResultBase
     {
         /// <summary>
@@ -113,8 +116,8 @@ namespace XRPL.Core.Domain.Responses
     /// <summary>
     /// Specifies an an offer made by an account that is outstanding as of the requested ledger version.
     /// <para/>If the number of offers is large, only returns up to limit at a time.
-    /// <para/> The account accepting the offer receives a <see cref="string"/> representing the amount in XRP.
-    /// <para/> The account accepting the offer provides a <see cref="TokenAmount"/> object representing the amount in a token specification.
+    /// <para/> The account accepting the offer receives a <see cref="string"/> value representing the amount in XRP.
+    /// <para/> The account accepting the offer provides a <see cref="TokenAmount"/> object representing the amount in a fungible token specification.
     /// </summary>
     public sealed class XrpForTokenAccountOffer : AccountOffer<string, TokenAmount>
     {
@@ -123,8 +126,8 @@ namespace XRPL.Core.Domain.Responses
     /// <summary>
     /// Specifies an an offer made by an account that is outstanding as of the requested ledger version.
     /// <para/>If the number of offers is large, only returns up to limit at a time.
-    /// <para/> The account accepting the offer receives a <see cref="TokenAmount"/> object representing the amount in a token specification.
-    /// <para/> The account accepting the offer provides a <see cref="string"/> representing the amount in XRP.
+    /// <para/> The account accepting the offer receives a <see cref="TokenAmount"/> object representing the amount in a fungible token specification.
+    /// <para/> The account accepting the offer provides a <see cref="string"/> value representing the amount in XRP.
     /// </summary>
     public sealed class TokenForXrpAccountOffer : AccountOffer<TokenAmount, string>
     {
@@ -134,7 +137,7 @@ namespace XRPL.Core.Domain.Responses
     /// Specifies an an offer made by an account that is outstanding as of the requested ledger version.
     /// <para/>If the number of offers is large, only returns up to limit at a time.
     /// <para/> The account accepting the offer receives a <see cref="TokenAmount"/> object representing the amount in a token specification.
-    /// <para/> The account accepting the offer provides a <see cref="TokenAmount"/> representing the amount in a token specification.
+    /// <para/> The account accepting the offer provides a <see cref="TokenAmount"/> representing the amount in a fungible token specification.
     /// </summary>
     public sealed class TokenForTokenAccountOffer : AccountOffer<TokenAmount, TokenAmount>
     {

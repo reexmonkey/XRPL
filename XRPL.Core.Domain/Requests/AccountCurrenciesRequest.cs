@@ -1,15 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.Serialization;
+using XRPL.Core.Domain.Contracts;
+using XRPL.Core.Domain.Responses;
 
 namespace XRPL.Core.Domain.Requests
 {
     /// <summary>
+    /// Represents the request to retrieve account currencies.
+    /// </summary>
+    [DataContract]
+    public class AccountCurrenciesRequest : RequestBase<AccountCurrenciesParameters>, IRelateTo<AccountCurrenciesResponse>
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AccountCurrenciesRequest"/> class.
+        /// </summary>
+        public AccountCurrenciesRequest() : base("account_currencies")
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AccountCurrenciesRequest"/> class with the specified parameters.
+        /// </summary>
+        /// <param name="parameters">The parameters of the request.</param>
+        public AccountCurrenciesRequest(AccountCurrenciesParameters[]? parameters) : this()
+        {
+            ArgumentNullException.ThrowIfNull(parameters);
+            Parameters = parameters;
+        }
+    }
+
+    /// <summary>
     /// Represents the parameters of a request to retrieve account currencies.
     /// </summary>
+    [DataContract]
     public class AccountCurrenciesParameters : ParameterBase
     {
         /// <summary>
@@ -29,28 +51,5 @@ namespace XRPL.Core.Domain.Requests
         /// </summary>
         [DataMember(Name = "ledger_index")]
         public string? LedgerIndex { get; set; }
-    }
-
-    /// <summary>
-    /// Represents the request to retrieve account currencies.
-    /// </summary>
-    public class AccountCurrenciesRequest : RequestBase<AccountCurrenciesParameters>
-    {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="AccountCurrenciesRequest"/> class.
-        /// </summary>
-        public AccountCurrenciesRequest() : base("account_currencies")
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="AccountCurrenciesRequest"/> class with the specified parameters.
-        /// </summary>
-        /// <param name="parameters">The parameters of the request.</param>
-        public AccountCurrenciesRequest(AccountCurrenciesParameters[]? parameters) : this()
-        {
-            ArgumentNullException.ThrowIfNull(parameters);
-            Parameters = parameters;
-        }
     }
 }

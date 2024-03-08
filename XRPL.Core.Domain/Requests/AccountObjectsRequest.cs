@@ -4,7 +4,9 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using XRPL.Core.Domain.Contracts;
 using XRPL.Core.Domain.Entries;
+using XRPL.Core.Domain.Responses;
 
 namespace XRPL.Core.Domain.Requests
 {
@@ -20,12 +22,13 @@ namespace XRPL.Core.Domain.Requests
     /// <para/><see cref="XRPCheck"/>, <see cref="TokenCheck"/> entries for pending Checks.
     /// <para/><see cref="DepositPreauth"/> entries for deposit preauthorizations.
     /// <para/><see cref="Ticket"/> entries for Tickets.
-    /// <para/><see cref="XrpForNFTokenOffer"/>, 
-    /// <see cref="TokenForNFTokenOffer"/>, 
+    /// <para/><see cref="XrpForNFTokenOffer"/>,
+    /// <see cref="TokenForNFTokenOffer"/>,
     /// <see cref="TokenForTokenOffer"/> entries for offers to buy or sell an NFT.
     /// <para/><see cref="NFTokenPage"/> entries for collections of NFTs.
     /// </summary>
-    public class AccountObjectsRequest : RequestBase<AccountObjectsParameters>
+    [DataContract]
+    public class AccountObjectsRequest : RequestBase<AccountObjectsParameters>, IRelateTo<AccountObjectsResponse>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AccountObjectsRequest"/> class.
@@ -38,6 +41,7 @@ namespace XRPL.Core.Domain.Requests
     /// <summary>
     /// Represents parameters of the raw ledger format for all ledger entries owned by an account.
     /// </summary>
+    [DataContract]
     public class AccountObjectsParameters : ParameterBase
     {
         /// <summary>

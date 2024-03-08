@@ -4,15 +4,17 @@ using XRPL.Core.Domain.Models;
 namespace XRPL.Core.Domain.Responses
 {
     /// <summary>
-    /// Represents the response to a request to return a list of NFToken objects for a specified account
+    /// Encapsulates a list of NFToken objects for a specified account
     /// </summary>
+    [DataContract]
     public class AccountNFTsResponse : ResponseBase<AccountNFTsResult>
     {
     }
 
     /// <summary>
-    /// Represents the result of a query to return a list of NFToken objects for a specified account
+    /// Represents the result of an <see cref="AccountNFTsResponse"/> object.
     /// </summary>
+    [DataContract]
     public class AccountNFTsResult : ResultBase
     {
         /// <summary>
