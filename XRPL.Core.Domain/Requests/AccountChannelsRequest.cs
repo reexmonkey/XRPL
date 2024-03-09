@@ -31,7 +31,7 @@ namespace XRPL.Core.Domain.Requests
     }
 
     /// <summary>
-    /// Represents the parameters of an account's payment channels.
+    /// Represents the parameters of an <see cref="AccountChannelsRequest"/> object.
     /// </summary>
     public class AccountChannelsParameters : ParameterBase
     {

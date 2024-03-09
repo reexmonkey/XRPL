@@ -20,7 +20,7 @@ namespace XRPL.Core.Domain.Requests
     }
 
     /// <summary>
-    /// Represents parameters to return information about an account's trust lines, which contain balances in all non-XRP currencies and assets.
+    /// Represents parameters of an <see cref="AccountLinesRequest"/> object.
     /// </summary>
     [DataContract]
     public class AccountLinesParameters : ParameterBase

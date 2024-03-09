@@ -29,7 +29,7 @@ namespace XRPL.Core.Domain.Requests
     }
 
     /// <summary>
-    /// Represents the parameters of a request to retrieve information about an account, its activity and its XRP balance.
+    /// Represents the parameters of an <see cref="AccountInfoRequest"/> object.
     /// </summary>
     [DataContract]
     public class AccountInfoRequestParameters : ParameterBase

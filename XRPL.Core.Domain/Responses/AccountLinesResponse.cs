@@ -3,7 +3,7 @@
 namespace XRPL.Core.Domain.Responses
 {
     /// <summary>
-    /// Encapsulates information about an account's trust lines, which contain balances in all non-XRP currencies and assets.
+    /// Represents a response that encapsulates information about an account's trust lines, which contain balances in all non-XRP currencies and assets.
     /// </summary>
     [DataContract]
     public class AccountLinesResponse : ResponseBase<AccountLinesResult>

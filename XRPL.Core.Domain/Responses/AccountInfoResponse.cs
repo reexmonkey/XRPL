@@ -4,7 +4,7 @@ using XRPL.Core.Domain.Entries;
 namespace XRPL.Core.Domain.Responses
 {
     /// <summary>
-    /// Encapsulates information about an account, its activity, and its XRP balance.
+    /// Represents a response that encapsulates information about an account, its activity, and its XRP balance.
     /// </summary>
     [DataContract]
     public class AccountInfoResponse : ResponseBase<AccountInfoResult>
@@ -199,13 +199,14 @@ namespace XRPL.Core.Domain.Responses
         /// (May be omitted) Information about each queued transaction from this address.
         /// </summary>
         [DataMember(Name = "transactions")]
-        public Transaction[]? Transactions { get; set; }
+        public QueueDataTransaction[]? Transactions { get; set; }
     }
 
     /// <summary>
     /// Represents information about each queued transaction from this address.
     /// </summary>
-    public class Transaction
+    [DataContract]
+    public class QueueDataTransaction
     {
         /// <summary>
         /// Whether this transaction changes this address's ways of authorizing transactions.

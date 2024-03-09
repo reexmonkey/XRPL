@@ -4,7 +4,7 @@ using XRPL.Core.Domain.Models;
 namespace XRPL.Core.Domain.Responses
 {
     /// <summary>
-    /// Encapsulates a list of NFToken objects for a specified account
+    /// Represents a response that encapsulates a list of NFToken objects for a specified account
     /// </summary>
     [DataContract]
     public class AccountNFTsResponse : ResponseBase<AccountNFTsResult>

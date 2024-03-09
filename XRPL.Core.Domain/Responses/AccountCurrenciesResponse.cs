@@ -3,7 +3,7 @@
 namespace XRPL.Core.Domain.Responses
 {
     /// <summary>
-    /// Encapsulates a list of currencies that an account can send or receive, based on its trust lines.
+    /// Represents a response that encapsulates a list of currencies that an account can send or receive, based on its trust lines.
     /// </summary>
     [DataContract]
     public class AccountCurrenciesResponse : ResponseBase<AccountCurrenciesResponseResult>

@@ -21,7 +21,7 @@ namespace XRPL.Core.Domain.Entries
         /// <summary>
         /// A bit-map of boolean options enabled for this entry.
         /// </summary>
-        public override uint Flags { get => flags.HasValue? (uint)flags:0u; set => flags = value == 1u? (SignerListFlags)value: null; }
+        public override uint Flags { get => flags.HasValue ? (uint)flags : 0u; set => flags = value == 1u ? (SignerListFlags)value : null; }
 
         /// <summary>
         /// The identifying hash of the transaction that most recently modified this object.

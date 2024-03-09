@@ -29,7 +29,7 @@ namespace XRPL.Core.Domain.Requests
     }
 
     /// <summary>
-    /// Represents the parameters of a request to retrieve account currencies.
+    /// Represents the parameters of an <see cref="AccountCurrenciesRequest"/> object.
     /// </summary>
     [DataContract]
     public class AccountCurrenciesParameters : ParameterBase

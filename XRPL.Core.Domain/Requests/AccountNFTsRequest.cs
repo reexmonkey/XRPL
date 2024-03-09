@@ -24,7 +24,7 @@ namespace XRPL.Core.Domain.Requests
     }
 
     /// <summary>
-    /// Represents the parameters of a request to return a list of NFToken objects for the specified account.
+    /// Represents the parameters of an <see cref="AccountNFTsRequest"/> object.
     /// </summary>
     [DataContract]
     public class AccountNftsParameters : ParameterBase

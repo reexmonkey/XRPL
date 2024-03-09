@@ -3,7 +3,7 @@
 namespace XRPL.Core.Domain.Responses
 {
     /// <summary>
-    /// Encapsulates information about an account's payment channels.
+    /// Represents a response that encapsulates information about an account's payment channels.
     /// </summary>
     [DataContract]
     public class AccountChannelsResponse : ResponseBase<AccountChannelsResult>

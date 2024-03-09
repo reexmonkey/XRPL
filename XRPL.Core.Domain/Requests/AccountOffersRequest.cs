@@ -24,7 +24,7 @@ namespace XRPL.Core.Domain.Requests
     }
 
     /// <summary>
-    /// Represents the parameters of a request to retrieve a list of offers made by a given account that are outstanding as of a particular ledger version.
+    /// Represents the parameters of an <see cref="AccountOffersRequest"/> object.
     /// </summary>
     [DataContract]
     public class AccountOffersParameters : ParameterBase

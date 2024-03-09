@@ -9,7 +9,7 @@ using XRPL.Core.Domain.Entries;
 namespace XRPL.Core.Domain.Responses
 {
     /// <summary>
-    /// Encapsulates the raw ledger format for all ledger entries owned by an account.
+    /// Represents a response that encapsulates the raw ledger format for all ledger entries owned by an account.
     /// </summary>
     [DataContract]
     public class AccountObjectsResponse : ResponseBase<AccountObjectsResult>

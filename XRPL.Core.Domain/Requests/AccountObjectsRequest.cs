@@ -39,7 +39,7 @@ namespace XRPL.Core.Domain.Requests
     }
 
     /// <summary>
-    /// Represents parameters of the raw ledger format for all ledger entries owned by an account.
+    /// Represents parameters of an <see cref="AccountObjectsRequest"/> object.
     /// </summary>
     [DataContract]
     public class AccountObjectsParameters : ParameterBase

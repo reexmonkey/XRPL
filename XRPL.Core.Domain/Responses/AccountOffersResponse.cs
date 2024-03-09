@@ -5,7 +5,7 @@ using XRPL.Core.Domain.Requests;
 namespace XRPL.Core.Domain.Responses
 {
     /// <summary>
-    /// Encapsulates a list of offers made by a given account that are outstanding as of a particular ledger version.
+    /// Represents a response that encapsulates a list of offers made by a given account that are outstanding as of a particular ledger version.
     /// </summary>
     [DataContract]
     public class AccountOffersResponse : ResponseBase<AccountOffersResult>
