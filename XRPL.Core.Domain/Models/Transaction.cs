@@ -1,5 +1,6 @@
 using System.Runtime.Serialization;
 using XRPL.Core.Domain.Entries;
+using XRPL.Core.Domain.Models;
 
 namespace XRPL.Core.Domain.Responses
 {
@@ -8,6 +9,33 @@ namespace XRPL.Core.Domain.Responses
     /// <para/>Transactions' outcomes are only final if signed, submitted, and accepted into a validated ledger version following the consensus process.
     /// <para/>Some ledger rules also generate pseudo-transactions, which aren't signed or submitted, but still must be accepted by consensus. <para/>Transactions that fail are also included in ledgers because they modify balances of XRP to pay for the anti-spam transaction cost.
     /// </summary>
+    [KnownType(typeof(AccountRoot))]
+    [KnownType(typeof(AMM))]
+    [KnownType(typeof(Ammendments))]
+    [KnownType(typeof(Bridge))]
+    [KnownType(typeof(CurrencyAmountCheck))]
+    [KnownType(typeof(XRPCheck))]
+    [KnownType(typeof(DepositPreauth))]
+    [KnownType(typeof(DID))]
+    [KnownType(typeof(DirectoryNode))]
+    [KnownType(typeof(Escrow))]
+    [KnownType(typeof(FeeSettings))]
+    [KnownType(typeof(LedgerHashes))]
+    [KnownType(typeof(NegativeUNL))]
+    [KnownType(typeof(XrpForNFTokenOffer))]
+    [KnownType(typeof(CurrencyAmountForNFTokenOffer))]
+    [KnownType(typeof(NFTokenPage))]
+    [KnownType(typeof(XrpForCurrencyAmountOffer))]
+    [KnownType(typeof(CurrencyAmountForXrpOffer))]
+    [KnownType(typeof(CurrencyAmountForCurrencyAmountOffer))]
+    [KnownType(typeof(PayChannel))]
+    [KnownType(typeof(RippleState))]
+    [KnownType(typeof(SignerList))]
+    [KnownType(typeof(Ticket))]
+    [KnownType(typeof(XRPXChainOwnedClaimID))]
+    [KnownType(typeof(CurrencyAmountXChainOwnedClaimID))]
+    [KnownType(typeof(XrpXChainOwnedCreateAccountClaimID))]
+    [KnownType(typeof(CurrencyAmountXChainOwnedCreateAccountClaimID))]
     public class Transaction
     {
         /// <summary>
@@ -89,6 +117,34 @@ namespace XRPL.Core.Domain.Responses
         /// (Automatically added when signing) The signature that verifies this transaction as originating from the account it says it is from.
         /// </summary>
         public string? TxnSignature { get; set; }
+
+        /// <summary>
+        /// List of ledger entries that were created, deleted, or modified by this transaction, and specific changes to each.
+        /// </summary>
+        public LedgerEntryBase[]? AffectedNodes { get; set; }
+
+        /// <summary>
+        /// (May be omitted) For a partial payment, this field records the amount of currency actually delivered to the destination.
+        /// <para/>To avoid errors when reading transactions, instead use the delivered_amount field, which is provided for all Payment transactions, partial or not.
+        /// </summary>
+        [DataMember(Name = "DeliveredAmount")]
+        public CurrencyAmount[]? PartialPaymentDeliveredAmount { get; set; }
+
+        /// <summary>
+        /// The transaction's position within the ledger that included it. This is zero-indexed. (For example, the value 2 means it was the 3rd transaction in that ledger.)
+        /// </summary>
+        public uint TransactionIndex { get; set; }
+
+        /// <summary>
+        /// A result code indicating whether the transaction succeeded or how it failed.
+        /// </summary>
+        public string? TransactionResult { get; set; }
+
+        /// <summary>
+        /// (Omitted for non-Payment transactions) The [Currency Amount][] actually received by the Destination account. Use this field to determine how much was delivered, regardless of whether the transaction is a partial payment. See this description for details.
+        /// </summary>
+        [DataMember(Name = "delivered_amount")]
+        public CurrencyAmount? DeliveredAmount { get; set; }
     }
 
     /// <summary>

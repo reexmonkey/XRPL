@@ -38,7 +38,7 @@ namespace XRPL.Core.Domain.Entries
         /// The total outstanding balance of liquidity provider tokens from this AMM instance.
         /// <para/>The holders of these tokens can vote on the AMM's trading fee in proportion to their holdings, or redeem the tokens for a share of the AMM's assets which grows with the trading fees collected.
         /// </summary>
-        public TokenAmount? LPTokenBalance { get; set; }
+        public CurrencyAmount? LPTokenBalance { get; set; }
 
         /// <summary>
         /// The percentage fee to be charged for trades against this AMM instance, in units of 1/100,000. The maximum value is 1000, for a 1% fee.
@@ -90,7 +90,7 @@ namespace XRPL.Core.Domain.Entries
         /// <summary>
         /// The amount the auction owner paid to win this slot, in LP Tokens.
         /// </summary>
-        public TokenAmount? Price { get; set; }
+        public CurrencyAmount? Price { get; set; }
 
         /// <summary>
         /// The time when this slot expires, in seconds since the Ripple Epoch.

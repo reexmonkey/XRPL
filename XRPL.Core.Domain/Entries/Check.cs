@@ -95,7 +95,7 @@ namespace XRPL.Core.Domain.Entries
     /// <summary>
     /// Reprsents a token check.
     /// </summary>
-    public sealed class TokenCheck : Check<TokenAmount>
+    public sealed class CurrencyAmountCheck : Check<CurrencyAmount>
     {
     }
 }

@@ -99,6 +99,12 @@ namespace XRPL.Core.Domain.Clients
         public Task<AccountTxResponse> PostAsync(AccountTxRequest request, CancellationToken cancellation)
             => PostAsync<AccountTxRequest, AccountTxResponse>(request, cancellation);
 
+        public GatewayBalancesResponse Post(GatewayBalancesRequest request, CancellationToken cancellation)
+            => Post<GatewayBalancesRequest, GatewayBalancesResponse>(request, cancellation);
+
+        public Task<GatewayBalancesResponse> PostAsync(GatewayBalancesRequest request, CancellationToken cancellation)
+            => PostAsync<GatewayBalancesRequest, GatewayBalancesResponse>(request, cancellation);
+
         #endregion Account Methods
 
         protected virtual void Dispose(bool disposing)

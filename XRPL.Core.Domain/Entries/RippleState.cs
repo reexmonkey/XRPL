@@ -16,7 +16,7 @@ namespace XRPL.Core.Domain.Entries
         /// <para/>A negative balance indicates that the high account holds tokens issued by the low account.
         /// The issuer in this is always set to the neutral value ACCOUNT_ONE.
         /// </summary>
-        public TokenAmount? Balance { get; set; }
+        public CurrencyAmount? Balance { get; set; }
 
         /// <summary>
         /// A bit-map of boolean options enabled for this entry.
@@ -27,7 +27,7 @@ namespace XRPL.Core.Domain.Entries
         /// The limit that the high account has set on the trust line.
         /// <para/>The issuer is the address of the high account that set this limit.
         /// </summary>
-        public TokenAmount? HighLimit { get; set; }
+        public CurrencyAmount? HighLimit { get; set; }
 
         /// <summary>
         /// (Omitted in some historical ledgers) A hint indicating which page of the high account's owner directory links to this entry, in case the directory consists of multiple pages.
@@ -50,7 +50,7 @@ namespace XRPL.Core.Domain.Entries
         /// The limit that the low account has set on the trust line.
         /// <para/>The issuer is the address of the low account that set this limit.
         /// </summary>
-        public TokenAmount? LowLimit { get; set; }
+        public CurrencyAmount? LowLimit { get; set; }
 
         /// <summary>
         /// (Omitted in some historical ledgers) A hint indicating which page of the low account's owner directory links to this entry, in case the directory consists of multiple pages.

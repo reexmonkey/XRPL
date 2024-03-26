@@ -8,11 +8,11 @@ using XRPL.Core.Domain.Models;
 namespace XRPL.Core.Domain.Entries
 {
     /// <summary>
-    /// Specifies one cross-chain transfer of value and includes information of the account on the source chain 
+    /// Specifies one cross-chain transfer of value and includes information of the account on the source chain
     /// that locks or burns the funds on the source chain.
-    /// <para/>The XChainOwnedClaimID object must be acquired on the destination chain before submitting a XChainCommit on the source chain. 
+    /// <para/>The XChainOwnedClaimID object must be acquired on the destination chain before submitting a XChainCommit on the source chain.
     /// Its purpose is to prevent transaction replay attacks and is also used as a place to collect attestations from witness servers.
-    /// <para/>An XChainCreateClaimID transaction is used to create a new XChainOwnedClaimID. 
+    /// <para/>An XChainCreateClaimID transaction is used to create a new XChainOwnedClaimID.
     /// The ledger object is destroyed when the funds are successfully claimed on the destination chain.
     /// </summary>
     /// <typeparam name="TTokenAmount">The type of amount and token to claim in the XChainCommit transaction.</typeparam>
@@ -30,14 +30,14 @@ namespace XRPL.Core.Domain.Entries
         public string? LedgerIndex { get; set; }
 
         /// <summary>
-        /// The account that must send the corresponding XChainCommit on the source chain. 
-        /// <para/>The destination may be specified in the XChainCommit transaction, which means that if the OtherChainSource isn't specified, another account can try to specify a different destination and steal the funds. 
+        /// The account that must send the corresponding XChainCommit on the source chain.
+        /// <para/>The destination may be specified in the XChainCommit transaction, which means that if the OtherChainSource isn't specified, another account can try to specify a different destination and steal the funds.
         /// This also allows tracking only a single set of signatures, since we know which account will send the XChainCommit transaction.
         /// </summary>
         public string? OtherChainSource { get; set; }
 
         /// <summary>
-        /// The total amount to pay the witness servers for their signatures. 
+        /// The total amount to pay the witness servers for their signatures.
         /// <para/>It must be at least the value of SignatureReward in the Bridge ledger object.
         /// </summary>
         public string? SignatureReward { get; set; }
@@ -60,7 +60,7 @@ namespace XRPL.Core.Domain.Entries
         /// <summary>
         /// Initializes a new instance of the <see cref="XChainOwnedClaimIDBase{TTokenAmount}"/> class.
         /// </summary>
-        protected XChainOwnedClaimIDBase() 
+        protected XChainOwnedClaimIDBase()
         {
             LedgerEntryType = "XChainOwnedClaimID";
         }
@@ -107,34 +107,29 @@ namespace XRPL.Core.Domain.Entries
         /// A boolean representing the chain where the event occurred.
         /// </summary>
         public uint WasLockingChainSend { get; set; }
-
     }
 
     /// <summary>
-    /// Represents one cross-chain transfer of XRP and includes information of the account on the source chain 
+    /// Represents one cross-chain transfer of XRP and includes information of the account on the source chain
     /// that locks or burns the funds on the source chain.
-    /// <para/>The XChainOwnedClaimID object must be acquired on the destination chain before submitting a XChainCommit on the source chain. 
+    /// <para/>The XChainOwnedClaimID object must be acquired on the destination chain before submitting a XChainCommit on the source chain.
     /// Its purpose is to prevent transaction replay attacks and is also used as a place to collect attestations from witness servers.
-    /// <para/>An XChainCreateClaimID transaction is used to create a new XChainOwnedClaimID. 
+    /// <para/>An XChainCreateClaimID transaction is used to create a new XChainOwnedClaimID.
     /// The ledger object is destroyed when the funds are successfully claimed on the destination chain.
     /// </summary>
-    public sealed class XRPXChainOwnedClaimID: XChainOwnedClaimIDBase<string>
+    public sealed class XRPXChainOwnedClaimID : XChainOwnedClaimIDBase<string>
     {
-
     }
 
     /// <summary>
-    /// Represents one cross-chain transfer of a token and includes information of the account on the source chain 
+    /// Represents one cross-chain transfer of a token and includes information of the account on the source chain
     /// that locks or burns the funds on the source chain.
-    /// <para/>The XChainOwnedClaimID object must be acquired on the destination chain before submitting a XChainCommit on the source chain. 
+    /// <para/>The XChainOwnedClaimID object must be acquired on the destination chain before submitting a XChainCommit on the source chain.
     /// Its purpose is to prevent transaction replay attacks and is also used as a place to collect attestations from witness servers.
-    /// <para/>An XChainCreateClaimID transaction is used to create a new XChainOwnedClaimID. 
+    /// <para/>An XChainCreateClaimID transaction is used to create a new XChainOwnedClaimID.
     /// The ledger object is destroyed when the funds are successfully claimed on the destination chain.
     /// </summary>
-    public sealed class TokenXChainOwnedClaimID: XChainOwnedClaimIDBase<TokenAmount>
+    public sealed class CurrencyAmountXChainOwnedClaimID : XChainOwnedClaimIDBase<CurrencyAmount>
     {
-
     }
-
-
 }

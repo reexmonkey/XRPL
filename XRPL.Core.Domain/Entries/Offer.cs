@@ -121,7 +121,7 @@ namespace XRPL.Core.Domain.Entries
     /// When processing transactions, the network automatically removes any unfunded offers that those transactions come across.
     /// (Otherwise, unfunded offers remain, because only transactions can change the ledger state.)
     /// </summary>
-    public sealed class XrpForTokenOffer : Offer<string, TokenAmount>
+    public sealed class XrpForCurrencyAmountOffer : Offer<string, CurrencyAmount>
     {
     }
 
@@ -134,7 +134,7 @@ namespace XRPL.Core.Domain.Entries
     /// When processing transactions, the network automatically removes any unfunded offers that those transactions come across.
     /// (Otherwise, unfunded offers remain, because only transactions can change the ledger state.)
     /// </summary>
-    public sealed class TokenForXrpOffer : Offer<TokenAmount, string>
+    public sealed class CurrencyAmountForXrpOffer : Offer<CurrencyAmount, string>
     {
     }
 
@@ -147,7 +147,7 @@ namespace XRPL.Core.Domain.Entries
     /// When processing transactions, the network automatically removes any unfunded offers that those transactions come across.
     /// (Otherwise, unfunded offers remain, because only transactions can change the ledger state.)
     /// </summary>
-    public sealed class TokenForTokenOffer : Offer<TokenAmount, TokenAmount>
+    public sealed class CurrencyAmountForCurrencyAmountOffer : Offer<CurrencyAmount, CurrencyAmount>
     {
     }
 }

@@ -5,12 +5,12 @@ namespace XRPL.Core.Domain.Models
     /// <summary>
     /// Represents the amount and currency of a fungible token.
     /// </summary>
-    public class TokenAmount
+    public class CurrencyAmount
     {
         /// <summary>
         /// Arbitrary currency code for the token. Cannot be XRP.
         /// </summary>
-        [DataMember(Name = "currence")]
+        [DataMember(Name = "currency")]
         public string? Currency { get; set; }
 
         /// <summary>
