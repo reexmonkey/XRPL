@@ -105,6 +105,12 @@ namespace XRPL.Core.Domain.Clients
         public Task<GatewayBalancesResponse> PostAsync(GatewayBalancesRequest request, CancellationToken cancellation)
             => PostAsync<GatewayBalancesRequest, GatewayBalancesResponse>(request, cancellation);
 
+        public NoRippleCheckResponse Post(NoRippleCheckRequest request, CancellationToken cancellation)
+            => Post<NoRippleCheckRequest, NoRippleCheckResponse>(request, cancellation);
+
+        public Task<NoRippleCheckResponse> PostAsync(NoRippleCheckRequest request, CancellationToken cancellation)
+            => PostAsync<NoRippleCheckRequest, NoRippleCheckResponse>(request, cancellation);
+
         #endregion Account Methods
 
         protected virtual void Dispose(bool disposing)
