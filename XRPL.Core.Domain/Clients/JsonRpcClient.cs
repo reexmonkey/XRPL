@@ -1,5 +1,4 @@
 ﻿using ServiceStack;
-using System.Net.Http.Headers;
 using System.Text;
 using XRPL.Core.Domain.Contracts;
 using XRPL.Core.Domain.Requests;
@@ -110,6 +109,18 @@ namespace XRPL.Core.Domain.Clients
 
         public Task<NoRippleCheckResponse> PostAsync(NoRippleCheckRequest request, CancellationToken cancellation)
             => PostAsync<NoRippleCheckRequest, NoRippleCheckResponse>(request, cancellation);
+
+        public SubmitResponse Post(SubmitOnlyRequest request, CancellationToken cancellation)
+            => Post<SubmitOnlyRequest, SubmitResponse>(request, cancellation);
+
+        public Task<SubmitResponse> PostAsync(SubmitOnlyRequest request, CancellationToken cancellation)
+            => PostAsync<SubmitOnlyRequest, SubmitResponse>(request, cancellation);
+
+        public SubmitResponse Post(SignAndSubmitRequest request, CancellationToken cancellation)
+            => Post<SignAndSubmitRequest, SubmitResponse>(request, cancellation);
+
+        public Task<SubmitResponse> PostAsync(SignAndSubmitRequest request, CancellationToken cancellation)
+            => PostAsync<SignAndSubmitRequest, SubmitResponse>(request, cancellation);
 
         #endregion Account Methods
 
