@@ -122,6 +122,30 @@ namespace XRPL.Core.Domain.Clients
         public Task<SubmitResponse> PostAsync(SignAndSubmitRequest request, CancellationToken cancellation)
             => PostAsync<SignAndSubmitRequest, SubmitResponse>(request, cancellation);
 
+        public TransactionEntryResponse Post(TransactionEntryRequest request, CancellationToken cancellation)
+            => Post<TransactionEntryRequest, TransactionEntryResponse>(request, cancellation);
+
+        public Task<TransactionEntryResponse> PostAsync(TransactionEntryRequest request, CancellationToken cancellation)
+            => PostAsync<TransactionEntryRequest, TransactionEntryResponse>(request, cancellation);
+
+        public HashTxResponse Post(TxRequest request, CancellationToken cancellation)
+            => Post<TxRequest, HashTxResponse>(request, cancellation);
+
+        public Task<HashTxResponse> PostAsync(TxRequest request, CancellationToken cancellation)
+            => PostAsync<TxRequest, HashTxResponse>(request, cancellation);
+
+        public CtidTxResponse Post(CtidTxRequest request, CancellationToken cancellation)
+            => Post<CtidTxRequest, CtidTxResponse>(request, cancellation);
+
+        public Task<CtidTxResponse> PostAsync(CtidTxRequest request, CancellationToken cancellation)
+            => PostAsync<CtidTxRequest, CtidTxResponse>(request, cancellation);
+
+        public TxHistoryResponse Post(TxHistoryRequest request, CancellationToken cancellation)
+            => Post<TxHistoryRequest, TxHistoryResponse>(request, cancellation);
+
+        public Task<TxHistoryResponse> PostAsync(TxHistoryRequest request, CancellationToken cancellation)
+            => PostAsync<TxHistoryRequest, TxHistoryResponse>(request, cancellation);
+
         #endregion Account Methods
 
         protected virtual void Dispose(bool disposing)

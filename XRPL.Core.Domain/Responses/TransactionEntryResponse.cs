@@ -15,7 +15,7 @@ namespace XRPL.Core.Domain.Responses
     /// Represents a result of an <see cref="TransactionEntryResponse"/> object.
     /// </summary>
     [DataContract]
-    public abstract class TransactionEntryResult : ResultBase
+    public class TransactionEntryResult : ResultBase
     {
         /// <summary>
         /// The ledger index of the ledger version the transaction was found in; this is the same as the one from the request.
