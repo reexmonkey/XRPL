@@ -14,13 +14,13 @@ namespace XRPL.Core.Domain.Responses
     /// Represents a result of an <see cref="SubmitResponse"/> object.
     /// </summary>
     [DataContract]
-    public abstract class SubmitResult : ResultBase
+    public class SubmitResult : ResultBase
     {
         /// <summary>
         /// Text result code indicating the preliminary result of the transaction, for example tesSUCCESS.
         /// </summary>
         [DataMember(Name = "engine_result")]
-        public int EngineResult { get; set; }
+        public string? EngineResult { get; set; }
 
         /// <summary>
         /// Numeric version of the result code. Not recommended.
@@ -33,6 +33,18 @@ namespace XRPL.Core.Domain.Responses
         /// </summary>
         [DataMember(Name = "engine_result_message")]
         public string? EngineResultMessage { get; set; }
+
+        /// <summary>
+        /// The complete transaction in hex string format.
+        /// </summary>
+        [DataMember(Name = "tx_blob")]
+        public string? TxBlob { get; set; }
+
+        /// <summary>
+        /// The complete transaction in JSON format.
+        /// </summary>
+        [DataMember(Name = "tx_json")]
+        public Transaction? TxJson { get; set; }
 
         /// <summary>
         /// (Omitted in sign-and-submit mode) The value true indicates that the transaction was applied, queued, broadcast, or kept for later.
@@ -97,23 +109,5 @@ namespace XRPL.Core.Domain.Responses
         /// </summary>
         [DataMember(Name = "validated_ledger_index")]
         public int? ValidatedLedgerIndex { get; set; }
-    }
-
-    public sealed class BinarySubmitResult : SubmitResult
-    {
-        /// <summary>
-        /// The complete transaction in hex string format.
-        /// </summary>
-        [DataMember(Name = "tx_blob")]
-        public string? TxBlob { get; set; }
-    }
-
-    public sealed class JsonSubmitResult : SubmitResult
-    {
-        /// <summary>
-        /// The complete transaction in JSON format.
-        /// </summary>
-        [DataMember(Name = "tx_json")]
-        public Transaction? TxJson { get; set; }
     }
 }

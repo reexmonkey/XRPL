@@ -59,8 +59,8 @@ namespace XRPL.Core.Domain.Requests
         /// <summary>
         /// The API version to use. If omitted, use version 1
         /// </summary>
-        [DataMember]
-        public uint ApiVersion { get; set; }
+        [DataMember(Name = "api_version")]
+        public uint? ApiVersion { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ParameterBase"/> class.
