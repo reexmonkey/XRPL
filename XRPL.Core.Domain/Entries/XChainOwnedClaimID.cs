@@ -129,7 +129,7 @@ namespace XRPL.Core.Domain.Entries
     /// <para/>An XChainCreateClaimID transaction is used to create a new XChainOwnedClaimID.
     /// The ledger object is destroyed when the funds are successfully claimed on the destination chain.
     /// </summary>
-    public sealed class CurrencyAmountXChainOwnedClaimID : XChainOwnedClaimIDBase<CurrencyAmount>
+    public sealed class CurrencyAmountXChainOwnedClaimID : XChainOwnedClaimIDBase<Token>
     {
     }
 }

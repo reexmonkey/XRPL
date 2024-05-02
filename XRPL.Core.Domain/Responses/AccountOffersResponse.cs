@@ -101,13 +101,13 @@ namespace XRPL.Core.Domain.Responses
         where TGets : class
     {
         /// <summary>
-        /// The amount the account accepting the offer receives, as a <see cref="string"/> representing an amount in XRP, or a token specification object (<see cref="CurrencyAmount"/>).
+        /// The amount the account accepting the offer receives, as a <see cref="string"/> representing an amount in XRP, or a token specification object (<see cref="Token"/>).
         /// </summary>
         [DataMember(Name = "taker_gets")]
         public TGets? TakerGets { get; set; }
 
         /// <summary>
-        /// The amount the account accepting the offer provides, as a <see cref="string"/> representing an amount in XRP, or a token specification object (<see cref="CurrencyAmount"/>).
+        /// The amount the account accepting the offer provides, as a <see cref="string"/> representing an amount in XRP, or a token specification object (<see cref="Token"/>).
         /// </summary>
         [DataMember(Name = "taker_pays")]
         public TPays? TakerPays { get; set; }
@@ -117,29 +117,29 @@ namespace XRPL.Core.Domain.Responses
     /// Specifies an an offer made by an account that is outstanding as of the requested ledger version.
     /// <para/>If the number of offers is large, only returns up to limit at a time.
     /// <para/> The account accepting the offer receives a <see cref="string"/> value representing the amount in XRP.
-    /// <para/> The account accepting the offer provides a <see cref="CurrencyAmount"/> object representing the amount in a fungible token specification.
+    /// <para/> The account accepting the offer provides a <see cref="Token"/> object representing the amount in a fungible token specification.
     /// </summary>
-    public sealed class XrpForTokenAccountOffer : AccountOffer<string, CurrencyAmount>
+    public sealed class XrpForTokenAccountOffer : AccountOffer<string, Token>
     {
     }
 
     /// <summary>
     /// Specifies an an offer made by an account that is outstanding as of the requested ledger version.
     /// <para/>If the number of offers is large, only returns up to limit at a time.
-    /// <para/> The account accepting the offer receives a <see cref="CurrencyAmount"/> object representing the amount in a fungible token specification.
+    /// <para/> The account accepting the offer receives a <see cref="Token"/> object representing the amount in a fungible token specification.
     /// <para/> The account accepting the offer provides a <see cref="string"/> value representing the amount in XRP.
     /// </summary>
-    public sealed class TokenForXrpAccountOffer : AccountOffer<CurrencyAmount, string>
+    public sealed class TokenForXrpAccountOffer : AccountOffer<Token, string>
     {
     }
 
     /// <summary>
     /// Specifies an an offer made by an account that is outstanding as of the requested ledger version.
     /// <para/>If the number of offers is large, only returns up to limit at a time.
-    /// <para/> The account accepting the offer receives a <see cref="CurrencyAmount"/> object representing the amount in a token specification.
-    /// <para/> The account accepting the offer provides a <see cref="CurrencyAmount"/> representing the amount in a fungible token specification.
+    /// <para/> The account accepting the offer receives a <see cref="Token"/> object representing the amount in a token specification.
+    /// <para/> The account accepting the offer provides a <see cref="Token"/> representing the amount in a fungible token specification.
     /// </summary>
-    public sealed class TokenForTokenAccountOffer : AccountOffer<CurrencyAmount, CurrencyAmount>
+    public sealed class TokenForTokenAccountOffer : AccountOffer<Token, Token>
     {
     }
 }

@@ -12,8 +12,8 @@ namespace XRPL.Core.Domain.Models
     [KnownType(typeof(AMM))]
     [KnownType(typeof(Ammendments))]
     [KnownType(typeof(Bridge))]
-    [KnownType(typeof(CurrencyAmountCheck))]
-    [KnownType(typeof(XRPCheck))]
+    [KnownType(typeof(TokenCheck))]
+    [KnownType(typeof(XrpCheck))]
     [KnownType(typeof(DepositPreauth))]
     [KnownType(typeof(DID))]
     [KnownType(typeof(DirectoryNode))]
@@ -43,14 +43,14 @@ namespace XRPL.Core.Domain.Models
         /// (May be omitted) For a partial payment, this field records the amount of currency actually delivered to the destination.
         /// <para/>To avoid errors when reading transactions, instead use the delivered_amount field, which is provided for all Payment transactions, partial or not.
         /// </summary>
-        public CurrencyAmount[]? CurrencyAmounts { get; set; }
+        public Token[]? CurrencyAmounts { get; set; }
 
         /// <summary>
         /// (May be omitted) For a partial payment, this field records the amount of currency actually delivered to the destination.
         /// <para/>To avoid errors when reading transactions, instead use the delivered_amount field, which is provided for all Payment transactions, partial or not.
         /// </summary>
         [DataMember(Name = "DeliveredAmount")]
-        public CurrencyAmount[]? PartialPaymentDeliveredAmount { get; set; }
+        public Token[]? PartialPaymentDeliveredAmount { get; set; }
 
         /// <summary>
         /// The transaction's position within the ledger that included it. This is zero-indexed. (For example, the value 2 means it was the 3rd transaction in that ledger.)
@@ -66,6 +66,6 @@ namespace XRPL.Core.Domain.Models
         /// (Omitted for non-Payment transactions) The [Currency Amount][] actually received by the Destination account. Use this field to determine how much was delivered, regardless of whether the transaction is a partial payment. See this description for details.
         /// </summary>
         [DataMember(Name = "delivered_amount")]
-        public CurrencyAmount? DeliveredAmount { get; set; }
+        public Token? DeliveredAmount { get; set; }
     }
 }

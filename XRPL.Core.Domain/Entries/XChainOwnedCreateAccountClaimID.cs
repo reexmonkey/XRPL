@@ -104,7 +104,7 @@ namespace XRPL.Core.Domain.Entries
     /// <para/> It is created when an XChainAddAccountCreateAttestation transaction adds a signature attesting to a XChainAccountCreateCommit transaction and the XChainAccountCreateCount is greater than or equal to the current XChainAccountClaimCount on the Bridge ledger object.
     /// <para/>The ledger object is destroyed when all the attestations have been received and the funds have transferred to the new account.
     /// </summary>
-    public sealed class CurrencyAmountXChainOwnedCreateAccountClaimID : XChainOwnedCreateAccountClaimIDBase<CurrencyAmount>
+    public sealed class CurrencyAmountXChainOwnedCreateAccountClaimID : XChainOwnedCreateAccountClaimIDBase<Token>
     {
     }
 }

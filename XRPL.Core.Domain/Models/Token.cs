@@ -5,13 +5,13 @@ namespace XRPL.Core.Domain.Models
     /// <summary>
     /// Represents the amount and currency of a fungible token.
     /// </summary>
-    public class CurrencyAmount
+    public class Token
     {
         /// <summary>
         /// Arbitrary currency code for the token. Cannot be XRP.
         /// </summary>
         [DataMember(Name = "currency")]
-        public string? Currency { get; set; }
+        public required string Currency { get; set; }
 
         /// <summary>
         /// Quoted decimal representation of the amount of the token.
@@ -36,5 +36,14 @@ namespace XRPL.Core.Domain.Models
         /// </summary>
         [DataMember(Name = "issuer")]
         public string? Issuer { get; set; }
+    }
+
+    /// <summary>
+    /// Represents an LP Token that indicates the percentage of ownership of assets in an AMM (Automated Market Maker) pool.
+    /// <para/>Note: LP Tokens use a special type of currency code in the 160-bit hexadecimal "non-standard" format. These codes have the first 8 bits 0x03.  
+    /// </summary>
+    public class LPToken : Token
+    {
+
     }
 }

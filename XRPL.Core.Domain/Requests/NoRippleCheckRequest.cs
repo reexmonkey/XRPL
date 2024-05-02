@@ -1,5 +1,5 @@
 ﻿using System.Runtime.Serialization;
-using XRPL.Core.Domain.Contracts;
+using XRPL.Core.Domain.Interfaces;
 using XRPL.Core.Domain.Responses;
 
 namespace XRPL.Core.Domain.Requests
@@ -9,7 +9,7 @@ namespace XRPL.Core.Domain.Requests
     /// compared with the recommended settings.
     /// </summary>
     [DataContract]
-    public class NoRippleCheckRequest : RequestBase<NoRippleCheckParameters>, IRelateTo<NoRippleCheckResponse>
+    public class NoRippleCheckRequest : RequestBase<NoRippleCheckParameters>, IExpect<NoRippleCheckResponse>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="NoRippleCheckRequest"/> class.

@@ -1,5 +1,5 @@
 ﻿using System.Runtime.Serialization;
-using XRPL.Core.Domain.Contracts;
+using XRPL.Core.Domain.Interfaces;
 using XRPL.Core.Domain.Responses;
 
 namespace XRPL.Core.Domain.Requests
@@ -8,7 +8,7 @@ namespace XRPL.Core.Domain.Requests
     /// Represents a request that retrieves information on a single transaction, by its identifying hash.
     /// </summary>
     [DataContract]
-    public class TxRequest : RequestBase<TxParameters>, IRelateTo<HashTxResponse>
+    public class TxRequest : RequestBase<TxParameters>, IExpect<HashTxResponse>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TxRequest"/> class.
@@ -22,7 +22,7 @@ namespace XRPL.Core.Domain.Requests
     /// Represents a request that retrieves information on a single transaction, by its identifying hash or its CTID.
     /// </summary>
     [DataContract]
-    public class CtidTxRequest : RequestBase<TxParameters>, IRelateTo<CtidTxResponse>
+    public class CtidTxRequest : RequestBase<TxParameters>, IExpect<CtidTxResponse>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TxRequest"/> class.

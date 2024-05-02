@@ -1,5 +1,5 @@
 ﻿using System.Runtime.Serialization;
-using XRPL.Core.Domain.Contracts;
+using XRPL.Core.Domain.Interfaces;
 using XRPL.Core.Domain.Responses;
 
 namespace XRPL.Core.Domain.Requests
@@ -8,7 +8,7 @@ namespace XRPL.Core.Domain.Requests
     /// Represents a request that retrieves some of the most recent transactions made.
     /// </summary>
     [DataContract]
-    public class TxHistoryRequest : RequestBase<TxHistoryParameters>, IRelateTo<TxHistoryResponse>
+    public class TxHistoryRequest : RequestBase<TxHistoryParameters>, IExpect<TxHistoryResponse>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TxHistoryRequest"/> class.

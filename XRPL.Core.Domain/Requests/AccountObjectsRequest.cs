@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
-using XRPL.Core.Domain.Contracts;
+﻿using System.Runtime.Serialization;
 using XRPL.Core.Domain.Entries;
+using XRPL.Core.Domain.Interfaces;
 using XRPL.Core.Domain.Responses;
 
 namespace XRPL.Core.Domain.Requests
@@ -19,7 +14,7 @@ namespace XRPL.Core.Domain.Requests
     /// <para/>The account's <see cref="SignerList"/>, if the account has multi-signing enabled.
     /// <para/><see cref="Escrow"/> entries for held payments that have not yet been executed or canceled.
     /// <para/><see cref="PayChannel"/> entries for open payment channels.
-    /// <para/><see cref="XRPCheck"/>, <see cref="CurrencyAmountCheck"/> entries for pending Checks.
+    /// <para/><see cref="XrpCheck"/>, <see cref="TokenCheck"/> entries for pending Checks.
     /// <para/><see cref="DepositPreauth"/> entries for deposit preauthorizations.
     /// <para/><see cref="Ticket"/> entries for Tickets.
     /// <para/><see cref="XrpForNFTokenOffer"/>,
@@ -28,7 +23,7 @@ namespace XRPL.Core.Domain.Requests
     /// <para/><see cref="NFTokenPage"/> entries for collections of NFTs.
     /// </summary>
     [DataContract]
-    public class AccountObjectsRequest : RequestBase<AccountObjectsParameters>, IRelateTo<AccountObjectsResponse>
+    public class AccountObjectsRequest : RequestBase<AccountObjectsParameters>, IExpect<AccountObjectsResponse>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AccountObjectsRequest"/> class.

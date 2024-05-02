@@ -1,5 +1,5 @@
 ﻿using System.Runtime.Serialization;
-using XRPL.Core.Domain.Contracts;
+using XRPL.Core.Domain.Interfaces;
 using XRPL.Core.Domain.Responses;
 
 namespace XRPL.Core.Domain.Requests
@@ -10,7 +10,7 @@ namespace XRPL.Core.Domain.Requests
     /// (A channel's "source" and "owner" are the same.)
     /// All information retrieved is relative to a particular version of the ledger
     /// </summary>
-    public class AccountChannelsRequest : RequestBase<AccountChannelsParameters>, IRelateTo<AccountChannelsResponse>
+    public class AccountChannelsRequest : RequestBase<AccountChannelsParameters>, IExpect<AccountChannelsResponse>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AccountChannelsRequest"/> class.
