@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace XRPL.Core.Domain.Entries
+﻿namespace XRPL.Core.Domain.Entries
 {
     /// <summary>
     /// The DirectoryNode ledger entry type provides a list of links to other entries in the ledger's state data. 
@@ -19,9 +13,16 @@ namespace XRPL.Core.Domain.Entries
     public class DirectoryNode : LedgerEntryBase
     {
         /// <summary>
+        /// A bit-map of boolean flags enabled for this object. 
+        /// <para/>Currently, the protocol defines no flags for DirectoryNode objects. 
+        /// The value is always 0.
+        /// </summary>
+        public override required uint Flags { get => base.Flags; set => base.Flags = value; }
+
+        /// <summary>
         /// The contents of this Directory: an array of IDs of other objects.
         /// </summary>
-        public string[]? Indexes { get; set; }
+        public required string[] Indexes { get; set; }
 
         /// <summary>
         /// If this Directory consists of multiple pages, this ID links to the next object in the chain, wrapping around at the end.
@@ -42,7 +43,7 @@ namespace XRPL.Core.Domain.Entries
         /// <summary>
         /// The ID of root object for this directory.
         /// </summary>
-        public string? RootIndex { get; set; }
+        public required string RootIndex { get; set; }
 
         /// <summary>
         /// The token code of the TakerGets amount from the offers in this directory.
@@ -67,6 +68,7 @@ namespace XRPL.Core.Domain.Entries
         /// <para/>	(Offer Directories only)
         /// </summary>
         public string? TakerPaysIssuer { get; set; }
+
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DirectoryNode"/> class.

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using XRPL.Core.Domain.Models;
+﻿using XRPL.Core.Domain.Models;
 
 namespace XRPL.Core.Domain.Entries
 {
@@ -14,6 +9,11 @@ namespace XRPL.Core.Domain.Entries
     public class NFTokenPage : LedgerEntryBase
     {
         /// <summary>
+        /// The value 0x0050, mapped to the string NFTokenPage, indicates that this is a page containing NFToken objects.
+        /// </summary>
+        public override required string LedgerEntryType { get => base.LedgerEntryType; set => base.LedgerEntryType = value; }
+
+        /// <summary>
         /// The locator of the next page, if any. Details about this field and how it should be used are outlined below.
         /// </summary>
         public string? NextPageMin { get; set; }
@@ -22,7 +22,7 @@ namespace XRPL.Core.Domain.Entries
         /// The collection of NFToken objects contained in this <see cref="NFTokenPage"/> object.
         /// <para/>This specification places an upper bound of 32 NFToken objects per page. Objects are sorted from low to high with the NFTokenID used as the sorting parameter.
         /// </summary>
-        public NFToken[]? NFTokens { get; set; }
+        public required NFToken[] NFTokens { get; set; }
 
         /// <summary>
         /// The locator of the previous page, if any. Details about this field and how it should be used are outlined below.

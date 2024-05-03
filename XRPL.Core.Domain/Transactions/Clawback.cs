@@ -19,7 +19,7 @@ namespace XRPL.Core.Domain.Transactions
         /// If this is more than the current balance, the transaction claws back the entire balance.
         /// The sub-field issuer within Amount represents the token holder's account ID, rather than the issuer's.
         /// </summary>
-        public required Token Amount { get; set; }
+        public required FungibleToken Amount { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Clawback"/> class.

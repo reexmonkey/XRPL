@@ -112,7 +112,7 @@ namespace XRPL.Core.Domain.Transactions
     /// Represents a transaction that deposits pairs of XRP/fungible token funds into an Automated Market Maker (AMM) instance and receive the AMM's liquidity provider tokens (LP Tokens) in exchange. You can deposit one or both of the assets in the AMM's pool.
     /// <para/> If successful, this transaction creates a trust line to the AMM Account (limit 0) to hold the LP Tokens.
     /// </summary>
-    public sealed class XrpFungibleTokenAMMDeposit : AMMDeposit<string, Token>
+    public sealed class XrpFungibleTokenAMMDeposit : AMMDeposit<string, FungibleToken>
     {
     }
 
@@ -120,7 +120,7 @@ namespace XRPL.Core.Domain.Transactions
     /// Represents a transaction that deposits pairs of fungible token funds into an Automated Market Maker (AMM) instance and receive the AMM's liquidity provider tokens (LP Tokens) in exchange. You can deposit one or both of the assets in the AMM's pool.
     /// <para/> If successful, this transaction creates a trust line to the AMM Account (limit 0) to hold the LP Tokens.
     /// </summary>
-    public sealed class FungibleTokenAMMDeposit : AMMDeposit<Token, Token>
+    public sealed class FungibleTokenAMMDeposit : AMMDeposit<FungibleToken, FungibleToken>
     {
     }
 }

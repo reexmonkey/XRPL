@@ -10,12 +10,12 @@ namespace XRPL.Core.Domain.Entries
         /// <summary>
         /// The sender of the <see cref="Check"/>. Cashing the <see cref="Check"/> debits this address's balance.
         /// </summary>
-        public string? Account { get; set; }
+        public required string Account { get; set; }
 
         /// <summary>
         /// The intended recipient of the Check. Only this address can cash the Check, using a CheckCash transaction.
         /// </summary>
-        public string? Destination { get; set; }
+        public required string Destination { get; set; }
 
         /// <summary>
         /// A hint indicating which page of the destination's owner directory links to this object, in case the directory consists of multiple pages.
@@ -40,7 +40,7 @@ namespace XRPL.Core.Domain.Entries
         /// <summary>
         /// A hint indicating which page of the sender's owner directory links to this object, in case the directory consists of multiple pages.
         /// </summary>
-        public string? OwnerNode { get; set; }
+        public required string OwnerNode { get; set; }
 
         /// <summary>
         /// The identifying hash of the transaction that most recently modified this object.
@@ -50,12 +50,12 @@ namespace XRPL.Core.Domain.Entries
         /// <summary>
         /// The index of the ledger that contains the transaction that most recently modified this object.
         /// </summary>
-        public uint PreviousTxnLgrSeq { get; set; }
+        public required uint PreviousTxnLgrSeq { get; set; }
 
         /// <summary>
         /// The sequence number of the CheckCreate transaction that created this check.
         /// </summary>
-        public uint Sequence { get; set; }
+        public required uint Sequence { get; set; }
 
         /// <summary>
         /// An arbitrary tag to further specify the source for this <see cref="Check"/>, such as a hosted recipient at the sender's address.
@@ -82,7 +82,7 @@ namespace XRPL.Core.Domain.Entries
         /// The maximum amount of currency this <see cref="Check"/> can debit the sender.
         /// <para/> If the <see cref="Check"/> is successfully cashed, the destination is credited in the same token for up to this amount.
         /// </summary>
-        public TAmount? SendMax { get; set; }
+        public required TAmount SendMax { get; set; }
 
         /// <summary>
         /// Initializes the new instance of the <see cref="Check{TAmount}"/> class.
@@ -103,7 +103,7 @@ namespace XRPL.Core.Domain.Entries
     /// <summary>
     /// Represents a fungible token check, similar to a paper personal check, which can be cashed by its destination to get money from its sender.
     /// </summary>
-    public sealed class TokenCheck : Check<Token>
+    public sealed class FungibleTokenCheck : Check<FungibleToken>
     {
     }
 }

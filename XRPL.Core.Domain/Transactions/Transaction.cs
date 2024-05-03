@@ -12,7 +12,7 @@ namespace XRPL.Core.Domain.Responses
         /// <summary>
         /// (Required) The unique address of the account that initiated the transaction.
         /// </summary>
-        public required string Account { get; set; }
+        public virtual required string Account { get; set; }
 
         /// <summary>
         /// (Required) The type of transaction.

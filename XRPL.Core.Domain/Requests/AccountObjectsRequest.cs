@@ -9,17 +9,17 @@ namespace XRPL.Core.Domain.Requests
     /// Represents the raw ledger format for all ledger entries owned by an account.
     /// <para/>For a higher-level view of an account's trust lines and balances, see the <see cref="AccountLinesRequest"/> instead.
     /// <para/>The types of objects that may appear in the account_objects response include:
-    /// <para/><see cref="XrpForCurrencyAmountOffer"/> entries for orders that are currently live, unfunded, or expired but not yet removed.
+    /// <para/><see cref="XrpForFungibleTokenOffer"/> entries for orders that are currently live, unfunded, or expired but not yet removed.
     /// <para/><see cref="RippleState"/> entries for trust lines where this account's side is not in the default state.
     /// <para/>The account's <see cref="SignerList"/>, if the account has multi-signing enabled.
     /// <para/><see cref="Escrow"/> entries for held payments that have not yet been executed or canceled.
     /// <para/><see cref="PayChannel"/> entries for open payment channels.
-    /// <para/><see cref="XrpCheck"/>, <see cref="TokenCheck"/> entries for pending Checks.
+    /// <para/><see cref="XrpCheck"/>, <see cref="FungibleTokenCheck"/> entries for pending Checks.
     /// <para/><see cref="DepositPreauth"/> entries for deposit preauthorizations.
     /// <para/><see cref="Ticket"/> entries for Tickets.
     /// <para/><see cref="XrpForNFTokenOffer"/>,
-    /// <see cref="CurrencyAmountForNFTokenOffer"/>,
-    /// <see cref="CurrencyAmountForCurrencyAmountOffer"/> entries for offers to buy or sell an NFT.
+    /// <see cref="FungibleTokenForNFTokenOffer"/>,
+    /// <see cref="FungibleTokenOffer"/> entries for offers to buy or sell an NFT.
     /// <para/><see cref="NFTokenPage"/> entries for collections of NFTs.
     /// </summary>
     [DataContract]

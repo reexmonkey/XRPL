@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
-using XRPL.Core.Domain.Models;
+﻿using XRPL.Core.Domain.Models;
 
 namespace XRPL.Core.Domain.Entries
 {
@@ -17,7 +11,7 @@ namespace XRPL.Core.Domain.Entries
         /// <summary>
         /// The account that submitted the XChainCreateBridge transaction on the blockchain
         /// </summary>
-        public string? Account { get; set; }
+        public required string Account { get; set; }
 
         /// <summary>
         /// The minimum amount, in XRP, required for an XChainAccountCreateCommit transaction.
@@ -29,7 +23,7 @@ namespace XRPL.Core.Domain.Entries
         /// The total amount, in XRP, to be rewarded for providing a signature for cross-chain transfer or for signing for the cross-chain reward.
         /// <para/>This amount will be split among the signers.
         /// </summary>
-        public string? SignatureReward { get; set; }
+        public required string SignatureReward { get; set; }
 
         /// <summary>
         /// A counter used to order the execution of account create transactions.
@@ -39,23 +33,23 @@ namespace XRPL.Core.Domain.Entries
         /// This orders the claims so that they run in the same order that the XChainAccountCreateCommit transactions ran on the source chain,
         /// to prevent transaction replay
         /// </summary>
-        public uint XChainAccountClaimCount { get; set; }
+        public required uint XChainAccountClaimCount { get; set; }
 
         /// <summary>
         /// A counter used to order the execution of account create transactions.
         /// <para/>It is incremented every time a successful XChainAccountCreateCommit transaction is run for the source chain.
         /// </summary>
-        public uint XChainAccountCreateCount { get; set; }
+        public required uint XChainAccountCreateCount { get; set; }
 
         /// <summary>
         /// The door accounts and assets of the bridge this object correlates to.
         /// </summary>
-        public XChainBridge? XChainBridge { get; set; }
+        public required XChainBridge XChainBridge { get; set; }
 
         /// <summary>
         /// The value of the next XChainClaimID to be created.
         /// </summary>
-        public uint XChainClaimID { get; set; }
+        public required uint XChainClaimID { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Bridge"/> class.
@@ -75,48 +69,30 @@ namespace XRPL.Core.Domain.Entries
         /// The door account on the issuing chain.
         /// <para/>For an XRP-XRP bridge, this must be the genesis account (the account that is created when the network is first started, which contains all of the XRP).
         /// </summary>
-        public string? IssuingChainDoor { get; set; }
+        public required string IssuingChainDoor { get; set; }
 
         /// <summary>
         /// The asset that is minted and burned on the issuing chain.
         /// <para/> For an IOU-IOU bridge, the issuer of the asset must be the door account on the issuing chain, to avoid supply issues.
         /// </summary>
-        public Issue? IssuingChainIssue { get; set; }
+        public required Issue IssuingChainIssue { get; set; }
 
         /// <summary>
         /// The door account on the locking chain.
         /// </summary>
-        public string? LockingChainDoor { get; set; }
+        public required string LockingChainDoor { get; set; }
 
         /// <summary>
         /// The asset that is locked and unlocked on the locking chain.
         /// </summary>
-        public Issue? LockingChainIssue { get; set; }
+        public required Issue LockingChainIssue { get; set; }
     }
 
     /// <summary>
     /// Represents an asset on an issuing chain.
     /// </summary>
-    public class Issue
+    public class Issue : FungibleToken
     {
-        /// <summary>
-        /// The token of the issue.
-        /// </summary>
-        [DataMember(Name = "token")]
-        public string? Token { get; set; }
-    }
 
-    /// <summary>
-    /// Represents an XRP asset on an issuing chain.
-    /// </summary>
-    public sealed class XrpIssue : Issue
-    {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="XrpIssue"/> class.
-        /// </summary>
-        public XrpIssue()
-        {
-            Token = "XRP";
-        }
     }
 }

@@ -1,36 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace XRPL.Core.Domain.Entries
+﻿namespace XRPL.Core.Domain.Entries
 {
     /// <summary>
-    /// Represents a ledger entry that contains the current base transaction cost and reserve amounts as determined by fee voting. 
+    /// Represents a ledger entry that contains the current base transaction cost and reserve amounts as determined by fee voting.
     /// <para/>Each ledger version contains at most one FeeSettings entry.
     /// </summary>
-    public class FeeSettings: LedgerEntryBase
+    public class FeeSettings : LedgerEntryBase
     {
         /// <summary>
         /// The transaction cost of the "reference transaction" in drops of XRP as hexadecimal.
         /// </summary>
-        public string? BaseFee { get; set; }
+        public required string BaseFee { get; set; }
+
+        /// <summary>
+        /// A bit-map of boolean flags enabled for this object.
+        /// <para/>Currently, the protocol defines no flags for FeeSettings objects.
+        /// The value is always 0.
+        /// </summary>
+        public override required uint Flags { get => base.Flags; set => base.Flags = value; }
 
         /// <summary>
         /// The BaseFee translated into "fee units".
         /// </summary>
-        public uint ReferenceFeeUnits { get; set; }
+        public required uint ReferenceFeeUnits { get; set; }
 
         /// <summary>
         /// The base reserve for an account in the XRP Ledger, as drops of XRP.
         /// </summary>
-        public uint ReserveBase { get; set; }
+        public required uint ReserveBase { get; set; }
 
         /// <summary>
         /// The incremental owner reserve for owning objects, as drops of XRP.
         /// </summary>
-        public uint ReserveIncrement { get; set; }
+        public required uint ReserveIncrement { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FeeSettings"/> class.

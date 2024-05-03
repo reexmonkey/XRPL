@@ -16,23 +16,23 @@ namespace XRPL.Core.Domain.Entries
         /// <para/>A negative balance indicates that the high account holds tokens issued by the low account.
         /// The issuer in this is always set to the neutral value ACCOUNT_ONE.
         /// </summary>
-        public Token? Balance { get; set; }
+        public required FungibleToken Balance { get; set; }
 
         /// <summary>
         /// A bit-map of boolean options enabled for this entry.
         /// </summary>
-        public override uint Flags { get => (uint)flags; set => flags = (RippleStateFlags)value; }
+        public override required uint Flags { get => (uint)flags; set => flags = (RippleStateFlags)value; }
 
         /// <summary>
         /// The limit that the high account has set on the trust line.
         /// <para/>The issuer is the address of the high account that set this limit.
         /// </summary>
-        public Token? HighLimit { get; set; }
+        public required FungibleToken HighLimit { get; set; }
 
         /// <summary>
         /// (Omitted in some historical ledgers) A hint indicating which page of the high account's owner directory links to this entry, in case the directory consists of multiple pages.
         /// </summary>
-        public string? HighNode { get; set; }
+        public required string HighNode { get; set; }
 
         /// <summary>
         /// The inbound quality set by the high account, as an integer in the implied ratio HighQualityIn:1,000,000,000.
@@ -47,15 +47,20 @@ namespace XRPL.Core.Domain.Entries
         public uint? HighQualityOut { get; set; }
 
         /// <summary>
+        /// The value 0x0072, mapped to the string RippleState, indicates that this is a RippleState entry.
+        /// </summary>
+        public override required string LedgerEntryType { get => base.LedgerEntryType; set => base.LedgerEntryType = value; }
+
+        /// <summary>
         /// The limit that the low account has set on the trust line.
         /// <para/>The issuer is the address of the low account that set this limit.
         /// </summary>
-        public Token? LowLimit { get; set; }
+        public required FungibleToken LowLimit { get; set; }
 
         /// <summary>
         /// (Omitted in some historical ledgers) A hint indicating which page of the low account's owner directory links to this entry, in case the directory consists of multiple pages.
         /// </summary>
-        public string? LowNode { get; set; }
+        public required string LowNode { get; set; }
 
         /// <summary>
         /// The inbound quality set by the low account, as an integer in the implied ratio LowQualityIn:1,000,000,000.
@@ -72,12 +77,12 @@ namespace XRPL.Core.Domain.Entries
         /// <summary>
         /// The identifying hash of the transaction that most recently modified this entry.
         /// </summary>
-        public string? PreviousTxnID { get; set; }
+        public required string PreviousTxnID { get; set; }
 
         /// <summary>
         /// The index of the ledger that contains the transaction that most recently modified this entry.
         /// </summary>
-        public uint PreviousTxnLgrSeq { get; set; }
+        public required uint PreviousTxnLgrSeq { get; set; }
 
         /// <summary>
         /// Initialize a new instance of the <see cref="RippleState"/> class.

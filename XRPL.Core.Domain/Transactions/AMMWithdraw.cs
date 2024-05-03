@@ -115,14 +115,14 @@ namespace XRPL.Core.Domain.Transactions
     /// <summary>
     /// Represents a transaction that withdraws XRP and fungible token assets from an Automated Market Maker (AMM) instance by returning the AMM's liquidity provider tokens (LP Tokens).
     /// </summary>
-    public sealed class XrpFungibleTokenAMMWithdraw : AMMWithdraw<string, Token>
+    public sealed class XrpFungibleTokenAMMWithdraw : AMMWithdraw<string, FungibleToken>
     {
     }
 
     /// <summary>
     /// Represents a transaction that withdraws fungible token assets from an Automated Market Maker (AMM) instance by returning the AMM's liquidity provider tokens (LP Tokens).
     /// </summary>
-    public sealed class FungibleTokenAMMWithdraw : AMMWithdraw<Token, Token>
+    public sealed class FungibleTokenAMMWithdraw : AMMWithdraw<FungibleToken, FungibleToken>
     {
     }
 }
