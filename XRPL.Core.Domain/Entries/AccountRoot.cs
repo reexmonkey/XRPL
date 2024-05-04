@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace XRPL.Core.Domain.Entries
+﻿namespace XRPL.Core.Domain.Entries
 {
     /// <summary>
     /// Represents a ledger entry that describes a single account.
@@ -16,7 +10,7 @@ namespace XRPL.Core.Domain.Entries
         /// <summary>
         /// The identifying (classic) address of this account.
         /// </summary>
-        public string? Account { get; set; }
+        public required string Account { get; set; }
 
         /// <summary>
         /// The identifying hash of the transaction most recently sent by this account.
@@ -91,7 +85,7 @@ namespace XRPL.Core.Domain.Entries
         /// <summary>
         /// The index of the ledger that contains the transaction that most recently modified this object.
         /// </summary>
-        public uint PreviousTxnLgrSeq { get; set; }
+        public required uint PreviousTxnLgrSeq { get; set; }
 
         /// <summary>
         /// The address of a key pair that can be used to sign transactions for this account instead of the master key. Use a SetRegularKey transaction to change this value.
@@ -101,7 +95,7 @@ namespace XRPL.Core.Domain.Entries
         /// <summary>
         /// The sequence number of the next valid transaction for this account.
         /// </summary>
-        public uint Sequence { get; set; }
+        public required uint Sequence { get; set; }
 
         /// <summary>
         /// How many Tickets this account owns in the ledger.
@@ -133,7 +127,7 @@ namespace XRPL.Core.Domain.Entries
         /// <summary>
         /// Set of bit-flags for this ledger entry.
         /// </summary>
-        public override uint Flags { get => (uint)flags; set => flags = (AccountRootFlags)value; }
+        public override required uint Flags { get => (uint)flags; set => flags = (AccountRootFlags)value; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AccountRoot"/> class.

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using XRPL.Core.Domain.Models;
+﻿using XRPL.Core.Domain.Models;
 
 namespace XRPL.Core.Domain.Entries
 {
@@ -25,22 +20,22 @@ namespace XRPL.Core.Domain.Entries
         /// <summary>
         /// The address of the account that owns this Offer.
         /// </summary>
-        public string? Account { get; set; }
+        public required string Account { get; set; }
 
         /// <summary>
         /// Set of bit-flags for this ledger entry.
         /// </summary>
-        public override uint Flags { get => (uint)flags; set => flags = (OfferFlags)value; }
+        public override required uint Flags { get => (uint)flags; set => flags = (OfferFlags)value; }
 
         /// <summary>
         /// The ID of the Offer Directory that links to this Offer.
         /// </summary>
-        public string? BookDirectory { get; set; }
+        public required string BookDirectory { get; set; }
 
         /// <summary>
         /// A hint indicating which page of the offer directory links to this entry, in case the directory consists of multiple pages.
         /// </summary>
-        public string? BookNode { get; set; }
+        public required string BookNode { get; set; }
 
         /// <summary>
         /// Indicates the time after which this Offer is considered unfunded. See Specifying Time for details.
@@ -50,22 +45,22 @@ namespace XRPL.Core.Domain.Entries
         /// <summary>
         /// A hint indicating which page of the owner directory links to this entry, in case the directory consists of multiple pages.
         /// </summary>
-        public string? OwnerNode { get; set; }
+        public required string OwnerNode { get; set; }
 
         /// <summary>
         /// The identifying hash of the transaction that most recently modified this entry.
         /// </summary>
-        public string? PreviousTxnID { get; set; }
+        public required string PreviousTxnID { get; set; }
 
         /// <summary>
         /// The identifying hash of the transaction that most recently modified this entry.
         /// </summary>
-        public uint PreviousTxnLgrSeq { get; set; }
+        public required uint PreviousTxnLgrSeq { get; set; }
 
         /// <summary>
         /// The Sequence value of the OfferCreate transaction that created this offer. Used in combination with the Account to identify this offer.
         /// </summary>
-        public uint Sequence { get; set; }
+        public required uint Sequence { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Offer"/> class.
@@ -94,12 +89,12 @@ namespace XRPL.Core.Domain.Entries
         /// <summary>
         /// The remaining amount and type of token requested by the offer creator.
         /// </summary>
-        public TPays? TakerPays { get; set; }
+        public required TPays TakerPays { get; set; }
 
         /// <summary>
         /// The remaining amount and type of token being provided by the Offer creator.
         /// </summary>
-        public TGets? TakerGets { get; set; }
+        public required TGets TakerGets { get; set; }
     }
 
     /// <summary>
@@ -121,7 +116,7 @@ namespace XRPL.Core.Domain.Entries
     /// When processing transactions, the network automatically removes any unfunded offers that those transactions come across.
     /// (Otherwise, unfunded offers remain, because only transactions can change the ledger state.)
     /// </summary>
-    public sealed class XrpForCurrencyAmountOffer : Offer<string, CurrencyAmount>
+    public sealed class XrpForFungibleTokenOffer : Offer<string, FungibleToken>
     {
     }
 
@@ -134,7 +129,7 @@ namespace XRPL.Core.Domain.Entries
     /// When processing transactions, the network automatically removes any unfunded offers that those transactions come across.
     /// (Otherwise, unfunded offers remain, because only transactions can change the ledger state.)
     /// </summary>
-    public sealed class CurrencyAmountForXrpOffer : Offer<CurrencyAmount, string>
+    public sealed class FungibleTokenForXrpOffer : Offer<FungibleToken, string>
     {
     }
 
@@ -147,7 +142,7 @@ namespace XRPL.Core.Domain.Entries
     /// When processing transactions, the network automatically removes any unfunded offers that those transactions come across.
     /// (Otherwise, unfunded offers remain, because only transactions can change the ledger state.)
     /// </summary>
-    public sealed class CurrencyAmountForCurrencyAmountOffer : Offer<CurrencyAmount, CurrencyAmount>
+    public sealed class FungibleTokenOffer : Offer<FungibleToken, FungibleToken>
     {
     }
 }

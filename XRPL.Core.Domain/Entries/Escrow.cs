@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace XRPL.Core.Domain.Entries
+﻿namespace XRPL.Core.Domain.Entries
 {
     /// <summary>
     /// Represents an escrow, which holds XRP until specific conditions are met.
@@ -14,12 +8,12 @@ namespace XRPL.Core.Domain.Entries
         /// <summary>
         /// The address of the owner (sender) of this escrow. This is the account that provided the XRP, and gets it back if the escrow is canceled.
         /// </summary>
-        public string? Account { get; set; }
+        public required string Account { get; set; }
 
         /// <summary>
         /// The amount of XRP, in drops, currently held in the escrow.
         /// </summary>
-        public string? Amount { get; set; }
+        public required string Amount { get; set; }
 
         /// <summary>
         /// The escrow can be canceled if and only if this field is present and the time it specifies has passed.
@@ -36,7 +30,7 @@ namespace XRPL.Core.Domain.Entries
         /// <summary>
         /// The destination address where the XRP is paid if the escrow is successful.
         /// </summary>
-        public string? Destination { get; set; }
+        public required string Destination { get; set; }
 
         /// <summary>
         /// A hint indicating which page of the destination's owner directory links to this object, #
@@ -60,17 +54,17 @@ namespace XRPL.Core.Domain.Entries
         /// <summary>
         /// A hint indicating which page of the sender's owner directory links to this entry, in case the directory consists of multiple pages.
         /// </summary>
-        public string? OwnerNode { get; set; }
+        public required string OwnerNode { get; set; }
 
         /// <summary>
         /// The identifying hash of the transaction that most recently modified this entry.
         /// </summary>
-        public string? PreviousTxnID { get; set; }
+        public required string PreviousTxnID { get; set; }
 
         /// <summary>
         /// The index of the ledger that contains the transaction that most recently modified this entry.
         /// </summary>
-        public uint PreviousTxnLgrSeq { get; set; }
+        public required uint PreviousTxnLgrSeq { get; set; }
 
         /// <summary>
         /// An arbitrary tag to further specify the source for this escrow, such as a hosted recipient at the owner's address

@@ -1,5 +1,5 @@
 ﻿using System.Runtime.Serialization;
-using XRPL.Core.Domain.Contracts;
+using XRPL.Core.Domain.Interfaces;
 using XRPL.Core.Domain.Responses;
 
 namespace XRPL.Core.Domain.Requests
@@ -9,7 +9,7 @@ namespace XRPL.Core.Domain.Requests
     /// You can also submit multi-signed transactions in binary form using the submit command in submit-only mode.
     /// </summary>
     [DataContract]
-    public class SubmitMultisignedRequest : RequestBase<SubmitMultisignedParameters>, IRelateTo<SubmitMultisignedResponse>
+    public class SubmitMultisignedRequest : RequestBase<SubmitMultisignedParameters>, IExpect<SubmitMultisignedResponse>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SubmitMultisignedRequest"/> class.
@@ -36,6 +36,5 @@ namespace XRPL.Core.Domain.Requests
         /// </summary>
         [DataMember(Name = "fail_hard")]
         public bool FailHard { get; set; }
-
     }
 }

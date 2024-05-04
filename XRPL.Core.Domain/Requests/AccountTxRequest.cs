@@ -1,5 +1,5 @@
 ﻿using System.Runtime.Serialization;
-using XRPL.Core.Domain.Contracts;
+using XRPL.Core.Domain.Interfaces;
 using XRPL.Core.Domain.Responses;
 
 namespace XRPL.Core.Domain.Requests
@@ -8,7 +8,7 @@ namespace XRPL.Core.Domain.Requests
     /// Represents a request to retrieve a list of validated transactions that involve a given account.
     /// </summary>
     [DataContract]
-    public class AccountTxRequest : RequestBase<AccountTxParameters>, IRelateTo<AccountTxResponse>
+    public class AccountTxRequest : RequestBase<AccountTxParameters>, IExpect<AccountTxResponse>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AccountTxRequest"/> class.
