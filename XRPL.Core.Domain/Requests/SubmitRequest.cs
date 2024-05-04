@@ -1,5 +1,5 @@
 ﻿using System.Runtime.Serialization;
-using XRPL.Core.Domain.Contracts;
+using XRPL.Core.Domain.Interfaces;
 using XRPL.Core.Domain.Responses;
 
 namespace XRPL.Core.Domain.Requests
@@ -8,7 +8,7 @@ namespace XRPL.Core.Domain.Requests
     /// Represents a request that applies a transaction and sends it to the network to be confirmed and included in future ledgers.
     /// </summary>
     [DataContract]
-    public class SubmitOnlyRequest : RequestBase<SubmitOnlyParameters>, IRelateTo<SubmitResponse>
+    public class SubmitOnlyRequest : RequestBase<SubmitOnlyParameters>, IExpect<SubmitResponse>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SubmitOnlyRequest"/> class.
@@ -42,7 +42,7 @@ namespace XRPL.Core.Domain.Requests
     /// <para/>This mode is intended to be used for testing. You cannot use this mode for multi-signed transactions.
     /// </summary>
     [DataContract]
-    public class SignAndSubmitRequest : RequestBase<SignAndSubmitParameters>, IRelateTo<SubmitResponse>
+    public class SignAndSubmitRequest : RequestBase<SignAndSubmitParameters>, IExpect<SubmitResponse>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SignAndSubmitRequest"/> class.

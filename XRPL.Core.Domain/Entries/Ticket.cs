@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace XRPL.Core.Domain.Entries
+﻿namespace XRPL.Core.Domain.Entries
 {
     /// <summary>
     /// Represents a Ticket, which tracks an account sequence number that has been set aside for future use.
@@ -13,24 +7,34 @@ namespace XRPL.Core.Domain.Entries
     public class Ticket : LedgerEntryBase
     {
         /// <summary>
+        /// The account that owns this Ticket.
+        /// </summary>
+        public required string Account { get; set; }
+
+        /// <summary>
+        /// The value 0x0054, mapped to the string Ticket, indicates that this is a Ticket entry.
+        /// </summary>
+        public override required string LedgerEntryType { get => base.LedgerEntryType; set => base.LedgerEntryType = value; }
+
+        /// <summary>
         /// A hint indicating which page of the owner directory links to this entry, in case the directory consists of multiple pages.
         /// </summary>
-        public string? OwnerNode { get; set; }
+        public required string OwnerNode { get; set; }
 
         /// <summary>
         /// The identifying hash of the transaction that most recently modified this entry.
         /// </summary>
-        public string? PreviousTxnID { get; set; }
+        public required string PreviousTxnID { get; set; }
 
         /// <summary>
         /// The index of the ledger that contains the transaction that most recently modified this entry.
         /// </summary>
-        public uint PreviousTxnLgrSeq { get; set; }
+        public required uint PreviousTxnLgrSeq { get; set; }
 
         /// <summary>
         /// The Sequence Number this Ticket sets aside.
         /// </summary>
-        public uint TicketSequence { get; set; }
+        public required uint TicketSequence { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Ticket"/> class.

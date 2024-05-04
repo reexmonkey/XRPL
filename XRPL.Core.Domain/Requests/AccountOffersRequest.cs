@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
-using XRPL.Core.Domain.Contracts;
+﻿using System.Runtime.Serialization;
+using XRPL.Core.Domain.Interfaces;
 using XRPL.Core.Domain.Responses;
 
 namespace XRPL.Core.Domain.Requests
@@ -13,7 +8,7 @@ namespace XRPL.Core.Domain.Requests
     /// Represents the request to retrieve a list of offers made by a given account that are outstanding as of a particular ledger version.
     /// </summary>
     [DataContract]
-    public class AccountOffersRequest : RequestBase<AccountOffersParameters>, IRelateTo<AccountOffersResponse>
+    public class AccountOffersRequest : RequestBase<AccountOffersParameters>, IExpect<AccountOffersResponse>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AccountOffersRequest"/> class.

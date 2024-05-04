@@ -24,7 +24,7 @@ namespace XRPL.Core.Domain.Clients
         private bool disposedValue;
 
         private TResponse Post<TRequest, TResponse>(TRequest request, CancellationToken cancellation)
-            where TRequest : RequestBase, IRelateTo<TResponse>
+            where TRequest : RequestBase, IExpect<TResponse>
             where TResponse : ResponseBase
         {
             var json = request.ToJson();
@@ -41,7 +41,7 @@ namespace XRPL.Core.Domain.Clients
         }
 
         private async Task<TResponse> PostAsync<TRequest, TResponse>(TRequest request, CancellationToken cancellation)
-            where TRequest : IRelateTo<TResponse>
+            where TRequest : IExpect<TResponse>
             where TResponse : ResponseBase
         {
             var json = request.ToJson();

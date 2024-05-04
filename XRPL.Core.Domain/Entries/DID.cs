@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace XRPL.Core.Domain.Entries
+﻿namespace XRPL.Core.Domain.Entries
 {
     /// <summary>
     /// Represents a ledger entry holds references to, or data associated with, a single DID.
     /// </summary>
-    public class DID: LedgerEntryBase
+    public class DID : LedgerEntryBase
     {
         /// <summary>
         /// The account that controls the DID.
         /// </summary>
-        public string? Account { get; set; }
+        public required string Account { get; set; }
 
         /// <summary>
         /// The W3C standard DID document associated with the DID. 
@@ -31,17 +25,17 @@ namespace XRPL.Core.Domain.Entries
         /// <summary>
         /// A hint indicating which page of the sender's owner directory links to this entry, in case the directory consists of multiple pages.
         /// </summary>
-        public string? OwnerNode { get; set; }
+        public required string OwnerNode { get; set; }
 
         /// <summary>
         /// The identifying hash of the transaction that most recently modified this object.
         /// </summary>
-        public string? PreviousTxnID { get; set; }
+        public required string PreviousTxnID { get; set; }
 
         /// <summary>
         /// The index of the ledger that contains the transaction that most recently modified this object.
         /// </summary>
-        public uint PreviousTxnLgrSeq { get; set; }
+        public required uint PreviousTxnLgrSeq { get; set; }
 
         /// <summary>
         /// The Universal Resource Identifier that points to the corresponding DID document or the data associated with the DID. 

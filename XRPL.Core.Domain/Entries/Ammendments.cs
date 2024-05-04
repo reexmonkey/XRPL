@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.Serialization;
 
 namespace XRPL.Core.Domain.Entries
 {
@@ -41,11 +36,11 @@ namespace XRPL.Core.Domain.Entries
         /// <summary>
         /// The Amendment ID of the pending amendment.
         /// </summary>
-        public string? Amendment { get; set; }
+        public required string Amendment { get; set; }
 
         /// <summary>
         /// The close_time field of the ledger version where this amendment most recently gained a majority.
         /// </summary>
-        public uint? CloseTime { get; set; }
+        public required uint CloseTime { get; set; }
     }
 }

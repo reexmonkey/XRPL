@@ -1,5 +1,5 @@
 ﻿using System.Runtime.Serialization;
-using XRPL.Core.Domain.Contracts;
+using XRPL.Core.Domain.Interfaces;
 using XRPL.Core.Domain.Responses;
 
 namespace XRPL.Core.Domain.Requests
@@ -8,7 +8,7 @@ namespace XRPL.Core.Domain.Requests
     /// Represents the request to retrieve account currencies.
     /// </summary>
     [DataContract]
-    public class AccountCurrenciesRequest : RequestBase<AccountCurrenciesParameters>, IRelateTo<AccountCurrenciesResponse>
+    public class AccountCurrenciesRequest : RequestBase<AccountCurrenciesParameters>, IExpect<AccountCurrenciesResponse>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AccountCurrenciesRequest"/> class.

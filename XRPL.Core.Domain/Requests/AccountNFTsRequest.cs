@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
-using XRPL.Core.Domain.Contracts;
+﻿using System.Runtime.Serialization;
+using XRPL.Core.Domain.Interfaces;
 using XRPL.Core.Domain.Responses;
 
 namespace XRPL.Core.Domain.Requests
@@ -13,7 +8,7 @@ namespace XRPL.Core.Domain.Requests
     /// Represents a request to return a list of NFToken objects for the specified account.
     /// </summary>
     [DataContract]
-    public class AccountNFTsRequest : RequestBase<AccountNftsParameters>, IRelateTo<AccountNFTsResponse>
+    public class AccountNFTsRequest : RequestBase<AccountNftsParameters>, IExpect<AccountNFTsResponse>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AccountNFTsRequest"/> class.

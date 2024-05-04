@@ -1,5 +1,5 @@
 ﻿using System.Runtime.Serialization;
-using XRPL.Core.Domain.Contracts;
+using XRPL.Core.Domain.Interfaces;
 using XRPL.Core.Domain.Responses;
 
 namespace XRPL.Core.Domain.Requests
@@ -9,7 +9,7 @@ namespace XRPL.Core.Domain.Requests
     /// <para/>(The TxRequest method, by contrast, searches all ledgers for the specified transaction. We recommend using that method instead.)
     /// </summary>
     [DataContract]
-    public class TransactionEntryRequest : RequestBase<TransactionEntryParameters>, IRelateTo<TransactionEntryResponse>
+    public class TransactionEntryRequest : RequestBase<TransactionEntryParameters>, IExpect<TransactionEntryResponse>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TransactionEntryRequest"/> class.

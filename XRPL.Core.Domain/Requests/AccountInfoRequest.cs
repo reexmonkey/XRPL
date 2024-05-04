@@ -1,5 +1,5 @@
 ﻿using System.Runtime.Serialization;
-using XRPL.Core.Domain.Contracts;
+using XRPL.Core.Domain.Interfaces;
 using XRPL.Core.Domain.Responses;
 
 namespace XRPL.Core.Domain.Requests
@@ -8,7 +8,7 @@ namespace XRPL.Core.Domain.Requests
     /// Represents a request to retrieve information about an account, its activity and its XRP balance.
     /// </summary>
     [DataContract]
-    public class AccountInfoRequest : RequestBase<AccountInfoRequestParameters>, IRelateTo<AccountInfoResponse>
+    public class AccountInfoRequest : RequestBase<AccountInfoRequestParameters>, IExpect<AccountInfoResponse>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AccountInfoRequest"/> class.

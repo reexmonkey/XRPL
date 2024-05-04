@@ -36,14 +36,14 @@ namespace XRPL.Core.Domain.Responses
         /// <para/>The keys are addresses and the values are arrays of currency amounts they hold.
         /// </summary>
         [DataMember(Name = "balances")]
-        public Dictionary<string, CurrencyAmount[]>? Balances { get; set; }
+        public Dictionary<string, FungibleToken[]>? Balances { get; set; }
 
         /// <summary>
         /// (Omitted if empty) Total amounts held that are issued by others.
         /// <para/>In the recommended configuration, the issuing address should have none.
         /// </summary>
         [DataMember(Name = "assets")]
-        public Dictionary<string, CurrencyAmount[]>? Assets { get; set; }
+        public Dictionary<string, FungibleToken[]>? Assets { get; set; }
 
         /// <summary>
         /// (May be omitted) The identifying hash of the ledger version that was used to generate this response.

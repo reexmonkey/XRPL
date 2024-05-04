@@ -1,29 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
-using XRPL.Core.Domain.Models;
+﻿using XRPL.Core.Domain.Models;
 
 namespace XRPL.Core.Domain.Entries
 {
     /// <summary>
-    /// Specifies a ledger entry that describes a check, similar to a paper personal check,
-    /// which can be cashed by its destination to get money from its sender.
+    /// Specifies a ledger entry that describes a check, similar to a paper personal check, which can be cashed by its destination to get money from its sender.
     /// </summary>
-    public abstract class Check<TTokenAmount> : LedgerEntryBase
-        where TTokenAmount : class
+    public abstract class Check : LedgerEntryBase
     {
         /// <summary>
-        /// The sender of the <see cref="Check{TToken}"/>. Cashing the <see cref="Check{TToken}"/> debits this address's balance.
+        /// The sender of the <see cref="Check"/>. Cashing the <see cref="Check"/> debits this address's balance.
         /// </summary>
-        public string? Account { get; set; }
+        public required string Account { get; set; }
 
         /// <summary>
         /// The intended recipient of the Check. Only this address can cash the Check, using a CheckCash transaction.
         /// </summary>
-        public string? Destination { get; set; }
+        public required string Destination { get; set; }
 
         /// <summary>
         /// A hint indicating which page of the destination's owner directory links to this object, in case the directory consists of multiple pages.
@@ -36,19 +28,19 @@ namespace XRPL.Core.Domain.Entries
         public uint DestinationTag { get; set; }
 
         /// <summary>
-        /// Indicates the time after which this <see cref="Check{TToken}"/> is considered expired. See Specifying Time for details.
+        /// Indicates the time after which this <see cref="Check"/> is considered expired. See Specifying Time for details.
         /// </summary>
         public uint Expiration { get; set; }
 
         /// <summary>
-        /// Arbitrary 256-bit hash provided by the sender as a specific reason or identifier for this <see cref="Check{TToken}"/>.
+        /// Arbitrary 256-bit hash provided by the sender as a specific reason or identifier for this <see cref="Check"/>.
         /// </summary>
         public string? InvoiceID { get; set; }
 
         /// <summary>
         /// A hint indicating which page of the sender's owner directory links to this object, in case the directory consists of multiple pages.
         /// </summary>
-        public string? OwnerNode { get; set; }
+        public required string OwnerNode { get; set; }
 
         /// <summary>
         /// The identifying hash of the transaction that most recently modified this object.
@@ -58,26 +50,20 @@ namespace XRPL.Core.Domain.Entries
         /// <summary>
         /// The index of the ledger that contains the transaction that most recently modified this object.
         /// </summary>
-        public uint PreviousTxnLgrSeq { get; set; }
-
-        /// <summary>
-        /// The maximum amount of token this <see cref="Check"/> can debit the sender.
-        /// <para/> If the <see cref="Check"/> is successfully cashed, the destination is credited in the same token for up to this amount.
-        /// </summary>
-        public TTokenAmount? SendMax { get; set; }
+        public required uint PreviousTxnLgrSeq { get; set; }
 
         /// <summary>
         /// The sequence number of the CheckCreate transaction that created this check.
         /// </summary>
-        public uint Sequence { get; set; }
+        public required uint Sequence { get; set; }
 
         /// <summary>
-        /// An arbitrary tag to further specify the source for this <see cref="Check{TToken}"/>, such as a hosted recipient at the sender's address.
+        /// An arbitrary tag to further specify the source for this <see cref="Check"/>, such as a hosted recipient at the sender's address.
         /// </summary>
         public uint SourceTag { get; set; }
 
         /// <summary>
-        /// Initializes the new instance of the <see cref="Check{TToken}"/> class.
+        /// Initializes the new instance of the <see cref="Check"/> class.
         /// </summary>
         public Check()
         {
@@ -86,16 +72,38 @@ namespace XRPL.Core.Domain.Entries
     }
 
     /// <summary>
-    /// Represents an XRP check.
+    /// Specifies a currency amount check, similar to a paper personal check, which can be cashed by its destination to get money from its sender.
     /// </summary>
-    public sealed class XRPCheck : Check<string>
+    /// <typeparam name="TAmount">The type of currency amount that can be cashed.</typeparam>
+    public abstract class Check<TAmount> : Check
+        where TAmount : class
+    {
+        /// <summary>
+        /// The maximum amount of currency this <see cref="Check"/> can debit the sender.
+        /// <para/> If the <see cref="Check"/> is successfully cashed, the destination is credited in the same token for up to this amount.
+        /// </summary>
+        public required TAmount SendMax { get; set; }
+
+        /// <summary>
+        /// Initializes the new instance of the <see cref="Check{TAmount}"/> class.
+        /// </summary>
+        public Check()
+        {
+            LedgerEntryType = "Check";
+        }
+    }
+
+    /// <summary>
+    /// Represents an XRP check, similar to a paper personal check, which can be cashed by its destination to get money from its sender.
+    /// </summary>
+    public sealed class XrpCheck : Check<string>
     {
     }
 
     /// <summary>
-    /// Reprsents a token check.
+    /// Represents a fungible token check, similar to a paper personal check, which can be cashed by its destination to get money from its sender.
     /// </summary>
-    public sealed class CurrencyAmountCheck : Check<CurrencyAmount>
+    public sealed class FungibleTokenCheck : Check<FungibleToken>
     {
     }
 }
