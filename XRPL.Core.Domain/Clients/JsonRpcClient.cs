@@ -1,6 +1,6 @@
 ﻿using ServiceStack;
 using System.Text;
-using XRPL.Core.Domain.Contracts;
+using XRPL.Core.Domain.Interfaces;
 using XRPL.Core.Domain.Requests;
 using XRPL.Core.Domain.Responses;
 
