@@ -110,6 +110,12 @@ namespace XRPL.Core.Domain.Clients
         public Task<NoRippleCheckResponse> PostAsync(NoRippleCheckRequest request, CancellationToken cancellation)
             => PostAsync<NoRippleCheckRequest, NoRippleCheckResponse>(request, cancellation);
 
+        public SubmitMultisignedResponse Post(SubmitMultisignedRequest request, CancellationToken cancellation)
+               => Post<SubmitMultisignedRequest, SubmitMultisignedResponse>(request, cancellation);
+
+        public Task<SubmitMultisignedResponse> PostAsync(SubmitMultisignedRequest request, CancellationToken cancellation)
+            => PostAsync<SubmitMultisignedRequest, SubmitMultisignedResponse>(request, cancellation);
+
         public SubmitResponse Post(SubmitOnlyRequest request, CancellationToken cancellation)
             => Post<SubmitOnlyRequest, SubmitResponse>(request, cancellation);
 
