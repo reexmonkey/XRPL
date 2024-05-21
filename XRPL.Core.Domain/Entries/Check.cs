@@ -103,7 +103,7 @@ namespace XRPL.Core.Domain.Entries
     /// <summary>
     /// Represents a fungible token check, similar to a paper personal check, which can be cashed by its destination to get money from its sender.
     /// </summary>
-    public sealed class FungibleTokenCheck : Check<FungibleToken>
+    public sealed class FungibleTokenCheck : Check<TokenAmount>
     {
     }
 }

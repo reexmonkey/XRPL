@@ -1,4 +1,5 @@
 ﻿using XRPL.Core.Domain.Entries;
+using XRPL.Core.Domain.Models;
 using XRPL.Core.Domain.Responses;
 
 namespace XRPL.Core.Domain.Transactions

@@ -24,7 +24,7 @@ namespace XRPL.Core.Domain.Transactions
         /// (Optional) This field is only valid in brokered mode, and specifies the amount that the broker keeps as part of their fee for bringing the two offers together; the remaining amount is sent to the seller of the NFToken being bought.
         /// <para/>If specified, the fee must be such that, before applying the transfer fee, the amount that the seller would receive is at least as much as the amount indicated in the sell offer.
         /// </summary>
-        public FungibleToken? NFTokenBrokerFee { get; set; }
+        public TokenAmount? NFTokenBrokerFee { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="NFTokenAcceptOffer"/> class.

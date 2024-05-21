@@ -64,7 +64,7 @@ namespace XRPL.Core.Domain.Transactions
     /// Represents a transaction that creates an <see cref="FungibleTokenCheck"/> object in the ledger, which is a deferred payment that can be cashed by its intended destination.
     /// <para/>The sender of this transaction is the sender of the <see cref="FungibleTokenCheck"/>.
     /// </summary>
-    public sealed class TokenCheckCreate : CheckCreate<FungibleToken>
+    public sealed class TokenCheckCreate : CheckCreate<TokenAmount>
     {
     }
 }

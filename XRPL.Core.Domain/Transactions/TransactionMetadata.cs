@@ -43,14 +43,14 @@ namespace XRPL.Core.Domain.Models
         /// (May be omitted) For a partial payment, this field records the amount of currency actually delivered to the destination.
         /// <para/>To avoid errors when reading transactions, instead use the delivered_amount field, which is provided for all Payment transactions, partial or not.
         /// </summary>
-        public FungibleToken[]? CurrencyAmounts { get; set; }
+        public TokenAmount[]? CurrencyAmounts { get; set; }
 
         /// <summary>
         /// (May be omitted) For a partial payment, this field records the amount of currency actually delivered to the destination.
         /// <para/>To avoid errors when reading transactions, instead use the delivered_amount field, which is provided for all Payment transactions, partial or not.
         /// </summary>
         [DataMember(Name = "DeliveredAmount")]
-        public FungibleToken[]? PartialPaymentDeliveredAmount { get; set; }
+        public TokenAmount[]? PartialPaymentDeliveredAmount { get; set; }
 
         /// <summary>
         /// The transaction's position within the ledger that included it. This is zero-indexed. (For example, the value 2 means it was the 3rd transaction in that ledger.)
@@ -66,6 +66,6 @@ namespace XRPL.Core.Domain.Models
         /// (Omitted for non-Payment transactions) The [Currency Amount][] actually received by the Destination account. Use this field to determine how much was delivered, regardless of whether the transaction is a partial payment. See this description for details.
         /// </summary>
         [DataMember(Name = "delivered_amount")]
-        public FungibleToken? DeliveredAmount { get; set; }
+        public TokenAmount? DeliveredAmount { get; set; }
     }
 }

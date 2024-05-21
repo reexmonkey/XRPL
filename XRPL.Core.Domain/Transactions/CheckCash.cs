@@ -71,7 +71,7 @@ namespace XRPL.Core.Domain.Transactions
     /// If this happens, the <see cref="FungibleTokenCheck"/> remains in the ledger and the destination can try to cash it again later, or for a different amount.
     /// <para/>Caution: The transaction must include either Amount or DeliverMin, but not both.
     /// </summary>
-    public sealed class TokenCheckCash : CheckCash<FungibleToken>
+    public sealed class TokenCheckCash : CheckCash<TokenAmount>
     {
     }
 }

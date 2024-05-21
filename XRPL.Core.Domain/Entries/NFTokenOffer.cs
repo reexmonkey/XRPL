@@ -7,6 +7,9 @@ namespace XRPL.Core.Domain.Entries
     /// </summary>
     public abstract class NFTokenOffer : LedgerEntryBase
     {
+        /// <summary>
+        /// The bit-flags for a non-fungible token offer.
+        /// </summary>
         protected NFTokenOfferFlags flags;
 
         /// <summary>
@@ -21,7 +24,7 @@ namespace XRPL.Core.Domain.Entries
 
         /// <summary>
         /// The time after which the offer is no longer active.
-        /// </para>The value is the number of seconds since the Ripple Epoch.
+        /// <para/>The value is the number of seconds since the Ripple Epoch.
         /// </summary>
         public uint Expiration { get; set; }
 
@@ -103,12 +106,12 @@ namespace XRPL.Core.Domain.Entries
     /// <summary>
     /// Represents an offer to buy, sell or transfer an NFT with an amount of tokens.
     /// </summary>
-    public sealed class FungibleTokenForNFTokenOffer : NFTokenOffer<FungibleToken>
+    public sealed class FungibleTokenForNFTokenOffer : NFTokenOffer<TokenAmount>
     {
     }
 
     /// <summary>
-    /// Represents a flag for a non-token offer.
+    /// Represents a flag for a non-fungible token offer.
     /// </summary>
     public enum NFTokenOfferFlags : uint
     {

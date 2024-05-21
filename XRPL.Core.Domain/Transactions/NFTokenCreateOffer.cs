@@ -76,7 +76,7 @@ namespace XRPL.Core.Domain.Transactions
     /// Each offer counts as one object towards the owner reserve of the account that placed the offer.
     /// <para/>The asset expected or offered for the corresponding <see cref="NFToken"/> is a fungible token.
     /// </summary>
-    public sealed class FungibleTokenNFTokenCreateOffer : NFTokenCreateOffer<FungibleToken>
+    public sealed class FungibleTokenNFTokenCreateOffer : NFTokenCreateOffer<TokenAmount>
     {
 
     }

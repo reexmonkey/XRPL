@@ -6,6 +6,7 @@ namespace XRPL.Core.Domain.Transactions
     /// <summary>
     /// Represents a transaction that adds additional XRP to an open payment channel, and optionally update the expiration time of the channel.
     /// <para/>Only the source address of the channel can use this transaction.
+    /// </summary>
     public class PaymentChannelFund : Transaction
     {
         /// <summary>

@@ -9,6 +9,9 @@ namespace XRPL.Core.Domain.Entries
     /// </summary>
     public class RippleState : LedgerEntryBase
     {
+        /// <summary>
+        /// 
+        /// </summary>
         protected RippleStateFlags flags;
 
         /// <summary>
@@ -16,7 +19,7 @@ namespace XRPL.Core.Domain.Entries
         /// <para/>A negative balance indicates that the high account holds tokens issued by the low account.
         /// The issuer in this is always set to the neutral value ACCOUNT_ONE.
         /// </summary>
-        public required FungibleToken Balance { get; set; }
+        public required TokenAmount Balance { get; set; }
 
         /// <summary>
         /// A bit-map of boolean options enabled for this entry.
@@ -27,7 +30,7 @@ namespace XRPL.Core.Domain.Entries
         /// The limit that the high account has set on the trust line.
         /// <para/>The issuer is the address of the high account that set this limit.
         /// </summary>
-        public required FungibleToken HighLimit { get; set; }
+        public required TokenAmount HighLimit { get; set; }
 
         /// <summary>
         /// (Omitted in some historical ledgers) A hint indicating which page of the high account's owner directory links to this entry, in case the directory consists of multiple pages.
@@ -55,7 +58,7 @@ namespace XRPL.Core.Domain.Entries
         /// The limit that the low account has set on the trust line.
         /// <para/>The issuer is the address of the low account that set this limit.
         /// </summary>
-        public required FungibleToken LowLimit { get; set; }
+        public required TokenAmount LowLimit { get; set; }
 
         /// <summary>
         /// (Omitted in some historical ledgers) A hint indicating which page of the low account's owner directory links to this entry, in case the directory consists of multiple pages.

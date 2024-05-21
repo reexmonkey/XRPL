@@ -58,7 +58,7 @@ namespace XRPL.Core.Domain.Transactions
     /// <para/>One or both of Amount and Amount2 can be tokens; at most one of them can be XRP. They cannot both have the same currency code and issuer.
     /// <para/>The tokens' issuers must have Default Ripple enabled. If the Clawback amendment is enabled, those issuers must not have enabled the Allow Clawback flag. The assets cannot be LP tokens for another AMM.
     /// </summary>
-    public sealed class XrpFungibleTokenAMMCreate : AMMCreate<string, FungibleToken>
+    public sealed class XrpFungibleTokenAMMCreate : AMMCreate<string, TokenAmount>
     {
     }
 
@@ -69,7 +69,7 @@ namespace XRPL.Core.Domain.Transactions
     /// <para/>One or both of Amount and Amount2 can be tokens; at most one of them can be XRP. They cannot both have the same currency code and issuer.
     /// <para/>The tokens' issuers must have Default Ripple enabled. If the Clawback amendment is enabled, those issuers must not have enabled the Allow Clawback flag. The assets cannot be LP tokens for another AMM.
     /// </summary>
-    public sealed class FungibleTokenAMMCreate : AMMCreate<FungibleToken, FungibleToken>
+    public sealed class FungibleTokenAMMCreate : AMMCreate<TokenAmount, TokenAmount>
     {
     }
 }
