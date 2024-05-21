@@ -1,6 +1,6 @@
 ﻿using ServiceStack;
 using System.Text;
-using XRPL.Core.Domain.Contracts;
+using XRPL.Core.Domain.Interfaces;
 using XRPL.Core.Domain.Requests;
 using XRPL.Core.Domain.Responses;
 
@@ -12,8 +12,8 @@ namespace XRPL.Core.Domain.Clients
     /// <remarks>
     /// Initializes a new instance of the <see cref="JsonRpcClient"/> for the given endpoint.
     /// </remarks>
-    /// <param name="url">The URL of the rippled server to connect to.</param>
-    /// <exception cref="ArgumentException"><paramref name="url"/> is null.</exception>
+    /// <param name="uri">The URL of the rippled server to connect to.</param>
+    /// <exception cref="ArgumentException"><paramref name="uri"/> is null.</exception>
     public class JsonRpcClient(Uri uri) : IDisposable
     {
         private const string contentType = "application/json";
