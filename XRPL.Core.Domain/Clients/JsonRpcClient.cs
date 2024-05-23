@@ -98,6 +98,12 @@ namespace XRPL.Core.Domain.Clients
         public Task<AccountTxResponse> PostAsync(AccountTxRequest request, CancellationToken cancellation)
             => PostAsync<AccountTxRequest, AccountTxResponse>(request, cancellation);
 
+        public AmmInfoResponse Post(AmmInfoRequest request, CancellationToken cancellation)
+            => Post<AmmInfoRequest, AmmInfoResponse>(request, cancellation);
+
+        public Task<AmmInfoResponse> PostAsync(AmmInfoRequest request, CancellationToken cancellation)
+            => PostAsync<AmmInfoRequest, AmmInfoResponse>(request, cancellation);
+
         public GatewayBalancesResponse Post(GatewayBalancesRequest request, CancellationToken cancellation)
             => Post<GatewayBalancesRequest, GatewayBalancesResponse>(request, cancellation);
 
