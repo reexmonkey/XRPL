@@ -74,7 +74,7 @@ namespace XRPL.Core.Domain.Responses
         ///(Note: This could be asset or asset2 from the request.)
         ///</summary>
         [DataMember(Name = "amount2")]
-        public required LPAmount Amount2 { get; set; }
+        public required LPTokenAmount Amount2 { get; set; }
 
         ///<summary>
         ///(Omitted for XRP) If true, the amount currency is currently frozen.
@@ -100,7 +100,7 @@ namespace XRPL.Core.Domain.Responses
         ///instead, this is the amount of this AMM's LP Tokens held by that liquidity provider.
         ///</summary>
         [DataMember(Name = "lp_token")]
-        public required LPAmount LPToken { get; set; }
+        public required LPTokenAmount LPToken { get; set; }
 
         ///<summary>
         ///The AMM's current trading fee, in units of 1/100,000; a value of 1 is equivalent to a 0.001% fee.
@@ -155,7 +155,7 @@ namespace XRPL.Core.Domain.Responses
         ///This affects the price to outbid the current slot holder.
         ///</summary>
         [DataMember(Name = "price")]
-        public required LPAmount Price { get; set; }
+        public required LPTokenAmount Price { get; set; }
 
         ///<summary>
         ///The current 72-minute time interval this auction slot is in, from 0 to 19.
