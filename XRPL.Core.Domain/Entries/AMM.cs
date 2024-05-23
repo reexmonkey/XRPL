@@ -33,7 +33,7 @@ namespace XRPL.Core.Domain.Entries
         /// The total outstanding balance of liquidity provider tokens from this AMM instance.
         /// <para/>The holders of these tokens can vote on the AMM's trading fee in proportion to their holdings, or redeem the tokens for a share of the AMM's assets which grows with the trading fees collected.
         /// </summary>
-        public required LPToken LPTokenBalance { get; set; }
+        public required LPTokenAmount LPTokenBalance { get; set; }
 
         /// <summary>
         /// The percentage fee to be charged for trades against this AMM instance, in units of 1/100,000. The maximum value is 1000, for a 1% fee.
@@ -44,22 +44,6 @@ namespace XRPL.Core.Domain.Entries
         /// A list of vote objects, representing votes on the pool's trading fee.
         /// </summary>
         public VoteEntry[]? VoteSlots { get; set; }
-    }
-
-    /// <summary>
-    /// Represents an asset type.
-    /// </summary>
-    public class STIssue
-    {
-        /// <summary>
-        /// The token of the asset.
-        /// </summary>
-        public string? Token { get; set; }
-
-        /// <summary>
-        /// The issuer of the asset.
-        /// </summary>
-        public string? Issuer { get; set; }
     }
 
     /// <summary>
@@ -85,7 +69,7 @@ namespace XRPL.Core.Domain.Entries
         /// <summary>
         /// The amount the auction owner paid to win this slot, in LP Tokens.
         /// </summary>
-        public FungibleToken? Price { get; set; }
+        public LPTokenAmount? Price { get; set; }
 
         /// <summary>
         /// The time when this slot expires, in seconds since the Ripple Epoch.
@@ -116,11 +100,4 @@ namespace XRPL.Core.Domain.Entries
         public required uint VoteWeight { get; set; }
     }
 
-    /// <summary>
-    /// Represents an account that is authorized to trade at the discounted fee for an <see cref="AMM"/> instance.
-    /// </summary>
-    public class AuthAccount
-    {
-        public required string Account { get; set; }
-    }
 }

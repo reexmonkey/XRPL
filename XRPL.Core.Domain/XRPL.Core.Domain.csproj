@@ -4,14 +4,22 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <PackageTags>XRPL;.NET;C#;Client Library</PackageTags>
+    <RepositoryUrl>https://github.com/reexmonkey/XRPL.git</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/reexmonkey/XRPL</PackageProjectUrl>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Extensions\" />
-  </ItemGroup>
+  <!--<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <IsTrimmable>True</IsTrimmable>
+  </PropertyGroup>-->
+
+  <!--<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <IsTrimmable>True</IsTrimmable>
+  </PropertyGroup>-->
 
   <ItemGroup>
-    <PackageReference Include="ServiceStack.Text" Version="8.1.2" />
+    <PackageReference Include="ServiceStack.Text" Version="8.2.2" />
   </ItemGroup>
 
 </Project>

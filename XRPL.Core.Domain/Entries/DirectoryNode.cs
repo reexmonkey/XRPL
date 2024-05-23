@@ -8,7 +8,7 @@
     /// <para/>There are two kinds of Directories:
     /// <para/>Owner directories list other entries owned by an account, such as RippleState (trust line) or Offer entries.
     /// <para/>Offer directories list the offers available in the decentralized exchange. 
-    /// A single Offer directory contains all the offers that have the same exchange rate for the same token (token code and issuer).
+    /// A single Offer directory contains all the offers that have the same exchange rate for the same token (currency code and issuer).
     /// </summary>
     public class DirectoryNode : LedgerEntryBase
     {
@@ -46,7 +46,7 @@
         public required string RootIndex { get; set; }
 
         /// <summary>
-        /// The token code of the TakerGets amount from the offers in this directory.
+        /// The currency code of the TakerGets amount from the offers in this directory.
         /// <para/> (Offer Directories only)
         /// </summary>
         public string? TakerGetsToken { get; set; }
@@ -58,7 +58,7 @@
         public string? TakerGetsIssuer { get; set; }
 
         /// <summary>
-        /// The token code of the TakerPays amount from the offers in this directory.
+        /// The currency code of the TakerPays amount from the offers in this directory.
         /// <para/>	(Offer Directories only)
         /// </summary>
         public string? TakerPaysToken { get; set; }

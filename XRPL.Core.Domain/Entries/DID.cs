@@ -44,6 +44,9 @@
         /// </summary>
         public string? URI { get; set; }
 
+        /// <summary>
+        /// Initialzes a new instance of the <see cref="DID"/> class.
+        /// </summary>
         public DID()
         {
             LedgerEntryType = "DID";

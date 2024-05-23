@@ -48,21 +48,21 @@ namespace XRPL.Core.Domain.Transactions
     /// <summary>
     /// Represents a transaction that places an <see cref="Offer"/> to sell XRP for fungible tokens in the decentralized exchange.
     /// </summary>
-    public sealed class XrpForFungibleTokenOfferCreate : OfferCreate<string, FungibleToken>
+    public sealed class XrpForFungibleTokenOfferCreate : OfferCreate<string, TokenAmount>
     {
     }
 
     /// <summary>
     /// Represents a transaction that places an <see cref="Offer"/> to sell fungible tokens for XRP in the decentralized exchange.
     /// </summary>
-    public sealed class FungibleTokenXrpOfferCreate : OfferCreate<FungibleToken, string>
+    public sealed class FungibleTokenXrpOfferCreate : OfferCreate<TokenAmount, string>
     {
     }
 
     /// <summary>
     /// Represents a transaction that places an <see cref="Offer"/> to sell fungible tokens for other types of fungible tokens in the decentralized exchange.
     /// </summary>
-    public sealed class FungibleTokenOfferCreate : OfferCreate<FungibleToken, FungibleToken>
+    public sealed class FungibleTokenOfferCreate : OfferCreate<TokenAmount, TokenAmount>
     {
     }
 }

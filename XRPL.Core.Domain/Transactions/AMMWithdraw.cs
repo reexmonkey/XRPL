@@ -109,20 +109,20 @@ namespace XRPL.Core.Domain.Transactions
         /// <summary>
         /// How many of the AMM's LP Tokens to buy.
         /// </summary>
-        public LPToken? LPTokenIn { get; set; }
+        public LPTokenAmount? LPTokenIn { get; set; }
     }
 
     /// <summary>
     /// Represents a transaction that withdraws XRP and fungible token assets from an Automated Market Maker (AMM) instance by returning the AMM's liquidity provider tokens (LP Tokens).
     /// </summary>
-    public sealed class XrpFungibleTokenAMMWithdraw : AMMWithdraw<string, FungibleToken>
+    public sealed class XrpFungibleTokenAMMWithdraw : AMMWithdraw<string, TokenAmount>
     {
     }
 
     /// <summary>
     /// Represents a transaction that withdraws fungible token assets from an Automated Market Maker (AMM) instance by returning the AMM's liquidity provider tokens (LP Tokens).
     /// </summary>
-    public sealed class FungibleTokenAMMWithdraw : AMMWithdraw<FungibleToken, FungibleToken>
+    public sealed class FungibleTokenAMMWithdraw : AMMWithdraw<TokenAmount, TokenAmount>
     {
     }
 }

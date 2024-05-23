@@ -87,12 +87,4 @@ namespace XRPL.Core.Domain.Entries
         /// </summary>
         public required Issue LockingChainIssue { get; set; }
     }
-
-    /// <summary>
-    /// Represents an asset on an issuing chain.
-    /// </summary>
-    public class Issue : FungibleToken
-    {
-
-    }
 }

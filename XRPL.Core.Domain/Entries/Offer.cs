@@ -11,8 +11,6 @@ namespace XRPL.Core.Domain.Entries
     /// When processing transactions, the network automatically removes any unfunded Offers that those transactions come across.
     /// (Otherwise, unfunded Offers remain, because only transactions can change the ledger state.)
     /// </summary>
-    /// <typeparam name="TPays">The type of amount and token requested by the offer creator.</typeparam>
-    /// <typeparam name="TGets">The type of amount and token provided by the offer creator.</typeparam>
     public abstract class Offer : LedgerEntryBase
     {
         protected OfferFlags flags;
@@ -116,7 +114,7 @@ namespace XRPL.Core.Domain.Entries
     /// When processing transactions, the network automatically removes any unfunded offers that those transactions come across.
     /// (Otherwise, unfunded offers remain, because only transactions can change the ledger state.)
     /// </summary>
-    public sealed class XrpForFungibleTokenOffer : Offer<string, FungibleToken>
+    public sealed class XrpForFungibleTokenOffer : Offer<string, TokenAmount>
     {
     }
 
@@ -129,7 +127,7 @@ namespace XRPL.Core.Domain.Entries
     /// When processing transactions, the network automatically removes any unfunded offers that those transactions come across.
     /// (Otherwise, unfunded offers remain, because only transactions can change the ledger state.)
     /// </summary>
-    public sealed class FungibleTokenForXrpOffer : Offer<FungibleToken, string>
+    public sealed class FungibleTokenForXrpOffer : Offer<TokenAmount, string>
     {
     }
 
@@ -142,7 +140,7 @@ namespace XRPL.Core.Domain.Entries
     /// When processing transactions, the network automatically removes any unfunded offers that those transactions come across.
     /// (Otherwise, unfunded offers remain, because only transactions can change the ledger state.)
     /// </summary>
-    public sealed class FungibleTokenOffer : Offer<FungibleToken, FungibleToken>
+    public sealed class FungibleTokenOffer : Offer<TokenAmount, TokenAmount>
     {
     }
 }

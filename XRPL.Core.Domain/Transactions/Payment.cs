@@ -130,7 +130,7 @@ namespace XRPL.Core.Domain.Transactions
     /// <para/>Payments are also the only way to create accounts.
     /// <para/>Only applicable to API v1.
     /// </summary>
-    public sealed class CreateOrRedeemTokensV1Payment : V1Payment<FungibleToken, FungibleToken>
+    public sealed class CreateOrRedeemTokensV1Payment : V1Payment<TokenAmount, TokenAmount>
     {
         /// <summary>
         /// (Optional, auto-fillable) Array of payment paths to be used for this transaction.
@@ -146,7 +146,7 @@ namespace XRPL.Core.Domain.Transactions
     /// or currencies with the same currency code and different issuers.
     /// <para/>Only applicable to API v1.
     /// </summary>
-    public sealed class XrpFungibleTokenCrossCurrencyV1Payment : V1Payment<string, FungibleToken>
+    public sealed class XrpFungibleTokenCrossCurrencyV1Payment : V1Payment<string, TokenAmount>
     {
         /// <summary>
         /// (Optional, auto-fillable) Array of payment paths to be used for this transaction.
@@ -162,7 +162,7 @@ namespace XRPL.Core.Domain.Transactions
     /// or currencies with the same currency code and different issuers.
     /// <para/>Only applicable to API v1.
     /// </summary>
-    public sealed class FungibleTokenXrpCrossCurrencyV1Payment : V1Payment<FungibleToken, string>
+    public sealed class FungibleTokenXrpCrossCurrencyV1Payment : V1Payment<TokenAmount, string>
     {
         /// <summary>
         /// (Optional, auto-fillable) Array of payment paths to be used for this transaction.
@@ -178,7 +178,7 @@ namespace XRPL.Core.Domain.Transactions
     /// or currencies with the same currency code and different issuers.
     /// <para/>Only applicable to API v1.
     /// </summary>
-    public sealed class FungibleTokenCrossCurrencyV1Payment : V1Payment<FungibleToken, FungibleToken>
+    public sealed class FungibleTokenCrossCurrencyV1Payment : V1Payment<TokenAmount, TokenAmount>
     {
         /// <summary>
         /// (Optional, auto-fillable) Array of payment paths to be used for this transaction.
@@ -193,7 +193,7 @@ namespace XRPL.Core.Domain.Transactions
     /// <para/>Payments are also the only way to create accounts.
     /// <para/>Only applicable to API v1.
     /// </summary>
-    public sealed class XrpFungibleTokenV1PartialPayment : V1Payment<string, FungibleToken>
+    public sealed class XrpFungibleTokenV1PartialPayment : V1Payment<string, TokenAmount>
     {
         /// <summary>
         /// (Optional, auto-fillable) Array of payment paths to be used for this transaction.
@@ -216,7 +216,7 @@ namespace XRPL.Core.Domain.Transactions
     /// <para/>Payments are also the only way to create accounts.
     /// <para/>Only applicable to API v1.
     /// </summary>
-    public sealed class FungibleTokenXrpV1PartialPayment : V1Payment<FungibleToken, string>
+    public sealed class FungibleTokenXrpV1PartialPayment : V1Payment<TokenAmount, string>
     {
         /// <summary>
         /// (Optional, auto-fillable) Array of payment paths to be used for this transaction.
@@ -238,7 +238,7 @@ namespace XRPL.Core.Domain.Transactions
     /// if the transaction does not specify DeliverMin, it can succeed by delivering any positive amount.
     /// <para/>Only applicable to API v1.
     /// </summary>
-    public sealed class FungibleTokenV1PartialPayment : V1Payment<FungibleToken, FungibleToken>
+    public sealed class FungibleTokenV1PartialPayment : V1Payment<TokenAmount, TokenAmount>
     {
         /// <summary>
         /// (Optional, auto-fillable) Array of payment paths to be used for this transaction.
@@ -261,7 +261,7 @@ namespace XRPL.Core.Domain.Transactions
     /// <para/>Payments are also the only way to create accounts.
     /// <para/>Only applicable to API v1.
     /// </summary>
-    public sealed class XrpFungibleTokenV1CurrencyConversion : V1Payment<string, FungibleToken>
+    public sealed class XrpFungibleTokenV1CurrencyConversion : V1Payment<string, TokenAmount>
     {
         /// <summary>
         /// (Auto-fillable) Array of payment paths to be used for this transaction.
@@ -276,7 +276,7 @@ namespace XRPL.Core.Domain.Transactions
     /// <para/>Payments are also the only way to create accounts.
     /// <para/>Only applicable to API v1.
     /// </summary>
-    public sealed class FungibleTokenXrpV1CurrencyConversion : V1Payment<FungibleToken, string>
+    public sealed class FungibleTokenXrpV1CurrencyConversion : V1Payment<TokenAmount, string>
     {
         /// <summary>
         /// (Auto-fillable) Array of payment paths to be used for this transaction.
@@ -291,7 +291,7 @@ namespace XRPL.Core.Domain.Transactions
     /// <para/>Payments are also the only way to create accounts.
     /// <para/>Only applicable to API v1.
     /// </summary>
-    public sealed class FungibleTokenV1CurrencyConversion : V1Payment<FungibleToken, FungibleToken>
+    public sealed class FungibleTokenV1CurrencyConversion : V1Payment<TokenAmount, TokenAmount>
     {
         /// <summary>
         /// (Auto-fillable) Array of payment paths to be used for this transaction.
@@ -320,7 +320,7 @@ namespace XRPL.Core.Domain.Transactions
     /// <para/>Payments are also the only way to create accounts.
     /// <para/>Only applicable to API v2.
     /// </summary>
-    public sealed class CreateOrRedeemTokensV2Payment : V2Payment<FungibleToken, FungibleToken>
+    public sealed class CreateOrRedeemTokensV2Payment : V2Payment<TokenAmount, TokenAmount>
     {
         /// <summary>
         /// (Optional, auto-fillable) Array of payment paths to be used for this transaction.
@@ -336,7 +336,7 @@ namespace XRPL.Core.Domain.Transactions
     /// or currencies with the same currency code and different issuers.
     /// <para/>Only applicable to API v2.
     /// </summary>
-    public sealed class XrpFungibleTokenCrossCurrencyV2Payment : V2Payment<string, FungibleToken>
+    public sealed class XrpFungibleTokenCrossCurrencyV2Payment : V2Payment<string, TokenAmount>
     {
         /// <summary>
         /// (Optional, auto-fillable) Array of payment paths to be used for this transaction.
@@ -352,7 +352,7 @@ namespace XRPL.Core.Domain.Transactions
     /// or currencies with the same currency code and different issuers.
     /// <para/>Only applicable to API v2.
     /// </summary>
-    public sealed class FungibleTokenXrpCrossCurrencyV2Payment : V2Payment<FungibleToken, string>
+    public sealed class FungibleTokenXrpCrossCurrencyV2Payment : V2Payment<TokenAmount, string>
     {
         /// <summary>
         /// (Optional, auto-fillable) Array of payment paths to be used for this transaction.
@@ -368,7 +368,7 @@ namespace XRPL.Core.Domain.Transactions
     /// or currencies with the same currency code and different issuers.
     /// <para/>Only applicable to API v2.
     /// </summary>
-    public sealed class FungibleTokenCrossCurrencyV2Payment : V2Payment<FungibleToken, FungibleToken>
+    public sealed class FungibleTokenCrossCurrencyV2Payment : V2Payment<TokenAmount, TokenAmount>
     {
         /// <summary>
         /// (Optional, auto-fillable) Array of payment paths to be used for this transaction.
@@ -383,7 +383,7 @@ namespace XRPL.Core.Domain.Transactions
     /// <para/>Payments are also the only way to create accounts.
     /// <para/>Only applicable to API v2.
     /// </summary>
-    public sealed class XrpFungibleTokenV2PartialPayment : V2Payment<string, FungibleToken>
+    public sealed class XrpFungibleTokenV2PartialPayment : V2Payment<string, TokenAmount>
     {
         /// <summary>
         /// (Optional, auto-fillable) Array of payment paths to be used for this transaction.
@@ -406,7 +406,7 @@ namespace XRPL.Core.Domain.Transactions
     /// <para/>Payments are also the only way to create accounts.
     /// <para/>Only applicable to API v2.
     /// </summary>
-    public sealed class FungibleTokenXrpV2PartialPayment : V2Payment<FungibleToken, string>
+    public sealed class FungibleTokenXrpV2PartialPayment : V2Payment<TokenAmount, string>
     {
         /// <summary>
         /// (Optional, auto-fillable) Array of payment paths to be used for this transaction.
@@ -428,7 +428,7 @@ namespace XRPL.Core.Domain.Transactions
     /// if the transaction does not specify DeliverMin, it can succeed by delivering any positive amount.
     /// <para/>Only applicable to API v2.
     /// </summary>
-    public sealed class FungibleTokenV2PartialPayment : V2Payment<FungibleToken, FungibleToken>
+    public sealed class FungibleTokenV2PartialPayment : V2Payment<TokenAmount, TokenAmount>
     {
         /// <summary>
         /// (Optional, auto-fillable) Array of payment paths to be used for this transaction.
@@ -451,7 +451,7 @@ namespace XRPL.Core.Domain.Transactions
     /// <para/>Payments are also the only way to create accounts.
     /// <para/>Only applicable to API v2.
     /// </summary>
-    public sealed class XrpFungibleTokenV2CurrencyConversion : V2Payment<string, FungibleToken>
+    public sealed class XrpFungibleTokenV2CurrencyConversion : V2Payment<string, TokenAmount>
     {
         /// <summary>
         /// (Auto-fillable) Array of payment paths to be used for this transaction.
@@ -466,7 +466,7 @@ namespace XRPL.Core.Domain.Transactions
     /// <para/>Payments are also the only way to create accounts.
     /// <para/>Only applicable to API v2.
     /// </summary>
-    public sealed class FungibleTokenXrpV2CurrencyConversion : V2Payment<FungibleToken, string>
+    public sealed class FungibleTokenXrpV2CurrencyConversion : V2Payment<TokenAmount, string>
     {
         /// <summary>
         /// (Auto-fillable) Array of payment paths to be used for this transaction.
@@ -481,7 +481,7 @@ namespace XRPL.Core.Domain.Transactions
     /// <para/>Payments are also the only way to create accounts.
     /// <para/>Only applicable to API v2.
     /// </summary>
-    public sealed class FungibleTokenV2CurrencyConversion : V2Payment<FungibleToken, FungibleToken>
+    public sealed class FungibleTokenV2CurrencyConversion : V2Payment<TokenAmount, TokenAmount>
     {
         /// <summary>
         /// (Auto-fillable) Array of payment paths to be used for this transaction.
