@@ -1,5 +1,4 @@
 ﻿using System.Runtime.Serialization;
-using XRPL.Core.Domain.Entries;
 using XRPL.Core.Domain.Models;
 
 namespace XRPL.Core.Domain.Responses

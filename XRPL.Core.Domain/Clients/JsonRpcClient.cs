@@ -116,6 +116,18 @@ namespace XRPL.Core.Domain.Clients
         public Task<GatewayBalancesResponse> PostAsync(GatewayBalancesRequest request, CancellationToken cancellation)
             => PostAsync<GatewayBalancesRequest, GatewayBalancesResponse>(request, cancellation);
 
+        public NftBuyOffersResponse Post(NftBuyOffersRequest request, CancellationToken cancellation)
+            => Post<NftBuyOffersRequest, NftBuyOffersResponse>(request, cancellation);
+
+        public Task<NftBuyOffersResponse> PostAsync(NftBuyOffersRequest request, CancellationToken cancellation)
+            => PostAsync<NftBuyOffersRequest, NftBuyOffersResponse>(request, cancellation);
+
+        public NftSellOffersResponse Post(NftSellOffersRequest request, CancellationToken cancellation)
+            => Post<NftSellOffersRequest, NftSellOffersResponse>(request, cancellation);
+
+        public Task<NftSellOffersResponse> PostAsync(NftSellOffersRequest request, CancellationToken cancellation)
+            => PostAsync<NftSellOffersRequest, NftSellOffersResponse>(request, cancellation);
+
         public NoRippleCheckResponse Post(NoRippleCheckRequest request, CancellationToken cancellation)
             => Post<NoRippleCheckRequest, NoRippleCheckResponse>(request, cancellation);
 
