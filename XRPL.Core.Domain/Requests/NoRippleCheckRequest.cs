@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 using XRPL.Core.Domain.Interfaces;
 using XRPL.Core.Domain.Responses;
 
@@ -28,7 +29,7 @@ namespace XRPL.Core.Domain.Requests
         /// <summary>
         /// A unique identifier for the account, most commonly the account's address.
         /// </summary>
-        [DataMember(Name = "account")]
+        [JsonPropertyName("account")]
         public string? Account { get; set; }
 
         /// <summary>
@@ -36,31 +37,31 @@ namespace XRPL.Core.Domain.Requests
         /// <para/>Issuers must have Default Ripple enabled and must disable No Ripple on all trust lines.
         /// Users should have Default Ripple disabled, and should enable No Ripple on all trust lines.
         /// </summary>
-        [DataMember(Name = "role")]
+        [JsonPropertyName("role")]
         public string? Role { get; set; }
 
         /// <summary>
         /// If true, include an array of suggested transactions, as JSON objects, that you can sign and submit to fix the problems. The default is false.
         /// </summary>
-        [DataMember(Name = "transactions")]
+        [JsonPropertyName("transactions")]
         public bool Transactions { get; set; }
 
         /// <summary>
         /// (Optional) The maximum number of trust line problems to include in the results. Defaults to 300.
         /// </summary>
-        [DataMember(Name = "limit")]
+        [JsonPropertyName("limit")]
         public uint Limit { get; set; } = 300;
 
         /// <summary>
         /// (Optional) A 20-byte hex string for the ledger version to use.
         /// </summary>
-        [DataMember(Name = "ledger_hash")]
+        [JsonPropertyName("ledger_hash")]
         public string? LedgerHash { get; set; }
 
         /// <summary>
         /// (Optional) The ledger index of the ledger version to use, or a shortcut string to choose a ledger automatically.
         /// </summary>
-        [DataMember(Name = "ledger_index")]
+        [JsonPropertyName("ledger_index")]
         public int? LedgerIndex { get; set; }
     }
 }

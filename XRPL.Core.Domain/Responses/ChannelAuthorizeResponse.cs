@@ -20,7 +20,7 @@ namespace XRPL.Core.Domain.Responses
         /// The signature for this claim, as a hexadecimal value. 
         /// <para/>To process the claim, the destination account of the payment channel must send a PaymentChannelClaim transaction with this signature, the exact Channel ID, XRP amount, and public key of the channel.
         /// </summary>
-        [DataMember(Name = "signature")]
+        [JsonPropertyName("signature")]
         public string? Signature { get; set; }
     }
 

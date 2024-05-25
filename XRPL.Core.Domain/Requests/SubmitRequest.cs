@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 using XRPL.Core.Domain.Interfaces;
 using XRPL.Core.Domain.Responses;
 
@@ -27,13 +28,13 @@ namespace XRPL.Core.Domain.Requests
         /// <summary>
         /// Hex representation of the signed transaction to submit. This can be a multi-signed transaction.
         /// </summary>
-        [DataMember(Name = "tx_blob")]
+        [JsonPropertyName("tx_blob")]
         public string? TxBlob { get; set; }
 
         /// <summary>
         /// If true, and the transaction fails locally, do not retry or relay the transaction to other servers. The default is false.
         /// </summary>
-        [DataMember(Name = "fail_hard")]
+        [JsonPropertyName("fail_hard")]
         public bool FailHard { get; set; }
     }
 
@@ -61,7 +62,7 @@ namespace XRPL.Core.Domain.Requests
         /// <summary>
         /// Transaction definition in JSON format, optionally omitting any auto-fillable fields.
         /// </summary>
-        [DataMember(Name = "tx_json")]
+        [JsonPropertyName("tx_json")]
         public Transaction? TxJson { get; set; }
 
         /// <summary>
@@ -69,7 +70,7 @@ namespace XRPL.Core.Domain.Requests
         /// <para/>Do not send your secret to untrusted servers or through unsecured network connections.
         /// Cannot be used with key_type, seed, seed_hex, or passphrase.
         /// </summary>
-        [DataMember(Name = "secret")]
+        [JsonPropertyName("secret")]
         public string? Secret { get; set; }
 
         /// <summary>
@@ -77,7 +78,7 @@ namespace XRPL.Core.Domain.Requests
         /// Must be in the XRP Ledger's base58 format. If provided, you must also specify the key_type.
         /// Cannot be used with secret, seed_hex, or passphrase.
         /// </summary>
-        [DataMember(Name = "seed")]
+        [JsonPropertyName("seed")]
         public string? Seed { get; set; }
 
         /// <summary>
@@ -85,14 +86,14 @@ namespace XRPL.Core.Domain.Requests
         /// Must be in hexadecimal format. If provided, you must also specify the key_type.
         /// Cannot be used with secret, seed, or passphrase.
         /// </summary>
-        [DataMember(Name = "seed_hex")]
+        [JsonPropertyName("seed_hex")]
         public string? SeedHex { get; set; }
 
         /// <summary>
         /// (Optional) Secret key of the account supplying the transaction, used to sign it, as a string passphrase.
         /// <para/>If provided, you must also specify the key_type. Cannot be used with secret, seed, or seed_hex.
         /// </summary>
-        [DataMember(Name = "passphrase")]
+        [JsonPropertyName("passphrase")]
         public string? Passphrase { get; set; }
 
         /// <summary>
@@ -101,21 +102,21 @@ namespace XRPL.Core.Domain.Requests
         /// Defaults to secp256k1.
         /// Cannot be used with secret. Caution: Ed25519 support is experimental.
         /// </summary>
-        [DataMember(Name = "key_type")]
+        [JsonPropertyName("key_type")]
         public KeyType? KeyType { get; set; }
 
         /// <summary>
         /// (Optional) If true, and the transaction fails locally, do not retry or relay the transaction to other servers.
         /// <para/>The default is false.
         /// </summary>
-        [DataMember(Name = "fail_hard")]
+        [JsonPropertyName("fail_hard")]
         public bool? FailHard { get; set; }
 
         /// <summary>
         /// (Optional) If true, when constructing the transaction, do not try to automatically fill in or validate values.
         /// <para/>The default is false.
         /// </summary>
-        [DataMember(Name = "offline")]
+        [JsonPropertyName("offline")]
         public bool? Offline { get; set; }
 
         /// <summary>
@@ -123,21 +124,21 @@ namespace XRPL.Core.Domain.Requests
         /// <para/>You must omit this field if the transaction is a direct XRP payment or if it is not a Payment-type transaction.
         /// Caution: The server looks for the presence or absence of this field, not its value. This behavior may change.
         /// </summary>
-        [DataMember(Name = "build_path")]
+        [JsonPropertyName("build_path")]
         public bool? BuildPath { get; set; }
 
         /// <summary>
         /// (Optional) Sign-and-submit fails with the error rpcHIGH_FEE if the auto-filled Fee value would be greater than the reference transaction cost × fee_mult_max ÷ fee_div_max.
         /// This field has no effect if you explicitly specify the Fee field of the transaction. The default is 10.
         /// </summary>
-        [DataMember(Name = "fee_mult_max")]
+        [JsonPropertyName("fee_mult_max")]
         public int? FeeMultMax { get; set; }
 
         /// <summary>
         /// (Optional) Sign-and-submit fails with the error rpcHIGH_FEE if the auto-filled Fee value would be greater than the reference transaction cost × fee_mult_max ÷ fee_div_max.
         /// <para/>This field has no effect if you explicitly specify the Fee field of the transaction. The default is 1.
         /// </summary>
-        [DataMember(Name = "fee_div_max")]
+        [JsonPropertyName("fee_div_max")]
         public int? FeeDivMax { get; set; }
     }
 

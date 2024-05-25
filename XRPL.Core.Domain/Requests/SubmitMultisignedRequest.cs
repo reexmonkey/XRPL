@@ -28,13 +28,13 @@ namespace XRPL.Core.Domain.Requests
         /// <summary>
         /// Transaction in JSON format with an array of Signers. To be successful, the weights of the signatures must be equal or higher than the quorum of the SignerList.
         /// </summary>
-        [DataMember(Name = "tx_json")]
+        [JsonPropertyName("tx_json")]
         public Transaction? TxJson { get; set; }
 
         /// <summary>
         /// If true, and the transaction fails locally, do not retry or relay the transaction to other servers. The default is false.
         /// </summary>
-        [DataMember(Name = "fail_hard")]
+        [JsonPropertyName("fail_hard")]
         public bool FailHard { get; set; }
     }
 }

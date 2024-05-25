@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 using XRPL.Core.Domain.Interfaces;
 using XRPL.Core.Domain.Responses;
 
@@ -8,7 +9,7 @@ namespace XRPL.Core.Domain.Requests
     /// Represents a request to return a list of NFToken objects for the specified account.
     /// </summary>
     [DataContract]
-    public class AccountNFTsRequest : RequestBase<AccountNftsParameters>, IExpect<AccountNFTsResponse>
+    public class AccountNFTsRequest : RequestBase<AccountNFTsParameters>, IExpect<AccountNFTsResponse>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AccountNFTsRequest"/> class.
@@ -22,25 +23,25 @@ namespace XRPL.Core.Domain.Requests
     /// Represents the parameters of an <see cref="AccountNFTsRequest"/> object.
     /// </summary>
     [DataContract]
-    public class AccountNftsParameters : ParameterBase
+    public class AccountNFTsParameters : ParameterBase
     {
         /// <summary>
         /// The unique identifier of an account, typically the account's Address.
         /// <para/>The request returns a list of NFTs owned by this account.
         /// </summary>
-        [DataMember(Name = "account")]
+        [JsonPropertyName("account")]
         public string? Account { get; set; }
 
         /// <summary>
         /// (Optional) A 20-byte hex string for the ledger version to use
         /// </summary>
-        [DataMember(Name = "ledger_hash")]
+        [JsonPropertyName("ledger_hash")]
         public string? LedgerHash { get; set; }
 
         /// <summary>
         /// (Optional) The ledger index of the ledger to use, or a shortcut string to choose a ledger automatically.
         /// </summary>
-        [DataMember(Name = "ledger_index")]
+        [JsonPropertyName("ledger_index")]
         public string? LedgerIndex { get; set; }
 
         /// <summary>
@@ -49,13 +50,13 @@ namespace XRPL.Core.Domain.Requests
         /// Positive values outside this range are replaced with the closest valid option.
         /// The default is 100.
         /// </summary>
-        [DataMember(Name = "limit")]
+        [JsonPropertyName("limit")]
         public uint Limit { get; set; }
 
         /// <summary>
         /// Value from a previous paginated response. Resume retrieving data where that response left off.
         /// </summary>
-        [DataMember(Name = "marker")]
+        [JsonPropertyName("marker")]
         public object? Marker { get; set; }
     }
 }

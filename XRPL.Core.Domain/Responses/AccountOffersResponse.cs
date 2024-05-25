@@ -21,39 +21,39 @@ namespace XRPL.Core.Domain.Responses
         /// <summary>
         /// Unique Address identifying the account that made the offers
         /// </summary>
-        [DataMember(Name = "account")]
+        [JsonPropertyName("account")]
         public string? Account { get; set; }
 
         /// <summary>
         /// Array of objects, where each object represents an offer made by this account that is outstanding as of the requested ledger version.
         /// If the number of offers is large, only returns up to limit at a time.
         /// </summary>
-        [DataMember(Name = "offers")]
+        [JsonPropertyName("offers")]
         public AccountOfferBase[]? Offers { get; set; }
 
         /// <summary>
         /// (May be omitted) The identifying hash of the ledger version that was used when retrieving this data.
         /// </summary>
-        [DataMember(Name = "ledger_hash")]
+        [JsonPropertyName("ledger_hash")]
         public string? LedgerHash { get; set; }
 
         /// <summary>
         /// (Omitted if ledger_current_index provided instead) The ledger index of the ledger version that was used when retrieving this data, as requested.
         /// </summary>
-        [DataMember(Name = "ledger_index")]
+        [JsonPropertyName("ledger_index")]
         public int? LedgerIndex { get; set; }
 
         /// <summary>
         /// (Omitted if ledger_hash or ledger_index provided) The ledger index of the current in-progress ledger version, which was used when retrieving this data.
         /// </summary>
-        [DataMember(Name = "ledger_current_index")]
+        [JsonPropertyName("ledger_current_index")]
         public int? LedgerCurrentIndex { get; set; }
 
         /// <summary>
         /// Server-defined value for pagination. Pass this to the next call to resume getting results where this call left off.
         /// Omitted when there are no additional pages after this one.
         /// </summary>
-        [DataMember(Name = "marker")]
+        [JsonPropertyName("marker")]
         public object? Marker { get; set; }
     }
 
@@ -66,13 +66,13 @@ namespace XRPL.Core.Domain.Responses
         /// <summary>
         /// Options set for this offer entry as bit-flags.
         /// </summary>
-        [DataMember(Name = "flags")]
+        [JsonPropertyName("flags")]
         public uint Flags { get; set; }
 
         /// <summary>
         /// Sequence number of the transaction that created this entry. (Transaction sequence numbers are relative to accounts.)
         /// </summary>
-        [DataMember(Name = "seq")]
+        [JsonPropertyName("seq")]
         public uint Seq { get; set; }
 
         /// <summary>
@@ -80,13 +80,13 @@ namespace XRPL.Core.Domain.Responses
         /// When executing offers, the offer with the most favorable (lowest) quality is consumed first;
         /// offers with the same quality are executed from oldest to newest.
         /// </summary>
-        [DataMember(Name = "quality")]
+        [JsonPropertyName("quality")]
         public string? Quality { get; set; }
 
         /// <summary>
         /// (May be omitted) A time after which this offer is considered unfunded, as the number of seconds since the Ripple Epoch.
         /// </summary>
-        [DataMember(Name = "expiration")]
+        [JsonPropertyName("expiration")]
         public uint? Expiration { get; set; }
     }
 
@@ -103,13 +103,13 @@ namespace XRPL.Core.Domain.Responses
         /// <summary>
         /// The amount the account accepting the offer receives, as a <see cref="string"/> representing an amount in XRP, or a token specification object (<see cref="TokenAmount"/>).
         /// </summary>
-        [DataMember(Name = "taker_gets")]
+        [JsonPropertyName("taker_gets")]
         public TGets? TakerGets { get; set; }
 
         /// <summary>
         /// The amount the account accepting the offer provides, as a <see cref="string"/> representing an amount in XRP, or a token specification object (<see cref="TokenAmount"/>).
         /// </summary>
-        [DataMember(Name = "taker_pays")]
+        [JsonPropertyName("taker_pays")]
         public TPays? TakerPays { get; set; }
     }
 

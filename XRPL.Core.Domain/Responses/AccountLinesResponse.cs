@@ -20,41 +20,41 @@ namespace XRPL.Core.Domain.Responses
         /// Unique Address of the account this request corresponds to.
         /// <para/>This is the "perspective account" for purpose of the trust lines.
         /// </summary>
-        [DataMember(Name = "account")]
+        [JsonPropertyName("account")]
         public string? Account { get; set; }
 
         /// <summary>
         /// Array of trust line objects, as described below.
         /// <para/>If the number of trust lines is large, only returns up to the limit at a time.
         /// </summary>
-        [DataMember(Name = "lines")]
+        [JsonPropertyName("lines")]
         public TrustLine[]? Lines { get; set; }
 
         /// <summary>
         /// (Omitted if ledger_index is provided instead) The ledger index of the current in-progress ledger,
         /// which was used when retrieving this information.
         /// </summary>
-        [DataMember(Name = "ledger_current_index")]
+        [JsonPropertyName("ledger_current_index")]
         public int? LedgerCurrentIndex { get; set; }
 
         /// <summary>
         /// (Omitted if ledger_current_index is provided instead) The ledger index of the ledger version used when retrieving this information.
         /// <para/>The information does not contain any changes from ledger versions newer than this one.
         /// </summary>
-        [DataMember(Name = "ledger_index")]
+        [JsonPropertyName("ledger_index")]
         public int? LedgerIndex { get; set; }
 
         /// <summary>
         /// The identifying Hash of the ledger version used to generate this response.
         /// </summary>
-        [DataMember(Name = "ledger_hash")]
+        [JsonPropertyName("ledger_hash")]
         public string? LedgerHash { get; set; }
 
         /// <summary>
         /// Server-defined value for pagination. Pass this to the next call to resume getting results where this call left off.
         /// Omitted when there are no additional pages after this one.
         /// </summary>
-        [DataMember(Name = "marker")]
+        [JsonPropertyName("marker")]
         public object? Marker { get; set; }
     }
 
@@ -66,46 +66,46 @@ namespace XRPL.Core.Domain.Responses
         /// <summary>
         /// The unique Address of the counterparty to this trust line.
         /// </summary>
-        [DataMember(Name = "account")]
+        [JsonPropertyName("account")]
         public string? Account { get; set; }
 
         /// <summary>
         /// Representation of the numeric balance currently held against this line.
         /// <para/>A positive balance means that the perspective account holds value; a negative balance means that the perspective account owes value.
         /// </summary>
-        [DataMember(Name = "balance")]
+        [JsonPropertyName("balance")]
         public string? Balance { get; set; }
 
         /// <summary>
         /// A Token Code identifying what token this trust line can hold.
         /// </summary>
-        [DataMember(Name = "token")]
+        [JsonPropertyName("token")]
         public string? Token { get; set; }
 
         /// <summary>
         /// The maximum amount of the given token that this account is willing to owe the peer account
         /// </summary>
-        [DataMember(Name = "limit")]
+        [JsonPropertyName("limit")]
         public string? Limit { get; set; }
 
         /// <summary>
         /// The maximum amount of token that the counterparty account is willing to owe the perspective account
         /// </summary>
-        [DataMember(Name = "limit_peer")]
+        [JsonPropertyName("limit_peer")]
         public string? LimitPeer { get; set; }
 
         /// <summary>
         /// Rate at which the account values incoming balances on this trust line, as a ratio of this value per 1 billion units.
         /// <para/>(For example, a value of 500 million represents a 0.5:1 ratio.) As a special case, 0 is treated as a 1:1 ratio
         /// </summary>
-        [DataMember(Name = "quality_in")]
+        [JsonPropertyName("quality_in")]
         public uint QualityIn { get; set; }
 
         /// <summary>
         /// Rate at which the account values outgoing balances on this trust line, as a ratio of this value per 1 billion units.
         /// <para/>(For example, a value of 500 million represents a 0.5:1 ratio.) As a special case, 0 is treated as a 1:1 ratio.
         /// </summary>
-        [DataMember(Name = "quality_out")]
+        [JsonPropertyName("quality_out")]
         public uint? QualityOut { get; set; }
 
         /// <summary>
@@ -114,7 +114,7 @@ namespace XRPL.Core.Domain.Responses
         /// because the account also has the Default Ripple flag disabled, that is not considered the default state.
         /// If omitted, the account has the No Ripple flag disabled for this trust line and Default Ripple enabled.
         /// </summary>
-        [DataMember(Name = "no_ripple")]
+        [JsonPropertyName("no_ripple")]
         public bool? NoRipple { get; set; }
 
         /// <summary>
@@ -123,31 +123,31 @@ namespace XRPL.Core.Domain.Responses
         /// that is not considered the default state.
         /// If omitted, the account has the No Ripple flag disabled for this trust line and Default Ripple enabled.
         /// </summary>
-        [DataMember(Name = "no_ripple_peer")]
+        [JsonPropertyName("no_ripple_peer")]
         public bool? NoRipplePeer { get; set; }
 
         /// <summary>
         /// (May be omitted) If true, this account has authorized this trust line. The default is false.
         /// </summary>
-        [DataMember(Name = "authorized")]
+        [JsonPropertyName("authorized")]
         public bool Authorized { get; set; }
 
         /// <summary>
         /// (May be omitted) If true, the peer account has authorized this trust line. The default is false.
         /// </summary>
-        [DataMember(Name = "peer_authorized")]
+        [JsonPropertyName("peer_authorized")]
         public bool? PeerAuthorized { get; set; }
 
         /// <summary>
         /// (May be omitted) If true, this account has frozen this trust line. The default is false.
         /// </summary>
-        [DataMember(Name = "freeze")]
+        [JsonPropertyName("freeze")]
         public bool? Freeze { get; set; }
 
         /// <summary>
         /// (May be omitted) If true, the peer account has frozen this trust line. The default is false.
         /// </summary>
-        [DataMember(Name = "freeze_peer")]
+        [JsonPropertyName("freeze_peer")]
         public bool? FreezePeer { get; set; }
     }
 }

@@ -29,21 +29,21 @@ namespace XRPL.Core.Domain.Responses
         /// If true, return transaction data and metadata as binary serialized to hexadecimal strings. If false, return transaction data and metadata as JSON.
         /// <para/>The default is false.
         /// </summary>
-        [DataMember(Name = "binary")]
+        [JsonPropertyName("binary")]
         public bool Binary { get; set; }
 
         /// <summary>
         /// Use this with max_ledger to specify a range of up to 1000 ledger indexes, starting with this ledger (inclusive).
         /// <para/>If the server cannot find the transaction, it confirms whether it was able to search all the ledgers in this range.
         /// </summary>
-        [DataMember(Name = "min_ledger")]
+        [JsonPropertyName("min_ledger")]
         public string? LedgerHash { get; set; }
 
         /// <summary>
         /// Use this with min_ledger to specify a range of up to 1000 ledger indexes, ending with this ledger (inclusive).
         /// <para/>If the server cannot find the transaction, it confirms whether it was able to search all the ledgers in the requested range.
         /// </summary>
-        [DataMember(Name = "max_ledger")]
+        [JsonPropertyName("max_ledger")]
         public TransactionMetadata? MaxLedger { get; set; }
     }
 
@@ -55,7 +55,7 @@ namespace XRPL.Core.Domain.Responses
         /// <summary>
         /// The 256-bit hash of the transaction to look up, as hexadecimal.
         /// </summary>
-        [DataMember(Name = "transaction")]
+        [JsonPropertyName("transaction")]
         public string? Transaction { get; set; }
     }
 
@@ -69,7 +69,7 @@ namespace XRPL.Core.Domain.Responses
         /// The compact transaction identifier of the transaction to look up.
         /// <para/>Must use uppercase hexadecimal only.
         /// </summary>
-        [DataMember(Name = "ctid")]
+        [JsonPropertyName("ctid")]
         public string? Ctid { get; set; }
     }
 }

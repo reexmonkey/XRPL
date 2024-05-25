@@ -11,7 +11,7 @@ namespace XRPL.Core.Domain.Requests
         /// <summary>
         /// The name of the API method.
         /// </summary>
-        [DataMember(Name = "method")]
+        [JsonPropertyName("method")]
         public string Method { get; }
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace XRPL.Core.Domain.Requests
         /// <summary>
         /// A one-item array containing a nested JSON object with the parameters to this method. You may omit this field if the method does not require any parameters.
         /// </summary>
-        [DataMember(Name = "params")]
+        [JsonPropertyName("params")]
         public TParameters[]? Parameters { get; set; }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace XRPL.Core.Domain.Requests
         /// <summary>
         /// The API version to use. If omitted, use version 1
         /// </summary>
-        [DataMember(Name = "api_version")]
+        [JsonPropertyName("api_version")]
         public uint? ApiVersion { get; set; }
 
         /// <summary>

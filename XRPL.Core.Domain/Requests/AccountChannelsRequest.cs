@@ -38,25 +38,25 @@ namespace XRPL.Core.Domain.Requests
         /// <summary>
         /// Look up channels where this account is the channel's owner/source
         /// </summary>
-        [DataMember(Name = "account")]
+        [JsonPropertyName("account")]
         public string? Account { get; set; }
 
         /// <summary>
         /// A second account; if provided, filter results to payment channels whose destination is this account.
         /// </summary>
-        [DataMember(Name = "destination_account")]
+        [JsonPropertyName("destination_account")]
         public string? DestinationAccount { get; set; }
 
         /// <summary>
         /// A 20-byte hex string for the ledger version to use.
         /// </summary>
-        [DataMember(Name = "ledger_hash")]
+        [JsonPropertyName("ledger_hash")]
         public string? LedgerHash { get; set; }
 
         /// <summary>
         /// The ledger index of the ledger to use, or a shortcut string to choose a ledger automatically.
         /// </summary>
-        [DataMember(Name = "ledger_index")]
+        [JsonPropertyName("ledger_index")]
         public string? LedgerIndex { get; set; }
 
         /// <summary>
@@ -64,13 +64,13 @@ namespace XRPL.Core.Domain.Requests
         /// <para/>Cannot be less than 10 or more than 400. Positive values outside this range are replaced with the closest valid option.
         /// The default is 200.
         /// </summary>
-        [DataMember(Name = "limit")]
+        [JsonPropertyName("limit")]
         public int Limit { get; set; }
 
         /// <summary>
         /// Value from a previous paginated response. Resume retrieving data where that response left off.
         /// </summary>
-        [DataMember(Name = "marker")]
+        [JsonPropertyName("marker")]
         public object? Marker { get; set; }
     }
 }

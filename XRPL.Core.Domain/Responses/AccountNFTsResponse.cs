@@ -20,38 +20,38 @@ namespace XRPL.Core.Domain.Responses
         /// <summary>
         /// The account that owns the list of NFTs.
         /// </summary>
-        [DataMember(Name = "account")]
+        [JsonPropertyName("account")]
         public string? Account { get; set; }
 
         /// <summary>
         /// A list of NFTs owned by the account, formatted as NFT Objects.
         /// </summary>
-        [DataMember(Name = "account_nfts")]
+        [JsonPropertyName("account_nfts")]
         public NFTObject[]? AccountNFTs { get; set; }
 
         /// <summary>
         /// (May be omitted) The identifying hash of the ledger that was used to generate this response.
         /// </summary>
-        [DataMember(Name = "ledger_hash")]
+        [JsonPropertyName("ledger_hash")]
         public string? LedgerHash { get; set; }
 
         /// <summary>
         /// (May be omitted) The ledger index of the ledger that was used to generate this response.
         /// </summary>
-        [DataMember(Name = "ledger_index")]
+        [JsonPropertyName("ledger_index")]
         public int? LedgerIndex { get; set; }
 
         /// <summary>
         /// (May be omitted) The ledger index of the current in-progress ledger version, which was used to generate this response.
         /// </summary>
-        [DataMember(Name = "ledger_current_index")]
+        [JsonPropertyName("ledger_current_index")]
         public int? LedgerCurrentIndex { get; set; }
 
         /// <summary>
         /// If included and set to true, the information in this response comes from a validated ledger version.
         /// <para/>Otherwise, the information is subject to change
         /// </summary>
-        [DataMember(Name = "validated")]
+        [JsonPropertyName("validated")]
         public bool Validated { get; set; }
     }
 
@@ -89,7 +89,7 @@ namespace XRPL.Core.Domain.Responses
         /// <summary>
         /// The token sequence number of this NFToken, which is unique for its issuer.
         /// </summary>
-        [DataMember(Name = "nft_serial")]
+        [JsonPropertyName("nft_serial")]
         public uint NFTSerial { get; set; }
     }
 }

@@ -37,19 +37,19 @@ namespace XRPL.Core.Domain.Requests
         /// <summary>
         /// Look up currencies this account can send or receive.
         /// </summary>
-        [DataMember(Name = "account")]
+        [JsonPropertyName("account")]
         public string? Account { get; set; }
 
         /// <summary>
         /// A 20-byte hex string for the ledger version to use.
         /// </summary>
-        [DataMember(Name = "ledger_hash")]
+        [JsonPropertyName("ledger_hash")]
         public string? LedgerHash { get; set; }
 
         /// <summary>
         /// The ledger index of the ledger to use, or a shortcut string to choose a ledger automatically.
         /// </summary>
-        [DataMember(Name = "ledger_index")]
+        [JsonPropertyName("ledger_index")]
         public string? LedgerIndex { get; set; }
     }
 }

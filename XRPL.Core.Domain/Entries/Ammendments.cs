@@ -1,4 +1,4 @@
-﻿using System.Runtime.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace XRPL.Core.Domain.Entries
 {
@@ -10,7 +10,7 @@ namespace XRPL.Core.Domain.Entries
         /// <summary>
         /// Array of 256-bit amendment IDs for all currently enabled amendments. If omitted, there are no enabled amendments.
         /// </summary>
-        [DataMember(Name = "Ammendments")]
+        [JsonPropertyName("Ammendments")]
         public string[]? AmendmentIDs { get; set; }
 
         /// <summary>

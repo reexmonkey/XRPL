@@ -1,5 +1,4 @@
-﻿
-using System.Runtime.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace XRPL.Core.Domain.Models
 {
@@ -11,7 +10,7 @@ namespace XRPL.Core.Domain.Models
         /// <summary>
         /// Arbitrary currency code for the asset.
         /// </summary>
-        [DataMember(Name = "currency")]
+        [JsonPropertyName("currency")]
         public required string Currency { get; set; }
     }
 
@@ -25,7 +24,7 @@ namespace XRPL.Core.Domain.Models
         /// Generally, the account that issues this token.
         /// <para/>In special cases, this can refer to the account that holds the token instead (for example, in a Clawback transaction).
         /// </summary>
-        [DataMember(Name = "issuer")]
+        [JsonPropertyName("issuer")]
         public required string Issuer { get; set; }
 
         /// <summary>
@@ -42,7 +41,7 @@ namespace XRPL.Core.Domain.Models
         /// <para/>In some cases, you need to define an asset (which could be XRP or a token) without a specific amount, such as when defining an order book in the decentralized exchange.
         /// To describe a token without an amount, specify it as a token object, but omit the value field.
         /// </summary>
-        [DataMember(Name = "value")]
+        [JsonPropertyName("value")]
         public string? Value { get; set; }
     }
 
@@ -62,7 +61,7 @@ namespace XRPL.Core.Domain.Models
         /// Generally, the account that issues this token.
         /// <para/>In special cases, this can refer to the account that holds the token instead (for example, in a Clawback transaction).
         /// </summary>
-        [DataMember(Name = "issuer")]
+        [JsonPropertyName("issuer")]
         public string? Issuer { get; set; }
     }
 

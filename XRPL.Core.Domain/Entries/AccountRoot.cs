@@ -1,10 +1,17 @@
-﻿namespace XRPL.Core.Domain.Entries
+﻿using System.Text.Json.Serialization;
+
+namespace XRPL.Core.Domain.Entries
 {
     /// <summary>
     /// Represents a ledger entry that describes a single account.
     /// </summary>
+    [JsonDerivedType(typeof(AccountRoot), typeDiscriminator: "base")]
+    [JsonDerivedType(typeof(AmmAccountRoot), typeDiscriminator: "amm")]
     public class AccountRoot : LedgerEntryBase
     {
+        /// <summary>
+        /// Options to change with an AccountSet transaction.
+        /// </summary>
         protected AccountRootFlags flags;
 
         /// <summary>
@@ -141,12 +148,13 @@
     /// <summary>
     /// Represents an account root to be used with an Automated Market Maker (AMM).
     /// </summary>
-    public sealed class SpecialAccountRoot : AccountRoot
+    [JsonDerivedType(typeof(AmmAccountRoot), typeDiscriminator: "amm")]
+    public sealed class AmmAccountRoot : AccountRoot
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="SpecialAccountRoot"/> class.
+        /// Initializes a new instance of the <see cref="AmmAccountRoot"/> class.
         /// </summary>
-        public SpecialAccountRoot()
+        public AmmAccountRoot()
         {
             flags = AccountRootFlags.lsfDisableMaster
                 | AccountRootFlags.lsfDepositAuth

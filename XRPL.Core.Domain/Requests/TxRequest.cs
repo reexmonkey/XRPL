@@ -41,19 +41,19 @@ namespace XRPL.Core.Domain.Requests
         /// <summary>
         /// (Optional) A 20-byte hex string for the ledger version to use. (See Specifying Ledgers)
         /// </summary>
-        [DataMember(Name = "ledger_hash")]
+        [JsonPropertyName("ledger_hash")]
         public string? LedgerHash { get; set; }
 
         /// <summary>
         /// (Optional) The ledger index of the ledger to use, or a shortcut string to choose a ledger automatically.
         /// </summary>
-        [DataMember(Name = "ledger_index")]
+        [JsonPropertyName("ledger_index")]
         public uint LedgerIndex { get; set; }
 
         /// <summary>
         /// Unique hash of the transaction you are looking up
         /// </summary>
-        [DataMember(Name = "tx_hash")]
+        [JsonPropertyName("tx_hash")]
         public uint TxHash { get; set; }
     }
 }

@@ -27,7 +27,7 @@ namespace XRPL.Core.Domain.Requests
         /// <summary>
         /// Number of transactions to skip over.
         /// </summary>
-        [DataMember(Name = "start")]
+        [JsonPropertyName("start")]
         public string? Start { get; set; }
     }
 }

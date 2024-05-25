@@ -51,19 +51,19 @@ namespace XRPL.Core.Domain.Transactions
         /// The currency to this trust line applies to, as a three-letter ISO 4217 Currency Code or a 160-bit hex value according to currency format.
         /// <para/>"XRP" is invalid.
         /// </summary>
-        [DataMember(Name = "currency")]
+        [JsonPropertyName("currency")]
         public required string Currency { get; set; }
 
         /// <summary>
         /// Quoted decimal representation of the limit to set on this trust line.
         /// </summary>
-        [DataMember(Name = "value")]
+        [JsonPropertyName("value")]
         public string? Value { get; set; }
 
         /// <summary>
         /// The address of the account to extend trust to.
         /// </summary>
-        [DataMember(Name = "issuer")]
+        [JsonPropertyName("issuer")]
         public string? Issuer { get; set; }
 
     }

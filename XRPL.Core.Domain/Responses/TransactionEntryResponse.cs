@@ -20,25 +20,25 @@ namespace XRPL.Core.Domain.Responses
         /// <summary>
         /// The ledger index of the ledger version the transaction was found in; this is the same as the one from the request.
         /// </summary>
-        [DataMember(Name = "ledger_index")]
+        [JsonPropertyName("ledger_index")]
         public uint LedgerIndex { get; set; }
 
         /// <summary>
         /// (May be omitted) The identifying hash of the ledger version the transaction was found in; this is the same as the one from the request.
         /// </summary>
-        [DataMember(Name = "ledger_hash")]
+        [JsonPropertyName("ledger_hash")]
         public string? LedgerHash { get; set; }
 
         /// <summary>
         /// The transaction metadata, which shows the exact results of the transaction in detail.
         /// </summary>
-        [DataMember(Name = "metadata")]
+        [JsonPropertyName("metadata")]
         public TransactionMetadata? Metadata { get; set; }
 
         /// <summary>
         /// JSON representation of the Transaction object
         /// </summary>
-        [DataMember(Name = "tx_json")]
+        [JsonPropertyName("tx_json")]
         public Transaction? TxJson { get; set; }
     }
 }

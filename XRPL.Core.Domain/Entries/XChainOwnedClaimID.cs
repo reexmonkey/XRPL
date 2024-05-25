@@ -1,17 +1,17 @@
-﻿using XRPL.Core.Domain.Models;
+﻿using System.Text.Json.Serialization;
+using XRPL.Core.Domain.Models;
 
 namespace XRPL.Core.Domain.Entries
 {
     /// <summary>
-    /// Specifies one cross-chain transfer of value and includes information of the account on the source chain
+    /// Represents one cross-chain transfer of value and includes information of the account on the source chain
     /// that locks or burns the funds on the source chain.
     /// <para/>The XChainOwnedClaimID object must be acquired on the destination chain before submitting a XChainCommit on the source chain.
     /// Its purpose is to prevent transaction replay attacks and is also used as a place to collect attestations from witness servers.
     /// <para/>An XChainCreateClaimID transaction is used to create a new XChainOwnedClaimID.
     /// The ledger object is destroyed when the funds are successfully claimed on the destination chain.
     /// </summary>
-    /// <typeparam name="TAmount">The type of amount and token to claim in the XChainCommit transaction.</typeparam>
-    public abstract class XChainOwnedClaimIDBase : LedgerEntryBase
+    public class XChainOwnedClaimID : LedgerEntryBase
     {
         /// <summary>
         /// The account that owns this object.
@@ -47,56 +47,38 @@ namespace XRPL.Core.Domain.Entries
         public required string XChainClaimID { get; set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="XChainOwnedClaimIDBase{TTokenAmount}"/> class.
-        /// </summary>
-        protected XChainOwnedClaimIDBase()
-        {
-            LedgerEntryType = "XChainOwnedClaimID";
-        }
-    }
-
-    /// <summary>
-    /// Specifies one cross-chain transfer of value and includes information of the account on the source chain
-    /// that locks or burns the funds on the source chain.
-    /// <para/>The XChainOwnedClaimID object must be acquired on the destination chain before submitting a XChainCommit on the source chain.
-    /// Its purpose is to prevent transaction replay attacks and is also used as a place to collect attestations from witness servers.
-    /// <para/>An XChainCreateClaimID transaction is used to create a new XChainOwnedClaimID.
-    /// The ledger object is destroyed when the funds are successfully claimed on the destination chain.
-    /// </summary>
-    /// <typeparam name="TAmount">The type of amount and token to claim in the XChainCommit transaction.</typeparam>
-    public abstract class XChainOwnedClaimIDBase<TAmount> : XChainOwnedClaimIDBase
-        where TAmount : class
-    {
-        /// <summary>
         /// Attestations collected from the witness servers. This includes the parameters needed to recreate the message that was signed, including the amount, which chain (locking or issuing), optional destination, and reward account for that signature
         /// </summary>
-        public required XChainClaimAttestation<TAmount>[] XChainClaimAttestations { get; set; }
+        public required XChainClaimAttestation[] XChainClaimAttestations { get; set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="XChainOwnedClaimIDBase{TTokenAmount}"/> class.
+        /// Initializes a new instance of the <see cref="XChainOwnedClaimID"/> class.
         /// </summary>
-        protected XChainOwnedClaimIDBase()
+        protected XChainOwnedClaimID()
         {
             LedgerEntryType = "XChainOwnedClaimID";
         }
     }
+
 
     /// <summary>
     /// Represents an attestation collected from a witness server.
     /// <para/>This includes the parameters needed to recreate the message that was signed, including the amount, which chain (locking or issuing), optional destination, and reward account for that signature.
     /// </summary>
-    /// <typeparam name="TAmount">The type of amount and token to claim in the XChainCommit transaction.</typeparam>
-    public class XChainClaimAttestation<TAmount> where TAmount : class
+    [JsonPolymorphic]
+    [JsonDerivedType(typeof(XrpXChainClaimAttestation), typeDiscriminator: "xrp")]
+    [JsonDerivedType(typeof(FungibleTokenXChainClaimAttestation), typeDiscriminator: "token")]
+    public abstract class XChainClaimAttestation
     {
         /// <summary>
         /// An attestation from one witness server.
         /// </summary>
-        public required XChainClaimAttestation<TAmount> XChainClaimProofSig { get; set; }
+        public required XChainClaimAttestation XChainClaimProofSig { get; set; }
 
         /// <summary>
         /// The amount to claim in the XChainCommit transaction on the destination chain.
         /// </summary>
-        public required TAmount Amount { get; set; }
+        public object Amount { get; set; } = null!;
 
         /// <summary>
         /// The account that should receive this signer's share of the <see cref="Bridge.SignatureReward"/>.
@@ -132,9 +114,13 @@ namespace XRPL.Core.Domain.Entries
     /// <para/>An XChainCreateClaimID transaction is used to create a new XChainOwnedClaimID.
     /// The ledger object is destroyed when the funds are successfully claimed on the destination chain.
     /// </summary>
-    public sealed class XrpXChainOwnedClaimID : XChainOwnedClaimIDBase<string>
+    [JsonDerivedType(typeof(XrpXChainClaimAttestation), typeDiscriminator: "xrp")]
+    public class XrpXChainClaimAttestation : XChainClaimAttestation
     {
-
+        /// <summary>
+        /// The amount in XRP drops to claim in the XChainCommit transaction on the destination chain.
+        /// </summary>
+        public new required string Amount { get => (string)base.Amount; set => base.Amount = value; }
     }
 
     /// <summary>
@@ -145,7 +131,12 @@ namespace XRPL.Core.Domain.Entries
     /// <para/>An XChainCreateClaimID transaction is used to create a new XChainOwnedClaimID.
     /// The ledger object is destroyed when the funds are successfully claimed on the destination chain.
     /// </summary>
-    public sealed class FungibleTokenXChainOwnedClaimID : XChainOwnedClaimIDBase<TokenAmount>
+    [JsonDerivedType(typeof(FungibleTokenXChainClaimAttestation), typeDiscriminator: "token")]
+    public class FungibleTokenXChainClaimAttestation : XChainClaimAttestation
     {
+        /// <summary>
+        /// The amount and type of currency to claim in the XChainCommit transaction on the destination chain.
+        /// </summary>
+        public new required TokenAmount Amount { get => (TokenAmount)base.Amount; set => base.Amount = value; }
     }
 }

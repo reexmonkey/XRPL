@@ -1,37 +1,37 @@
 ﻿using System.Runtime.Serialization;
-using XRPL.Core.Domain.Entries;
+using System.Text.Json.Serialization;
 
 namespace XRPL.Core.Domain.Responses
 {
     /// <summary>
     /// Represents a response to a nft buy offers request.
     /// </summary>
-    public class NftBuyOffersResponse : ResponseBase<NftBuyOffersResult>
+    public class NFTBuyOffersResponse : ResponseBase<NFTBuyOffersResult>
     {
     }
 
     /// <summary>
-    /// Represents a result of an <see cref="NftBuyOffersResponse"/> object.
+    /// Represents a result of an <see cref="NFTBuyOffersResponse"/> object.
     /// </summary>
     [DataContract]
-    public abstract class NftBuyOffersResult : ResultBase
+    public abstract class NFTBuyOffersResult : ResultBase
     {
         /// <summary>
         /// The NFToken these offers are for, as specified in the request.
         /// </summary>
-        [DataMember(Name = "nft_id")]
-        public required string NftId { get; set; }
+        [JsonPropertyName("nft_id")]
+        public required string NFTId { get; set; }
 
         /// <summary>
         /// A list of buy offers for the token. Each of these is formatted as a Buy Offer (see below).
         /// </summary>
-        [DataMember(Name = "offers")]
-        public required BuyOffers[] Offers { get; set; }
+        [JsonPropertyName("offers")]
+        public required BuyOffer[] Offers { get; set; }
 
         /// <summary>
         /// (May be omitted) The limit, as specified in the request.
         /// </summary>
-        [DataMember(Name = "limit")]
+        [JsonPropertyName("limit")]
         public uint? Limit { get; set; }
 
         /// <summary>
@@ -39,39 +39,39 @@ namespace XRPL.Core.Domain.Responses
         /// Pass this to the next call to resume where this call left off.
         /// Omitted when there are no pages of information after this one.
         /// </summary>
-        [DataMember(Name = "marker")]
+        [JsonPropertyName("marker")]
         public object? Marker { get; set; }
     }
 
     /// <summary>
     /// Additional fields that each member of the BuyOffers array has.
     /// </summary>
-    public class BuyOffers : Offer
+    public class BuyOffer
     {
         /// <summary>
         /// The amount offered to buy the NFT for, as a String representing an amount in drops of XRP,
         /// or an object representing an amount of a fungible token. (See Specifying Currency Amounts)
         /// </summary>
-        [DataMember(Name = "amount")]
+        [JsonPropertyName("amount")]
         public required string Amount { get; set; }
 
         /// <summary>
         /// A set of bit-flags for this offer. See NFTokenOffer flags for possible values.
         /// </summary>
-        [DataMember(Name = "flags")]
-        public override required  uint Flags { get; set; } /*to be reviewed*/
+        [JsonPropertyName("flags")]
+        public required uint Flags { get; set; }
 
         /// <summary>
         /// The ledger object ID of this offer.
         /// </summary>
-        [DataMember(Name = "nft_offer_index")]
-        public  required string NftOfferIndex { get; set; }
+        [JsonPropertyName("nft_offer_index")]
+        public required string NFTOfferIndex { get; set; }
 
         /// <summary>
         /// The account that placed this offer.
         /// </summary>
-        [DataMember(Name = "owner")]
-        public required string Ower {  get; set; }
+        [JsonPropertyName("owner")]
+        public required string Ower { get; set; }
 
     }
 }

@@ -19,13 +19,13 @@ namespace XRPL.Core.Domain.Responses
         /// <summary>
         /// The value of start used in the request.
         /// </summary>
-        [DataMember(Name = "index")]
+        [JsonPropertyName("index")]
         public uint Index { get; set; }
 
         /// <summary>
         /// Array of transaction objects.
         /// </summary>
-        [DataMember(Name = "txs")]
+        [JsonPropertyName("txs")]
         public string? Txs { get; set; }
     }
 }

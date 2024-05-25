@@ -18,8 +18,4 @@
     <IsTrimmable>True</IsTrimmable>
   </PropertyGroup>-->
 
-  <ItemGroup>
-    <PackageReference Include="ServiceStack.Text" Version="8.2.2" />
-  </ItemGroup>
-
 </Project>

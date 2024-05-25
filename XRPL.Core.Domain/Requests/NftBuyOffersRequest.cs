@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 using XRPL.Core.Domain.Interfaces;
 using XRPL.Core.Domain.Responses;
 
@@ -9,38 +10,38 @@ namespace XRPL.Core.Domain.Requests
     /// </summary>
     [DataContract]
 
-    public class NftBuyOffersRequest : RequestBase<NftBuyOffersParameters>, IExpect<NftBuyOffersResponse>
+    public class NFTBuyOffersRequest : RequestBase<NFTBuyOffersParameters>, IExpect<NFTBuyOffersResponse>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="NftBuyOffersRequest"/> class.
+        /// Initializes a new instance of the <see cref="NFTBuyOffersRequest"/> class.
         /// </summary>
-        public NftBuyOffersRequest() : base("nft_buy_offers")
-        { 
+        public NFTBuyOffersRequest() : base("nft_buy_offers")
+        {
         }
     }
 
     /// <summary>
-    /// Represents the parameters of an <see cref="NftBuyOffersRequest"/> object.
+    /// Represents the parameters of an <see cref="NFTBuyOffersRequest"/> object.
     /// </summary>
     [DataContract]
-    public class NftBuyOffersParameters : ParameterBase
+    public class NFTBuyOffersParameters : ParameterBase
     {
         /// <summary>
         /// The unique identifier of a NFToken object.
         /// </summary>
-        [DataMember(Name = "nft_id")]
-        public required string NftId { get; set; }
+        [JsonPropertyName("nft_id")]
+        public required string NFTId { get; set; }
 
         /// <summary>
         /// (Optional) A 20-byte hex string for the ledger version to use. (See Specifying Ledgers)
         /// </summary>
-        [DataMember(Name = "ledger_hash")]
+        [JsonPropertyName("ledger_hash")]
         public string? LedgerHash { get; set; }
 
         /// <summary>
         /// (Optional) The ledger index of the ledger to use, or a shortcut string to choose a ledger automatically.
         /// </summary>
-        [DataMember(Name = "ledger_index")]
+        [JsonPropertyName("ledger_index")]
         public uint? LedgerIndex { get; set; }
 
         /// <summary>
@@ -48,13 +49,13 @@ namespace XRPL.Core.Domain.Requests
         /// This value cannot be lower than 50 or more than 500.
         /// Positive values outside this range are replaced with the closest valid option. The default is 250.
         /// </summary>
-        [DataMember(Name = "limit")]
+        [JsonPropertyName("limit")]
         public uint? Limit { get; set; }
 
         /// <summary>
         /// (Optional) Value from a previous paginated response. Resume retrieving data where that response left off.
         /// </summary>
-        [DataMember(Name = "marker")]
+        [JsonPropertyName("marker")]
         public object? Marker { get; set; }
     }
 }

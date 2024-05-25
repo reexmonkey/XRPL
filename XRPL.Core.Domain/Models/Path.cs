@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 namespace XRPL.Core.Domain.Models
 {
@@ -19,7 +20,7 @@ namespace XRPL.Core.Domain.Models
         /// (Optional) If present, this path step represents rippling through the specified address. 
         /// <para/>MUST NOT be provided if this step specifies the currency or issuer fields.
         /// </summary>
-        [DataMember(Name = "account")]
+        [JsonPropertyName("account")]
         public string? Account { get; set; }
 
         /// <summary>
@@ -27,7 +28,7 @@ namespace XRPL.Core.Domain.Models
         /// <para/>The currency specified indicates the new currency. 
         /// MUST NOT be provided if this step specifies the account field.
         /// </summary>
-        [DataMember(Name = "currency")]
+        [JsonPropertyName("currency")]
         public string? Currency { get; set; }
 
         /// <summary>
@@ -37,7 +38,7 @@ namespace XRPL.Core.Domain.Models
         /// MUST be omitted if the currency is XRP. 
         /// MUST NOT be provided if this step specifies the account field.
         /// </summary>
-        [DataMember(Name = "issuer")]
+        [JsonPropertyName("issuer")]
         public string? Issuer { get; set; }
     }
 }

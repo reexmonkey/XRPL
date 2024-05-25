@@ -19,33 +19,33 @@ namespace XRPL.Core.Domain.Responses
         ///<summary>
         ///An AMM Description Object for the requested asset pair.
         ///</summary>
-        [DataMember(Name = "amm")]
+        [JsonPropertyName("amm")]
         public required AmmDescription Amm {  get; set; }
 
         ///<summary>
         ///The ledger index of the current in-progress ledger,
         ///which was used when retrieving this information.
         ///</summary>
-        [DataMember(Name = "ledger_current_index")]
+        [JsonPropertyName("ledger_current_index")]
         public uint? LedgerCurrentIndex { get; set; }
 
         ///<summary>
         ///The identifying hash of the ledger version that was used when retrieving this data.
         ///</summary>
-        [DataMember(Name = "ledger_hash")]
+        [JsonPropertyName("ledger_hash")]
         public string? LedgerHash { get; set; }
 
         ///<summary>
         ///The ledger index of the ledger version used when retrieving this information.
         ///</summary>
-        [DataMember(Name = "ledger_index")]
+        [JsonPropertyName("ledger_index")]
         public uint? LedgerIndex { get; set;}
 
         ///<summary>
         ///If true, the ledger used for this request is validated and these results are final;
         ///if omitted or set to false, the data is pending and may change.
         ///</summary>
-        [DataMember(Name = "validated")]
+        [JsonPropertyName("validated")]
         public required bool Validated { get; set; }
     }
 
@@ -59,38 +59,38 @@ namespace XRPL.Core.Domain.Responses
         ///<summary>
         ///The Address of the AMM Account.
         ///</summary>
-        [DataMember(Name = "account")]
+        [JsonPropertyName("account")]
         public required string Account {  get; set; }
 
         ///<summary>
         ///The total amount of one asset in the AMM's pool. (Note: This could be asset or asset2 from the request.)
         ///</summary>
-        [DataMember(Name = "amount")]
+        [JsonPropertyName("amount")]
         public required TokenAmount Amount { get; set; }
 
         ///<summary>
         ///The total amount of the other asset in the AMM's pool.
         ///(Note: This could be asset or asset2 from the request.)
         ///</summary>
-        [DataMember(Name = "amount2")]
+        [JsonPropertyName("amount2")]
         public required LPTokenAmount Amount2 { get; set; }
 
         ///<summary>
         ///(Omitted for XRP) If true, the amount currency is currently frozen.
         ///</summary>
-        [DataMember(Name = "asset_frozen")]
+        [JsonPropertyName("asset_frozen")]
         public bool ? AssetFrozen { get; set; }
 
         ///<summary>
         ///(Omitted for XRP) If true, the amount2 currency is currently frozen.
         ///</summary>
-        [DataMember(Name = "asset2_frozen")]
+        [JsonPropertyName("asset2_frozen")]
         public bool? Asset2Frozen { get; set; }
 
         ///<summary>
         ///(May be omitted) An Auction Slot Object describing the current auction slot holder, if there is one.
         ///</summary>
-        [DataMember(Name = "auction_slot")]
+        [JsonPropertyName("auction_slot")]
         public AuctionSlot? AuctionSlot { get; set; }
 
         ///<summary>
@@ -98,19 +98,19 @@ namespace XRPL.Core.Domain.Responses
         ///If the request specified a liquidity provider in the account field,
         ///instead, this is the amount of this AMM's LP Tokens held by that liquidity provider.
         ///</summary>
-        [DataMember(Name = "lp_token")]
+        [JsonPropertyName("lp_token")]
         public required LPTokenAmount LPToken { get; set; }
 
         ///<summary>
         ///The AMM's current trading fee, in units of 1/100,000; a value of 1 is equivalent to a 0.001% fee.
         ///</summary>
-        [DataMember(Name = "trading_fee")]
+        [JsonPropertyName("trading_fee")]
         public required uint TradingFee { get; set; }
 
         ///<summary>
         ///
         ///</summary>
-        [DataMember(Name = "vote_slots")]
+        [JsonPropertyName("vote_slots")]
         public VoteSlot[]? VoteSlots { get; set; }
     }
 
@@ -123,13 +123,13 @@ namespace XRPL.Core.Domain.Responses
         ///<summary>
         ///The Address of the account that owns the auction slot.
         ///</summary>
-        [DataMember(Name = "account")]
+        [JsonPropertyName("account")]
         public required string Account {  get; set; }
 
         ///<summary>
         ///
         ///</summary>
-        [DataMember(Name = "auth_accounts")]
+        [JsonPropertyName("auth_accounts")]
         public required AuthAccount[] AuthAccounts { get; set; }
 
 
@@ -138,7 +138,7 @@ namespace XRPL.Core.Domain.Responses
         ///and any eligible accounts, when trading against this AMM.
         ///This is 1/10 of the AMM's normal trading fee.
         ///</summary>
-        [DataMember(Name = "discounted_fee")]
+        [JsonPropertyName("discounted_fee")]
         public required uint DiscountedFee { get; set; }
 
         ///<summary>
@@ -146,14 +146,14 @@ namespace XRPL.Core.Domain.Responses
         ///After expired, the auction slot does not apply
         ///(but the data can remain in the ledger until another transaction replaces it or cleans it up).
         ///</summary>
-        [DataMember(Name = "expiration")]
+        [JsonPropertyName("expiration")]
         public required string Expiration {  get; set; }
 
         ///<summary>
         ///The amount, in LP Tokens, that the auction slot holder paid to win the auction slot.
         ///This affects the price to outbid the current slot holder.
         ///</summary>
-        [DataMember(Name = "price")]
+        [JsonPropertyName("price")]
         public required LPTokenAmount Price { get; set; }
 
         ///<summary>
@@ -162,7 +162,7 @@ namespace XRPL.Core.Domain.Responses
         ///affects the cost to outbid the current holder and how much the current holder
         ///is refunded if someone outbids them.
         ///</summary>
-        [DataMember(Name = "time_interval")]
+        [JsonPropertyName("time_interval")]
         public required uint TimeInterval { get; set; }
     }
 
@@ -176,13 +176,13 @@ namespace XRPL.Core.Domain.Responses
         ///<summary>
         ///The Address of this liquidity provider.
         ///</summary>
-        [DataMember(Name = "account")]
+        [JsonPropertyName("account")]
         public required string Account { get; set; }
 
         ///<summary>
         ///The trading fee this liquidity provider voted for, in units of 1/100,000.
         ///</summary>
-        [DataMember(Name = "trading_fee")]
+        [JsonPropertyName("trading_fee")]
         public required uint TradingFee { get; set; }
 
         ///<summary>
@@ -192,7 +192,7 @@ namespace XRPL.Core.Domain.Responses
         ///divided by the total number of LP Tokens outstanding. For example, a value of 1000 means that
         ///the liquidity provider holds 1% of this AMM's LP Tokens.
         ///</summary>
-        [DataMember(Name = "vote_weight")]
+        [JsonPropertyName("vote_weight")]
         public required uint VoteWeight { get; set;}
     }
 }

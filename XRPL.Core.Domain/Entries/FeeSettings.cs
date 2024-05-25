@@ -9,7 +9,7 @@
         /// <summary>
         /// The transaction cost of the "reference transaction" in drops of XRP as hexadecimal.
         /// </summary>
-        public required string BaseFee { get; set; }
+        public required string BaseFeeDrops { get; set; }
 
         /// <summary>
         /// A bit-map of boolean flags enabled for this object.
@@ -26,12 +26,12 @@
         /// <summary>
         /// The base reserve for an account in the XRP Ledger, as drops of XRP.
         /// </summary>
-        public required uint ReserveBase { get; set; }
+        public required string ReserveBaseDrops { get; set; }
 
         /// <summary>
         /// The incremental owner reserve for owning objects, as drops of XRP.
         /// </summary>
-        public required uint ReserveIncrement { get; set; }
+        public required string ReserveIncrementDrops { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FeeSettings"/> class.

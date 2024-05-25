@@ -28,26 +28,26 @@ namespace XRPL.Core.Domain.Requests
         /// <summary>
         /// The sender of a possible payment.
         /// </summary>
-        [DataMember(Name = "source_account")]
+        [JsonPropertyName("source_account")]
         public required string SourceAccount { get; set; }
 
         /// <summary>
         /// The recipient of a possible payment.
         /// </summary>
-        [DataMember(Name = "destination_acount")]
+        [JsonPropertyName("destination_acount")]
         public required string DestinationAccount { get; set; }
 
         /// <summary>
         /// (Optional) A 20-byte hex string for the ledger version to use. (See Specifying Ledgers)
         /// </summary>
-        [DataMember(Name = "ledger_hash")]
+        [JsonPropertyName("ledger_hash")]
         public string? LedgerHash { get; set; }
 
         /// <summary>
         /// (Optional) The ledger index of the ledger to use, or a shortcut string to choose a ledger automatically.
         /// (See Specifying Ledgers)
         /// </summary>
-        [DataMember(Name = "ledger_index")]
+        [JsonPropertyName("ledger_index")]
         public string? LedgerIndex { get; set; }
     }
 }

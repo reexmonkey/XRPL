@@ -27,31 +27,31 @@ namespace XRPL.Core.Domain.Requests
         /// <summary>
         /// The Address to check. This should be the issuing address
         /// </summary>
-        [DataMember(Name = "account")]
+        [JsonPropertyName("account")]
         public string? Account { get; set; }
 
         /// <summary>
         /// (Optional) If true, only accept an address or public key for the account parameter. Defaults to false.
         /// </summary>
-        [DataMember(Name = "strict")]
+        [JsonPropertyName("strict")]
         public bool Strict { get; set; }
 
         /// <summary>
         /// (Optional) An operational address to exclude from the balances issued, or an array of such addresses.
         /// </summary>
-        [DataMember(Name = "hotwallet")]
+        [JsonPropertyName("hotwallet")]
         public string[]? Hotwallet { get; set; }
 
         /// <summary>
         /// (Optional) A 20-byte hex string for the ledger version to use.
         /// </summary>
-        [DataMember(Name = "ledger_hash")]
+        [JsonPropertyName("ledger_hash")]
         public string? LedgerHash { get; set; }
 
         /// <summary>
         /// (Optional) The ledger index of the ledger version to use, or a shortcut string to choose a ledger automatically.
         /// </summary>
-        [DataMember(Name = "ledger_index")]
+        [JsonPropertyName("ledger_index")]
         public int? LedgerIndex { get; set; }
     }
 }

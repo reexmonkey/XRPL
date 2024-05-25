@@ -42,25 +42,25 @@ namespace XRPL.Core.Domain.Requests
         /// <summary>
         /// A unique identifier for the account, most commonly the account's Address.
         /// </summary>
-        [DataMember(Name = "account")]
+        [JsonPropertyName("account")]
         public string? Account { get; set; }
 
         /// <summary>
         /// If true, the response only includes objects that would block this account from being deleted. The default is false.
         /// </summary>
-        [DataMember(Name = "deletion_blockers_only")]
+        [JsonPropertyName("deletion_blockers_only")]
         public bool? DeletionBlockersOnly { get; set; }
 
         /// <summary>
         /// A 20-byte hex string for the ledger version to use. (See Specifying Ledgers)
         /// </summary>
-        [DataMember(Name = "ledger_hash")]
+        [JsonPropertyName("ledger_hash")]
         public string? LedgerHash { get; set; }
 
         /// <summary>
         /// The ledger index of the ledger to use, or a shortcut string to choose a ledger automatically.
         /// </summary>
-        [DataMember(Name = "ledger_index")]
+        [JsonPropertyName("ledger_index")]
         public string? LedgerIndex { get; set; }
 
         /// <summary>
@@ -68,21 +68,21 @@ namespace XRPL.Core.Domain.Requests
         /// <para/>Must be within the inclusive range 10 to 400 on non-admin connections.
         /// The default is 200.
         /// </summary>
-        [DataMember(Name = "limit")]
+        [JsonPropertyName("limit")]
         public uint? Limit { get; set; }
 
         /// <summary>
         /// Value from a previous paginated response.
         /// <para/>Resume retrieving data where that response left off.
         /// </summary>
-        [DataMember(Name = "marker")]
+        [JsonPropertyName("marker")]
         public object? Marker { get; set; }
 
         /// <summary>
         /// Filter results by a ledger entry type.
         /// <para/>The valid types are: check, deposit_preauth, escrow, nft_offer, nft_page, offer, payment_channel, signer_list, state (trust line), and ticket.
         /// </summary>
-        [DataMember(Name = "account")]
+        [JsonPropertyName("account")]
         public string? Type { get; set; }
     }
 }

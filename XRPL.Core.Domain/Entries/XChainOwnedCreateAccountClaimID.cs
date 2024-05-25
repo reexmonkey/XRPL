@@ -1,13 +1,14 @@
-﻿using XRPL.Core.Domain.Models;
+﻿using System.Text.Json.Serialization;
+using XRPL.Core.Domain.Models;
 
 namespace XRPL.Core.Domain.Entries
 {
     /// <summary>
-    /// Specifies a ledger entry that is used to collect attestations for creating an account via a cross-chain transfer.
+    /// Represents a ledger entry that is used to collect attestations for creating an account via a cross-chain transfer.
     /// <para/> It is created when an XChainAddAccountCreateAttestation transaction adds a signature attesting to a XChainAccountCreateCommit transaction and the XChainAccountCreateCount is greater than or equal to the current XChainAccountClaimCount on the Bridge ledger object.
     /// <para/>The ledger object is destroyed when all the attestations have been received and the funds have transferred to the new account.
     /// </summary>
-    public abstract class XChainOwnedCreateAccountClaimIDBase : LedgerEntryBase
+    public class XChainOwnedCreateAccountClaimID : LedgerEntryBase
     {
         /// <summary>
         /// The account that owns this object.
@@ -24,7 +25,7 @@ namespace XRPL.Core.Domain.Entries
         /// An integer that determines the order that accounts created through cross-chain transfers must be performed.
         /// <para/>Smaller numbers must execute before larger numbers.
         /// </summary>
-        public required uint XChainAccountCreateCount { get; set; }
+        public required ulong XChainAccountCreateCount { get; set; }
 
         /// <summary>
         /// The door accounts and assets of the bridge this object correlates to.
@@ -32,34 +33,16 @@ namespace XRPL.Core.Domain.Entries
         public required XChainBridge XChainBridge { get; set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="XChainOwnedCreateAccountClaimIDBase"/> class.
-        /// </summary>
-        protected XChainOwnedCreateAccountClaimIDBase()
-        {
-            LedgerEntryType = "XChainOwnedCreateAccountClaimID";
-        }
-    }
-
-    /// <summary>
-    /// Specifies a ledger entry that is used to collect attestations for creating an account via a cross-chain transfer.
-    /// <para/> It is created when an XChainAddAccountCreateAttestation transaction adds a signature attesting to a XChainAccountCreateCommit transaction and the XChainAccountCreateCount is greater than or equal to the current XChainAccountClaimCount on the Bridge ledger object.
-    /// <para/>The ledger object is destroyed when all the attestations have been received and the funds have transferred to the new account.
-    /// </summary>
-    /// <typeparam name="TAmount">The type of amount and token to claim in the transaction.</typeparam>
-    public abstract class XChainOwnedCreateAccountClaimIDBase<TAmount> : XChainOwnedCreateAccountClaimIDBase
-        where TAmount : class
-    {
-        /// <summary>
         /// Attestations collected from the witness servers.
         /// This includes the parameters needed to recreate the message that was signed, including the amount, destination, signature reward amount, and reward account for that signature.
         /// With the exception of the reward account, all signatures must sign the message created with common parameters.
         /// </summary>
-        public required XChainCreateAccountAttestation<TAmount>[] XChainCreateAccountAttestations { get; set; }
+        public required XChainCreateAccountAttestation[] XChainCreateAccountAttestations { get; set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="XChainOwnedCreateAccountClaimIDBase{TAmount}"/> class.
+        /// Initializes a new instance of the <see cref="XChainOwnedCreateAccountClaimID"/> class.
         /// </summary>
-        protected XChainOwnedCreateAccountClaimIDBase()
+        protected XChainOwnedCreateAccountClaimID()
         {
             LedgerEntryType = "XChainOwnedCreateAccountClaimID";
         }
@@ -69,19 +52,20 @@ namespace XRPL.Core.Domain.Entries
     /// Represents an attestation collected from a witness server.
     /// <para/>This includes the parameters needed to recreate the message that was signed, including the amount, destination, signature reward amount, and reward account for that signature. With the exception of the reward account, all signatures must sign the message created with common parameters.
     /// </summary>
-    /// <typeparam name="TAmount"></typeparam>
-    public class XChainCreateAccountAttestation<TAmount>
-        where TAmount : class
+    [JsonPolymorphic]
+    [JsonDerivedType(typeof(XrpXChainCreateAccountAttestation), typeDiscriminator: "xrp")]
+    [JsonDerivedType(typeof(FungibleTokenXChainCreateAccountAttestation), typeDiscriminator: "token")]
+    public class XChainCreateAccountAttestation
     {
         /// <summary>
         /// An attestation from one witness server.
         /// </summary>
-        public required XChainCreateAccountAttestation<TAmount> XChainCreateAccountProofSig { get; set; }
+        public required XChainCreateAccountAttestation XChainCreateAccountProofSig { get; set; }
 
         /// <summary>
         /// The amount committed by the XChainAccountCreateCommit transaction on the source chain.
         /// </summary>
-        public required TAmount Amount { get; set; }
+        public object Amount { get; set; } = null!;
 
         /// <summary>
         /// The account that should receive this signer's share of the SignatureReward.
@@ -110,20 +94,28 @@ namespace XRPL.Core.Domain.Entries
     }
 
     /// <summary>
-    /// Represents a ledger entry that is used to collect attestations for creating an account via a cross-chain XRP transfer.
-    /// <para/> It is created when an XChainAddAccountCreateAttestation transaction adds a signature attesting to a XChainAccountCreateCommit transaction and the XChainAccountCreateCount is greater than or equal to the current XChainAccountClaimCount on the Bridge ledger object.
-    /// <para/>The ledger object is destroyed when all the attestations have been received and the funds have transferred to the new account.
+    /// Represents an attestation collected from a witness server.
+    /// <para/>This includes the parameters needed to recreate the message that was signed, including the amount in XRP drops, destination, signature reward amount, and reward account for that signature. With the exception of the reward account, all signatures must sign the message created with common parameters.
     /// </summary>
-    public sealed class XrpXChainOwnedCreateAccountClaimID : XChainOwnedCreateAccountClaimIDBase<string>
+    [JsonDerivedType(typeof(XrpXChainCreateAccountAttestation), typeDiscriminator: "xrp")]
+    public sealed class XrpXChainCreateAccountAttestation : XChainCreateAccountAttestation
     {
+        /// <summary>
+        /// The amount in XRP drops committed by the XChainAccountCreateCommit transaction on the source chain.
+        /// </summary>
+        public new required string Amount { get => (string)base.Amount; set => base.Amount = value; }
     }
 
     /// <summary>
-    /// Represents a ledger entry that is used to collect attestations for creating an account via a cross-chain token transfer.
-    /// <para/> It is created when an XChainAddAccountCreateAttestation transaction adds a signature attesting to a XChainAccountCreateCommit transaction and the XChainAccountCreateCount is greater than or equal to the current XChainAccountClaimCount on the Bridge ledger object.
-    /// <para/>The ledger object is destroyed when all the attestations have been received and the funds have transferred to the new account.
+    /// Represents an attestation collected from a witness server.
+    /// <para/>This includes the parameters needed to recreate the message that was signed, including the amount and currency type, destination, signature reward amount, and reward account for that signature. With the exception of the reward account, all signatures must sign the message created with common parameters.
     /// </summary>
-    public sealed class FungibleTokenXChainOwnedCreateAccountClaimID : XChainOwnedCreateAccountClaimIDBase<TokenAmount>
+    [JsonDerivedType(typeof(FungibleTokenXChainCreateAccountAttestation), typeDiscriminator: "token")]
+    public class FungibleTokenXChainCreateAccountAttestation : XChainCreateAccountAttestation
     {
+        /// <summary>
+        /// The amount and currency type committed by the XChainAccountCreateCommit transaction on the source chain.
+        /// </summary>
+        public new required TokenAmount Amount { get => (TokenAmount)base.Amount; set => base.Amount = value; }
     }
 }

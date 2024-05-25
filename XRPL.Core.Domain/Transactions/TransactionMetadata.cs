@@ -49,7 +49,7 @@ namespace XRPL.Core.Domain.Models
         /// (May be omitted) For a partial payment, this field records the amount of currency actually delivered to the destination.
         /// <para/>To avoid errors when reading transactions, instead use the delivered_amount field, which is provided for all Payment transactions, partial or not.
         /// </summary>
-        [DataMember(Name = "DeliveredAmount")]
+        [JsonPropertyName("DeliveredAmount")]
         public TokenAmount[]? PartialPaymentDeliveredAmount { get; set; }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace XRPL.Core.Domain.Models
         /// <summary>
         /// (Omitted for non-Payment transactions) The [Currency Amount][] actually received by the Destination account. Use this field to determine how much was delivered, regardless of whether the transaction is a partial payment. See this description for details.
         /// </summary>
-        [DataMember(Name = "delivered_amount")]
+        [JsonPropertyName("delivered_amount")]
         public TokenAmount? DeliveredAmount { get; set; }
     }
 }

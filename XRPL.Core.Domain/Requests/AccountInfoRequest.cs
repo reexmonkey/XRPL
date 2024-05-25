@@ -37,31 +37,31 @@ namespace XRPL.Core.Domain.Requests
         /// <summary>
         /// The account to look up.
         /// </summary>
-        [DataMember(Name = "account")]
+        [JsonPropertyName("account")]
         public string? Account { get; set; }
 
         /// <summary>
         /// A 20-byte hex string for the ledger version to use
         /// </summary>
-        [DataMember(Name = "ledger_hash")]
+        [JsonPropertyName("ledger_hash")]
         public string? LedgerHash { get; set; }
 
         /// <summary>
         /// The ledger index of the ledger to use, or a shortcut string to choose a ledger automatically.
         /// </summary>
-        [DataMember(Name = "ledger_index")]
+        [JsonPropertyName("ledger_index")]
         public string? LedgerIndex { get; set; }
 
         /// <summary>
         /// If true, return stats about queued transactions sent by this account. Can only be used when querying for the data from the current open ledger.
         /// </summary>
-        [DataMember(Name = "queue")]
+        [JsonPropertyName("queue")]
         public bool Queue { get; set; }
 
         /// <summary>
         /// If true, return any signer list objects associated with this account.
         /// </summary>
-        [DataMember(Name = "signer_lists")]
+        [JsonPropertyName("signer_lists")]
         public bool SignerLists { get; set; }
     }
 }
