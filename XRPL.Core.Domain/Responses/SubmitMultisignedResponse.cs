@@ -31,25 +31,19 @@ namespace XRPL.Core.Domain.Responses
         /// Human-readable explanation of the preliminary transaction result
         /// </summary>
         [DataMember(Name = "engíne_result_message")]
-        public string? EngineResultMessage { get; set; } 
+        public string? EngineResultMessage { get; set; }
 
-    }
-
-    public sealed class BinarySubmitMultisignedResult : SubmitMultisignedResult
-    {
         /// <summary>
         /// The complete transaction in hex string format.
         /// </summary>
         [DataMember(Name = "tx_blob")]
         public string? TxBlob { get; set; }
-    }
 
-    public sealed class JsonSubmitMultisignedResult : SubmitMultisignedResult
-    {
         /// <summary>
         /// The complete transaction in JSON format.
         /// </summary>
         [DataMember(Name = "tx_json")]
         public Transaction? TxJson { get; set; }
+
     }
 }

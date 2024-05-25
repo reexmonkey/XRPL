@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿
+using System.Runtime.Serialization;
 
 namespace XRPL.Core.Domain.Models
 {

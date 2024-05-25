@@ -98,17 +98,47 @@ namespace XRPL.Core.Domain.Clients
         public Task<AccountTxResponse> PostAsync(AccountTxRequest request, CancellationToken cancellation)
             => PostAsync<AccountTxRequest, AccountTxResponse>(request, cancellation);
 
+        public AmmInfoResponse Post(AmmInfoRequest request, CancellationToken cancellation)
+            => Post<AmmInfoRequest, AmmInfoResponse>(request, cancellation);
+
+        public Task<AmmInfoResponse> PostAsync(AmmInfoRequest request, CancellationToken cancellation)
+            => PostAsync<AmmInfoRequest, AmmInfoResponse>(request, cancellation);
+
+        public DepositAuthorizedResponse Post(DepositAuthorizedRequest request, CancellationToken cancellation)
+            => Post<DepositAuthorizedRequest, DepositAuthorizedResponse>(request, cancellation);
+
+        public Task<DepositAuthorizedResponse> PostAsync(DepositAuthorizedRequest request, CancellationToken cancellation)
+            => PostAsync<DepositAuthorizedRequest, DepositAuthorizedResponse>(request, cancellation);
+
         public GatewayBalancesResponse Post(GatewayBalancesRequest request, CancellationToken cancellation)
             => Post<GatewayBalancesRequest, GatewayBalancesResponse>(request, cancellation);
 
         public Task<GatewayBalancesResponse> PostAsync(GatewayBalancesRequest request, CancellationToken cancellation)
             => PostAsync<GatewayBalancesRequest, GatewayBalancesResponse>(request, cancellation);
 
+        public NftBuyOffersResponse Post(NftBuyOffersRequest request, CancellationToken cancellation)
+            => Post<NftBuyOffersRequest, NftBuyOffersResponse>(request, cancellation);
+
+        public Task<NftBuyOffersResponse> PostAsync(NftBuyOffersRequest request, CancellationToken cancellation)
+            => PostAsync<NftBuyOffersRequest, NftBuyOffersResponse>(request, cancellation);
+
+        public NftSellOffersResponse Post(NftSellOffersRequest request, CancellationToken cancellation)
+            => Post<NftSellOffersRequest, NftSellOffersResponse>(request, cancellation);
+
+        public Task<NftSellOffersResponse> PostAsync(NftSellOffersRequest request, CancellationToken cancellation)
+            => PostAsync<NftSellOffersRequest, NftSellOffersResponse>(request, cancellation);
+
         public NoRippleCheckResponse Post(NoRippleCheckRequest request, CancellationToken cancellation)
             => Post<NoRippleCheckRequest, NoRippleCheckResponse>(request, cancellation);
 
         public Task<NoRippleCheckResponse> PostAsync(NoRippleCheckRequest request, CancellationToken cancellation)
             => PostAsync<NoRippleCheckRequest, NoRippleCheckResponse>(request, cancellation);
+
+        public SubmitMultisignedResponse Post(SubmitMultisignedRequest request, CancellationToken cancellation)
+               => Post<SubmitMultisignedRequest, SubmitMultisignedResponse>(request, cancellation);
+
+        public Task<SubmitMultisignedResponse> PostAsync(SubmitMultisignedRequest request, CancellationToken cancellation)
+            => PostAsync<SubmitMultisignedRequest, SubmitMultisignedResponse>(request, cancellation);
 
         public SubmitResponse Post(SubmitOnlyRequest request, CancellationToken cancellation)
             => Post<SubmitOnlyRequest, SubmitResponse>(request, cancellation);
