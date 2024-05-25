@@ -1,6 +1,4 @@
 ﻿using System.Runtime.Serialization;
-using XRPL.Core.Domain.Interfaces;
-using XRPL.Core.Domain.Responses;
 
 namespace XRPL.Core.Domain.Responses
 {
