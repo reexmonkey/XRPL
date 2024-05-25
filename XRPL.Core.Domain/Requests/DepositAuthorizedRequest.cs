@@ -9,7 +9,7 @@ namespace XRPL.Core.Domain.Requests
     /// The deposit_authorized command indicates whether one account is authorized to send payments directly to another.
     /// </summary>
     [DataContract]
-    public class DepositAuthorizedRequest : RequestBase<DepositAutorizedParameters>, IExpect<DepositAuthorizedResponse>
+    public class DepositAuthorizedRequest : RequestBase<DepositAuthorizedParameters>, IExpect<DepositAuthorizedResponse>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="DepositAuthorizedRequest"/> class.
