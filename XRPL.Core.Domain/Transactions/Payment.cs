@@ -1,5 +1,4 @@
 ﻿using XRPL.Core.Domain.Models;
-using XRPL.Core.Domain.Responses;
 using Path = XRPL.Core.Domain.Models.Path;
 
 namespace XRPL.Core.Domain.Transactions

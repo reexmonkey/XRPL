@@ -13,9 +13,9 @@ namespace XRPL.Core.Domain.Entries
     /// (Otherwise, unfunded Offers remain, because only transactions can change the ledger state.)
     /// </summary>
     [JsonPolymorphic]
-    [JsonDerivedType(typeof(XrpForFungibleTokenOffer), typeDiscriminator: "xrp4token")]
-    [JsonDerivedType(typeof(FungibleTokenForXrpOffer), typeDiscriminator: "token4xrp")]
-    [JsonDerivedType(typeof(FungibleTokenOffer), typeDiscriminator: "token4token")]
+    [JsonDerivedType(typeof(XrpForFungibleTokenOffer), typeDiscriminator: nameof(XrpForFungibleTokenOffer))]
+    [JsonDerivedType(typeof(FungibleTokenForXrpOffer), typeDiscriminator: nameof(FungibleTokenForXrpOffer))]
+    [JsonDerivedType(typeof(FungibleTokenOffer), typeDiscriminator: nameof(FungibleTokenOffer))]
     public abstract class Offer : LedgerEntryBase
     {
         /// <summary>
@@ -115,7 +115,7 @@ namespace XRPL.Core.Domain.Entries
     /// When processing transactions, the network automatically removes any unfunded offers that those transactions come across.
     /// (Otherwise, unfunded offers remain, because only transactions can change the ledger state.)
     /// </summary>
-    [JsonDerivedType(typeof(XrpForFungibleTokenOffer), typeDiscriminator: "xrp4token")]
+    [JsonDerivedType(typeof(XrpForFungibleTokenOffer), typeDiscriminator: nameof(XrpForFungibleTokenOffer))]
     public class XrpForFungibleTokenOffer : Offer
     {
         /// <summary>
@@ -138,7 +138,7 @@ namespace XRPL.Core.Domain.Entries
     /// When processing transactions, the network automatically removes any unfunded offers that those transactions come across.
     /// (Otherwise, unfunded offers remain, because only transactions can change the ledger state.)
     /// </summary>
-    [JsonDerivedType(typeof(FungibleTokenForXrpOffer), typeDiscriminator: "token4xrp")]
+    [JsonDerivedType(typeof(FungibleTokenForXrpOffer), typeDiscriminator: nameof(FungibleTokenForXrpOffer))]
     public class FungibleTokenForXrpOffer : Offer
     {
         /// <summary>
@@ -161,7 +161,7 @@ namespace XRPL.Core.Domain.Entries
     /// When processing transactions, the network automatically removes any unfunded offers that those transactions come across.
     /// (Otherwise, unfunded offers remain, because only transactions can change the ledger state.)
     /// </summary>
-    [JsonDerivedType(typeof(FungibleTokenOffer), typeDiscriminator: "token4token")]
+    [JsonDerivedType(typeof(FungibleTokenOffer), typeDiscriminator: nameof(FungibleTokenOffer))]
     public class FungibleTokenOffer : Offer
     {
         /// <summary>

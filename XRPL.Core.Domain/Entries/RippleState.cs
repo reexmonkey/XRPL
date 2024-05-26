@@ -9,10 +9,7 @@ namespace XRPL.Core.Domain.Entries
     /// </summary>
     public class RippleState : LedgerEntryBase
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        protected RippleStateFlags flags;
+        private RippleStateFlags flags;
 
         /// <summary>
         /// The balance of the trust line, from the perspective of the low account.

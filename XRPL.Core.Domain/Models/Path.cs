@@ -1,5 +1,4 @@
-﻿using System.Runtime.Serialization;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace XRPL.Core.Domain.Models
 {
@@ -13,7 +12,7 @@ namespace XRPL.Core.Domain.Models
     /// All paths in a path set must start with the same currency, and must also end with the same currency as each other.
     /// <para/>Since XRP can be sent directly to any address, an XRP-to-XRP transaction does not use any paths.
     /// </summary>
-    [DataContract]
+
     public class Path
     {
         /// <summary>

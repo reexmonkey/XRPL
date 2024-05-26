@@ -5,8 +5,8 @@ namespace XRPL.Core.Domain.Entries
     /// <summary>
     /// Represents a ledger entry that describes a single account.
     /// </summary>
-    [JsonDerivedType(typeof(AccountRoot), typeDiscriminator: "base")]
-    [JsonDerivedType(typeof(AmmAccountRoot), typeDiscriminator: "amm")]
+    [JsonDerivedType(typeof(AccountRoot), typeDiscriminator: nameof(AccountRoot))]
+    [JsonDerivedType(typeof(AmmAccountRoot), typeDiscriminator: nameof(AmmAccountRoot))]
     public class AccountRoot : LedgerEntryBase
     {
         /// <summary>
@@ -148,8 +148,8 @@ namespace XRPL.Core.Domain.Entries
     /// <summary>
     /// Represents an account root to be used with an Automated Market Maker (AMM).
     /// </summary>
-    [JsonDerivedType(typeof(AmmAccountRoot), typeDiscriminator: "amm")]
-    public sealed class AmmAccountRoot : AccountRoot
+    [JsonDerivedType(typeof(AmmAccountRoot), typeDiscriminator: nameof(AmmAccountRoot))]
+    public class AmmAccountRoot : AccountRoot
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AmmAccountRoot"/> class.

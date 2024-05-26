@@ -1,6 +1,6 @@
 using XRPL.Core.Domain.Entries;
 
-namespace XRPL.Core.Domain.Responses
+namespace XRPL.Core.Domain.Transactions
 {
     /// <summary>
     /// Represents a transaction, which is the only way to cause changes in the XRPL ledeger.

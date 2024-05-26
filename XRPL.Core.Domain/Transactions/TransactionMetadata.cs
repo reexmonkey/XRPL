@@ -1,40 +1,14 @@
-﻿using System.Runtime.Serialization;
+﻿using System.Text.Json.Serialization;
 using XRPL.Core.Domain.Entries;
+using XRPL.Core.Domain.Models;
 
-namespace XRPL.Core.Domain.Models
+namespace XRPL.Core.Domain.Transactions
 {
     /// <summary>
     /// Represents the section of data that gets added to a transaction after it is processed.
     /// <para/> Any transaction that gets included in a ledger has metadata, regardless of whether it is successful. The transaction metadata describes the outcome of the transaction in detail.
     /// <para/> The changes described in transaction metadata are only final if the transaction is in a validated ledger version.
     /// </summary>
-    [KnownType(typeof(AccountRoot))]
-    [KnownType(typeof(AMM))]
-    [KnownType(typeof(Ammendments))]
-    [KnownType(typeof(Bridge))]
-    [KnownType(typeof(FungibleTokenCheck))]
-    [KnownType(typeof(XrpCheck))]
-    [KnownType(typeof(DepositPreauth))]
-    [KnownType(typeof(DID))]
-    [KnownType(typeof(DirectoryNode))]
-    [KnownType(typeof(Escrow))]
-    [KnownType(typeof(FeeSettings))]
-    [KnownType(typeof(LedgerHashes))]
-    [KnownType(typeof(NegativeUNL))]
-    [KnownType(typeof(XrpForNFTokenOffer))]
-    [KnownType(typeof(FungibleTokenForNFTokenOffer))]
-    [KnownType(typeof(NFTokenPage))]
-    [KnownType(typeof(XrpForFungibleTokenOffer))]
-    [KnownType(typeof(FungibleTokenForXrpOffer))]
-    [KnownType(typeof(FungibleTokenOffer))]
-    [KnownType(typeof(PayChannel))]
-    [KnownType(typeof(RippleState))]
-    [KnownType(typeof(SignerList))]
-    [KnownType(typeof(Ticket))]
-    [KnownType(typeof(XrpXChainOwnedClaimID))]
-    [KnownType(typeof(FungibleTokenXChainOwnedClaimID))]
-    [KnownType(typeof(XrpXChainOwnedCreateAccountClaimID))]
-    [KnownType(typeof(FungibleTokenXChainOwnedCreateAccountClaimID))]
     public class TransactionMetadata
     {
         public LedgerEntryBase[]? AffectedNodes { get; set; }

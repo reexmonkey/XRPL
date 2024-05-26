@@ -2,8 +2,25 @@
 using System.Text;
 using System.Text.Json;
 using XRPL.Core.Domain.Interfaces;
-using XRPL.Core.Domain.Requests;
-using XRPL.Core.Domain.Responses;
+using XRPL.Core.Domain.Methods;
+using XRPL.Core.Domain.Methods.AccountMethods.AccountChannels;
+using XRPL.Core.Domain.Methods.AccountMethods.AccountCurrencies;
+using XRPL.Core.Domain.Methods.AccountMethods.AccountInfo;
+using XRPL.Core.Domain.Methods.AccountMethods.AccountLines;
+using XRPL.Core.Domain.Methods.AccountMethods.AccountNFTs;
+using XRPL.Core.Domain.Methods.AccountMethods.AccountObjects;
+using XRPL.Core.Domain.Methods.AccountMethods.AccountTx;
+using XRPL.Core.Domain.Methods.AccountMethods.GatewayBalances;
+using XRPL.Core.Domain.Methods.AccountMethods.NoRippleCheck;
+using XRPL.Core.Domain.Methods.PathAndOrderBookMethods.AmmInfo;
+using XRPL.Core.Domain.Methods.PathAndOrderBookMethods.DepositAuthorized;
+using XRPL.Core.Domain.Methods.PathAndOrderBookMethods.NFTBuyOffers;
+using XRPL.Core.Domain.Methods.PathAndOrderBookMethods.NFTSellOffers;
+using XRPL.Core.Domain.Methods.TransactionMethods.Submit;
+using XRPL.Core.Domain.Methods.TransactionMethods.SubmitMultisigned;
+using XRPL.Core.Domain.Methods.TransactionMethods.TransactionEntry;
+using XRPL.Core.Domain.Methods.TransactionMethods.Tx;
+using XRPL.Core.Domain.Methods.TransactionMethods.TxHistory;
 
 namespace XRPL.Core.Domain.Clients
 {
@@ -104,11 +121,27 @@ namespace XRPL.Core.Domain.Clients
         public Task<AccountTxResponse?> PostAsync(AccountTxRequest request, CancellationToken cancellation)
             => PostAsync<AccountTxRequest, AccountTxResponse>(request, cancellation);
 
-        public AmmInfoResponse? Post(AmmInfoRequest request, CancellationToken cancellation)
-            => Post<AmmInfoRequest, AmmInfoResponse>(request, cancellation);
+        public NoRippleCheckResponse? Post(NoRippleCheckRequest request, CancellationToken cancellation)
+    => Post<NoRippleCheckRequest, NoRippleCheckResponse>(request, cancellation);
 
-        public Task<AmmInfoResponse?> PostAsync(AmmInfoRequest request, CancellationToken cancellation)
-            => PostAsync<AmmInfoRequest, AmmInfoResponse>(request, cancellation);
+        public Task<NoRippleCheckResponse?> PostAsync(NoRippleCheckRequest request, CancellationToken cancellation)
+            => PostAsync<NoRippleCheckRequest, NoRippleCheckResponse>(request, cancellation);
+
+        #endregion Account Methods
+
+        #region Path and Order Book Methods
+
+        public AmmInfoResponse? Post(AccountAmmInfoRequest request, CancellationToken cancellation)
+    => Post<AccountAmmInfoRequest, AmmInfoResponse>(request, cancellation);
+
+        public Task<AmmInfoResponse?> PostAsync(AccountAmmInfoRequest request, CancellationToken cancellation)
+            => PostAsync<AccountAmmInfoRequest, AmmInfoResponse>(request, cancellation);
+
+        public AmmInfoResponse? Post(AssetAmmInfoRequest request, CancellationToken cancellation)
+            => Post<AssetAmmInfoRequest, AmmInfoResponse>(request, cancellation);
+
+        public Task<AmmInfoResponse?> PostAsync(AssetAmmInfoRequest request, CancellationToken cancellation)
+            => PostAsync<AssetAmmInfoRequest, AmmInfoResponse>(request, cancellation);
 
         public DepositAuthorizedResponse? Post(DepositAuthorizedRequest request, CancellationToken cancellation)
             => Post<DepositAuthorizedRequest, DepositAuthorizedResponse>(request, cancellation);
@@ -134,11 +167,9 @@ namespace XRPL.Core.Domain.Clients
         public Task<NFTSellOffersResponse?> PostAsync(NFTSellOffersRequest request, CancellationToken cancellation)
             => PostAsync<NFTSellOffersRequest, NFTSellOffersResponse>(request, cancellation);
 
-        public NoRippleCheckResponse? Post(NoRippleCheckRequest request, CancellationToken cancellation)
-            => Post<NoRippleCheckRequest, NoRippleCheckResponse>(request, cancellation);
+        #endregion Path and Order Book Methods
 
-        public Task<NoRippleCheckResponse?> PostAsync(NoRippleCheckRequest request, CancellationToken cancellation)
-            => PostAsync<NoRippleCheckRequest, NoRippleCheckResponse>(request, cancellation);
+        #region Transaction Methods
 
         public SubmitMultisignedResponse? Post(SubmitMultisignedRequest request, CancellationToken cancellation)
                => Post<SubmitMultisignedRequest, SubmitMultisignedResponse>(request, cancellation);
@@ -182,7 +213,7 @@ namespace XRPL.Core.Domain.Clients
         public Task<TxHistoryResponse?> PostAsync(TxHistoryRequest request, CancellationToken cancellation)
             => PostAsync<TxHistoryRequest, TxHistoryResponse>(request, cancellation);
 
-        #endregion Account Methods
+        #endregion Transaction Methods
 
         /// <summary>
         ///

@@ -1,6 +1,4 @@
-﻿using XRPL.Core.Domain.Responses;
-
-namespace XRPL.Core.Domain.Transactions
+﻿namespace XRPL.Core.Domain.Transactions
 {
     /// <summary>
     /// Represents a transaction that claims XRP from a payment channel, adjust the payment channel's expiration, or both.

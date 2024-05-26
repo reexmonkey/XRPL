@@ -1,6 +1,5 @@
 ﻿using XRPL.Core.Domain.Entries;
 using XRPL.Core.Domain.Models;
-using XRPL.Core.Domain.Responses;
 
 namespace XRPL.Core.Domain.Transactions
 {
@@ -19,36 +18,23 @@ namespace XRPL.Core.Domain.Transactions
         public required string CheckID { get; set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CheckCash"/> class.
-        /// </summary>
-        protected CheckCash() : base(TransactionType.CheckCash)
-        {
-        }
-    }
-
-    /// <summary>
-    /// Specifies a transaction that attempts to redeem a <see cref="Check"/> object in the ledger to receive up to the amount authorized by the corresponding CheckCreate transaction.
-    /// Only the Destination address of a <see cref="Check{TAmount}"/> can cash it with a <see cref="CheckCash{TAmount}"/> transaction.
-    /// Cashing a check this way is similar to executing a Payment initiated by the destination.
-    /// <para/> Since the funds for a check are not guaranteed, redeeming a <see cref="CheckCash{TAmount}"/> can fail because the sender does not have a high enough balance or because there is not enough liquidity to deliver the funds.
-    /// If this happens, the <see cref="CheckCash{TAmount}"/> remains in the ledger and the destination can try to cash it again later, or for a different amount.
-    /// <para/>Caution: The transaction must include either Amount or DeliverMin, but not both.
-    /// </summary>
-    /// <typeparam name="TAmount">The type of currency amount.</typeparam>
-    public abstract class CheckCash<TAmount> : CheckCash
-        where TAmount : class
-    {
-        /// <summary>
         /// (Optional) Redeem the Check for exactly this amount, if possible.
         /// The currency must match that of the SendMax of the corresponding CheckCreate transaction. You must provide either this field or DeliverMin.
         /// </summary>
-        public TAmount? Amount { get; set; }
+        public object? Amount { get; set; }
 
         /// <summary>
         /// (Optional) Redeem the Check for at least this amount and for as much as possible.
         /// The currency must match that of the SendMax of the corresponding CheckCreate transaction. You must provide either this field or Amount.
         /// </summary>
-        public TAmount? DeliverMin { get; set; }
+        public object? DeliverMin { get; set; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CheckCash"/> class.
+        /// </summary>
+        protected CheckCash() : base(TransactionType.CheckCash)
+        {
+        }
     }
 
     /// <summary>
@@ -59,8 +45,19 @@ namespace XRPL.Core.Domain.Transactions
     /// If this happens, the <see cref="XrpCheck"/> remains in the ledger and the destination can try to cash it again later, or for a different amount.
     /// <para/>Caution: The transaction must include either Amount or DeliverMin, but not both.
     /// </summary>
-    public sealed class XrpCheckCash : CheckCash<string>
+    public sealed class XrpCheckCash : CheckCash
     {
+        /// <summary>
+        /// (Optional) Redeem the Check for exactly this amount, if possible.
+        /// The currency must match that of the SendMax of the corresponding CheckCreate transaction. You must provide either this field or DeliverMin.
+        /// </summary>
+        public new string? Amount { get => (string?)base.Amount; set => base.Amount = value; }
+
+        /// <summary>
+        /// (Optional) Redeem the Check for at least this amount and for as much as possible.
+        /// The currency must match that of the SendMax of the corresponding CheckCreate transaction. You must provide either this field or Amount.
+        /// </summary>
+        public new string? DeliverMin { get => (string?)base.Amount; set => base.Amount = value; }
     }
 
     /// <summary>
@@ -71,7 +68,18 @@ namespace XRPL.Core.Domain.Transactions
     /// If this happens, the <see cref="FungibleTokenCheck"/> remains in the ledger and the destination can try to cash it again later, or for a different amount.
     /// <para/>Caution: The transaction must include either Amount or DeliverMin, but not both.
     /// </summary>
-    public sealed class TokenCheckCash : CheckCash<TokenAmount>
+    public sealed class TokenCheckCash : CheckCash
     {
+        /// <summary>
+        /// (Optional) Redeem the Check for exactly this amount, if possible.
+        /// The currency must match that of the SendMax of the corresponding CheckCreate transaction. You must provide either this field or DeliverMin.
+        /// </summary>
+        public new TokenAmount? Amount { get => (TokenAmount?)base.Amount; set => base.Amount = value; }
+
+        /// <summary>
+        /// (Optional) Redeem the Check for at least this amount and for as much as possible.
+        /// The currency must match that of the SendMax of the corresponding CheckCreate transaction. You must provide either this field or Amount.
+        /// </summary>
+        public new TokenAmount? DeliverMin { get => (TokenAmount?)base.Amount; set => base.Amount = value; }
     }
 }

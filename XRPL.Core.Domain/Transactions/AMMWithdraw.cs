@@ -1,6 +1,4 @@
-﻿using XRPL.Core.Domain.Entries;
-using XRPL.Core.Domain.Models;
-using XRPL.Core.Domain.Responses;
+﻿using XRPL.Core.Domain.Models;
 
 namespace XRPL.Core.Domain.Transactions
 {
@@ -9,7 +7,7 @@ namespace XRPL.Core.Domain.Transactions
     /// </summary>
     public abstract class AMMWithdraw : Transaction
     {
-        protected AMMWithdrawFlags? flags;
+        private AMMWithdrawFlags? flags;
 
         /// <summary>
         /// The definition for one of the assets in the AMM's pool.

@@ -1,5 +1,4 @@
-﻿using System.Runtime.Serialization;
-using XRPL.Core.Domain.Responses;
+﻿using System.Text.Json.Serialization;
 
 namespace XRPL.Core.Domain.Transactions
 {

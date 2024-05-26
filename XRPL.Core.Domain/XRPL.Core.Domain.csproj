@@ -10,6 +10,14 @@
     <PackageProjectUrl>https://github.com/reexmonkey/XRPL</PackageProjectUrl>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Methods\LedgerMethods\" />
+    <Folder Include="Methods\SubscriptionMethods\" />
+    <Folder Include="Methods\ServerInfoMethods\" />
+    <Folder Include="Methods\PathAndOrderBookMethods\RipplePathFind\" />
+    <Folder Include="Methods\PathAndOrderBookMethods\PathFind\" />
+  </ItemGroup>
+
   <!--<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <IsTrimmable>True</IsTrimmable>
   </PropertyGroup>-->

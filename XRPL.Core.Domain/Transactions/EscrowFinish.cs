@@ -1,6 +1,4 @@
-﻿using XRPL.Core.Domain.Responses;
-
-namespace XRPL.Core.Domain.Transactions
+﻿namespace XRPL.Core.Domain.Transactions
 {
     /// <summary>
     /// Represents a transaction that delivers XRP from a held payment to the recipient.

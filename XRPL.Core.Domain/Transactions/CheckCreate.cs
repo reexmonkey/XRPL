@@ -1,6 +1,5 @@
 ﻿using XRPL.Core.Domain.Entries;
 using XRPL.Core.Domain.Models;
-using XRPL.Core.Domain.Responses;
 
 namespace XRPL.Core.Domain.Transactions
 {
@@ -18,6 +17,12 @@ namespace XRPL.Core.Domain.Transactions
         /// (Optional) Arbitrary tag that identifies the reason for the <see cref="Check"/>, or a hosted recipient to pay.
         /// </summary>
         public uint? DestinationTag { get; set; }
+
+        /// <summary>
+        /// Maximum amount of source currency the <see cref="Check"/> is allowed to debit the sender, including transfer fees on non-XRP currencies.
+        /// <para/>The <see cref="Check"/> can only credit the destination with the same currency (from the same issuer, for non-XRP currencies). For non-XRP amounts, the nested field names MUST be lower-case.
+        /// </summary>
+        public object SendMax { get; set; } = null!;
 
         /// <summary>
         /// (Optional) Time after which the <see cref="Check"/> is no longer valid, in seconds since the Ripple Epoch.
@@ -38,33 +43,29 @@ namespace XRPL.Core.Domain.Transactions
     }
 
     /// <summary>
-    /// Specifies a transaction that creates a <see cref="Check{TAmount}"/> object in the ledger, which is a deferred payment that can be cashed by its intended destination.
-    /// <para/>The sender of this transaction is the sender of the <see cref="Check{TAmount}"/>.
-    /// </summary>
-    /// <typeparam name="TAmount">The type of currency amount.</typeparam>
-    public abstract class CheckCreate<TAmount> : CheckCreate
-        where TAmount : class
-    {
-        /// <summary>
-        /// Maximum amount of source currency the <see cref="Check{TAmount}"/> is allowed to debit the sender, including transfer fees on non-XRP currencies.
-        /// <para/>The <see cref="Check{TAmount}"/> can only credit the destination with the same currency (from the same issuer, for non-XRP currencies). For non-XRP amounts, the nested field names MUST be lower-case.
-        /// </summary>
-        public required TAmount SendMax { get; set; }
-    }
-
-    /// <summary>
     /// Represents a transaction that creates an <see cref="XrpCheck"/> object in the ledger, which is a deferred payment that can be cashed by its intended destination.
     /// <para/>The sender of this transaction is the sender of the <see cref="XrpCheck"/>.
     /// </summary>
-    public sealed class XrpCheckCreate : CheckCreate<string>
+    public sealed class XrpCheckCreate : CheckCreate
     {
+        /// <summary>
+        /// Maximum amount of source currency the <see cref="Check"/> is allowed to debit the sender.
+        /// <para/>The <see cref="Check"/> can only credit the destination with the same currency.
+        /// </summary>
+        public new required string SendMax { get => (string)base.SendMax; set => base.SendMax = value; }
     }
 
     /// <summary>
     /// Represents a transaction that creates an <see cref="FungibleTokenCheck"/> object in the ledger, which is a deferred payment that can be cashed by its intended destination.
     /// <para/>The sender of this transaction is the sender of the <see cref="FungibleTokenCheck"/>.
     /// </summary>
-    public sealed class TokenCheckCreate : CheckCreate<TokenAmount>
+    public sealed class TokenCheckCreate : CheckCreate
     {
+        /// <summary>
+        /// Maximum amount of source currency the <see cref="Check"/> is allowed to debit the sender, including transfer fees on non-XRP currencies.
+        /// <para/>The <see cref="Check"/> can only credit the destination with the same currency (from the same issuer, for non-XRP currencies). 
+        /// <para/>For non-XRP amounts, the nested field names MUST be lower-case.
+        /// </summary>
+        public new required TokenAmount SendMax { get => (TokenAmount)base.SendMax; set => base.SendMax = value; }
     }
 }

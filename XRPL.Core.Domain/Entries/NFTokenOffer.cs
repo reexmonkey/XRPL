@@ -7,14 +7,11 @@ namespace XRPL.Core.Domain.Entries
     /// Represents an offer to buy, sell or transfer an NFT.
     /// </summary>
     [JsonPolymorphic]
-    [JsonDerivedType(typeof(XrpForNFTokenOffer), typeDiscriminator: "xrp")]
-    [JsonDerivedType(typeof(FungibleTokenForNFTokenOffer), typeDiscriminator: "token")]
+    [JsonDerivedType(typeof(XrpForNFTokenOffer), typeDiscriminator: nameof(XrpForNFTokenOffer))]
+    [JsonDerivedType(typeof(FungibleTokenForNFTokenOffer), typeDiscriminator: nameof(FungibleTokenForNFTokenOffer))]
     public abstract class NFTokenOffer : LedgerEntryBase
     {
-        /// <summary>
-        /// The bit-flags for a non-fungible token offer.
-        /// </summary>
-        protected NFTokenOfferFlags flags;
+        private NFTokenOfferFlags flags;
 
         /// <summary>
         /// Amount expected or offered for the NFToken.
@@ -95,7 +92,7 @@ namespace XRPL.Core.Domain.Entries
     /// <summary>
     /// Represents an offer to buy, sell or transfer an NFT with an amount of XRPs.
     /// </summary>
-    [JsonDerivedType(typeof(XrpForNFTokenOffer), typeDiscriminator: "xrp")]
+    [JsonDerivedType(typeof(XrpForNFTokenOffer), typeDiscriminator: nameof(XrpForNFTokenOffer))]
     public sealed class XrpForNFTokenOffer : NFTokenOffer
     {
         /// <summary>
@@ -109,7 +106,7 @@ namespace XRPL.Core.Domain.Entries
     /// <summary>
     /// Represents an offer to buy, sell or transfer an NFT with an amount of tokens.
     /// </summary>
-    [JsonDerivedType(typeof(FungibleTokenForNFTokenOffer), typeDiscriminator: "token")]
+    [JsonDerivedType(typeof(FungibleTokenForNFTokenOffer), typeDiscriminator: nameof(FungibleTokenForNFTokenOffer))]
     public sealed class FungibleTokenForNFTokenOffer : NFTokenOffer
     {
         /// <summary>

@@ -17,7 +17,7 @@ namespace XRPL.Core.Domain.Models
     /// <summary>
     /// Represents a fungible token asset.
     /// </summary>
-    public class FungibleTokenAsset : Asset
+    public class TokenAsset : Asset
     {
 
         /// <summary>
@@ -50,6 +50,10 @@ namespace XRPL.Core.Domain.Models
     /// </summary>
     public class XrpAsset : Asset
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="XrpAsset"/> class.
+        /// </summary>
+        public XrpAsset() => Currency = "XRP";
     }
 
     /// <summary>

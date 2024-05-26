@@ -7,8 +7,8 @@ namespace XRPL.Core.Domain.Entries
     /// Specifies a ledger entry that describes a check, similar to a paper personal check, which can be cashed by its destination to get money from its sender.
     /// </summary>
     [JsonPolymorphic]
-    [JsonDerivedType(typeof(XrpCheck), typeDiscriminator: "xrp")]
-    [JsonDerivedType(typeof(FungibleTokenCheck), typeDiscriminator: "token")]
+    [JsonDerivedType(typeof(XrpCheck), typeDiscriminator: nameof(XrpCheck))]
+    [JsonDerivedType(typeof(FungibleTokenCheck), typeDiscriminator: nameof(FungibleTokenCheck))]
     public abstract class Check : LedgerEntryBase
     {
         /// <summary>
@@ -84,7 +84,7 @@ namespace XRPL.Core.Domain.Entries
     /// <summary>
     /// Represents an XRP check, similar to a paper personal check, which can be cashed by its destination to get money from its sender.
     /// </summary>
-    [JsonDerivedType(typeof(XrpCheck), typeDiscriminator: "xrp")]
+    [JsonDerivedType(typeof(XrpCheck), typeDiscriminator: nameof(XrpCheck))]
     public sealed class XrpCheck : Check
     {
         /// <summary>
@@ -97,7 +97,7 @@ namespace XRPL.Core.Domain.Entries
     /// <summary>
     /// Represents a fungible token check, similar to a paper personal check, which can be cashed by its destination to get money from its sender.
     /// </summary>
-    [JsonDerivedType(typeof(FungibleTokenCheck), typeDiscriminator: "token")]
+    [JsonDerivedType(typeof(FungibleTokenCheck), typeDiscriminator: nameof(FungibleTokenCheck))]
     public sealed class FungibleTokenCheck : Check
     {
         /// <summary>
