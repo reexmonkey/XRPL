@@ -86,4 +86,5 @@ namespace XRPL.Core.Domain.Models
         /// </summary>
         public required string Issuer { get; set; }
     }
+
 }

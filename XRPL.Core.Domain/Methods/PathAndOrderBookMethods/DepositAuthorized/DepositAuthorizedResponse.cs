@@ -12,8 +12,7 @@ namespace XRPL.Core.Domain.Methods.PathAndOrderBookMethods.DepositAuthorized
     /// <summary>
     /// Represents a result of an <see cref="DepositAuthorizedResponse"/> object.
     /// </summary>
-
-    public abstract class DepositAuthorizedResult : ResultBase
+    public class DepositAuthorizedResult : ResultBase
     {
         /// <summary>
         /// Whether the specified source account is authorized to send payments directly to the destination account.
@@ -57,6 +56,5 @@ namespace XRPL.Core.Domain.Methods.PathAndOrderBookMethods.DepositAuthorized
         /// </summary>
         [JsonPropertyName("validated")]
         public bool? Validated { get; set; }
-
     }
 }

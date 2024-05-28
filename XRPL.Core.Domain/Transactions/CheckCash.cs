@@ -62,13 +62,13 @@ namespace XRPL.Core.Domain.Transactions
 
     /// <summary>
     /// Represents a transaction that attempts to redeem a <see cref="FungibleTokenCheck"/> object in the ledger to receive up to the amount authorized by the corresponding CheckCreate transaction.
-    /// Only the Destination address of a <see cref="FungibleTokenCheck"/> can cash it with a <see cref="TokenCheckCash"/> transaction.
+    /// Only the Destination address of a <see cref="FungibleTokenCheck"/> can cash it with a <see cref="FungibleTokenCheckCash"/> transaction.
     /// Cashing a check this way is similar to executing a Payment initiated by the destination.
     /// <para/> Since the funds for a check are not guaranteed, redeeming a <see cref="FungibleTokenCheck"/> can fail because the sender does not have a high enough balance or because there is not enough liquidity to deliver the funds.
     /// If this happens, the <see cref="FungibleTokenCheck"/> remains in the ledger and the destination can try to cash it again later, or for a different amount.
     /// <para/>Caution: The transaction must include either Amount or DeliverMin, but not both.
     /// </summary>
-    public sealed class TokenCheckCash : CheckCash
+    public sealed class FungibleTokenCheckCash : CheckCash
     {
         /// <summary>
         /// (Optional) Redeem the Check for exactly this amount, if possible.

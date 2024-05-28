@@ -1,5 +1,4 @@
-﻿using System.Net.Http.Json;
-using System.Text;
+﻿using System.Text;
 using System.Text.Json;
 using XRPL.Core.Domain.Interfaces;
 using XRPL.Core.Domain.Methods;
@@ -14,8 +13,8 @@ using XRPL.Core.Domain.Methods.AccountMethods.GatewayBalances;
 using XRPL.Core.Domain.Methods.AccountMethods.NoRippleCheck;
 using XRPL.Core.Domain.Methods.PathAndOrderBookMethods.AmmInfo;
 using XRPL.Core.Domain.Methods.PathAndOrderBookMethods.DepositAuthorized;
-using XRPL.Core.Domain.Methods.PathAndOrderBookMethods.NFTBuyOffers;
-using XRPL.Core.Domain.Methods.PathAndOrderBookMethods.NFTSellOffers;
+using XRPL.Core.Domain.Methods.PathAndOrderBookMethods.NftBuyOffers;
+using XRPL.Core.Domain.Methods.PathAndOrderBookMethods.NftSellOffers;
 using XRPL.Core.Domain.Methods.TransactionMethods.Submit;
 using XRPL.Core.Domain.Methods.TransactionMethods.SubmitMultisigned;
 using XRPL.Core.Domain.Methods.TransactionMethods.TransactionEntry;
@@ -27,30 +26,38 @@ namespace XRPL.Core.Domain.Clients
     /// <summary>
     /// Represents a JSON-RPC client that can send requests to a rippled server.
     /// </summary>
-    /// <remarks>
-    /// Initializes a new instance of the <see cref="JsonRpcClient"/> for the given endpoint.
-    /// </remarks>
-    /// <param name="uri">The URL of the rippled server to connect to.</param>
-    /// <exception cref="ArgumentException"><paramref name="uri"/> is null.</exception>
-    public class JsonRpcClient(Uri uri) : IDisposable
+    public class JsonRpcClient : IDisposable
     {
         private const string contentType = "application/json";
         private readonly HttpClient client = new();
-        private readonly Uri uri = uri ?? throw new ArgumentNullException(nameof(uri));
+        private readonly Uri uri;
         private readonly Encoding encoding = new UTF8Encoding(false, true);
 
-        /// <summary>
-        /// The serializer options for the JSON serializer
-        /// </summary>
-        public JsonSerializerOptions? JsonSerializerOptions { get; set; }
+
+        private readonly static JsonSerializerOptions serializerOptions = new()
+        {
+            WriteIndented = true,
+
+        };
 
         private bool disposedValue;
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="JsonRpcClient"/> for the given endpoint.
+        /// </summary>
+        /// <param name="uri">The URL of the rippled server to connect to</param>
+        /// <exception cref="ArgumentException"><paramref name="uri"/> is null.</exception>
+        public JsonRpcClient(Uri uri)
+        {
+            this.uri = uri ?? throw new ArgumentNullException(nameof(uri));
+        }
 
         private TResponse? Post<TRequest, TResponse>(TRequest request, CancellationToken cancellation)
             where TRequest : RequestBase, IExpect<TResponse>
             where TResponse : ResponseBase
         {
-            var json = JsonSerializer.Serialize(request, JsonSerializerOptions);
+            var json = JsonSerializer.Serialize(request, serializerOptions);
             using var content = new StringContent(json, encoding, contentType);
             var message = new HttpRequestMessage(HttpMethod.Post, uri) { Content = content };
 
@@ -58,22 +65,32 @@ namespace XRPL.Core.Domain.Clients
             response.EnsureSuccessStatusCode();
 
             using var stream = response.Content.ReadAsStream(cancellation);
-            return JsonSerializer.Deserialize<TResponse>(stream, JsonSerializerOptions);
+            return JsonSerializer.Deserialize<TResponse>(stream, serializerOptions);
         }
 
         private async Task<TResponse?> PostAsync<TRequest, TResponse>(TRequest request, CancellationToken cancellation)
             where TRequest : IExpect<TResponse>
             where TResponse : ResponseBase
         {
+            using var requestStream = new MemoryStream();
+            await JsonSerializer
+                .SerializeAsync(requestStream, request, serializerOptions, cancellation)
+                .ConfigureAwait(false);
+
+            requestStream.Position = 0;
+
+            using var content = new StreamContent(requestStream);
             using var response = await client
-                .PostAsJsonAsync(uri, request, cancellation)
+                .PostAsync(uri, content, cancellation)
                 .ConfigureAwait(false);
 
             response.EnsureSuccessStatusCode();
+            using var responseStream = await response.Content
+                .ReadAsStreamAsync(cancellation)
+                .ConfigureAwait(false);
 
-            using var stream = await response.Content.ReadAsStreamAsync(cancellation);
             return await JsonSerializer
-                .DeserializeAsync<TResponse>(stream, JsonSerializerOptions, cancellation)
+                .DeserializeAsync<TResponse>(responseStream, serializerOptions, cancellation)
                 .ConfigureAwait(false);
         }
 
@@ -155,17 +172,17 @@ namespace XRPL.Core.Domain.Clients
         public Task<GatewayBalancesResponse?> PostAsync(GatewayBalancesRequest request, CancellationToken cancellation)
             => PostAsync<GatewayBalancesRequest, GatewayBalancesResponse>(request, cancellation);
 
-        public NFTBuyOffersResponse? Post(NFTBuyOffersRequest request, CancellationToken cancellation)
-            => Post<NFTBuyOffersRequest, NFTBuyOffersResponse>(request, cancellation);
+        public NftBuyOffersResponse? Post(NftBuyOffersRequest request, CancellationToken cancellation)
+            => Post<NftBuyOffersRequest, NftBuyOffersResponse>(request, cancellation);
 
-        public Task<NFTBuyOffersResponse?> PostAsync(NFTBuyOffersRequest request, CancellationToken cancellation)
-            => PostAsync<NFTBuyOffersRequest, NFTBuyOffersResponse>(request, cancellation);
+        public Task<NftBuyOffersResponse?> PostAsync(NftBuyOffersRequest request, CancellationToken cancellation)
+            => PostAsync<NftBuyOffersRequest, NftBuyOffersResponse>(request, cancellation);
 
-        public NFTSellOffersResponse? Post(NFTSellOffersRequest request, CancellationToken cancellation)
-            => Post<NFTSellOffersRequest, NFTSellOffersResponse>(request, cancellation);
+        public NftSellOffersResponse? Post(NftSellOffersRequest request, CancellationToken cancellation)
+            => Post<NftSellOffersRequest, NftSellOffersResponse>(request, cancellation);
 
-        public Task<NFTSellOffersResponse?> PostAsync(NFTSellOffersRequest request, CancellationToken cancellation)
-            => PostAsync<NFTSellOffersRequest, NFTSellOffersResponse>(request, cancellation);
+        public Task<NftSellOffersResponse?> PostAsync(NftSellOffersRequest request, CancellationToken cancellation)
+            => PostAsync<NftSellOffersRequest, NftSellOffersResponse>(request, cancellation);
 
         #endregion Path and Order Book Methods
 

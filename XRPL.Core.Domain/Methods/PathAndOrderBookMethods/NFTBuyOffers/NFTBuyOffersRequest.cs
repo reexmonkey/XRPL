@@ -1,37 +1,35 @@
 ﻿using System.Text.Json.Serialization;
 using XRPL.Core.Domain.Interfaces;
+using XRPL.Core.Domain.Models;
 
-namespace XRPL.Core.Domain.Methods.PathAndOrderBookMethods.NFTBuyOffers
+namespace XRPL.Core.Domain.Methods.PathAndOrderBookMethods.NftBuyOffers
 {
     /// <summary>
     /// The nft_buy_offers method returns a list of buy offers for a given NFToken object.
     /// </summary>
-
-
-    public class NFTBuyOffersRequest : RequestBase<NFTBuyOffersParameters>, IExpect<NFTBuyOffersResponse>
+    public class NftBuyOffersRequest : RequestBase<NftBuyOffersParameters>, IExpect<NftBuyOffersResponse>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="NFTBuyOffersRequest"/> class.
+        /// Initializes a new instance of the <see cref="NftBuyOffersRequest"/> class.
         /// </summary>
-        public NFTBuyOffersRequest() : base("nft_buy_offers")
+        public NftBuyOffersRequest() : base("nft_buy_offers")
         {
         }
     }
 
     /// <summary>
-    /// Represents the parameters of an <see cref="NFTBuyOffersRequest"/> object.
+    /// Represents the parameters of an <see cref="NftBuyOffersRequest"/> object.
     /// </summary>
-    
-    public class NFTBuyOffersParameters : ParameterBase
+    public class NftBuyOffersParameters : ParameterBase
     {
         /// <summary>
-        /// The unique identifier of a NFToken object.
+        /// The unique identifier of a <see cref="NFToken"/> object.
         /// </summary>
         [JsonPropertyName("nft_id")]
-        public required string NFTId { get; set; }
+        public required string NftId { get; set; }
 
         /// <summary>
-        /// (Optional) A 20-byte hex string for the ledger version to use. (See Specifying Ledgers)
+        /// (Optional) A 20-byte hex string for the ledger version to use.
         /// </summary>
         [JsonPropertyName("ledger_hash")]
         public string? LedgerHash { get; set; }

@@ -1,19 +1,20 @@
 ﻿using System.Text.Json.Serialization;
+using XRPL.Core.Domain.Entries;
 
-namespace XRPL.Core.Domain.Methods.PathAndOrderBookMethods.NFTBuyOffers
+namespace XRPL.Core.Domain.Methods.PathAndOrderBookMethods.NftBuyOffers
 {
     /// <summary>
     /// Represents a response to a nft buy offers request.
     /// </summary>
-    public class NFTBuyOffersResponse : ResponseBase<NFTBuyOffersResult>
+    public class NftBuyOffersResponse : ResponseBase<NftBuyOffersResult>
     {
     }
 
     /// <summary>
-    /// Represents a result of an <see cref="NFTBuyOffersResponse"/> object.
+    /// Represents a result of an <see cref="NftBuyOffersResponse"/> object.
     /// </summary>
-    
-    public abstract class NFTBuyOffersResult : ResultBase
+
+    public class NftBuyOffersResult : ResultBase
     {
         /// <summary>
         /// The NFToken these offers are for, as specified in the request.
@@ -43,19 +44,19 @@ namespace XRPL.Core.Domain.Methods.PathAndOrderBookMethods.NFTBuyOffers
     }
 
     /// <summary>
-    /// Additional fields that each member of the BuyOffers array has.
+    /// Represents an <see cref="NFTokenOffer"/> object to buy the NFT in question.
     /// </summary>
     public class BuyOffer
     {
         /// <summary>
-        /// The amount offered to buy the NFT for, as a String representing an amount in drops of XRP,
-        /// or an object representing an amount of a fungible token. (See Specifying Currency Amounts)
+        /// The amount offered to buy the NFT for, as a string representing an amount in drops of XRP,
+        /// or an object representing an amount of a fungible token.
         /// </summary>
         [JsonPropertyName("amount")]
         public required string Amount { get; set; }
 
         /// <summary>
-        /// A set of bit-flags for this offer. See NFTokenOffer flags for possible values.
+        /// A set of bit-flags for this offer. See <see cref="NFTokenOffer"/> flags for possible values.
         /// </summary>
         [JsonPropertyName("flags")]
         public required uint Flags { get; set; }
@@ -64,14 +65,12 @@ namespace XRPL.Core.Domain.Methods.PathAndOrderBookMethods.NFTBuyOffers
         /// The ledger object ID of this offer.
         /// </summary>
         [JsonPropertyName("nft_offer_index")]
-        public required string NFTOfferIndex { get; set; }
+        public required string NftOfferIndex { get; set; }
 
         /// <summary>
         /// The account that placed this offer.
         /// </summary>
         [JsonPropertyName("owner")]
         public required string Ower { get; set; }
-
     }
 }
-

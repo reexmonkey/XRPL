@@ -1,19 +1,20 @@
 ﻿using System.Text.Json.Serialization;
+using XRPL.Core.Domain.Entries;
 
-namespace XRPL.Core.Domain.Methods.PathAndOrderBookMethods.NFTSellOffers
+namespace XRPL.Core.Domain.Methods.PathAndOrderBookMethods.NftSellOffers
 {
     /// <summary>
-    /// Represents a response to a nft sell offers request.
+    /// Represents a response to an <see cref="RipplePathFindRequest"/> request.
     /// </summary>
-    public class NFTSellOffersResponse : ResponseBase<NFTSellOffersResult>
+    public class NftSellOffersResponse : ResponseBase<NftSellOffersResult>
     {
     }
 
     /// <summary>
-    /// Represents a result of an <see cref="NFTSellOffersResponse"/> object.
+    /// Represents a result of an <see cref="RipplePathFindResponse"/> object.
     /// </summary>
-    
-    public abstract class NFTSellOffersResult : ResultBase
+
+    public class NftSellOffersResult : ResultBase
     {
         /// <summary>
         /// The NFToken these offers are for, as specified in the request.
@@ -25,7 +26,7 @@ namespace XRPL.Core.Domain.Methods.PathAndOrderBookMethods.NFTSellOffers
         /// A list of buy offers for the token. Each of these is formatted as a Buy Offer (see below).
         /// </summary>
         [JsonPropertyName("offers")]
-        public required SellOffers[] Offers { get; set; }
+        public required SellOffer[] Offers { get; set; }
 
         /// <summary>
         /// (May be omitted) The limit, as specified in the request.
@@ -41,14 +42,15 @@ namespace XRPL.Core.Domain.Methods.PathAndOrderBookMethods.NFTSellOffers
         [JsonPropertyName("marker")]
         public object? Marker { get; set; }
     }
+
     /// <summary>
-    /// Additional fields that each member of the BuyOffers array has.
+    /// Represents one <see cref="NFTokenOffer"/> object to buy the NFT in question.
     /// </summary>
-    public class SellOffers
+    public class SellOffer
     {
         /// <summary>
-        /// The amount offered to sell the NFT for, as a String representing an amount in drops of XRP,
-        /// or an object representing an amount of a fungible token. (See Specifying Currency Amounts)
+        /// The amount offered to sell the NFT for, as a string representing an amount in drops of XRP,
+        /// or an object representing an amount of a fungible token.
         /// </summary>
         [JsonPropertyName("amount")]
         public required string Amount { get; set; }
@@ -70,6 +72,5 @@ namespace XRPL.Core.Domain.Methods.PathAndOrderBookMethods.NFTSellOffers
         /// </summary>
         [JsonPropertyName("owner")]
         public required string Ower { get; set; }
-
     }
 }

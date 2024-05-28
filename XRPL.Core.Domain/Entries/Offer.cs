@@ -19,19 +19,9 @@ namespace XRPL.Core.Domain.Entries
     public abstract class Offer : LedgerEntryBase
     {
         /// <summary>
-        /// 
-        /// </summary>
-        protected OfferFlags flags;
-
-        /// <summary>
         /// The address of the account that owns this Offer.
         /// </summary>
         public required string Account { get; set; }
-
-        /// <summary>
-        /// Set of bit-flags for this ledger entry.
-        /// </summary>
-        public override required uint Flags { get => (uint)flags; set => flags = (OfferFlags)value; }
 
         /// <summary>
         /// The ID of the Offer Directory that links to this Offer.

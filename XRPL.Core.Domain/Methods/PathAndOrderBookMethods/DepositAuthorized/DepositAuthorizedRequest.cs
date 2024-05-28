@@ -4,9 +4,8 @@ using XRPL.Core.Domain.Interfaces;
 namespace XRPL.Core.Domain.Methods.PathAndOrderBookMethods.DepositAuthorized
 {
     /// <summary>
-    /// The deposit_authorized command indicates whether one account is authorized to send payments directly to another.
+    /// Represents a request to indicate whether one account is authorized to send payments directly to another.
     /// </summary>
-
     public class DepositAuthorizedRequest : RequestBase<DepositAuthorizedParameters>, IExpect<DepositAuthorizedResponse>
     {
         /// <summary>
@@ -20,7 +19,6 @@ namespace XRPL.Core.Domain.Methods.PathAndOrderBookMethods.DepositAuthorized
     /// <summary>
     /// Represents the parameters of an <see cref="DepositAuthorizedRequest"/> object.
     /// </summary>
-
     public abstract class DepositAuthorizedParameters : ParameterBase
     {
         /// <summary>
@@ -43,7 +41,6 @@ namespace XRPL.Core.Domain.Methods.PathAndOrderBookMethods.DepositAuthorized
 
         /// <summary>
         /// (Optional) The ledger index of the ledger to use, or a shortcut string to choose a ledger automatically.
-        /// (See Specifying Ledgers)
         /// </summary>
         [JsonPropertyName("ledger_index")]
         public string? LedgerIndex { get; set; }
