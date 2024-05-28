@@ -107,7 +107,7 @@ namespace XRPL.Core.Domain.Transactions
         /// The maximum amount of currency to deliver.
         /// If the tfPartialPayment flag is set, deliver up to this amount instead..
         /// </summary>
-        public new required string Amount { get; set; }
+        public new required string Amount { get => (string)base.Amount; set => base.Amount = value; }
     }
 
     /// <summary>
@@ -125,7 +125,7 @@ namespace XRPL.Core.Domain.Transactions
         /// The maximum amount of currency to deliver.
         /// If the tfPartialPayment flag is set, deliver up to this amount instead..
         /// </summary>
-        public new required TokenAmount Amount { get; set; }
+        public new required TokenAmount Amount { get => (TokenAmount)base.Amount; set => base.Amount = value; }
 
         /// <summary>
         /// (Optional) Highest amount of source currency this transaction is allowed to cost, including transfer fees, exchange rates, and slippage.
@@ -155,7 +155,7 @@ namespace XRPL.Core.Domain.Transactions
         /// The maximum amount of currency in XRP drops to deliver.
         /// If the tfPartialPayment flag is set, deliver up to this amount instead.
         /// </summary>
-        public new required string Amount { get; set; }
+        public new required string Amount { get => (string)base.Amount; set => base.Amount = value; }
 
         /// <summary>
         /// Highest amount in XRP drops, this transaction is allowed to cost, including transfer fees, exchange rates, and slippage.
@@ -185,7 +185,7 @@ namespace XRPL.Core.Domain.Transactions
         /// The maximum amount of currency to deliver.
         /// If the tfPartialPayment flag is set, deliver up to this amount instead.
         /// </summary>
-        public new required TokenAmount Amount { get; set; }
+        public new required TokenAmount Amount { get => (TokenAmount)base.Amount; set => base.Amount = value; }
 
         /// <summary>
         /// (Optional) Highest amount of source currency this transaction is allowed to cost, including transfer fees, exchange rates, and slippage.
@@ -214,7 +214,7 @@ namespace XRPL.Core.Domain.Transactions
         /// The maximum amount of currency in XRP drops to deliver.
         /// If the tfPartialPayment flag is set, deliver up to this amount instead.
         /// </summary>
-        public new required string Amount { get; set; }
+        public new required string Amount { get => (string)base.Amount; set => base.Amount = value; }
 
         /// <summary>
         /// (Optional) Minimum amount of XRP drops this transaction should deliver.
@@ -254,7 +254,7 @@ namespace XRPL.Core.Domain.Transactions
         /// The maximum amount of currency to deliver.
         /// If the tfPartialPayment flag is set, deliver up to this amount instead.
         /// </summary>
-        public new required TokenAmount Amount { get; set; }
+        public new required TokenAmount Amount { get => (TokenAmount)base.Amount; set => base.Amount = value; }
 
         /// <summary>
         /// (Optional) Minimum amount of destination currency this transaction should deliver.
@@ -295,7 +295,7 @@ namespace XRPL.Core.Domain.Transactions
         /// <summary>
         /// The maximum amount of XRP drops to deliver.
         /// </summary>
-        public new required string Amount { get; set; }
+        public new required string Amount { get => (string)base.Amount; set => base.Amount = value; }
 
         /// <summary>
         /// (Optional) Highest amount of XRP drops this transaction is allowed to cost, including transfer fees, exchange rates, and slippage.
@@ -322,7 +322,7 @@ namespace XRPL.Core.Domain.Transactions
         /// <summary>
         /// The maximum amount of currency to deliver.
         /// </summary>
-        public new required TokenAmount Amount { get; set; }
+        public new required TokenAmount Amount { get => (TokenAmount)base.Amount; set => base.Amount = value; }
 
         /// <summary>
         /// (Optional) Highest amount of source currency this transaction is allowed to cost, including transfer fees, exchange rates, and slippage.
@@ -354,7 +354,7 @@ namespace XRPL.Core.Domain.Transactions
         /// The maximum amount of currency to deliver.
         /// If the tfPartialPayment flag is set, deliver up to this amount instead..
         /// </summary>
-        public new required string DeliverMax { get; set; }
+        public new required string DeliverMax { get => (string)base.DeliverMax; set => base.DeliverMax = value; }
     }
 
     /// <summary>
@@ -372,7 +372,7 @@ namespace XRPL.Core.Domain.Transactions
         /// The maximum amount of currency to deliver.
         /// If the tfPartialPayment flag is set, deliver up to this amount instead..
         /// </summary>
-        public new required TokenAmount DeliverMax { get; set; }
+        public new required TokenAmount DeliverMax { get => (TokenAmount)base.DeliverMax; set => base.DeliverMax = value; }
 
         /// <summary>
         /// (Optional) Highest amount of source currency this transaction is allowed to cost, including transfer fees, exchange rates, and slippage.
@@ -402,7 +402,7 @@ namespace XRPL.Core.Domain.Transactions
         /// The maximum amount of currency in XRP drops to deliver.
         /// If the tfPartialPayment flag is set, deliver up to this amount instead.
         /// </summary>
-        public new required string DeliverMax { get; set; }
+        public new required string DeliverMax { get => (string)base.DeliverMax; set => base.DeliverMax = value; }
 
         /// <summary>
         /// Highest amount in XRP drops, this transaction is allowed to cost, including transfer fees, exchange rates, and slippage.
@@ -432,7 +432,7 @@ namespace XRPL.Core.Domain.Transactions
         /// The maximum amount of currency to deliver.
         /// If the tfPartialPayment flag is set, deliver up to this amount instead.
         /// </summary>
-        public new required TokenAmount DeliverMax { get; set; }
+        public new required TokenAmount DeliverMax { get => (TokenAmount)base.DeliverMax; set => base.DeliverMax = value; }
 
         /// <summary>
         /// (Optional) Highest amount of source currency this transaction is allowed to cost, including transfer fees, exchange rates, and slippage.
@@ -461,7 +461,7 @@ namespace XRPL.Core.Domain.Transactions
         /// The maximum amount of currency in XRP drops to deliver.
         /// If the tfPartialPayment flag is set, deliver up to this amount instead.
         /// </summary>
-        public new required string DeliverMax { get; set; }
+        public new required string DeliverMax { get => (string)base.DeliverMax; set => base.DeliverMax = value; }
 
         /// <summary>
         /// (Optional) Minimum amount of destination currency this transaction should deliver.
@@ -502,7 +502,7 @@ namespace XRPL.Core.Domain.Transactions
         /// The maximum amount of currency to deliver.
         /// If the tfPartialPayment flag is set, deliver up to this amount instead.
         /// </summary>
-        public new required TokenAmount DeliverMax { get; set; }
+        public new required TokenAmount DeliverMax { get => (TokenAmount)base.DeliverMax; set => base.DeliverMax = value; }
 
         /// <summary>
         /// (Optional) Minimum amount of destination currency this transaction should deliver.
@@ -543,7 +543,7 @@ namespace XRPL.Core.Domain.Transactions
         /// <summary>
         /// The maximum amount of XRP drops to deliver.
         /// </summary>
-        public new required string DeliverMax { get; set; }
+        public new required string DeliverMax { get => (string)base.DeliverMax; set => base.DeliverMax = value; }
 
         /// <summary>
         /// (Optional) Highest amount of XRP drops this transaction is allowed to cost, including transfer fees, exchange rates, and slippage.
@@ -570,7 +570,7 @@ namespace XRPL.Core.Domain.Transactions
         /// <summary>
         /// The maximum amount of currency to deliver.
         /// </summary>
-        public new required TokenAmount DeliverMax { get; set; }
+        public new required TokenAmount DeliverMax { get => (TokenAmount)base.DeliverMax; set => base.DeliverMax = value; }
 
         /// <summary>
         /// (Optional) Highest amount of source currency this transaction is allowed to cost, including transfer fees, exchange rates, and slippage.
