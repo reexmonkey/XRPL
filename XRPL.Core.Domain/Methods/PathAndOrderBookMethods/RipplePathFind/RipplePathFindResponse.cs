@@ -47,7 +47,7 @@ namespace XRPL.Core.Domain.Methods.PathAndOrderBookMethods.NftSellOffers
         /// Array of arrays of objects defining payment paths.
         /// </summary>
         [JsonPropertyName("paths_computed")]
-        public required RipplePath[] PathsComputed { get; set; }
+        public required PaymentPath[] PathsComputed { get; set; }
 
         /// <summary>
         /// Currency Amount that the source would have to send along this path for the destination to receive the desired amount.

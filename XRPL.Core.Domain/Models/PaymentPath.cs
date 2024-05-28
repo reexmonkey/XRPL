@@ -13,10 +13,10 @@ namespace XRPL.Core.Domain.Models
     /// <para/>Since XRP can be sent directly to any address, an XRP-to-XRP transaction does not use any paths.
     /// </summary>
     [JsonPolymorphic]
-    [JsonDerivedType(typeof(AccountRipplePath), typeDiscriminator: nameof(AccountRipplePath))]
-    [JsonDerivedType(typeof(XrpRipplePath), typeDiscriminator: nameof(XrpRipplePath))]
-    [JsonDerivedType(typeof(FungibleTokenRipplePath), typeDiscriminator: nameof(FungibleTokenRipplePath))]
-    public abstract class RipplePath
+    [JsonDerivedType(typeof(AccountPaymentPath), typeDiscriminator: nameof(AccountPaymentPath))]
+    [JsonDerivedType(typeof(XrpPaymentPath), typeDiscriminator: nameof(XrpPaymentPath))]
+    [JsonDerivedType(typeof(FungibleTokenPaymentPath), typeDiscriminator: nameof(FungibleTokenPaymentPath))]
+    public abstract class PaymentPath
     {
         /// <summary>
         /// (Optional) An indicator of which other fields are present.
@@ -41,8 +41,8 @@ namespace XRPL.Core.Domain.Models
     /// All paths in a path set must start with the same currency, and must also end with the same currency as each other.
     /// <para/>Since XRP can be sent directly to any address, an XRP-to-XRP transaction does not use any paths.
     /// </summary>
-    [JsonDerivedType(typeof(AccountRipplePath), typeDiscriminator: nameof(AccountRipplePath))]
-    public sealed class AccountRipplePath : RipplePath
+    [JsonDerivedType(typeof(AccountPaymentPath), typeDiscriminator: nameof(AccountPaymentPath))]
+    public sealed class AccountPaymentPath : PaymentPath
     {
         /// <summary>
         /// (Optional) If present, this path step represents rippling through the specified address.
@@ -61,8 +61,8 @@ namespace XRPL.Core.Domain.Models
     /// All paths in a path set must start with the same currency, and must also end with the same currency as each other.
     /// <para/>Since XRP can be sent directly to any address, an XRP-to-XRP transaction does not use any paths.
     /// </summary>
-    [JsonDerivedType(typeof(XrpRipplePath), typeDiscriminator: nameof(XrpRipplePath))]
-    public sealed class XrpRipplePath : RipplePath
+    [JsonDerivedType(typeof(XrpPaymentPath), typeDiscriminator: nameof(XrpPaymentPath))]
+    public sealed class XrpPaymentPath : PaymentPath
     {
         /// <summary>
         /// This path step represents changing XRP through an order book.
@@ -82,8 +82,8 @@ namespace XRPL.Core.Domain.Models
     /// All paths in a path set must start with the same currency, and must also end with the same currency as each other.
     /// <para/>Since XRP can be sent directly to any address, an XRP-to-XRP transaction does not use any paths.
     /// </summary>
-    [JsonDerivedType(typeof(FungibleTokenRipplePath), typeDiscriminator: nameof(FungibleTokenRipplePath))]
-    public sealed class FungibleTokenRipplePath : RipplePath
+    [JsonDerivedType(typeof(FungibleTokenPaymentPath), typeDiscriminator: nameof(FungibleTokenPaymentPath))]
+    public sealed class FungibleTokenPaymentPath : PaymentPath
     {
         /// <summary>
         /// (Optional) If present, this path step represents changing currencies through an order book.

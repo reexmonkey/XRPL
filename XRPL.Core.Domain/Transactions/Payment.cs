@@ -137,7 +137,7 @@ namespace XRPL.Core.Domain.Transactions
         /// <summary>
         /// (Optional, auto-fillable) Array of payment paths to be used for this transaction.
         /// </summary>
-        public RipplePath[][]? Paths { get; set; }
+        public PaymentPath[][]? Paths { get; set; }
     }
 
     /// <summary>
@@ -167,7 +167,7 @@ namespace XRPL.Core.Domain.Transactions
         /// <summary>
         /// (Optional, auto-fillable) Array of payment paths to be used for this transaction.
         /// </summary>
-        public RipplePath[][] Paths { get; set; } = [];
+        public PaymentPath[][] Paths { get; set; } = [];
     }
 
     /// <summary>
@@ -197,7 +197,7 @@ namespace XRPL.Core.Domain.Transactions
         /// <summary>
         /// (Optional, auto-fillable) Array of payment paths to be used for this transaction.
         /// </summary>
-        public RipplePath[][] Paths { get; set; } = [];
+        public PaymentPath[][] Paths { get; set; } = [];
     }
 
     /// <summary>
@@ -230,7 +230,7 @@ namespace XRPL.Core.Domain.Transactions
         /// <summary>
         /// (Optional, auto-fillable) Array of payment paths to be used for this transaction.
         /// </summary>
-        public RipplePath[][] Paths { get; set; } = [];
+        public PaymentPath[][] Paths { get; set; } = [];
 
         /// <summary>
         /// Initializes a new instance of the <see cref="XrpPartialPaymentV1"/> class.
@@ -271,7 +271,7 @@ namespace XRPL.Core.Domain.Transactions
         /// <summary>
         /// (Optional, auto-fillable) Array of payment paths to be used for this transaction.
         /// </summary>
-        public RipplePath[][] Paths { get; set; } = [];
+        public PaymentPath[][] Paths { get; set; } = [];
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FungibleTokenPartialPaymentV1"/> class.
@@ -306,7 +306,7 @@ namespace XRPL.Core.Domain.Transactions
         /// <summary>
         /// (Optional, auto-fillable) Array of payment paths to be used for this transaction.
         /// </summary>
-        public required RipplePath[][] Paths { get; set; }
+        public required PaymentPath[][] Paths { get; set; }
     }
 
     /// <summary>
@@ -333,7 +333,7 @@ namespace XRPL.Core.Domain.Transactions
         /// <summary>
         /// (Optional, auto-fillable) Array of payment paths to be used for this transaction.
         /// </summary>
-        public required RipplePath[][] Paths { get; set; }
+        public required PaymentPath[][] Paths { get; set; }
     }
 
     #endregion API V1 Payments
@@ -384,7 +384,7 @@ namespace XRPL.Core.Domain.Transactions
         /// <summary>
         /// (Optional, auto-fillable) Array of payment paths to be used for this transaction.
         /// </summary>
-        public RipplePath[][]? Paths { get; set; }
+        public PaymentPath[][]? Paths { get; set; }
     }
 
     /// <summary>
@@ -414,7 +414,7 @@ namespace XRPL.Core.Domain.Transactions
         /// <summary>
         /// (Optional, auto-fillable) Array of payment paths to be used for this transaction.
         /// </summary>
-        public RipplePath[][] Paths { get; set; } = [];
+        public PaymentPath[][] Paths { get; set; } = [];
     }
 
     /// <summary>
@@ -444,7 +444,7 @@ namespace XRPL.Core.Domain.Transactions
         /// <summary>
         /// (Optional, auto-fillable) Array of payment paths to be used for this transaction.
         /// </summary>
-        public RipplePath[][] Paths { get; set; } = [];
+        public PaymentPath[][] Paths { get; set; } = [];
     }
 
     /// <summary>
@@ -478,7 +478,7 @@ namespace XRPL.Core.Domain.Transactions
         /// <summary>
         /// (Optional, auto-fillable) Array of payment paths to be used for this transaction.
         /// </summary>
-        public RipplePath[][] Paths { get; set; } = [];
+        public PaymentPath[][] Paths { get; set; } = [];
 
         /// <summary>
         /// Initializes a new instance of the <see cref="XrpPartialPaymentV2"/> class.
@@ -519,7 +519,7 @@ namespace XRPL.Core.Domain.Transactions
         /// <summary>
         /// (Optional, auto-fillable) Array of payment paths to be used for this transaction.
         /// </summary>
-        public RipplePath[][] Paths { get; set; } = [];
+        public PaymentPath[][] Paths { get; set; } = [];
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FungibleTokenPartialPaymentV2"/> class.
@@ -554,7 +554,7 @@ namespace XRPL.Core.Domain.Transactions
         /// <summary>
         /// (Optional, auto-fillable) Array of payment paths to be used for this transaction.
         /// </summary>
-        public required RipplePath[][] Paths { get; set; }
+        public required PaymentPath[][] Paths { get; set; }
     }
 
     /// <summary>
@@ -581,7 +581,7 @@ namespace XRPL.Core.Domain.Transactions
         /// <summary>
         /// (Optional, auto-fillable) Array of payment paths to be used for this transaction.
         /// </summary>
-        public required RipplePath[][] Paths { get; set; }
+        public required PaymentPath[][] Paths { get; set; }
     }
 
     #endregion API V2 Payments
