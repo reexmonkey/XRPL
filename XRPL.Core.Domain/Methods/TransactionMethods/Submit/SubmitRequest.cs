@@ -1,6 +1,7 @@
 ﻿using System.Text.Json.Serialization;
-using System.Transactions;
 using XRPL.Core.Domain.Interfaces;
+using XRPL.Core.Domain.Models;
+using XRPL.Core.Domain.Transactions;
 
 namespace XRPL.Core.Domain.Methods.TransactionMethods.Submit
 {
@@ -28,7 +29,7 @@ namespace XRPL.Core.Domain.Methods.TransactionMethods.Submit
         /// Hex representation of the signed transaction to submit. This can be a multi-signed transaction.
         /// </summary>
         [JsonPropertyName("tx_blob")]
-        public string? TxBlob { get; set; }
+        public required string TxBlob { get; set; }
 
         /// <summary>
         /// If true, and the transaction fails locally, do not retry or relay the transaction to other servers. The default is false.
@@ -53,56 +54,20 @@ namespace XRPL.Core.Domain.Methods.TransactionMethods.Submit
     }
 
     /// <summary>
-    /// Represents the parameters of an <see cref="SignAndSubmitRequest"/> object.
+    /// Specifies the parameters of an <see cref="SignAndSubmitRequest"/> object.
     /// </summary>
-
-    public class SignAndSubmitParameters : ParameterBase
+    [JsonPolymorphic]
+    [JsonDerivedType(typeof(SecretSignAndSubmitParameters), typeDiscriminator: nameof(SecretSignAndSubmitParameters))]
+    [JsonDerivedType(typeof(SeedSignAndSubmitParameters), typeDiscriminator: nameof(SeedSignAndSubmitParameters))]
+    [JsonDerivedType(typeof(SeedHexSignAndSubmitParameters), typeDiscriminator: nameof(SeedHexSignAndSubmitParameters))]
+    [JsonDerivedType(typeof(PassphraseSignAndSubmitParameters), typeDiscriminator: nameof(PassphraseSignAndSubmitParameters))]
+    public abstract class SignAndSubmitParameters : ParameterBase
     {
         /// <summary>
         /// Transaction definition in JSON format, optionally omitting any auto-fillable fields.
         /// </summary>
         [JsonPropertyName("tx_json")]
-        public Transaction? TxJson { get; set; }
-
-        /// <summary>
-        /// (Optional) Secret key of the account supplying the transaction, used to sign it.
-        /// <para/>Do not send your secret to untrusted servers or through unsecured network connections.
-        /// Cannot be used with key_type, seed, seed_hex, or passphrase.
-        /// </summary>
-        [JsonPropertyName("secret")]
-        public string? Secret { get; set; }
-
-        /// <summary>
-        /// (Optional) Secret key of the account supplying the transaction, used to sign it.
-        /// Must be in the XRP Ledger's base58 format. If provided, you must also specify the key_type.
-        /// Cannot be used with secret, seed_hex, or passphrase.
-        /// </summary>
-        [JsonPropertyName("seed")]
-        public string? Seed { get; set; }
-
-        /// <summary>
-        /// (Optional) Secret key of the account supplying the transaction, used to sign it.
-        /// Must be in hexadecimal format. If provided, you must also specify the key_type.
-        /// Cannot be used with secret, seed, or passphrase.
-        /// </summary>
-        [JsonPropertyName("seed_hex")]
-        public string? SeedHex { get; set; }
-
-        /// <summary>
-        /// (Optional) Secret key of the account supplying the transaction, used to sign it, as a string passphrase.
-        /// <para/>If provided, you must also specify the key_type. Cannot be used with secret, seed, or seed_hex.
-        /// </summary>
-        [JsonPropertyName("passphrase")]
-        public string? Passphrase { get; set; }
-
-        /// <summary>
-        /// (Optional) Type of cryptographic key provided in this request.
-        /// <para/>Valid types are secp256k1 or ed25519.
-        /// Defaults to secp256k1.
-        /// Cannot be used with secret. Caution: Ed25519 support is experimental.
-        /// </summary>
-        [JsonPropertyName("key_type")]
-        public KeyType? KeyType { get; set; }
+        public required Transaction TxJson { get; set; }
 
         /// <summary>
         /// (Optional) If true, and the transaction fails locally, do not retry or relay the transaction to other servers.
@@ -142,11 +107,84 @@ namespace XRPL.Core.Domain.Methods.TransactionMethods.Submit
     }
 
     /// <summary>
-    /// Represents the type of cryptographic key.
+    /// Represents the parameters of an <see cref="SignAndSubmitRequest"/> object.
     /// </summary>
-    public enum KeyType
+    [JsonDerivedType(typeof(SecretSignAndSubmitParameters), typeDiscriminator: nameof(SecretSignAndSubmitParameters))]
+    public class SecretSignAndSubmitParameters : SignAndSubmitParameters
     {
-        secp256k1,
-        ed25519
+        /// <summary>
+        /// Secret key of the account supplying the transaction, used to sign it.
+        /// <para/>Do not send your secret to untrusted servers or through unsecured network connections.
+        /// </summary>
+        [JsonPropertyName("secret")]
+        public required string Secret { get; set; }
+    }
+
+    /// <summary>
+    /// Represents the parameters of an <see cref="SignAndSubmitRequest"/> object.
+    /// </summary>
+    [JsonDerivedType(typeof(SeedSignAndSubmitParameters), typeDiscriminator: nameof(SeedSignAndSubmitParameters))]
+    public class SeedSignAndSubmitParameters : SignAndSubmitParameters
+    {
+        /// <summary>
+        /// (Optional) Secret key of the account supplying the transaction, used to sign it.
+        /// Must be in the XRP Ledger's base58 format.
+        /// </summary>
+        [JsonPropertyName("seed")]
+        public required string Seed { get; set; }
+
+        /// <summary>
+        /// Type of cryptographic key provided in this request.
+        /// <para/>Valid types are secp256k1 or ed25519.
+        /// Defaults to secp256k1.
+        /// Cannot be used with secret. Caution: Ed25519 support is experimental.
+        /// </summary>
+        [JsonPropertyName("key_type")]
+        public required KeyType KeyType { get; set; }
+    }
+
+    /// <summary>
+    /// Represents the parameters of an <see cref="SignAndSubmitRequest"/> object that signs a transaction with a seed in hexadecimal format.
+    /// </summary>
+    [JsonDerivedType(typeof(SeedHexSignAndSubmitParameters), typeDiscriminator: nameof(SeedHexSignAndSubmitParameters))]
+    public class SeedHexSignAndSubmitParameters : SignAndSubmitParameters
+    {
+        /// <summary>
+        /// (Optional) Secret key of the account supplying the transaction, used to sign it.
+        /// Must be in hexadecimal format.
+        /// </summary>
+        [JsonPropertyName("seed_hex")]
+        public string? SeedHex { get; set; }
+
+        /// <summary>
+        /// Type of cryptographic key provided in this request.
+        /// <para/>Valid types are secp256k1 or ed25519.
+        /// Defaults to secp256k1.
+        /// Cannot be used with secret. Caution: Ed25519 support is experimental.
+        /// </summary>
+        [JsonPropertyName("key_type")]
+        public required KeyType KeyType { get; set; }
+    }
+
+    /// <summary>
+    /// Represents the parameters of an <see cref="SignAndSubmitRequest"/> object that signs a transaction with a passphrase.
+    /// </summary>
+    [JsonDerivedType(typeof(PassphraseSignAndSubmitParameters), typeDiscriminator: nameof(PassphraseSignAndSubmitParameters))]
+    public class PassphraseSignAndSubmitParameters : SignAndSubmitParameters
+    {
+        /// <summary>
+        /// Secret key of the account supplying the transaction, used to sign it, as a string passphrase.
+        /// </summary>
+        [JsonPropertyName("passphrase")]
+        public string? Passphrase { get; set; }
+
+        /// <summary>
+        /// Type of cryptographic key provided in this request.
+        /// <para/>Valid types are secp256k1 or ed25519.
+        /// Defaults to secp256k1.
+        /// Cannot be used with secret. Caution: Ed25519 support is experimental.
+        /// </summary>
+        [JsonPropertyName("key_type")]
+        public required KeyType KeyType { get; set; }
     }
 }

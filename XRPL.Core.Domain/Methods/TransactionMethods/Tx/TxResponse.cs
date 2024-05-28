@@ -6,70 +6,143 @@ namespace XRPL.Core.Domain.Methods.TransactionMethods.Tx
     /// <summary>
     /// Represents a response to a transaction method request that retrieves information on a single transaction, by its identifying hash or its CTID.
     /// </summary>
-
-    public class HashTxResponse : ResponseBase<HashTxResult>
+    public class HashJsonTxResponse : ResponseBase<HashJsonTxResult>
     {
     }
 
     /// <summary>
     /// Represents a response to a transaction method request that retrieves information on a single transaction, by its identifying CTID.
     /// </summary>
+    public class CtidJsonTxResponse : ResponseBase<CtidJsonTxResult>
+    {
+    }
 
-    public class CtidTxResponse : ResponseBase<CtidTxResult>
+    /// <summary>
+    /// Represents a response to a transaction method request that retrieves information on a single transaction, by its identifying hash or its CTID.
+    /// </summary>
+    public class HashBinaryTxResponse : ResponseBase<HashBinaryTxResult>
+    {
+    }
+
+    /// <summary>
+    /// Represents a response to a transaction method request that retrieves information on a single transaction, by its identifying CTID.
+    /// </summary>
+    public class CtidBinaryTxResponse : ResponseBase<CtidBinaryTxResult>
     {
     }
 
     /// <summary>
     /// Specifies a result of a transaction response object.
     /// </summary>
-
+    [JsonPolymorphic(UnknownDerivedTypeHandling = JsonUnknownDerivedTypeHandling.FallBackToBaseType)]
+    [JsonDerivedType(typeof(TxResult), typeDiscriminator: nameof(TxResult))]
+    [JsonDerivedType(typeof(JsonTxResult), typeDiscriminator: nameof(JsonTxResult))]
     public abstract class TxResult : ResultBase
     {
         /// <summary>
-        /// If true, return transaction data and metadata as binary serialized to hexadecimal strings. If false, return transaction data and metadata as JSON.
-        /// <para/>The default is false.
+        /// The close time of the ledger in which the transaction was applied, in seconds since the Ripple Epoch.
         /// </summary>
-        [JsonPropertyName("binary")]
-        public bool Binary { get; set; }
+        [JsonPropertyName("date")]
+        public uint Date { get; set; }
 
         /// <summary>
-        /// Use this with max_ledger to specify a range of up to 1000 ledger indexes, starting with this ledger (inclusive).
-        /// <para/>If the server cannot find the transaction, it confirms whether it was able to search all the ledgers in this range.
+        /// The ledger index of the ledger that includes this transaction.
         /// </summary>
-        [JsonPropertyName("min_ledger")]
-        public string? LedgerHash { get; set; }
+        [JsonPropertyName("ledger_index")]
+        public required string LedgerIndex { get; set; }
 
         /// <summary>
-        /// Use this with min_ledger to specify a range of up to 1000 ledger indexes, ending with this ledger (inclusive).
-        /// <para/>If the server cannot find the transaction, it confirms whether it was able to search all the ledgers in the requested range.
+        /// Transaction metadata, which describes the results of the transaction.
         /// </summary>
-        [JsonPropertyName("max_ledger")]
-        public TransactionMetadata? MaxLedger { get; set; }
+        [JsonPropertyName("meta")]
+        public object Meta { get; set; } = null!;
+
+        /// <summary>
+        /// If true, this data comes from a validated ledger version; if omitted or set to false, this data is not fi
+        /// </summary>
+        [JsonPropertyName("validated")]
+        public bool Validated { get; set; }
     }
 
     /// <summary>
-    /// Represents a <see cref="TxResult"/> with a 256-bit hash of the transaction.
+    /// Specifies a result of a transaction response object where the transaction metadata is a JSON object.
     /// </summary>
-    public sealed class HashTxResult : TxResult
+    [JsonPolymorphic(UnknownDerivedTypeHandling = JsonUnknownDerivedTypeHandling.FallBackToBaseType)]
+    [JsonDerivedType(typeof(JsonTxResult), typeDiscriminator: nameof(JsonTxResult))]
+    public abstract class JsonTxResult : TxResult
     {
         /// <summary>
-        /// The 256-bit hash of the transaction to look up, as hexadecimal.
+        /// Transaction metadata, which describes the results of the transaction.
         /// </summary>
-        [JsonPropertyName("transaction")]
-        public string? Transaction { get; set; }
+        [JsonPropertyName("meta")]
+        public new required TransactionMetadata Meta { get => (TransactionMetadata)base.Meta; set => base.Meta = value; }
     }
 
     /// <summary>
-    /// Represents a <see cref="TxResult"/> with a compact transaction identifier of the transaction.
+    /// Specifies a result of a transaction response object where the transaction metadata is a binary string.
     /// </summary>
+    [JsonPolymorphic(UnknownDerivedTypeHandling = JsonUnknownDerivedTypeHandling.FallBackToBaseType)]
+    [JsonDerivedType(typeof(BinaryTxResult), typeDiscriminator: nameof(BinaryTxResult))]
+    public abstract class BinaryTxResult : TxResult
+    {
+        /// <summary>
+        /// Transaction metadata, which describes the results of the transaction.
+        /// </summary>
+        [JsonPropertyName("meta")]
+        public new required string Meta { get => (string)base.Meta; set => base.Meta = value; }
+    }
 
-    public sealed class CtidTxResult : TxResult
+    /// <summary>
+    /// Represents a <see cref="TxResult"/> with a compact transaction identifier of the transaction and a JSON-based transaction metadata.
+    /// </summary>
+    [JsonDerivedType(typeof(CtidJsonTxResult), typeDiscriminator: nameof(CtidJsonTxResult))]
+    public sealed class CtidJsonTxResult : JsonTxResult
     {
         /// <summary>
         /// The compact transaction identifier of the transaction to look up.
         /// <para/>Must use uppercase hexadecimal only.
         /// </summary>
         [JsonPropertyName("ctid")]
-        public string? Ctid { get; set; }
+        public required string Ctid { get; set; }
+    }
+
+    /// <summary>
+    /// Represents a <see cref="TxResult"/> with a 256-bit hash of the transaction and a JSON-based transaction metadata.
+    /// </summary>
+    [JsonDerivedType(typeof(HashJsonTxResult), typeDiscriminator: nameof(HashJsonTxResult))]
+    public sealed class HashJsonTxResult : JsonTxResult
+    {
+        /// <summary>
+        /// The 256-bit hash of the transaction to look up, as hexadecimal.
+        /// </summary>
+        [JsonPropertyName("transaction")]
+        public required string Transaction { get; set; }
+    }
+
+    /// <summary>
+    /// Represents a <see cref="TxResult"/> with a compact transaction identifier of the transaction and a binary transaction metadata.
+    /// </summary>
+    [JsonDerivedType(typeof(CtidBinaryTxResult), typeDiscriminator: nameof(CtidBinaryTxResult))]
+    public sealed class CtidBinaryTxResult : BinaryTxResult
+    {
+        /// <summary>
+        /// The compact transaction identifier of the transaction to look up.
+        /// <para/>Must use uppercase hexadecimal only.
+        /// </summary>
+        [JsonPropertyName("ctid")]
+        public required string Ctid { get; set; }
+    }
+
+    /// <summary>
+    /// Represents a <see cref="TxResult"/> with a 256-bit hash of the transaction and a binary transaction metadata.
+    /// </summary>
+    [JsonDerivedType(typeof(HashBinaryTxResult), typeDiscriminator: nameof(HashBinaryTxResult))]
+    public sealed class HashBinaryTxResult : BinaryTxResult
+    {
+        /// <summary>
+        /// The 256-bit hash of the transaction to look up, as hexadecimal.
+        /// </summary>
+        [JsonPropertyName("transaction")]
+        public required string Transaction { get; set; }
     }
 }

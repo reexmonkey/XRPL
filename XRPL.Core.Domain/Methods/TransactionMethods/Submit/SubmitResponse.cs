@@ -12,6 +12,10 @@ namespace XRPL.Core.Domain.Methods.TransactionMethods.Submit
 
     /// <summary>
     /// Represents a result of an <see cref="SubmitResponse"/> object.
+    /// <para/>Caution: If this command results in an error message, the message can contain the secret key from the request. (This can only happen in sign-and-submit mode.) Make sure that these errors are not visible to others.
+    /// <para/>- Do not write an error including your secret key to a log file that can be seen by multiple people.
+    /// <para/>- Do not paste an error including your secret key to a public place for debugging.
+    /// <para/>- Do not display an error message including your secret key on a website, even by accident.
     /// </summary>
     public class SubmitResult : ResultBase
     {
@@ -19,31 +23,32 @@ namespace XRPL.Core.Domain.Methods.TransactionMethods.Submit
         /// Text result code indicating the preliminary result of the transaction, for example tesSUCCESS.
         /// </summary>
         [JsonPropertyName("engine_result")]
-        public string? EngineResult { get; set; }
+        public required string EngineResult { get; set; }
 
         /// <summary>
         /// Numeric version of the result code. Not recommended.
         /// </summary>
         [JsonPropertyName("engine_result_code")]
+        [Obsolete("Not recommended.")]
         public int? EngineResultCode { get; set; }
 
         /// <summary>
         /// Human-readable explanation of the transaction's preliminary result.
         /// </summary>
         [JsonPropertyName("engine_result_message")]
-        public string? EngineResultMessage { get; set; }
+        public required string EngineResultMessage { get; set; }
 
         /// <summary>
         /// The complete transaction in hex string format.
         /// </summary>
         [JsonPropertyName("tx_blob")]
-        public string? TxBlob { get; set; }
+        public required string TxBlob { get; set; }
 
         /// <summary>
         /// The complete transaction in JSON format.
         /// </summary>
         [JsonPropertyName("tx_json")]
-        public Transaction? TxJson { get; set; }
+        public required Transaction TxJson { get; set; }
 
         /// <summary>
         /// (Omitted in sign-and-submit mode) The value true indicates that the transaction was applied, queued, broadcast, or kept for later.

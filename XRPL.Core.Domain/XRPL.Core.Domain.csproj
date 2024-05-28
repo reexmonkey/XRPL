@@ -14,7 +14,6 @@
     <Folder Include="Methods\LedgerMethods\" />
     <Folder Include="Methods\SubscriptionMethods\" />
     <Folder Include="Methods\ServerInfoMethods\" />
-    <Folder Include="Methods\PathAndOrderBookMethods\PathFind\" />
   </ItemGroup>
 
   <!--<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

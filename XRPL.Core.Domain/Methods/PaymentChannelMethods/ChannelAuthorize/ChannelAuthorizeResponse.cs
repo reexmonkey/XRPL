@@ -1,7 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 using XRPL.Core.Domain.Methods.TransactionMethods.Tx;
 
-namespace XRPL.Core.Domain.Methods.PaymentChannelMethods
+namespace XRPL.Core.Domain.Methods.PaymentChannelMethods.ChannelAuthorize
 {
     /// <summary>
     /// Represents a response to a transaction method request that creates a signature that can be used to redeem a specific amount of XRP from a payment channel.

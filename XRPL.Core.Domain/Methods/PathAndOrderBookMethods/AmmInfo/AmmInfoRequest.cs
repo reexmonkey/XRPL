@@ -89,13 +89,13 @@ namespace XRPL.Core.Domain.Methods.PathAndOrderBookMethods.AmmInfo
         /// The XRP asset of the AMM to look up.
         ///</summary>
         [JsonPropertyName("asset")]
-        public new required XrpAsset Asset { get; set; }
+        public new required XrpAsset Asset { get => (XrpAsset)base.Asset; set => base.Asset = value; }
 
         ///<summary>
         ///The other of the assets of the AMM, as an object with currency and issuer fields like currency amounts.
         ///</summary>
         [JsonPropertyName("asset2")]
-        public new required TokenAsset Asset2 { get; set; }
+        public new required TokenAsset Asset2 { get => (TokenAsset)base.Asset2; set => base.Asset2 = value; }
     }
 
     /// <summary>
@@ -108,13 +108,13 @@ namespace XRPL.Core.Domain.Methods.PathAndOrderBookMethods.AmmInfo
         /// One of the assets of the AMM to look up, as an object with currency and issuer fields (omit issuer for XRP), like currency amounts.
         ///</summary>
         [JsonPropertyName("asset")]
-        public new required TokenAsset Asset { get; set; }
+        public new required TokenAsset Asset { get => (TokenAsset)base.Asset; set => base.Asset = value; }
 
         ///<summary>
         ///The XRP asset of the AMM.
         ///</summary>
         [JsonPropertyName("asset2")]
-        public new required XrpAsset Asset2 { get; set; }
+        public new required XrpAsset Asset2 { get => (XrpAsset)base.Asset2; set => base.Asset2 = value; }
     }
 
     /// <summary>
@@ -127,12 +127,12 @@ namespace XRPL.Core.Domain.Methods.PathAndOrderBookMethods.AmmInfo
         /// One of the assets of the AMM to look up, as an object with currency and issuer fields (omit issuer for XRP), like currency amounts.
         ///</summary>
         [JsonPropertyName("asset")]
-        public new required TokenAsset Asset { get; set; }
+        public new required TokenAsset Asset { get => (TokenAsset)base.Asset; set => base.Asset = value; }
 
         ///<summary>
         ///The XRP asset of the AMM.
         ///</summary>
         [JsonPropertyName("asset2")]
-        public new required XrpAsset Asset2 { get; set; }
+        public new required TokenAsset Asset2 { get => (TokenAsset)base.Asset2; set => base.Asset2 = value; }
     }
 }

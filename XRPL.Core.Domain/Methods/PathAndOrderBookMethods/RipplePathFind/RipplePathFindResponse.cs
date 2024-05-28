@@ -66,7 +66,7 @@ namespace XRPL.Core.Domain.Methods.PathAndOrderBookMethods.NftSellOffers
         /// Currency Amount in XRP drops that the source would have to send along this path for the destination to receive the desired amount.
         /// </summary>
         [JsonPropertyName("source_amount")]
-        public new required string SourceAmount { get; set; }
+        public new required string SourceAmount { get => (string)base.SourceAmount; set => base.SourceAmount = value; }
     }
 
     /// <summary>
@@ -79,6 +79,6 @@ namespace XRPL.Core.Domain.Methods.PathAndOrderBookMethods.NftSellOffers
         /// Currency Amount in XRP drops that the source would have to send along this path for the destination to receive the desired amount.
         /// </summary>
         [JsonPropertyName("source_amount")]
-        public new required TokenAmount SourceAmount { get; set; }
+        public new required TokenAmount SourceAmount { get => (TokenAmount)base.SourceAmount; set => base.SourceAmount = value; }
     }
 }

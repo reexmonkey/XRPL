@@ -6,13 +6,12 @@ namespace XRPL.Core.Domain.Methods.TransactionMethods.Tx
     /// <summary>
     /// Represents a request that retrieves information on a single transaction, by its identifying hash.
     /// </summary>
-
-    public class TxRequest : RequestBase<TxParameters>, IExpect<HashTxResponse>
+    public class CtidJsonTxRequest : RequestBase<TxParameters>, IExpect<CtidJsonTxResponse>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="TxRequest"/> class.
+        /// Initializes a new instance of the <see cref="CtidJsonTxRequest"/> class.
         /// </summary>
-        public TxRequest() : base("tx")
+        public CtidJsonTxRequest() : base("tx")
         {
         }
     }
@@ -20,21 +19,45 @@ namespace XRPL.Core.Domain.Methods.TransactionMethods.Tx
     /// <summary>
     /// Represents a request that retrieves information on a single transaction, by its identifying hash or its CTID.
     /// </summary>
-
-    public class CtidTxRequest : RequestBase<TxParameters>, IExpect<CtidTxResponse>
+    public class CtidBinaryTxRequest : RequestBase<TxParameters>, IExpect<CtidBinaryTxResponse>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="TxRequest"/> class.
+        /// Initializes a new instance of the <see cref="CtidBinaryTxRequest"/> class.
         /// </summary>
-        public CtidTxRequest() : base("tx")
+        public CtidBinaryTxRequest() : base("tx")
         {
         }
     }
 
     /// <summary>
-    /// Represents the parameters of an <see cref="TxRequest"/> object.
+    /// Represents a request that retrieves information on a single transaction, by its identifying hash or its CTID.
     /// </summary>
+    public class HashJsonTxRequest : RequestBase<TxParameters>, IExpect<HashJsonTxResponse>
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CtidJsonTxRequest"/> class.
+        /// </summary>
+        public HashJsonTxRequest() : base("tx")
+        {
+        }
+    }
 
+    /// <summary>
+    /// Represents a request that retrieves information on a single transaction, by its identifying hash or its CTID.
+    /// </summary>
+    public class HashBinaryTxRequest : RequestBase<TxParameters>, IExpect<HashBinaryTxResponse>
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="HashBinaryTxRequest"/> class.
+        /// </summary>
+        public HashBinaryTxRequest() : base("tx")
+        {
+        }
+    }
+
+    /// <summary>
+    /// Represents the parameters of any Tx object.
+    /// </summary>
     public class TxParameters : ParameterBase
     {
         /// <summary>

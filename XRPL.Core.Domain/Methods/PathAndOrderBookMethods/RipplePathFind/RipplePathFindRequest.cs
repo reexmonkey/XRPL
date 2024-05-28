@@ -91,14 +91,14 @@ namespace XRPL.Core.Domain.Methods.PathAndOrderBookMethods.NftSellOffers
         /// This requests a path to deliver as much as possible, while spending no more than the amount specified in send_max (if provided).
         /// </summary>
         [JsonPropertyName("destination_amount")]
-        public new required string DestinationAmount { get; set; }
+        public new required string DestinationAmount { get => (string)base.DestinationAmount; set => base.DestinationAmount = value; }
 
         /// <summary>
         /// (Optional) XRP drops that would be spent in the transaction.
         /// <para/>Cannot be used with <see cref="RipplePathFindParameters.SourceCurrencies"/>.
         /// </summary>
         [JsonPropertyName("send_max")]
-        public new string? SendMax { get; set; }
+        public new string? SendMax { get => (string?)base.SendMax; set => base.SendMax = value; }
     }
 
     /// <summary>
@@ -113,13 +113,13 @@ namespace XRPL.Core.Domain.Methods.PathAndOrderBookMethods.NftSellOffers
         /// This requests a path to deliver as much as possible, while spending no more than the amount specified in send_max (if provided).
         /// </summary>
         [JsonPropertyName("destination_amount")]
-        public new required TokenAmount DestinationAmount { get; set; }
+        public new required TokenAmount DestinationAmount { get => (TokenAmount)base.DestinationAmount; set => base.DestinationAmount = value; }
 
         /// <summary>
         /// (Optional) Currency amount that would be spent in the transaction.
         /// <para/>Cannot be used with <see cref="RipplePathFindParameters.SourceCurrencies"/>.
         /// </summary>
         [JsonPropertyName("send_max")]
-        public new TokenAmount? SendMax { get; set; }
+        public new TokenAmount? SendMax { get => (TokenAmount?)base.SendMax; set => base.SendMax = value; }
     }
 }

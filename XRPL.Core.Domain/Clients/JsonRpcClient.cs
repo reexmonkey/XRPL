@@ -33,15 +33,12 @@ namespace XRPL.Core.Domain.Clients
         private readonly Uri uri;
         private readonly Encoding encoding = new UTF8Encoding(false, true);
 
-
-        private readonly static JsonSerializerOptions serializerOptions = new()
+        private static readonly JsonSerializerOptions serializerOptions = new()
         {
             WriteIndented = true,
-
         };
 
         private bool disposedValue;
-
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JsonRpcClient"/> for the given endpoint.
@@ -212,17 +209,29 @@ namespace XRPL.Core.Domain.Clients
         public Task<TransactionEntryResponse?> PostAsync(TransactionEntryRequest request, CancellationToken cancellation)
             => PostAsync<TransactionEntryRequest, TransactionEntryResponse>(request, cancellation);
 
-        public HashTxResponse? Post(TxRequest request, CancellationToken cancellation)
-            => Post<TxRequest, HashTxResponse>(request, cancellation);
+        public HashJsonTxResponse? Post(HashJsonTxRequest request, CancellationToken cancellation)
+            => Post<HashJsonTxRequest, HashJsonTxResponse>(request, cancellation);
 
-        public Task<HashTxResponse?> PostAsync(TxRequest request, CancellationToken cancellation)
-            => PostAsync<TxRequest, HashTxResponse>(request, cancellation);
+        public Task<HashJsonTxResponse?> PostAsync(HashJsonTxRequest request, CancellationToken cancellation)
+            => PostAsync<HashJsonTxRequest, HashJsonTxResponse>(request, cancellation);
 
-        public CtidTxResponse? Post(CtidTxRequest request, CancellationToken cancellation)
-            => Post<CtidTxRequest, CtidTxResponse>(request, cancellation);
+        public CtidJsonTxResponse? Post(CtidJsonTxRequest request, CancellationToken cancellation)
+            => Post<CtidJsonTxRequest, CtidJsonTxResponse>(request, cancellation);
 
-        public Task<CtidTxResponse?> PostAsync(CtidTxRequest request, CancellationToken cancellation)
-            => PostAsync<CtidTxRequest, CtidTxResponse>(request, cancellation);
+        public Task<CtidJsonTxResponse?> PostAsync(CtidJsonTxRequest request, CancellationToken cancellation)
+            => PostAsync<CtidJsonTxRequest, CtidJsonTxResponse>(request, cancellation);
+
+        public CtidBinaryTxResponse? Post(CtidBinaryTxRequest request, CancellationToken cancellation)
+            => Post<CtidBinaryTxRequest, CtidBinaryTxResponse>(request, cancellation);
+
+        public Task<CtidBinaryTxResponse?> PostAsync(CtidBinaryTxRequest request, CancellationToken cancellation)
+            => PostAsync<CtidBinaryTxRequest, CtidBinaryTxResponse>(request, cancellation);
+
+        public HashBinaryTxResponse? Post(HashBinaryTxRequest request, CancellationToken cancellation)
+            => Post<HashBinaryTxRequest, HashBinaryTxResponse>(request, cancellation);
+
+        public Task<HashBinaryTxResponse?> PostAsync(HashBinaryTxRequest request, CancellationToken cancellation)
+            => PostAsync<HashBinaryTxRequest, HashBinaryTxResponse>(request, cancellation);
 
         public TxHistoryResponse? Post(TxHistoryRequest request, CancellationToken cancellation)
             => Post<TxHistoryRequest, TxHistoryResponse>(request, cancellation);

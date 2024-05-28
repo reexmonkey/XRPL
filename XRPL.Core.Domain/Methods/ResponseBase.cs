@@ -13,7 +13,7 @@ namespace XRPL.Core.Domain.Methods
         /// The result of the query; contents vary depending on the command.
         /// </summary>
         [JsonPropertyName("result")]
-        public new required TResult Result { get; set; }
+        public new required TResult Result { get => (TResult)base.Result; set => base.Result = value; }
     }
 
     /// <summary>

@@ -6,7 +6,6 @@ namespace XRPL.Core.Domain.Methods.TransactionMethods.TransactionEntry
     /// <summary>
     /// Represents a response to a submit response.
     /// </summary>
-
     public class TransactionEntryResponse : ResponseBase<TransactionEntryResult>
     {
     }
@@ -14,14 +13,13 @@ namespace XRPL.Core.Domain.Methods.TransactionMethods.TransactionEntry
     /// <summary>
     /// Represents a result of an <see cref="TransactionEntryResponse"/> object.
     /// </summary>
-
     public class TransactionEntryResult : ResultBase
     {
         /// <summary>
         /// The ledger index of the ledger version the transaction was found in; this is the same as the one from the request.
         /// </summary>
         [JsonPropertyName("ledger_index")]
-        public uint LedgerIndex { get; set; }
+        public required uint LedgerIndex { get; set; }
 
         /// <summary>
         /// (May be omitted) The identifying hash of the ledger version the transaction was found in; this is the same as the one from the request.
@@ -33,12 +31,12 @@ namespace XRPL.Core.Domain.Methods.TransactionMethods.TransactionEntry
         /// The transaction metadata, which shows the exact results of the transaction in detail.
         /// </summary>
         [JsonPropertyName("metadata")]
-        public TransactionMetadata? Metadata { get; set; }
+        public required TransactionMetadata Metadata { get; set; }
 
         /// <summary>
         /// JSON representation of the Transaction object
         /// </summary>
         [JsonPropertyName("tx_json")]
-        public Transaction? TxJson { get; set; }
+        public required Transaction TxJson { get; set; }
     }
 }
