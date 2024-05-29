@@ -57,7 +57,7 @@ namespace XRPL.Core.Domain.Transactions
         /// (Optional) Redeem the Check for at least this amount and for as much as possible.
         /// The currency must match that of the SendMax of the corresponding CheckCreate transaction. You must provide either this field or Amount.
         /// </summary>
-        public new string? DeliverMin { get => (string?)base.Amount; set => base.Amount = value; }
+        public new string? DeliverMin { get => (string?)base.DeliverMin; set => base.DeliverMin = value; }
     }
 
     /// <summary>
@@ -80,6 +80,6 @@ namespace XRPL.Core.Domain.Transactions
         /// (Optional) Redeem the Check for at least this amount and for as much as possible.
         /// The currency must match that of the SendMax of the corresponding CheckCreate transaction. You must provide either this field or Amount.
         /// </summary>
-        public new TokenAmount? DeliverMin { get => (TokenAmount?)base.Amount; set => base.Amount = value; }
+        public new TokenAmount? DeliverMin { get => (TokenAmount?)base.DeliverMin; set => base.DeliverMin = value; }
     }
 }

@@ -9,8 +9,6 @@ namespace XRPL.Core.Domain.Transactions
     /// </summary>
     public class NFTokenMint : Transaction
     {
-        private NFTokenMintFlags? flags;
-
         /// <summary>
         /// An arbitrary taxon, or shared identifier, for a series or collection of related NFTs.
         /// <para/>To mint a series of NFTs, give them all the same taxon.
@@ -27,15 +25,13 @@ namespace XRPL.Core.Domain.Transactions
         /// (Optional) The value specifies the fee charged by the issuer for secondary sales of the NFToken, if such sales are allowed.
         /// <para/>Valid values for this field are between 0 and 50000 inclusive, allowing transfer rates of between 0.00% and 50.00% in increments of 0.001. If this field is provided, the transaction MUST have the tfTransferable flag enabled.
         /// </summary>
-        public uint? TransferFee { get; set; }
+        public ushort? TransferFee { get; set; }
 
         /// <summary>
         /// (Optional) Up to 256 bytes of arbitrary data.
         /// <para/>In JSON, this should be encoded as a string of hexadecimal. You can use the xrpl.convertStringToHex utility to convert a URI to its hexadecimal equivalent. This is intended to be a URI that points to the data or metadata associated with the NFT. The contents could decode to an HTTP or HTTPS URL, an IPFS URI, a magnet link, immediate data encoded as an RFC 2379 "data" URL, or even an issuer-specific encoding. The URI is NOT checked for validity
         /// </summary>
         public string? Uri { get; set; }
-
-        public override uint? Flags { get => (uint?)flags; set => flags = (NFTokenMintFlags?)value; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="NFTokenMint"/> class.

@@ -8,8 +8,6 @@ namespace XRPL.Core.Domain.Transactions
     /// </summary>
     public abstract class AMMDeposit : Transaction
     {
-        protected AMMDepositFlags? flags;
-
         /// <summary>
         /// The definition for one of the assets in the AMM's pool.
         /// <para/>In JSON, this is an object with currency and issuer fields (omit issuer for XRP).
@@ -23,9 +21,26 @@ namespace XRPL.Core.Domain.Transactions
         public required STIssue Asset2 { get; set; }
 
         /// <summary>
-        /// (Optional) Set of bit-flags for this transaction.
+        /// The amount of one asset to deposit to the AMM.
+        /// <para/>If present, this must match the type of one of the assets (tokens or XRP) in the AMM's pool.
         /// </summary>
-        public override required uint? Flags { get => (uint?)flags; set => flags = (AMMDepositFlags?)value; }
+        public object? Amount { get; set; }
+
+        /// <summary>
+        /// The amount of another asset to add to the AMM.
+        /// <para/>If present, this must match the type of the other asset in the AMM's pool and cannot be the same asset as <see cref="Amount"/>.
+        /// </summary>
+        public object? Amount2 { get; set; }
+
+        /// <summary>
+        /// The maximum effective price, in the deposit asset, to pay for each LP Token received.
+        /// </summary>
+        public object? EPrice { get; set; }
+
+        /// <summary>
+        /// How many of the AMM's LP Tokens to buy.
+        /// </summary>
+        public LPTokenAmount? LPTokenOut { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AMMDeposit"/> class.
@@ -36,10 +51,84 @@ namespace XRPL.Core.Domain.Transactions
     }
 
     /// <summary>
+    /// Represents a transaction that deposits pairs of XRP/fungible token funds into an Automated Market Maker (AMM) instance
+    /// and receive the AMM's liquidity provider tokens (LP Tokens) in exchange. You can deposit one or both of the assets in the AMM's pool.
+    /// <para/> If successful, this transaction creates a trust line to the AMM Account (limit 0) to hold the LP Tokens.
+    /// </summary>
+    public sealed class XrpFungibleTokenAMMDeposit : AMMDeposit
+    {
+        /// <summary>
+        /// The amount of one asset to deposit to the AMM.
+        /// <para/>If present, this must match the type of one of the assets (tokens or XRP) in the AMM's pool.
+        /// </summary>
+        public new string? Amount { get => (string?)base.Amount; set => base.Amount = value; }
+
+        /// <summary>
+        /// The amount of another asset to add to the AMM.
+        /// <para/>If present, this must match the type of the other asset in the AMM's pool.
+        /// </summary>
+        public new TokenAmount? Amount2 { get => (TokenAmount?)base.Amount2; set => base.Amount2 = value; }
+
+        /// <summary>
+        /// The maximum effective price, in the deposit asset, to pay for each LP Token received.
+        /// </summary>
+        public new string? EPrice { get => (string?)base.EPrice; set => base.EPrice = value; }
+    }
+
+    /// <summary>
+    /// Represents a transaction that deposits pairs of XRP/fungible token funds into an Automated Market Maker (AMM) instance
+    /// and receive the AMM's liquidity provider tokens (LP Tokens) in exchange. You can deposit one or both of the assets in the AMM's pool.
+    /// <para/> If successful, this transaction creates a trust line to the AMM Account (limit 0) to hold the LP Tokens.
+    /// </summary>
+    public sealed class FungibleTokenXrpAMMDeposit : AMMDeposit
+    {
+        /// <summary>
+        /// The amount of one asset to deposit to the AMM.
+        /// <para/>If present, this must match the type of one of the assets (tokens or XRP) in the AMM's pool.
+        /// </summary>
+        public new TokenAmount? Amount { get => (TokenAmount?)base.Amount; set => base.Amount = value; }
+
+        /// <summary>
+        /// The amount of another asset to add to the AMM.
+        /// <para/>If present, this must match the type of the other asset in the AMM's pool.
+        /// </summary>
+        public new string? Amount2 { get => (string?)base.Amount2; set => base.Amount2 = value; }
+
+        /// <summary>
+        /// The maximum effective price, in the deposit asset, to pay for each LP Token received.
+        /// </summary>
+        public new TokenAmount? EPrice { get => (TokenAmount?)base.EPrice; set => base.EPrice = value; }
+    }
+
+    /// <summary>
+    /// Represents a transaction that deposits pairs of fungible token funds into an Automated Market Maker (AMM) instance and receive the AMM's liquidity provider tokens (LP Tokens) in exchange. You can deposit one or both of the assets in the AMM's pool.
+    /// <para/> If successful, this transaction creates a trust line to the AMM Account (limit 0) to hold the LP Tokens.
+    /// </summary>
+    public sealed class FungibleTokenAMMDeposit : AMMDeposit
+    {
+        /// <summary>
+        /// The amount of one asset to deposit to the AMM.
+        /// <para/>If present, this must match the type of one of the assets (tokens or XRP) in the AMM's pool.
+        /// </summary>
+        public new TokenAmount? Amount { get => (TokenAmount?)base.Amount; set => base.Amount = value; }
+
+        /// <summary>
+        /// The amount of another asset to add to the AMM.
+        /// <para/>If present, this must match the type of the other asset in the AMM's pool and cannot be the same asset as <see cref="Amount"/>.
+        /// </summary>
+        public new TokenAmount? Amount2 { get => (TokenAmount?)base.Amount2; set => base.Amount2 = value; }
+
+        /// <summary>
+        /// The maximum effective price, in the deposit asset, to pay for each LP Token received.
+        /// </summary>
+        public new TokenAmount? EPrice { get => (TokenAmount?)base.EPrice; set => base.EPrice = value; }
+    }
+
+    /// <summary>
     /// Represents the transaction mode for an <see cref="AMMDeposit"/>.
     /// </summary>
     [Flags]
-    public enum AMMDepositFlags
+    public enum AMMDepositFlags : uint
     {
         /// <summary>
         /// Deposit both of this AMM's assets, in amounts calculated so that you receive the specified amount of LP Tokens in return.
@@ -71,54 +160,5 @@ namespace XRPL.Core.Domain.Transactions
         /// Deposit both of this AMM's assets, in exactly the specified amounts, to an AMM with an empty asset pool. The amount of LP Tokens you get in return is based on the total value deposited.
         /// </summary>
         tfTwoAssetIfEmpty = 0x00800000
-    }
-
-    /// <summary>
-    /// Specifies a transaction that deposits funds into an Automated Market Maker (AMM) instance and receive the AMM's liquidity provider tokens (LP Tokens) in exchange. You can deposit one or both of the assets in the AMM's pool.
-    /// <para/> If successful, this transaction creates a trust line to the AMM Account (limit 0) to hold the LP Tokens.
-    /// </summary>
-    /// <typeparam name="TAmount1">The type of the currency amount for the first of the two assets.</typeparam>
-    /// <typeparam name="TAmount2">The type of the currency amount for the second of the two assets.</typeparam>
-    public abstract class AMMDeposit<TAmount1, TAmount2> : AMMDeposit
-        where TAmount1 : class
-        where TAmount2 : class
-    {
-        /// <summary>
-        /// The amount of one asset to deposit to the AMM.
-        /// <para/>If present, this must match the type of one of the assets (tokens or XRP) in the AMM's pool.
-        /// </summary>
-        public TAmount1? Amount { get; set; }
-
-        /// <summary>
-        /// The amount of another asset to add to the AMM.
-        /// <para/>If present, this must match the type of the other asset in the AMM's pool and cannot be the same asset as <see cref="AMMDeposit{TAmount1, TAmount2}.Amount"/>.
-        /// </summary>
-        public TAmount2? Amount2 { get; set; }
-
-        /// <summary>
-        /// The maximum effective price, in the deposit asset, to pay for each LP Token received.
-        /// </summary>
-        public TAmount1? EPrice { get; set; }
-
-        /// <summary>
-        /// How many of the AMM's LP Tokens to buy.
-        /// </summary>
-        public LPTokenAmount? LPTokenOut { get; set; }
-    }
-
-    /// <summary>
-    /// Represents a transaction that deposits pairs of XRP/fungible token funds into an Automated Market Maker (AMM) instance and receive the AMM's liquidity provider tokens (LP Tokens) in exchange. You can deposit one or both of the assets in the AMM's pool.
-    /// <para/> If successful, this transaction creates a trust line to the AMM Account (limit 0) to hold the LP Tokens.
-    /// </summary>
-    public sealed class XrpFungibleTokenAMMDeposit : AMMDeposit<string, TokenAmount>
-    {
-    }
-
-    /// <summary>
-    /// Represents a transaction that deposits pairs of fungible token funds into an Automated Market Maker (AMM) instance and receive the AMM's liquidity provider tokens (LP Tokens) in exchange. You can deposit one or both of the assets in the AMM's pool.
-    /// <para/> If successful, this transaction creates a trust line to the AMM Account (limit 0) to hold the LP Tokens.
-    /// </summary>
-    public sealed class FungibleTokenAMMDeposit : AMMDeposit<TokenAmount, TokenAmount>
-    {
     }
 }

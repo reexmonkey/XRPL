@@ -3,10 +3,10 @@
     /// <summary>
     /// Represents a transaction that returns escrowed XRP to the sender.
     /// <para/>It is not possible to create a conditional escrow with no expiration, but you can specify an expiration that is very far in the future.
-    /// <para/>Note: Before the fix1571 amendment became enabled on 2018-06-19, it was possible to create an escrow with CancelAfter only. 
+    /// <para/>Note: Before the fix1571 amendment became enabled on 2018-06-19, it was possible to create an escrow with CancelAfter only.
     /// These escrows could be finished by anyone at any time before the specified expiration.
-    /// <para/>The rippled server and its APIs represent time as an unsigned integer. 
-    /// This number measures the number of seconds since the "Ripple Epoch" of January 1, 2000 (00:00 UTC). 
+    /// <para/>The rippled server and its APIs represent time as an unsigned integer.
+    /// This number measures the number of seconds since the "Ripple Epoch" of January 1, 2000 (00:00 UTC).
     /// This is like the way the Unix epoch works, except the Ripple Epoch is 946684800 seconds after the Unix Epoch.
     /// <para/>Don't convert Ripple Epoch times to UNIX Epoch times in 32-bit variables: this could lead to integer overflows.
     /// </summary>

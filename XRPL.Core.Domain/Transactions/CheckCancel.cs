@@ -3,8 +3,8 @@
 namespace XRPL.Core.Domain.Transactions
 {
     /// <summary>
-    /// Represents a transaction that cancels an unredeemed <see cref="Check"/>, removing it from the ledger without sending any money. 
-    /// The source or the destination of the check can cancel a <see cref="Check"/> at any time using this transaction type. 
+    /// Represents a transaction that cancels an unredeemed <see cref="Check"/>, removing it from the ledger without sending any money.
+    /// The source or the destination of the check can cancel a <see cref="Check"/> at any time using this transaction type.
     /// If the <see cref="Check"/> has expired, any address can cancel it.
     /// </summary>
     public class CheckCancel : Transaction

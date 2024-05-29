@@ -8,8 +8,10 @@ namespace XRPL.Core.Domain.Transactions
     public abstract class NFTokenCancelOffer : Transaction
     {
         /// <summary>
-        /// An array of IDs of the <see cref="NFTokenOffer"/> objects to cancel (not the IDs of NFToken objects, but the IDs of the <see cref="NFTokenOffer"/> objects). 
-        /// <para/>Each entry must be a different object ID of an <see cref="NFTokenOffer"/> object; the transaction is invalid if the array contains duplicate entries.
+        /// An array of IDs of the <see cref="NFTokenOffer"/> objects to cancel 
+        /// (not the IDs of NFToken objects, but the IDs of the <see cref="NFTokenOffer"/> objects). 
+        ///<para/>Each entry must be a different object ID of an <see cref="NFTokenOffer"/> object; 
+        ///the transaction is invalid if the array contains duplicate entries.
         /// </summary>
         public required NFTokenOffer[] NFTokenSellOffer { get; set; }
 
