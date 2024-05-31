@@ -10,6 +10,12 @@
     <PackageProjectUrl>https://github.com/reexmonkey/XRPL</PackageProjectUrl>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Methods\LedgerMethods\" />
+    <Folder Include="Methods\SubscriptionMethods\" />
+    <Folder Include="Methods\ServerInfoMethods\" />
+  </ItemGroup>
+
   <!--<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <IsTrimmable>True</IsTrimmable>
   </PropertyGroup>-->
@@ -17,9 +23,5 @@
   <!--<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <IsTrimmable>True</IsTrimmable>
   </PropertyGroup>-->
-
-  <ItemGroup>
-    <PackageReference Include="ServiceStack.Text" Version="8.2.2" />
-  </ItemGroup>
 
 </Project>

@@ -1,10 +1,14 @@
-﻿using XRPL.Core.Domain.Models;
+﻿using System.Text.Json.Serialization;
+using XRPL.Core.Domain.Models;
 
 namespace XRPL.Core.Domain.Entries
 {
     /// <summary>
     /// Specifies a ledger entry that describes a check, similar to a paper personal check, which can be cashed by its destination to get money from its sender.
     /// </summary>
+    [JsonPolymorphic]
+    [JsonDerivedType(typeof(XrpCheck), typeDiscriminator: nameof(XrpCheck))]
+    [JsonDerivedType(typeof(FungibleTokenCheck), typeDiscriminator: nameof(FungibleTokenCheck))]
     public abstract class Check : LedgerEntryBase
     {
         /// <summary>
@@ -53,6 +57,12 @@ namespace XRPL.Core.Domain.Entries
         public required uint PreviousTxnLgrSeq { get; set; }
 
         /// <summary>
+        /// The maximum amount of currency this <see cref="Check"/> can debit the sender.
+        /// <para/> If the <see cref="Check"/> is successfully cashed, the destination is credited in the same token for up to this amount.
+        /// </summary>
+        public object SendMax { get; set; } = null!;
+
+        /// <summary>
         /// The sequence number of the CheckCreate transaction that created this check.
         /// </summary>
         public required uint Sequence { get; set; }
@@ -72,38 +82,28 @@ namespace XRPL.Core.Domain.Entries
     }
 
     /// <summary>
-    /// Specifies a currency amount check, similar to a paper personal check, which can be cashed by its destination to get money from its sender.
+    /// Represents an XRP check, similar to a paper personal check, which can be cashed by its destination to get money from its sender.
     /// </summary>
-    /// <typeparam name="TAmount">The type of currency amount that can be cashed.</typeparam>
-    public abstract class Check<TAmount> : Check
-        where TAmount : class
+    [JsonDerivedType(typeof(XrpCheck), typeDiscriminator: nameof(XrpCheck))]
+    public sealed class XrpCheck : Check
     {
         /// <summary>
         /// The maximum amount of currency this <see cref="Check"/> can debit the sender.
         /// <para/> If the <see cref="Check"/> is successfully cashed, the destination is credited in the same token for up to this amount.
         /// </summary>
-        public required TAmount SendMax { get; set; }
-
-        /// <summary>
-        /// Initializes the new instance of the <see cref="Check{TAmount}"/> class.
-        /// </summary>
-        public Check()
-        {
-            LedgerEntryType = "Check";
-        }
-    }
-
-    /// <summary>
-    /// Represents an XRP check, similar to a paper personal check, which can be cashed by its destination to get money from its sender.
-    /// </summary>
-    public sealed class XrpCheck : Check<string>
-    {
+        public new required string SendMax { get => (string)base.SendMax; set => base.SendMax = value; }
     }
 
     /// <summary>
     /// Represents a fungible token check, similar to a paper personal check, which can be cashed by its destination to get money from its sender.
     /// </summary>
-    public sealed class FungibleTokenCheck : Check<TokenAmount>
+    [JsonDerivedType(typeof(FungibleTokenCheck), typeDiscriminator: nameof(FungibleTokenCheck))]
+    public sealed class FungibleTokenCheck : Check
     {
+        /// <summary>
+        /// The maximum amount of currency this <see cref="Check"/> can debit the sender.
+        /// <para/> If the <see cref="Check"/> is successfully cashed, the destination is credited in the same token for up to this amount.
+        /// </summary>
+        public new required TokenAmount SendMax { get => (TokenAmount)base.SendMax; set => base.SendMax = value; }
     }
 }

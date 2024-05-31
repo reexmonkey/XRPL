@@ -1,12 +1,11 @@
 ﻿using XRPL.Core.Domain.Models;
-using XRPL.Core.Domain.Responses;
 
 namespace XRPL.Core.Domain.Transactions
 {
     /// <summary>
-    /// Specifies a transaction that creates either a new Sell offer for an <see cref="NFToken"/> owned by the account executing the transaction, 
+    /// Specifies a transaction that creates either a new Sell offer for an <see cref="NFToken"/> owned by the account executing the transaction,
     /// or a new Buy offer for an <see cref="NFToken"/> owned by another account.
-    /// <para/>If successful, the transaction creates a <see cref="NFToken"/> object. 
+    /// <para/>If successful, the transaction creates a <see cref="NFToken"/> object.
     /// Each offer counts as one object towards the owner reserve of the account that placed the offer.
     /// </summary>
     public abstract class NFTokenCreateOffer : Transaction
@@ -20,6 +19,12 @@ namespace XRPL.Core.Domain.Transactions
         /// Identifies the NFToken object that the offer references.
         /// </summary>
         public required string NFTokenID { get; set; }
+
+        /// <summary>
+        /// Indicates the amount expected or offered for the corresponding <see cref="NFToken"/>.
+        /// <para/>The amount must be non-zero, except where this is an offer to sell and the asset is XRP; then, it is legal to specify an amount of zero, which means that the current owner of the token is giving it away, gratis, either to anyone at all, or to the account identified by the Destination field.
+        /// </summary>
+        public object Amount { get; set; } = null!;
 
         /// <summary>
         /// (Optional) Time after which the offer is no longer active, in seconds since the Ripple Epoch.
@@ -40,45 +45,35 @@ namespace XRPL.Core.Domain.Transactions
     }
 
     /// <summary>
-    /// Specifies a transaction that creates either a new Sell offer for an <see cref="NFToken"/> owned by the account executing the transaction, 
+    /// Represents a transaction that creates either a new Sell offer for an <see cref="NFToken"/> owned by the account executing the transaction,
     /// or a new Buy offer for an <see cref="NFToken"/> owned by another account.
-    /// <para/>If successful, the transaction creates a <see cref="NFToken"/> object. 
-    /// Each offer counts as one object towards the owner reserve of the account that placed the offer.
-    /// </summary>
-    /// <typeparam name="TAmount">The type of amount expected or offered for the corresponding <see cref="NFToken"/></typeparam>
-    public abstract class NFTokenCreateOffer<TAmount> : NFTokenCreateOffer
-        where TAmount : class
-    {
-        /// <summary>
-        /// Indicates the amount expected or offered for the corresponding <see cref="NFToken"/>. 
-        /// <para/>The amount must be non-zero, except where this is an offer to sell and the asset is XRP; then, it is legal to specify an amount of zero, which means that the current owner of the token is giving it away, gratis, either to anyone at all, or to the account identified by the Destination field.
-        /// </summary>
-        public required TAmount Amount { get; set; }
-    }
-
-
-    /// <summary>
-    /// Represents a transaction that creates either a new Sell offer for an <see cref="NFToken"/> owned by the account executing the transaction, 
-    /// or a new Buy offer for an <see cref="NFToken"/> owned by another account.
-    /// <para/>If successful, the transaction creates a <see cref="NFToken"/> object. 
+    /// <para/>If successful, the transaction creates a <see cref="NFToken"/> object.
     /// Each offer counts as one object towards the owner reserve of the account that placed the offer.
     /// <para/>The asset expected or offered for the corresponding <see cref="NFToken"/> is XRP.
     /// </summary>
-    public sealed class XrpNFTokenCreateOffer : NFTokenCreateOffer<string>
+    public sealed class XrpNFTokenCreateOffer : NFTokenCreateOffer
     {
-
+        /// <summary>
+        /// Indicates the amount expected or offered for the corresponding <see cref="NFToken"/>.
+        /// <para/>It is legal to specify an amount of zero, which means that the current owner of the token is giving it away,
+        /// gratis, either to anyone at all, or to the account identified by the Destination field.
+        /// </summary>
+        public new required string Amount { get => (string)base.Amount; set => base.Amount = value; }
     }
 
     /// <summary>
-    /// Represents a transaction that creates either a new Sell offer for an <see cref="NFToken"/> owned by the account executing the transaction, 
+    /// Represents a transaction that creates either a new Sell offer for an <see cref="NFToken"/> owned by the account executing the transaction,
     /// or a new Buy offer for an <see cref="NFToken"/> owned by another account.
-    /// <para/>If successful, the transaction creates a <see cref="NFToken"/> object. 
+    /// <para/>If successful, the transaction creates a <see cref="NFToken"/> object.
     /// Each offer counts as one object towards the owner reserve of the account that placed the offer.
     /// <para/>The asset expected or offered for the corresponding <see cref="NFToken"/> is a fungible token.
     /// </summary>
-    public sealed class FungibleTokenNFTokenCreateOffer : NFTokenCreateOffer<TokenAmount>
+    public sealed class FungibleTokenNFTokenCreateOffer : NFTokenCreateOffer
     {
-
+        /// <summary>
+        /// Indicates the amount expected or offered for the corresponding <see cref="NFToken"/>.
+        /// <para/>The amount must be non-zero.
+        /// </summary>
+        public new required TokenAmount Amount { get => (TokenAmount)base.Amount; set => base.Amount = value; }
     }
-
 }

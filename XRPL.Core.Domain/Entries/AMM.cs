@@ -54,27 +54,27 @@ namespace XRPL.Core.Domain.Entries
         /// <summary>
         /// The current owner of this auction slot.
         /// </summary>
-        public required string Account { get; set; }
+        public virtual required string Account { get; set; }
 
         /// <summary>
         /// A list of at most 4 additional accounts that are authorized to trade at the discounted fee for this AMM instance.
         /// </summary>
-        public AuthAccount[]? AuthAccounts { get; set; }
+        public virtual AuthAccount[]? AuthAccounts { get; set; }
 
         /// <summary>
         /// The trading fee to be charged to the auction owner, in the same format as TradingFee. Normally, this is 1/10 of the normal fee for this AMM.
         /// </summary>
-        public string? DiscountedFee { get; set; }
+        public string DiscountedFee { get; set; } = null!;
 
         /// <summary>
         /// The amount the auction owner paid to win this slot, in LP Tokens.
         /// </summary>
-        public LPTokenAmount? Price { get; set; }
+        public virtual required LPTokenAmount Price { get; set; }
 
         /// <summary>
         /// The time when this slot expires, in seconds since the Ripple Epoch.
         /// </summary>
-        public string? Expiration { get; set; }
+        public virtual required string Expiration { get; set; }
     }
 
     /// <summary>

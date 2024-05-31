@@ -1,6 +1,4 @@
-﻿using XRPL.Core.Domain.Responses;
-
-namespace XRPL.Core.Domain.Transactions
+﻿namespace XRPL.Core.Domain.Transactions
 {
     /// <summary>
     /// Represents a transaction that assigns, changes, or removes the regular key pair associated with an account.

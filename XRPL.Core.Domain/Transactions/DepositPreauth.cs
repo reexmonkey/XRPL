@@ -1,6 +1,4 @@
-﻿using XRPL.Core.Domain.Responses;
-
-namespace XRPL.Core.Domain.Transactions
+﻿namespace XRPL.Core.Domain.Transactions
 {
     /// <summary>
     /// Represents a transaction that gives another account pre-approval to deliver payments to the sender of this transaction. This is only useful if the sender of this transaction is using (or plans to use) Deposit Authorization (https://xrpl.org/docs/concepts/accounts/depositauth/).

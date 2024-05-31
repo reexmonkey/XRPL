@@ -1,6 +1,5 @@
 ﻿using XRPL.Core.Domain.Entries;
 using XRPL.Core.Domain.Models;
-using XRPL.Core.Domain.Responses;
 
 namespace XRPL.Core.Domain.Transactions
 {
@@ -20,6 +19,16 @@ namespace XRPL.Core.Domain.Transactions
         public uint? OfferSequence { get; set; }
 
         /// <summary>
+        /// The amount and type of currency being sold.
+        /// </summary>
+        public object TakerGets { get; set; } = null!;
+
+        /// <summary>
+        /// The amount and type of currency being bought.
+        /// </summary>
+        public object TakerPays { get; set; } = null!;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="OfferCreate"/> class.
         /// </summary>
         public OfferCreate() : base(TransactionType.OfferCreate)
@@ -28,41 +37,50 @@ namespace XRPL.Core.Domain.Transactions
     }
 
     /// <summary>
-    /// Specifies a transaction that places an <see cref="Offer"/> in the decentralized exchange.
+    /// Represents a transaction that places an <see cref="Offer"/> to sell XRP for fungible tokens in the decentralized exchange.
     /// </summary>
-    public abstract class OfferCreate<TTakerGets, TTakerPays> : OfferCreate
-        where TTakerGets : class
-        where TTakerPays : class
+    public sealed class XrpForFungibleTokenOfferCreate : OfferCreate
     {
         /// <summary>
         /// The amount and type of currency being sold.
         /// </summary>
-        public required TTakerGets TakerGets { get; set; }
+        public new required string TakerGets { get; set; }
 
         /// <summary>
         /// The amount and type of currency being bought.
         /// </summary>
-        public required TTakerPays TakerPays { get; set; }
-    }
-
-    /// <summary>
-    /// Represents a transaction that places an <see cref="Offer"/> to sell XRP for fungible tokens in the decentralized exchange.
-    /// </summary>
-    public sealed class XrpForFungibleTokenOfferCreate : OfferCreate<string, TokenAmount>
-    {
+        public new required TokenAmount TakerPays { get; set; }
     }
 
     /// <summary>
     /// Represents a transaction that places an <see cref="Offer"/> to sell fungible tokens for XRP in the decentralized exchange.
     /// </summary>
-    public sealed class FungibleTokenXrpOfferCreate : OfferCreate<TokenAmount, string>
+    public sealed class FungibleTokenForXrpOfferCreate : OfferCreate
     {
+        /// <summary>
+        /// The amount and type of currency being sold.
+        /// </summary>
+        public new required TokenAmount TakerGets { get; set; }
+
+        /// <summary>
+        /// The amount and type of currency being bought.
+        /// </summary>
+        public new required string TakerPays { get; set; }
     }
 
     /// <summary>
     /// Represents a transaction that places an <see cref="Offer"/> to sell fungible tokens for other types of fungible tokens in the decentralized exchange.
     /// </summary>
-    public sealed class FungibleTokenOfferCreate : OfferCreate<TokenAmount, TokenAmount>
+    public sealed class FungibleTokenOfferCreate : OfferCreate
     {
+        /// <summary>
+        /// The amount and type of currency being sold.
+        /// </summary>
+        public new required TokenAmount TakerGets { get; set; }
+
+        /// <summary>
+        /// The amount and type of currency being bought.
+        /// </summary>
+        public new required TokenAmount TakerPays { get; set; }
     }
 }

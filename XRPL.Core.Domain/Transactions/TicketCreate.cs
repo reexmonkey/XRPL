@@ -1,6 +1,4 @@
-﻿using XRPL.Core.Domain.Responses;
-
-namespace XRPL.Core.Domain.Transactions
+﻿namespace XRPL.Core.Domain.Transactions
 {
     /// <summary>
     /// Represents a transaction that sets aside one or more sequence numbers as Tickets.

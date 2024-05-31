@@ -1,16 +1,25 @@
-﻿using XRPL.Core.Domain.Models;
+﻿using System.Text.Json.Serialization;
+using XRPL.Core.Domain.Models;
 
 namespace XRPL.Core.Domain.Entries
 {
     /// <summary>
     /// Represents an offer to buy, sell or transfer an NFT.
     /// </summary>
+    [JsonPolymorphic]
+    [JsonDerivedType(typeof(XrpForNFTokenOffer), typeDiscriminator: nameof(XrpForNFTokenOffer))]
+    [JsonDerivedType(typeof(FungibleTokenForNFTokenOffer), typeDiscriminator: nameof(FungibleTokenForNFTokenOffer))]
     public abstract class NFTokenOffer : LedgerEntryBase
     {
+        private NFTokenOfferFlags flags;
+
         /// <summary>
-        /// The bit-flags for a non-fungible token offer.
+        /// Amount expected or offered for the NFToken.
+        /// <para/>If the token has the lsfOnlyXRP flag set, the amount must be specified in XRP.
+        /// Sell offers that specify assets other than XRP must specify a non-zero amount.
+        /// Sell offers that specify XRP can be 'free' (that is, the Amount field can be equal to "0").
         /// </summary>
-        protected NFTokenOfferFlags flags;
+        public object Amount { get; set; } = null!;
 
         /// <summary>
         /// Set of bit-flags for this ledger entry.
@@ -81,33 +90,31 @@ namespace XRPL.Core.Domain.Entries
     }
 
     /// <summary>
-    /// Represents an offer to buy, sell or transfer an NFT.
+    /// Represents an offer to buy, sell or transfer an NFT with an amount of XRPs.
     /// </summary>
-    /// <typeparam name="TAmount">The type of currency amount to buy, sell or transfer the NFT.</typeparam>
-    public abstract class NFTokenOffer<TAmount> : NFTokenOffer
-        where TAmount : class
+    [JsonDerivedType(typeof(XrpForNFTokenOffer), typeDiscriminator: nameof(XrpForNFTokenOffer))]
+    public sealed class XrpForNFTokenOffer : NFTokenOffer
     {
         /// <summary>
         /// Amount expected or offered for the NFToken.
         /// <para/>If the token has the lsfOnlyXRP flag set, the amount must be specified in XRP.
         /// Sell offers that specify assets other than XRP must specify a non-zero amount.
-        /// Sell offers that specify XRP can be 'free' (that is, the Amount field can be equal to "0").
         /// </summary>
-        public required TAmount Amount { get; set; }
-    }
-
-    /// <summary>
-    /// Represents an offer to buy, sell or transfer an NFT with an amount of XRPs.
-    /// </summary>
-    public sealed class XrpForNFTokenOffer : NFTokenOffer<string>
-    {
+        public new required string Amount { get => (string)base.Amount; set => base.Amount = value; }
     }
 
     /// <summary>
     /// Represents an offer to buy, sell or transfer an NFT with an amount of tokens.
     /// </summary>
-    public sealed class FungibleTokenForNFTokenOffer : NFTokenOffer<TokenAmount>
+    [JsonDerivedType(typeof(FungibleTokenForNFTokenOffer), typeDiscriminator: nameof(FungibleTokenForNFTokenOffer))]
+    public sealed class FungibleTokenForNFTokenOffer : NFTokenOffer
     {
+        /// <summary>
+        /// Amount expected or offered for the NFToken.
+        /// <para/>If the token has the lsfOnlyXRP flag set, the amount must be specified in XRP.
+        /// Sell offers that specify XRP can be 'free' (that is, the Amount field can be equal to "0").
+        /// </summary>
+        public new required TokenAmount Amount { get => (TokenAmount)base.Amount; set => base.Amount = value; }
     }
 
     /// <summary>

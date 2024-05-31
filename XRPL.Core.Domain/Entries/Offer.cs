@@ -1,4 +1,5 @@
-﻿using XRPL.Core.Domain.Models;
+﻿using System.Text.Json.Serialization;
+using XRPL.Core.Domain.Models;
 
 namespace XRPL.Core.Domain.Entries
 {
@@ -11,19 +12,16 @@ namespace XRPL.Core.Domain.Entries
     /// When processing transactions, the network automatically removes any unfunded Offers that those transactions come across.
     /// (Otherwise, unfunded Offers remain, because only transactions can change the ledger state.)
     /// </summary>
+    [JsonPolymorphic]
+    [JsonDerivedType(typeof(XrpForFungibleTokenOffer), typeDiscriminator: nameof(XrpForFungibleTokenOffer))]
+    [JsonDerivedType(typeof(FungibleTokenForXrpOffer), typeDiscriminator: nameof(FungibleTokenForXrpOffer))]
+    [JsonDerivedType(typeof(FungibleTokenOffer), typeDiscriminator: nameof(FungibleTokenOffer))]
     public abstract class Offer : LedgerEntryBase
     {
-        protected OfferFlags flags;
-
         /// <summary>
         /// The address of the account that owns this Offer.
         /// </summary>
         public required string Account { get; set; }
-
-        /// <summary>
-        /// Set of bit-flags for this ledger entry.
-        /// </summary>
-        public override required uint Flags { get => (uint)flags; set => flags = (OfferFlags)value; }
 
         /// <summary>
         /// The ID of the Offer Directory that links to this Offer.
@@ -61,6 +59,16 @@ namespace XRPL.Core.Domain.Entries
         public required uint Sequence { get; set; }
 
         /// <summary>
+        /// The remaining amount and type of token requested by the offer creator.
+        /// </summary>
+        public object TakerPays { get; set; } = null!;
+
+        /// <summary>
+        /// The remaining amount and type of token being provided by the Offer creator.
+        /// </summary>
+        public object TakerGets { get; set; } = null!;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="Offer"/> class.
         /// </summary>
         protected Offer()
@@ -70,38 +78,21 @@ namespace XRPL.Core.Domain.Entries
     }
 
     /// <summary>
-    /// The Offer ledger entry describes an Offer to exchange currencies in the XRP Ledger's decentralized exchange.
-    /// (In finance, this is more traditionally known as an order.)
-    /// <para/>An OfferCreate transaction only creates an Offer entry in the ledger
-    /// when the Offer cannot be fully executed immediately by consuming other Offers already in the ledger.
-    /// An Offer can become unfunded through other activities in the network, while remaining in the ledger.
-    /// When processing transactions, the network automatically removes any unfunded Offers that those transactions come across.
-    /// (Otherwise, unfunded Offers remain, because only transactions can change the ledger state.)
-    /// </summary>
-    /// <typeparam name="TPays">The type of amount and token requested by the offer creator.</typeparam>
-    /// <typeparam name="TGets">The type of amount and token provided by the offer creator.</typeparam>
-    public abstract class Offer<TPays, TGets> : Offer
-        where TPays : class
-        where TGets : class
-    {
-        /// <summary>
-        /// The remaining amount and type of token requested by the offer creator.
-        /// </summary>
-        public required TPays TakerPays { get; set; }
-
-        /// <summary>
-        /// The remaining amount and type of token being provided by the Offer creator.
-        /// </summary>
-        public required TGets TakerGets { get; set; }
-    }
-
-    /// <summary>
     /// Represents the flags for an Offer.
     /// </summary>
     [Flags]
     public enum OfferFlags : uint
     {
+        /// <summary>
+        /// The offer was placed as "passive".
+        /// <para/>This has no effect after the offer is placed into the ledger.
+        /// </summary>
         lsfPassive = 0x00010000,
+
+        /// <summary>
+        /// The offer was placed as a "Sell" offer.
+        /// <para/>This has no effect after the offer is placed in the ledger, because tfSell only matters if you get a better rate than you asked for, which can only happen when the offer is initially placed.
+        /// </summary>
         lsfSell = 0x00020000
     }
 
@@ -114,12 +105,22 @@ namespace XRPL.Core.Domain.Entries
     /// When processing transactions, the network automatically removes any unfunded offers that those transactions come across.
     /// (Otherwise, unfunded offers remain, because only transactions can change the ledger state.)
     /// </summary>
-    public sealed class XrpForFungibleTokenOffer : Offer<string, TokenAmount>
+    [JsonDerivedType(typeof(XrpForFungibleTokenOffer), typeDiscriminator: nameof(XrpForFungibleTokenOffer))]
+    public class XrpForFungibleTokenOffer : Offer
     {
+        /// <summary>
+        /// The remaining amount of XRP in drops requested by the offer creator.
+        /// </summary>
+        public new required string TakerPays { get => (string)base.TakerPays; set => base.TakerPays = value; }
+
+        /// <summary>
+        /// The remaining amount and type of currency being provided by the Offer creator.
+        /// </summary>
+        public new required TokenAmount TakerGets { get => (TokenAmount)base.TakerGets; set => base.TakerGets = value; }
     }
 
     /// <summary>
-    /// A ledger entry type that describes an offer to request a token for XRP in the XRP Ledger's decentralized exchange.
+    /// A ledger entry type that describes an offer to request a fungible token for XRP in the XRP Ledger's decentralized exchange.
     /// (In finance, this is more traditionally known as an order.)
     /// <para/>An OfferCreate transaction only creates an offer entry in the ledger
     /// when the offer cannot be fully executed immediately by consuming other offers already in the ledger.
@@ -127,12 +128,22 @@ namespace XRPL.Core.Domain.Entries
     /// When processing transactions, the network automatically removes any unfunded offers that those transactions come across.
     /// (Otherwise, unfunded offers remain, because only transactions can change the ledger state.)
     /// </summary>
-    public sealed class FungibleTokenForXrpOffer : Offer<TokenAmount, string>
+    [JsonDerivedType(typeof(FungibleTokenForXrpOffer), typeDiscriminator: nameof(FungibleTokenForXrpOffer))]
+    public class FungibleTokenForXrpOffer : Offer
     {
+        /// <summary>
+        /// The remaining amount and type of currency requested by the offer creator.
+        /// </summary>
+        public new required TokenAmount TakerPays { get => (TokenAmount)base.TakerPays; set => base.TakerPays = value; }
+
+        /// <summary>
+        /// The remaining amount of XRP in drops being provided by the Offer creator.
+        /// </summary>
+        public new required string TakerGets { get => (string)base.TakerGets; set => base.TakerGets = value; }
     }
 
     /// <summary>
-    /// A ledger entry type that describes an offer to request a token for another token in the XRP Ledger's decentralized exchange.
+    /// A ledger entry type that describes an offer to request a fungible token for another fungible token in the XRP Ledger's decentralized exchange.
     /// (In finance, this is more traditionally known as an order.)
     /// <para/>An OfferCreate transaction only creates an offer entry in the ledger
     /// when the offer cannot be fully executed immediately by consuming other offers already in the ledger.
@@ -140,7 +151,17 @@ namespace XRPL.Core.Domain.Entries
     /// When processing transactions, the network automatically removes any unfunded offers that those transactions come across.
     /// (Otherwise, unfunded offers remain, because only transactions can change the ledger state.)
     /// </summary>
-    public sealed class FungibleTokenOffer : Offer<TokenAmount, TokenAmount>
+    [JsonDerivedType(typeof(FungibleTokenOffer), typeDiscriminator: nameof(FungibleTokenOffer))]
+    public class FungibleTokenOffer : Offer
     {
+        /// <summary>
+        /// The remaining amount and type of currency requested by the offer creator.
+        /// </summary>
+        public new required TokenAmount TakerPays { get => (TokenAmount)base.TakerPays; set => base.TakerPays = value; }
+
+        /// <summary>
+        /// The remaining amount and type of currency being provided by the Offer creator.
+        /// </summary>
+        public new required TokenAmount TakerGets { get => (TokenAmount)base.TakerGets; set => base.TakerGets = value; }
     }
 }

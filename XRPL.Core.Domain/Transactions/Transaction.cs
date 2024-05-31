@@ -1,6 +1,6 @@
 using XRPL.Core.Domain.Entries;
 
-namespace XRPL.Core.Domain.Responses
+namespace XRPL.Core.Domain.Transactions
 {
     /// <summary>
     /// Represents a transaction, which is the only way to cause changes in the XRPL ledeger.
@@ -35,6 +35,11 @@ namespace XRPL.Core.Domain.Responses
         /// <summary>
         /// (Optional) Hash value identifying another transaction.
         /// <para/>If provided, this transaction is only valid if the sending account's previously-sent transaction matches the provided hash.
+        /// <para/>The AccountTxnID field lets you chain your transactions together, so that a current transaction is not valid unless the previous transaction sent from the same account has a specific transaction hash.
+        /// <para/>Unlike the PreviousTxnID field, which tracks the last transaction to modify an account (regardless of sender), the AccountTxnID tracks the last transaction sent by an account. To use AccountTxnID, you must first enable the asfAccountTxnID flag, so that the ledger keeps track of the ID for the account's previous transaction. (PreviousTxnID, by comparison, is always tracked.)
+        /// <para/>One situation in which this is useful is if you have a primary system for submitting transactions and a passive backup system. If the passive backup system becomes disconnected from the primary, but the primary is not fully dead, and they both begin operating at the same time, you could potentially have serious problems like some transactions sending twice and others not at all. Chaining your transactions together with AccountTxnID ensures that, even if both systems are active, only one of them can submit valid transactions at a time.
+        /// <para/>The AccountTxnID field cannot be used on transactions that use Tickets. 
+        /// Transactions that use AccountTxnID cannot be placed in the transaction queue.
         /// </summary>
         public string? AccountTxnID { get; set; }
 
@@ -119,19 +124,60 @@ namespace XRPL.Core.Domain.Responses
         /// <summary>
         /// Arbitrary hex value, conventionally containing the content of the memo.
         /// </summary>
-        public string? MemoData { get; set; }
+        public required string MemoData { get; set; }
 
         /// <summary>
         /// Hex value representing characters allowed in URLs.
         /// <para/>Conventionally containing information on how the memo is encoded, for example as a MIME type.
         /// </summary>
-        public string? MemoFormat { get; set; }
+        public required string MemoFormat { get; set; }
 
         /// <summary>
         /// Hex value representing characters allowed in URLs.
         /// <para/>Conventionally, a unique relation (according to RFC 5988) that defines the format of this memo.
         /// </summary>
-        public string? MemoType { get; set; }
+        public required string MemoType { get; set; }
+    }
+
+    /// <summary>
+    /// Represents a known Network ID (status and value)
+    /// </summary>
+    public enum KnownNetworkID
+    {
+        /// <summary>
+        /// Network ID of Mainnet. Field disallowed.
+        /// </summary>
+        Mainnet = 0,
+
+        /// <summary>
+        /// Network ID of Testnet. Field disallowed.
+        /// </summary>
+        Testnet = 1,
+
+        /// <summary>
+        /// Network ID of Devnet. Field disallowed.
+        /// </summary>
+        Devnet = 2,
+
+        /// <summary>
+        /// Network ID of AMM Devnet. Field disallowed.
+        /// </summary>
+        AMMDevnet = 25,
+
+        /// <summary>
+        /// Network ID of Sidechains Devnet Locking Chain. Field disallowed, but will become required after an update.
+        /// </summary>
+        SidechainsDevnetLockingChain = 2551,
+
+        /// <summary>
+        /// Network ID of Sidechains Devnet Issuing Chain. Field disallowed, but will become required after an update.
+        /// </summary>
+        SidechainsDevnetIssuingChain = 2552,
+
+        /// <summary>
+        /// Network ID of Hooks V3 Testnet. Required.
+        /// </summary>
+        HooksV3Testnet = 21338
     }
 
     /// <summary>
@@ -194,8 +240,8 @@ namespace XRPL.Core.Domain.Responses
         CheckCancel,
 
         /// <summary>
-        /// Attempts to redeem a <see cref="Check{TTokenAmount}"/> object in the ledger to receive up to the amount authorized by the corresponding CheckCreate transaction. 
-        /// <para/>Only the Destination address of a <see cref="Check{TTokenAmount}"/> can cash it with a CheckCash transaction. Cashing a check this way is similar to executing a Payment initiated by the destination.
+        /// Attempts to redeem a <see cref="Check"/> object in the ledger to receive up to the amount authorized by the corresponding CheckCreate transaction. 
+        /// <para/>Only the Destination address of a <see cref="Check"/> can cash it with a CheckCash transaction. Cashing a check this way is similar to executing a Payment initiated by the destination.
         /// </summary>
         CheckCash,
 
