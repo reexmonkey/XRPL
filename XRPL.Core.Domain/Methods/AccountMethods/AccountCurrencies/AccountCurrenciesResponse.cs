@@ -11,9 +11,9 @@ namespace XRPL.Core.Domain.Methods.AccountMethods.AccountCurrencies
     }
 
     /// <summary>
-    /// Represents the result of <see cref="AccountChannelsResponse"/> object.
+    /// Represents the result of <see cref="AccountCurrenciesResponse"/> object.
     /// </summary>
-    
+
     public class AccountCurrenciesResponseResult : ResultBase
     {
         /// <summary>

@@ -4,14 +4,14 @@ using XRPL.Core.Domain.Entries;
 namespace XRPL.Core.Domain.Methods.PathAndOrderBookMethods.NftSellOffers
 {
     /// <summary>
-    /// Represents a response to an <see cref="RipplePathFindRequest"/> request.
+    /// Represents a response to an <see cref="NftSellOffersRequest"/> request.
     /// </summary>
     public class NftSellOffersResponse : ResponseBase<NftSellOffersResult>
     {
     }
 
     /// <summary>
-    /// Represents a result of an <see cref="RipplePathFindResponse"/> object.
+    /// Represents a result of an <see cref="NftSellOffersRequest"/> object.
     /// </summary>
 
     public class NftSellOffersResult : ResultBase
