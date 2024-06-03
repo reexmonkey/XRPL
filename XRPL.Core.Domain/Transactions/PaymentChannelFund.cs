@@ -1,4 +1,5 @@
-﻿using XRPL.Core.Domain.Entries;
+﻿using System.Text.Json.Serialization;
+using XRPL.Core.Domain.Entries;
 
 namespace XRPL.Core.Domain.Transactions
 {
@@ -6,6 +7,7 @@ namespace XRPL.Core.Domain.Transactions
     /// Represents a transaction that adds additional XRP to an open payment channel, and optionally update the expiration time of the channel.
     /// <para/>Only the source address of the channel can use this transaction.
     /// </summary>
+    [JsonDerivedType(typeof(PaymentChannelFund), typeDiscriminator: nameof(PaymentChannelFund))]
     public class PaymentChannelFund : Transaction
     {
         /// <summary>

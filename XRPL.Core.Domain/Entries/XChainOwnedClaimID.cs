@@ -1,5 +1,4 @@
-﻿using System.Text.Json.Serialization;
-using XRPL.Core.Domain.Models;
+﻿using XRPL.Core.Domain.Models;
 
 namespace XRPL.Core.Domain.Entries
 {
@@ -64,9 +63,6 @@ namespace XRPL.Core.Domain.Entries
     /// Represents an attestation collected from a witness server.
     /// <para/>This includes the parameters needed to recreate the message that was signed, including the amount, which chain (locking or issuing), optional destination, and reward account for that signature.
     /// </summary>
-    [JsonPolymorphic]
-    [JsonDerivedType(typeof(XrpXChainClaimAttestation), typeDiscriminator: nameof(XrpXChainClaimAttestation))]
-    [JsonDerivedType(typeof(FungibleTokenXChainClaimAttestation), typeDiscriminator: nameof(FungibleTokenXChainClaimAttestation))]
     public abstract class XChainClaimAttestation
     {
         /// <summary>
@@ -113,7 +109,6 @@ namespace XRPL.Core.Domain.Entries
     /// <para/>An XChainCreateClaimID transaction is used to create a new XChainOwnedClaimID.
     /// The ledger object is destroyed when the funds are successfully claimed on the destination chain.
     /// </summary>
-    [JsonDerivedType(typeof(XrpXChainClaimAttestation), typeDiscriminator: nameof(XrpXChainClaimAttestation))]
     public class XrpXChainClaimAttestation : XChainClaimAttestation
     {
         /// <summary>
@@ -130,7 +125,6 @@ namespace XRPL.Core.Domain.Entries
     /// <para/>An XChainCreateClaimID transaction is used to create a new XChainOwnedClaimID.
     /// The ledger object is destroyed when the funds are successfully claimed on the destination chain.
     /// </summary>
-    [JsonDerivedType(typeof(FungibleTokenXChainClaimAttestation), typeDiscriminator: nameof(FungibleTokenXChainClaimAttestation))]
     public class FungibleTokenXChainClaimAttestation : XChainClaimAttestation
     {
         /// <summary>

@@ -13,11 +13,6 @@
         public DisabledValidator[]? DisabledValidators { get; set; }
 
         /// <summary>
-        /// The value 0x004E, mapped to the string NegativeUNL, indicates that this entry is the Negative UNL.
-        /// </summary>
-        public override required string LedgerEntryType { get => base.LedgerEntryType; set => base.LedgerEntryType = value; }
-
-        /// <summary>
         /// The public key of a trusted validator that is scheduled to be disabled in the next flag ledger.
         /// </summary>
         public string? ValidatorToDisable { get; set; }

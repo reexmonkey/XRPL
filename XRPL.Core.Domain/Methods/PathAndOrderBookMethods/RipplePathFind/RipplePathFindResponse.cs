@@ -1,7 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 using XRPL.Core.Domain.Models;
 
-namespace XRPL.Core.Domain.Methods.PathAndOrderBookMethods.NftSellOffers
+namespace XRPL.Core.Domain.Methods.PathAndOrderBookMethods.RipplePathFind
 {
     /// <summary>
     /// Represents a response to a ripple path find request.

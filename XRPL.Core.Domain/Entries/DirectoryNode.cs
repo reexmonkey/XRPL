@@ -12,12 +12,6 @@
     /// </summary>
     public class DirectoryNode : LedgerEntryBase
     {
-        /// <summary>
-        /// A bit-map of boolean flags enabled for this object. 
-        /// <para/>Currently, the protocol defines no flags for DirectoryNode objects. 
-        /// The value is always 0.
-        /// </summary>
-        public override required uint Flags { get => base.Flags; set => base.Flags = value; }
 
         /// <summary>
         /// The contents of this Directory: an array of IDs of other objects.

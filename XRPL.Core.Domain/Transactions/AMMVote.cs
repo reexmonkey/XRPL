@@ -1,4 +1,5 @@
-﻿using XRPL.Core.Domain.Models;
+﻿using System.Text.Json.Serialization;
+using XRPL.Core.Domain.Models;
 
 namespace XRPL.Core.Domain.Transactions
 {
@@ -7,6 +8,7 @@ namespace XRPL.Core.Domain.Transactions
     /// Up to 8 accounts can vote in proportion to the amount of the AMM's LP Tokens they hold.
     /// Each new vote re-calculates the AMM's trading fee based on a weighted average of the votes.
     /// </summary>
+    [JsonDerivedType(typeof(AMMVote), typeDiscriminator: nameof(AMMVote))]
     public class AMMVote : Transaction
     {
         /// <summary>

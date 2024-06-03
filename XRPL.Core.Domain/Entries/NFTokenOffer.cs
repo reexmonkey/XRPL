@@ -11,8 +11,6 @@ namespace XRPL.Core.Domain.Entries
     [JsonDerivedType(typeof(FungibleTokenForNFTokenOffer), typeDiscriminator: nameof(FungibleTokenForNFTokenOffer))]
     public abstract class NFTokenOffer : LedgerEntryBase
     {
-        private NFTokenOfferFlags flags;
-
         /// <summary>
         /// Amount expected or offered for the NFToken.
         /// <para/>If the token has the lsfOnlyXRP flag set, the amount must be specified in XRP.
@@ -20,11 +18,6 @@ namespace XRPL.Core.Domain.Entries
         /// Sell offers that specify XRP can be 'free' (that is, the Amount field can be equal to "0").
         /// </summary>
         public object Amount { get; set; } = null!;
-
-        /// <summary>
-        /// Set of bit-flags for this ledger entry.
-        /// </summary>
-        public override required uint Flags { get => (uint)flags; set => flags = (NFTokenOfferFlags)value; }
 
         /// <summary>
         /// The AccountID for which this offer is intended. If present, only that account can accept the offer.
@@ -36,15 +29,6 @@ namespace XRPL.Core.Domain.Entries
         /// <para/>The value is the number of seconds since the Ripple Epoch.
         /// </summary>
         public uint Expiration { get; set; }
-
-        /// <summary>
-        /// The value 0x0037, mapped to the string NFTokenOffer, indicates that this is an offer to trade a NFToken.
-        /// </summary>
-        public override required string LedgerEntryType
-        {
-            get => base.LedgerEntryType;
-            set => base.LedgerEntryType = value;
-        }
 
         /// <summary>
         /// The NFTokenID of the NFToken object referenced by this offer.

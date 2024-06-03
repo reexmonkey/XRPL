@@ -12,13 +12,6 @@
         public required string BaseFeeDrops { get; set; }
 
         /// <summary>
-        /// A bit-map of boolean flags enabled for this object.
-        /// <para/>Currently, the protocol defines no flags for FeeSettings objects.
-        /// The value is always 0.
-        /// </summary>
-        public override required uint Flags { get => base.Flags; set => base.Flags = value; }
-
-        /// <summary>
         /// The BaseFee translated into "fee units".
         /// </summary>
         public required uint ReferenceFeeUnits { get; set; }

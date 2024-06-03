@@ -59,11 +59,6 @@
         public uint Expiration { get; set; }
 
         /// <summary>
-        /// The value 0x0078, mapped to the string PayChannel, indicates that this is a payment channel entry.
-        /// </summary>
-        public override required string LedgerEntryType { get => base.LedgerEntryType; set => base.LedgerEntryType = value; }
-
-        /// <summary>
         /// A hint indicating which page of the source address's owner directory links to this entry, in case the directory consists of multiple pages.
         /// </summary>
         public required string OwnerNode { get; set; }

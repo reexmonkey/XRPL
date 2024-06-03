@@ -10,6 +10,7 @@ namespace XRPL.Core.Domain.Transactions
     /// <para/>Payments are also the only way to create accounts.
     /// </summary>
     [JsonPolymorphic]
+    [JsonDerivedType(typeof(Payment), typeDiscriminator: nameof(Payment))]
     [JsonDerivedType(typeof(PaymentV1), typeDiscriminator: nameof(PaymentV1))]
     [JsonDerivedType(typeof(PaymentV2), typeDiscriminator: nameof(PaymentV2))]
     public abstract class Payment : Transaction

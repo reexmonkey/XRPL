@@ -1,10 +1,12 @@
-﻿using XRPL.Core.Domain.Entries;
+﻿using System.Text.Json.Serialization;
+using XRPL.Core.Domain.Entries;
 
 namespace XRPL.Core.Domain.Transactions
 {
     /// <summary>
     /// Represents a transaction that is used to cancel existing token offers created using <see cref="NFTokenCreateOffer"/>.
     /// </summary>
+    [JsonDerivedType(typeof(NFTokenCancelOffer), typeDiscriminator: nameof(NFTokenCancelOffer))]
     public abstract class NFTokenCancelOffer : Transaction
     {
         /// <summary>

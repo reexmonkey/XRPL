@@ -1,4 +1,5 @@
-﻿using XRPL.Core.Domain.Entries;
+﻿using System.Text.Json.Serialization;
+using XRPL.Core.Domain.Entries;
 
 namespace XRPL.Core.Domain.Transactions
 {
@@ -7,6 +8,7 @@ namespace XRPL.Core.Domain.Transactions
     /// The source or the destination of the check can cancel a <see cref="Check"/> at any time using this transaction type.
     /// If the <see cref="Check"/> has expired, any address can cancel it.
     /// </summary>
+    [JsonDerivedType(typeof(CheckCancel), typeDiscriminator: nameof(CheckCancel))]
     public class CheckCancel : Transaction
     {
         /// <summary>

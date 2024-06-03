@@ -1,8 +1,11 @@
-﻿namespace XRPL.Core.Domain.Transactions
+﻿using System.Text.Json.Serialization;
+
+namespace XRPL.Core.Domain.Transactions
 {
     /// <summary>
     /// Represents a transaction that removes an Offer object from the XRP Ledger.
     /// </summary>
+    [JsonDerivedType(typeof(OfferCancel), typeDiscriminator: nameof(OfferCancel))]
     public class OfferCancel : Transaction
     {
         /// <summary>

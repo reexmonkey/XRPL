@@ -1,4 +1,6 @@
-﻿namespace XRPL.Core.Domain.Transactions
+﻿using System.Text.Json.Serialization;
+
+namespace XRPL.Core.Domain.Transactions
 {
     /// <summary>
     /// Represents a transaction that delivers XRP from a held payment to the recipient.
@@ -7,6 +9,7 @@
     /// <para/> - If the held payment has a <see cref="Condition"/>, you cannot execute it unless you provide a matching <see cref="Fulfillment"/> for the condition.
     /// <para/> - You cannot execute a held payment after it has expired. Specifically, if the corresponding <see cref="EscrowCreate"/> transaction specified a CancelAfter time that is before the close time of the most recently-closed ledger, the <see cref="EscrowFinish"/> transaction fails.
     /// </summary>
+    [JsonDerivedType(typeof(EscrowFinish), typeDiscriminator: nameof(EscrowFinish))]
     public class EscrowFinish : Transaction
     {
         /// <summary>

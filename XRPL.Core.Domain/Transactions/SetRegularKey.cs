@@ -1,4 +1,6 @@
-﻿namespace XRPL.Core.Domain.Transactions
+﻿using System.Text.Json.Serialization;
+
+namespace XRPL.Core.Domain.Transactions
 {
     /// <summary>
     /// Represents a transaction that assigns, changes, or removes the regular key pair associated with an account.
@@ -7,6 +9,7 @@
     /// If your regular key pair is compromised, but your master key pair is not,
     /// you can use a SetRegularKey transaction to regain control of your account.
     /// </summary>
+    [JsonDerivedType(typeof(SetRegularKey), typeDiscriminator: nameof(SetRegularKey))]
     public class SetRegularKey : Transaction
     {
         /// <summary>

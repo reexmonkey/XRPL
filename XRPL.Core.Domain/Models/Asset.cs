@@ -5,6 +5,11 @@ namespace XRPL.Core.Domain.Models
     /// <summary>
     /// Specifies an asset.
     /// </summary>
+    [JsonPolymorphic]
+    [JsonDerivedType(typeof(TokenAsset), typeDiscriminator: nameof(TokenAsset))]
+    [JsonDerivedType(typeof(XrpAsset), typeDiscriminator: nameof(XrpAsset))]
+    [JsonDerivedType(typeof(OrderBookAsset), typeDiscriminator: nameof(OrderBookAsset))]
+    [JsonDerivedType(typeof(Issue), typeDiscriminator: nameof(Issue))]
     public abstract class Asset
     {
         /// <summary>
@@ -17,6 +22,7 @@ namespace XRPL.Core.Domain.Models
     /// <summary>
     /// Represents a fungible token asset.
     /// </summary>
+    [JsonDerivedType(typeof(TokenAsset), typeDiscriminator: nameof(TokenAsset))]
     public class TokenAsset : Asset
     {
 
@@ -48,6 +54,7 @@ namespace XRPL.Core.Domain.Models
     /// <summary>
     /// Represents an XRP asset.
     /// </summary>
+    [JsonDerivedType(typeof(XrpAsset), typeDiscriminator: nameof(XrpAsset))]
     public class XrpAsset : Asset
     {
         /// <summary>
@@ -59,6 +66,7 @@ namespace XRPL.Core.Domain.Models
     /// <summary>
     /// Represents the asset of a fungible token without amounts.
     /// </summary>
+    [JsonDerivedType(typeof(OrderBookAsset), typeDiscriminator: nameof(OrderBookAsset))]
     public class OrderBookAsset : Asset
     {
         /// <summary>
@@ -72,6 +80,9 @@ namespace XRPL.Core.Domain.Models
     /// <summary>
     /// Represents an asset on an issuing chain.
     /// </summary>
+    [JsonPolymorphic]
+    [JsonDerivedType(typeof(Issue), typeDiscriminator: nameof(Issue))]
+    [JsonDerivedType(typeof(STIssue), typeDiscriminator: nameof(STIssue))]
     public class Issue : Asset
     {
     }
@@ -79,6 +90,7 @@ namespace XRPL.Core.Domain.Models
     /// <summary>
     /// Represents an asset type.
     /// </summary>
+    [JsonDerivedType(typeof(STIssue), typeDiscriminator: nameof(STIssue))]
     public class STIssue : Issue
     {
         /// <summary>

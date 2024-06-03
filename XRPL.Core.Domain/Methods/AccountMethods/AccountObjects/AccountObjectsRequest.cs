@@ -15,7 +15,7 @@ namespace XRPL.Core.Domain.Methods.AccountMethods.AccountObjects
     /// <para/><see cref="Escrow"/> entries for held payments that have not yet been executed or canceled.
     /// <para/><see cref="PayChannel"/> entries for open payment channels.
     /// <para/><see cref="Check"/> entries for pending Checks.
-    /// <para/><see cref="DepositPreauth"/> entries for deposit preauthorizations.
+    /// <para/><see cref="DepositPreauthEntry"/> entries for deposit preauthorizations.
     /// <para/><see cref="Ticket"/> entries for Tickets.
     /// <para/><see cref="NFTokenOffer"/> entries for offers to buy or sell an NFT.
     /// <para/><see cref="NFTokenPage"/> entries for collections of NFTs.

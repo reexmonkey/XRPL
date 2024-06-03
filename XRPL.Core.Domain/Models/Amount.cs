@@ -5,6 +5,8 @@ namespace XRPL.Core.Domain.Models
     /// <summary>
     /// Represents the amount and currency of a fungible token.
     /// </summary>
+    [JsonDerivedType(typeof(TokenAmount), typeDiscriminator: nameof(TokenAmount))]
+    [JsonDerivedType(typeof(LPTokenAmount), typeDiscriminator: nameof(LPTokenAmount))]
     public class TokenAmount
     {
         /// <summary>
@@ -42,6 +44,7 @@ namespace XRPL.Core.Domain.Models
     /// Represents an LP Token that indicates the percentage of ownership of assets in an AMM (Automated Market Maker) pool.
     /// <para/>Note: LP Tokens use a special type of currency code in the 160-bit hexadecimal "non-standard" format. These codes have the first 8 bits 0x03.
     /// </summary>
+    [JsonDerivedType(typeof(LPTokenAmount), typeDiscriminator: nameof(LPTokenAmount))]
     public class LPTokenAmount : TokenAmount
     {
     }
