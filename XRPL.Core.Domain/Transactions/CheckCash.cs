@@ -1,4 +1,5 @@
-﻿using XRPL.Core.Domain.Entries;
+﻿using System.Text.Json.Serialization;
+using XRPL.Core.Domain.Entries;
 using XRPL.Core.Domain.Models;
 
 namespace XRPL.Core.Domain.Transactions
@@ -10,6 +11,10 @@ namespace XRPL.Core.Domain.Transactions
     /// <para/> Since the funds for a check are not guaranteed, redeeming a <see cref="CheckCash"/> can fail because the sender does not have a high enough balance or because there is not enough liquidity to deliver the funds.
     /// If this happens, the <see cref="CheckCash"/> remains in the ledger and the destination can try to cash it again later, or for a different amount.
     /// </summary>
+    [JsonPolymorphic]
+    [JsonDerivedType(typeof(CheckCash), typeDiscriminator: nameof(CheckCash))]
+    [JsonDerivedType(typeof(XrpCheckCash), typeDiscriminator: nameof(XrpCheckCash))]
+    [JsonDerivedType(typeof(FungibleTokenCheckCash), typeDiscriminator: nameof(FungibleTokenCheckCash))]
     public abstract class CheckCash : Transaction
     {
         /// <summary>
@@ -45,6 +50,7 @@ namespace XRPL.Core.Domain.Transactions
     /// If this happens, the <see cref="XrpCheck"/> remains in the ledger and the destination can try to cash it again later, or for a different amount.
     /// <para/>Caution: The transaction must include either Amount or DeliverMin, but not both.
     /// </summary>
+    [JsonDerivedType(typeof(XrpCheckCash), typeDiscriminator: nameof(XrpCheckCash))]
     public sealed class XrpCheckCash : CheckCash
     {
         /// <summary>
@@ -68,6 +74,7 @@ namespace XRPL.Core.Domain.Transactions
     /// If this happens, the <see cref="FungibleTokenCheck"/> remains in the ledger and the destination can try to cash it again later, or for a different amount.
     /// <para/>Caution: The transaction must include either Amount or DeliverMin, but not both.
     /// </summary>
+    [JsonDerivedType(typeof(FungibleTokenCheckCash), typeDiscriminator: nameof(FungibleTokenCheckCash))]
     public sealed class FungibleTokenCheckCash : CheckCash
     {
         /// <summary>

@@ -5,15 +5,9 @@ namespace XRPL.Core.Domain.Transactions
     /// <summary>
     /// Represents a transaction that creates or modifies a trust line linking two accounts.
     /// </summary>
+    [JsonDerivedType(typeof(TrustSet), typeDiscriminator: nameof(TrustSet))]
     public class TrustSet : Transaction
     {
-        private TrustSetFlags? flags;
-
-        /// <summary>
-        /// (Optional) Set of bit-flags for this transaction.
-        /// </summary>
-        public override uint? Flags { get => (uint?)flags; set => flags = (TrustSetFlags?)value; }
-
         /// <summary>
         /// (Optional) Value incoming balances on this trust line at the ratio of this number per 1,000,000,000 units.
         /// <para/>A value of 0 is shorthand for treating balances at face value.
@@ -64,7 +58,6 @@ namespace XRPL.Core.Domain.Transactions
         /// </summary>
         [JsonPropertyName("issuer")]
         public string? Issuer { get; set; }
-
     }
 
     /// <summary>

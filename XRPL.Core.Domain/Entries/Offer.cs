@@ -1,5 +1,4 @@
-﻿using System.Text.Json.Serialization;
-using XRPL.Core.Domain.Models;
+﻿using XRPL.Core.Domain.Models;
 
 namespace XRPL.Core.Domain.Entries
 {
@@ -12,10 +11,6 @@ namespace XRPL.Core.Domain.Entries
     /// When processing transactions, the network automatically removes any unfunded Offers that those transactions come across.
     /// (Otherwise, unfunded Offers remain, because only transactions can change the ledger state.)
     /// </summary>
-    [JsonPolymorphic]
-    [JsonDerivedType(typeof(XrpForFungibleTokenOffer), typeDiscriminator: nameof(XrpForFungibleTokenOffer))]
-    [JsonDerivedType(typeof(FungibleTokenForXrpOffer), typeDiscriminator: nameof(FungibleTokenForXrpOffer))]
-    [JsonDerivedType(typeof(FungibleTokenOffer), typeDiscriminator: nameof(FungibleTokenOffer))]
     public abstract class Offer : LedgerEntryBase
     {
         /// <summary>
@@ -105,7 +100,6 @@ namespace XRPL.Core.Domain.Entries
     /// When processing transactions, the network automatically removes any unfunded offers that those transactions come across.
     /// (Otherwise, unfunded offers remain, because only transactions can change the ledger state.)
     /// </summary>
-    [JsonDerivedType(typeof(XrpForFungibleTokenOffer), typeDiscriminator: nameof(XrpForFungibleTokenOffer))]
     public class XrpForFungibleTokenOffer : Offer
     {
         /// <summary>
@@ -128,7 +122,6 @@ namespace XRPL.Core.Domain.Entries
     /// When processing transactions, the network automatically removes any unfunded offers that those transactions come across.
     /// (Otherwise, unfunded offers remain, because only transactions can change the ledger state.)
     /// </summary>
-    [JsonDerivedType(typeof(FungibleTokenForXrpOffer), typeDiscriminator: nameof(FungibleTokenForXrpOffer))]
     public class FungibleTokenForXrpOffer : Offer
     {
         /// <summary>
@@ -151,7 +144,6 @@ namespace XRPL.Core.Domain.Entries
     /// When processing transactions, the network automatically removes any unfunded offers that those transactions come across.
     /// (Otherwise, unfunded offers remain, because only transactions can change the ledger state.)
     /// </summary>
-    [JsonDerivedType(typeof(FungibleTokenOffer), typeDiscriminator: nameof(FungibleTokenOffer))]
     public class FungibleTokenOffer : Offer
     {
         /// <summary>

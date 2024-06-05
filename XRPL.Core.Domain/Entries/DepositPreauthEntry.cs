@@ -7,7 +7,7 @@
     /// In that case, the account that was preauthorized can send payments and other transactions directly to the account that provided the preauthorization
     /// Preauthorizations are one-directional, and have no effect on payments going the opposite direction.
     /// </summary>
-    public class DepositPreauth : LedgerEntryBase
+    public class DepositPreauthEntry : LedgerEntryBase
     {
         /// <summary>
         /// The account that granted the preauthorization.
@@ -38,9 +38,9 @@
         public required uint PreviousTxnLgrSeq { get; set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DepositPreauth"/> class.
+        /// Initializes a new instance of the <see cref="DepositPreauthEntry"/> class.
         /// </summary>
-        public DepositPreauth()
+        public DepositPreauthEntry()
         {
             LedgerEntryType = "DepositPreauth";
         }

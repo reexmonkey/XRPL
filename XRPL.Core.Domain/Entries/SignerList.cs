@@ -5,22 +5,10 @@
     /// </summary>
     public class SignerList : LedgerEntryBase
     {
-        private SignerListFlags? flags;
-
-        /// <summary>
-        /// The value 0x0053, mapped to the string SignerList, indicates that this is a SignerList ledger entry.
-        /// </summary>
-        public override required string LedgerEntryType { get => base.LedgerEntryType; set => base.LedgerEntryType = value; }
-
         /// <summary>
         /// A hint indicating which page of the owner directory links to this object, in case the directory consists of multiple pages.
         /// </summary>
         public required string OwnerNode { get; set; }
-
-        /// <summary>
-        /// A bit-map of boolean options enabled for this entry.
-        /// </summary>
-        public override required uint Flags { get => flags.HasValue ? (uint)flags : 0u; set => flags = value == 1u ? (SignerListFlags)value : null; }
 
         /// <summary>
         /// The identifying hash of the transaction that most recently modified this object.

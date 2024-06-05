@@ -1,4 +1,5 @@
-﻿using XRPL.Core.Domain.Entries;
+﻿using System.Text.Json.Serialization;
+using XRPL.Core.Domain.Entries;
 using XRPL.Core.Domain.Models;
 
 namespace XRPL.Core.Domain.Transactions
@@ -6,6 +7,11 @@ namespace XRPL.Core.Domain.Transactions
     /// <summary>
     /// Specifies a transaction that places an <see cref="Offer"/> in the decentralized exchange.
     /// </summary>
+    [JsonPolymorphic]
+    [JsonDerivedType(typeof(OfferCreate), typeDiscriminator: nameof(OfferCreate))]
+    [JsonDerivedType(typeof(XrpForFungibleTokenOfferCreate), typeDiscriminator: nameof(XrpForFungibleTokenOfferCreate))]
+    [JsonDerivedType(typeof(FungibleTokenForXrpOfferCreate), typeDiscriminator: nameof(FungibleTokenForXrpOfferCreate))]
+    [JsonDerivedType(typeof(FungibleTokenOfferCreate), typeDiscriminator: nameof(FungibleTokenOfferCreate))]
     public abstract class OfferCreate : Transaction
     {
         /// <summary>
@@ -39,6 +45,7 @@ namespace XRPL.Core.Domain.Transactions
     /// <summary>
     /// Represents a transaction that places an <see cref="Offer"/> to sell XRP for fungible tokens in the decentralized exchange.
     /// </summary>
+    [JsonDerivedType(typeof(XrpForFungibleTokenOfferCreate), typeDiscriminator: nameof(XrpForFungibleTokenOfferCreate))]
     public sealed class XrpForFungibleTokenOfferCreate : OfferCreate
     {
         /// <summary>
@@ -55,6 +62,7 @@ namespace XRPL.Core.Domain.Transactions
     /// <summary>
     /// Represents a transaction that places an <see cref="Offer"/> to sell fungible tokens for XRP in the decentralized exchange.
     /// </summary>
+    [JsonDerivedType(typeof(FungibleTokenForXrpOfferCreate), typeDiscriminator: nameof(FungibleTokenForXrpOfferCreate))]
     public sealed class FungibleTokenForXrpOfferCreate : OfferCreate
     {
         /// <summary>
@@ -71,6 +79,7 @@ namespace XRPL.Core.Domain.Transactions
     /// <summary>
     /// Represents a transaction that places an <see cref="Offer"/> to sell fungible tokens for other types of fungible tokens in the decentralized exchange.
     /// </summary>
+    [JsonDerivedType(typeof(FungibleTokenOfferCreate), typeDiscriminator: nameof(FungibleTokenOfferCreate))]
     public sealed class FungibleTokenOfferCreate : OfferCreate
     {
         /// <summary>

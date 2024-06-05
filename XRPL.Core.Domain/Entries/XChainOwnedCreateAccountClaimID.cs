@@ -1,5 +1,4 @@
-﻿using System.Text.Json.Serialization;
-using XRPL.Core.Domain.Models;
+﻿using XRPL.Core.Domain.Models;
 
 namespace XRPL.Core.Domain.Entries
 {
@@ -52,9 +51,6 @@ namespace XRPL.Core.Domain.Entries
     /// Represents an attestation collected from a witness server.
     /// <para/>This includes the parameters needed to recreate the message that was signed, including the amount, destination, signature reward amount, and reward account for that signature. With the exception of the reward account, all signatures must sign the message created with common parameters.
     /// </summary>
-    [JsonPolymorphic]
-    [JsonDerivedType(typeof(XrpXChainCreateAccountAttestation), typeDiscriminator: nameof(XrpXChainCreateAccountAttestation))]
-    [JsonDerivedType(typeof(FungibleTokenXChainCreateAccountAttestation), typeDiscriminator: nameof(FungibleTokenXChainClaimAttestation))]
     public class XChainCreateAccountAttestation
     {
         /// <summary>
@@ -97,7 +93,6 @@ namespace XRPL.Core.Domain.Entries
     /// Represents an attestation collected from a witness server.
     /// <para/>This includes the parameters needed to recreate the message that was signed, including the amount in XRP drops, destination, signature reward amount, and reward account for that signature. With the exception of the reward account, all signatures must sign the message created with common parameters.
     /// </summary>
-    [JsonDerivedType(typeof(XrpXChainCreateAccountAttestation), typeDiscriminator: nameof(XrpXChainCreateAccountAttestation))]
     public sealed class XrpXChainCreateAccountAttestation : XChainCreateAccountAttestation
     {
         /// <summary>
@@ -110,7 +105,6 @@ namespace XRPL.Core.Domain.Entries
     /// Represents an attestation collected from a witness server.
     /// <para/>This includes the parameters needed to recreate the message that was signed, including the amount and currency type, destination, signature reward amount, and reward account for that signature. With the exception of the reward account, all signatures must sign the message created with common parameters.
     /// </summary>
-    [JsonDerivedType(typeof(FungibleTokenXChainCreateAccountAttestation), typeDiscriminator: nameof(FungibleTokenXChainCreateAccountAttestation))]
     public class FungibleTokenXChainCreateAccountAttestation : XChainCreateAccountAttestation
     {
         /// <summary>

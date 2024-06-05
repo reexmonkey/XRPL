@@ -12,11 +12,6 @@
         public required string Account { get; set; }
 
         /// <summary>
-        /// The value 0x0054, mapped to the string Ticket, indicates that this is a Ticket entry.
-        /// </summary>
-        public override required string LedgerEntryType { get => base.LedgerEntryType; set => base.LedgerEntryType = value; }
-
-        /// <summary>
         /// A hint indicating which page of the owner directory links to this entry, in case the directory consists of multiple pages.
         /// </summary>
         public required string OwnerNode { get; set; }

@@ -1,18 +1,10 @@
-﻿using System.Text.Json.Serialization;
-
-namespace XRPL.Core.Domain.Entries
+﻿namespace XRPL.Core.Domain.Entries
 {
     /// <summary>
     /// Represents a ledger entry that describes a single account.
     /// </summary>
-    [JsonDerivedType(typeof(AccountRoot), typeDiscriminator: nameof(AccountRoot))]
-    [JsonDerivedType(typeof(AmmAccountRoot), typeDiscriminator: nameof(AmmAccountRoot))]
     public class AccountRoot : LedgerEntryBase
     {
-        /// <summary>
-        /// Options to change with an AccountSet transaction.
-        /// </summary>
-        protected AccountRootFlags flags;
 
         /// <summary>
         /// The identifying (classic) address of this account.
@@ -132,11 +124,6 @@ namespace XRPL.Core.Domain.Entries
         public uint WalletSize { get; set; }
 
         /// <summary>
-        /// Set of bit-flags for this ledger entry.
-        /// </summary>
-        public override required uint Flags { get => (uint)flags; set => flags = (AccountRootFlags)value; }
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="AccountRoot"/> class.
         /// </summary>
         public AccountRoot()
@@ -148,7 +135,6 @@ namespace XRPL.Core.Domain.Entries
     /// <summary>
     /// Represents an account root to be used with an Automated Market Maker (AMM).
     /// </summary>
-    [JsonDerivedType(typeof(AmmAccountRoot), typeDiscriminator: nameof(AmmAccountRoot))]
     public class AmmAccountRoot : AccountRoot
     {
         /// <summary>
@@ -156,9 +142,9 @@ namespace XRPL.Core.Domain.Entries
         /// </summary>
         public AmmAccountRoot()
         {
-            flags = AccountRootFlags.lsfDisableMaster
+            Flags = (uint)(AccountRootFlags.lsfDisableMaster
                 | AccountRootFlags.lsfDepositAuth
-                | AccountRootFlags.lsfDefaultRipple;
+                | AccountRootFlags.lsfDefaultRipple);
         }
     }
 

@@ -1,4 +1,5 @@
-﻿using XRPL.Core.Domain.Entries;
+﻿using System.Text.Json.Serialization;
+using XRPL.Core.Domain.Entries;
 using XRPL.Core.Domain.Models;
 
 namespace XRPL.Core.Domain.Transactions
@@ -6,6 +7,10 @@ namespace XRPL.Core.Domain.Transactions
     /// <summary>
     /// Specifies a transaction that creates a <see cref="Check"/> object in the ledger, which is a deferred payment that can be cashed by its intended destination. The sender of this transaction is the sender of the <see cref="Check"/>.
     /// </summary>
+    [JsonPolymorphic]
+    [JsonDerivedType(typeof(CheckCreate), typeDiscriminator: nameof(CheckCreate))]
+    [JsonDerivedType(typeof(XrpCheckCreate), typeDiscriminator: nameof(XrpCheckCreate))]
+    [JsonDerivedType(typeof(FungibleTokenCheckCreate), typeDiscriminator: nameof(FungibleTokenCheckCreate))]
     public abstract class CheckCreate : Transaction
     {
         /// <summary>
@@ -46,6 +51,7 @@ namespace XRPL.Core.Domain.Transactions
     /// Represents a transaction that creates an <see cref="XrpCheck"/> object in the ledger, which is a deferred payment that can be cashed by its intended destination.
     /// <para/>The sender of this transaction is the sender of the <see cref="XrpCheck"/>.
     /// </summary>
+    [JsonDerivedType(typeof(XrpCheckCreate), typeDiscriminator: nameof(XrpCheckCreate))]
     public sealed class XrpCheckCreate : CheckCreate
     {
         /// <summary>
@@ -59,7 +65,8 @@ namespace XRPL.Core.Domain.Transactions
     /// Represents a transaction that creates an <see cref="FungibleTokenCheck"/> object in the ledger, which is a deferred payment that can be cashed by its intended destination.
     /// <para/>The sender of this transaction is the sender of the <see cref="FungibleTokenCheck"/>.
     /// </summary>
-    public sealed class TokenCheckCreate : CheckCreate
+    [JsonDerivedType(typeof(FungibleTokenCheckCreate), typeDiscriminator: nameof(FungibleTokenCheckCreate))]
+    public sealed class FungibleTokenCheckCreate : CheckCreate
     {
         /// <summary>
         /// Maximum amount of source currency the <see cref="Check"/> is allowed to debit the sender, including transfer fees on non-XRP currencies.

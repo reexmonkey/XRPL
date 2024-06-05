@@ -9,19 +9,12 @@ namespace XRPL.Core.Domain.Entries
     /// </summary>
     public class RippleState : LedgerEntryBase
     {
-        private RippleStateFlags flags;
-
         /// <summary>
         /// The balance of the trust line, from the perspective of the low account.
         /// <para/>A negative balance indicates that the high account holds tokens issued by the low account.
         /// The issuer in this is always set to the neutral value ACCOUNT_ONE.
         /// </summary>
         public required TokenAmount Balance { get; set; }
-
-        /// <summary>
-        /// A bit-map of boolean options enabled for this entry.
-        /// </summary>
-        public override required uint Flags { get => (uint)flags; set => flags = (RippleStateFlags)value; }
 
         /// <summary>
         /// The limit that the high account has set on the trust line.
@@ -45,11 +38,6 @@ namespace XRPL.Core.Domain.Entries
         /// As a special case, the value 0 is equivalent to 1 billion, or face value.
         /// </summary>
         public uint? HighQualityOut { get; set; }
-
-        /// <summary>
-        /// The value 0x0072, mapped to the string RippleState, indicates that this is a RippleState entry.
-        /// </summary>
-        public override required string LedgerEntryType { get => base.LedgerEntryType; set => base.LedgerEntryType = value; }
 
         /// <summary>
         /// The limit that the low account has set on the trust line.

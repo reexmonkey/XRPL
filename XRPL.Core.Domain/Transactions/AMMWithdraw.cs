@@ -1,10 +1,16 @@
-﻿using XRPL.Core.Domain.Models;
+﻿using System.Text.Json.Serialization;
+using XRPL.Core.Domain.Models;
 
 namespace XRPL.Core.Domain.Transactions
 {
     /// <summary>
     /// Specifies a transaction that withdraws assets from an Automated Market Maker (AMM) instance by returning the AMM's liquidity provider tokens (LP Tokens).
     /// </summary>
+    [JsonPolymorphic]
+    [JsonDerivedType(typeof(AMMWithdraw), typeDiscriminator: nameof(AMMWithdraw))]
+    [JsonDerivedType(typeof(XrpFungibleTokenAMMWithdraw), typeDiscriminator: nameof(XrpFungibleTokenAMMWithdraw))]
+    [JsonDerivedType(typeof(FungibleTokenXrpAMMWithdraw), typeDiscriminator: nameof(FungibleTokenXrpAMMWithdraw))]
+    [JsonDerivedType(typeof(FungibleTokenAMMWithdraw), typeDiscriminator: nameof(FungibleTokenAMMWithdraw))]
     public abstract class AMMWithdraw : Transaction
     {
         /// <summary>
@@ -53,6 +59,7 @@ namespace XRPL.Core.Domain.Transactions
     /// Represents a transaction that withdraws assets from an Automated Market Maker (AMM) instance (XRP/fungible token)
     /// by returning the AMM's liquidity provider tokens (LP Tokens).
     /// </summary>
+    [JsonDerivedType(typeof(XrpFungibleTokenAMMWithdraw), typeDiscriminator: nameof(XrpFungibleTokenAMMWithdraw))]
     public sealed class XrpFungibleTokenAMMWithdraw : AMMWithdraw
     {
         /// <summary>
@@ -72,6 +79,7 @@ namespace XRPL.Core.Domain.Transactions
     /// Represents a transaction that withdraws assets from an Automated Market Maker (AMM) instance (fungible token/XRP)
     /// by returning the AMM's liquidity provider tokens (LP Tokens).
     /// </summary>
+    [JsonDerivedType(typeof(FungibleTokenXrpAMMWithdraw), typeDiscriminator: nameof(FungibleTokenXrpAMMWithdraw))]
     public sealed class FungibleTokenXrpAMMWithdraw : AMMWithdraw
     {
         /// <summary>
@@ -91,6 +99,7 @@ namespace XRPL.Core.Domain.Transactions
     /// Represents a transaction that withdraws fungible token assets from an Automated Market Maker (AMM) instance 
     /// by returning the AMM's liquidity provider tokens (LP Tokens).
     /// </summary>
+    [JsonDerivedType(typeof(FungibleTokenAMMWithdraw), typeDiscriminator: nameof(FungibleTokenAMMWithdraw))]
     public sealed class FungibleTokenAMMWithdraw : AMMWithdraw
     {
         /// <summary>

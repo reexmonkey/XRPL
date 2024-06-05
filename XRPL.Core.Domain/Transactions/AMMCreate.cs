@@ -1,4 +1,5 @@
-﻿using XRPL.Core.Domain.Entries;
+﻿using System.Text.Json.Serialization;
+using XRPL.Core.Domain.Entries;
 using XRPL.Core.Domain.Models;
 
 namespace XRPL.Core.Domain.Transactions
@@ -17,6 +18,11 @@ namespace XRPL.Core.Domain.Transactions
     /// If the Clawback amendment is enabled, those issuers must not have enabled the Allow Clawback flag.
     /// The assets cannot be LP tokens for another AMM.
     /// </summary>
+    [JsonPolymorphic]
+    [JsonDerivedType(typeof(AMMCreate), typeDiscriminator: nameof(AMMCreate))]
+    [JsonDerivedType(typeof(XrpFungibleTokenAMMCreate), typeDiscriminator: nameof(XrpFungibleTokenAMMCreate))]
+    [JsonDerivedType(typeof(FungibleTokenXrpAMMCreate), typeDiscriminator: nameof(FungibleTokenXrpAMMCreate))]
+    [JsonDerivedType(typeof(FungibleTokenAMMCreate), typeDiscriminator: nameof(FungibleTokenAMMCreate))]
     public abstract class AMMCreate : Transaction
     {
         /// <summary>
@@ -59,6 +65,7 @@ namespace XRPL.Core.Domain.Transactions
     /// If the Clawback amendment is enabled, those issuers must not have enabled the Allow Clawback flag.
     /// The assets cannot be LP tokens for another AMM.
     /// </summary>
+    [JsonDerivedType(typeof(XrpFungibleTokenAMMCreate), typeDiscriminator: nameof(XrpFungibleTokenAMMCreate))]
     public sealed class XrpFungibleTokenAMMCreate : AMMCreate
     {
         /// <summary>
@@ -88,6 +95,7 @@ namespace XRPL.Core.Domain.Transactions
     /// If the Clawback amendment is enabled, those issuers must not have enabled the Allow Clawback flag.
     /// The assets cannot be LP tokens for another AMM.
     /// </summary>
+    [JsonDerivedType(typeof(FungibleTokenXrpAMMCreate), typeDiscriminator: nameof(FungibleTokenXrpAMMCreate))]
     public sealed class FungibleTokenXrpAMMCreate : AMMCreate
     {
         /// <summary>
@@ -110,6 +118,7 @@ namespace XRPL.Core.Domain.Transactions
     /// <para/>Amount and Amount2 cannot both have the same currency code and issuer.
     /// <para/>The tokens' issuers must have Default Ripple enabled. If the Clawback amendment is enabled, those issuers must not have enabled the Allow Clawback flag. The assets cannot be LP tokens for another AMM.
     /// </summary>
+    [JsonDerivedType(typeof(FungibleTokenAMMCreate), typeDiscriminator: nameof(FungibleTokenAMMCreate))]
     public sealed class FungibleTokenAMMCreate : AMMCreate
     {
         /// <summary>

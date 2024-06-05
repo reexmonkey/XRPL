@@ -14,7 +14,7 @@ namespace XRPL.Core.Domain.Methods.AccountMethods.AccountInfo
     /// <summary>
     /// Represents the result of an <see cref="AccountInfoResponse"/> object.
     /// </summary>
-    
+
     public class AccountInfoResult : ResultBase
     {
         /// <summary>
@@ -24,7 +24,7 @@ namespace XRPL.Core.Domain.Methods.AccountMethods.AccountInfo
         public AccountRoot? AccountData { get; set; }
 
         /// <summary>
-        /// The account's flag statuses (see below), based on the <see cref="AccountRoot.Flags"/> field of the account.
+        /// The account's flag statuses (see below), based on the <see cref="LedgerEntryBase.Flags"/> field of the account.
         /// </summary>
         [JsonPropertyName("account_flags")]
         public AccountFlags? AccountFlags { get; set; }
@@ -72,7 +72,7 @@ namespace XRPL.Core.Domain.Methods.AccountMethods.AccountInfo
     }
 
     /// <summary>
-    /// Represents the statuses of an account based on the <see cref="AccountRoot.Flags"/> field of the account.
+    /// Represents the statuses of an account based on the <see cref="LedgerEntryBase.Flags"/> field of the account.
     /// </summary>
     public class AccountFlags
     {
@@ -205,7 +205,7 @@ namespace XRPL.Core.Domain.Methods.AccountMethods.AccountInfo
     /// <summary>
     /// Represents information about each queued transaction from this address.
     /// </summary>
-    
+
     public class QueueDataTransaction
     {
         /// <summary>

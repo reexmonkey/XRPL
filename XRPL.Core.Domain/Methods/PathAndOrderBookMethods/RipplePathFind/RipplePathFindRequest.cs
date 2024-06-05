@@ -2,7 +2,7 @@
 using XRPL.Core.Domain.Interfaces;
 using XRPL.Core.Domain.Models;
 
-namespace XRPL.Core.Domain.Methods.PathAndOrderBookMethods.NftSellOffers
+namespace XRPL.Core.Domain.Methods.PathAndOrderBookMethods.RipplePathFind
 {
     /// <summary>
     /// Represents a request, which is a simplified version of the path_find method to provide a single response with a payment path you can use right away.

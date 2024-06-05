@@ -9,11 +9,6 @@ namespace XRPL.Core.Domain.Entries
     public class NFTokenPage : LedgerEntryBase
     {
         /// <summary>
-        /// The value 0x0050, mapped to the string NFTokenPage, indicates that this is a page containing NFToken objects.
-        /// </summary>
-        public override required string LedgerEntryType { get => base.LedgerEntryType; set => base.LedgerEntryType = value; }
-
-        /// <summary>
         /// The locator of the next page, if any. Details about this field and how it should be used are outlined below.
         /// </summary>
         public string? NextPageMin { get; set; }

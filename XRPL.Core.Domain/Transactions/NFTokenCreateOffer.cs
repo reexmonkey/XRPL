@@ -1,4 +1,5 @@
-﻿using XRPL.Core.Domain.Models;
+﻿using System.Text.Json.Serialization;
+using XRPL.Core.Domain.Models;
 
 namespace XRPL.Core.Domain.Transactions
 {
@@ -8,6 +9,10 @@ namespace XRPL.Core.Domain.Transactions
     /// <para/>If successful, the transaction creates a <see cref="NFToken"/> object.
     /// Each offer counts as one object towards the owner reserve of the account that placed the offer.
     /// </summary>
+    [JsonPolymorphic]
+    [JsonDerivedType(typeof(NFTokenCreateOffer), typeDiscriminator: nameof(NFTokenCreateOffer))]
+    [JsonDerivedType(typeof(XrpNFTokenCreateOffer), typeDiscriminator: nameof(XrpNFTokenCreateOffer))]
+    [JsonDerivedType(typeof(FungibleTokenNFTokenCreateOffer), typeDiscriminator: nameof(FungibleTokenNFTokenCreateOffer))]
     public abstract class NFTokenCreateOffer : Transaction
     {
         /// <summary>
@@ -51,6 +56,7 @@ namespace XRPL.Core.Domain.Transactions
     /// Each offer counts as one object towards the owner reserve of the account that placed the offer.
     /// <para/>The asset expected or offered for the corresponding <see cref="NFToken"/> is XRP.
     /// </summary>
+    [JsonDerivedType(typeof(XrpNFTokenCreateOffer), typeDiscriminator: nameof(XrpNFTokenCreateOffer))]
     public sealed class XrpNFTokenCreateOffer : NFTokenCreateOffer
     {
         /// <summary>
@@ -68,6 +74,7 @@ namespace XRPL.Core.Domain.Transactions
     /// Each offer counts as one object towards the owner reserve of the account that placed the offer.
     /// <para/>The asset expected or offered for the corresponding <see cref="NFToken"/> is a fungible token.
     /// </summary>
+    [JsonDerivedType(typeof(FungibleTokenNFTokenCreateOffer), typeDiscriminator: nameof(FungibleTokenNFTokenCreateOffer))]
     public sealed class FungibleTokenNFTokenCreateOffer : NFTokenCreateOffer
     {
         /// <summary>

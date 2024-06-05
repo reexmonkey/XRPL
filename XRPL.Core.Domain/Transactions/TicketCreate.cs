@@ -1,8 +1,11 @@
-﻿namespace XRPL.Core.Domain.Transactions
+﻿using System.Text.Json.Serialization;
+
+namespace XRPL.Core.Domain.Transactions
 {
     /// <summary>
     /// Represents a transaction that sets aside one or more sequence numbers as Tickets.
     /// </summary>
+    [JsonDerivedType(typeof(TicketCreate), typeDiscriminator: nameof(TicketCreate))]
     public class TicketCreate : Transaction
     {
         /// <summary>

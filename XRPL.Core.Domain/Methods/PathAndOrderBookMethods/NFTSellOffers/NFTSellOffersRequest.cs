@@ -10,7 +10,7 @@ namespace XRPL.Core.Domain.Methods.PathAndOrderBookMethods.NftSellOffers
     public class NftSellOffersRequest : RequestBase<NftSellOffersParameters>, IExpect<NftSellOffersResponse>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="RipplePathFindRequest"/> class.
+        /// Initializes a new instance of the <see cref="NftSellOffersRequest"/> class.
         /// </summary>
         public NftSellOffersRequest() : base("nft_sell_offers")
         {
@@ -18,7 +18,7 @@ namespace XRPL.Core.Domain.Methods.PathAndOrderBookMethods.NftSellOffers
     }
 
     /// <summary>
-    /// Represents the parameters of an <see cref="RipplePathFindRequest"/> object.
+    /// Represents the parameters of an <see cref="NftSellOffersRequest"/> object.
     /// </summary>
     public class NftSellOffersParameters : ParameterBase
     {

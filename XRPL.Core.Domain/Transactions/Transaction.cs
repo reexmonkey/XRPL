@@ -46,7 +46,7 @@ namespace XRPL.Core.Domain.Transactions
         /// <summary>
         /// (Optional) Set of bit-flags for this transaction.
         /// </summary>
-        public virtual uint? Flags { get; set; }
+        public uint? Flags { get; set; }
 
         /// <summary>
         /// (Optional; strongly recommended) Highest ledger index this transaction can appear in.

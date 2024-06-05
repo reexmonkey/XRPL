@@ -1,4 +1,5 @@
-﻿using XRPL.Core.Domain.Entries;
+﻿using System.Text.Json.Serialization;
+using XRPL.Core.Domain.Entries;
 using XRPL.Core.Domain.Models;
 
 namespace XRPL.Core.Domain.Transactions
@@ -7,6 +8,7 @@ namespace XRPL.Core.Domain.Transactions
     /// Represents a transaction that creates a non-fungible token and adds it to the relevant <see cref="NFTokenPage"/> object of the NFTokenMinter as an <see cref="NFToken"/> object.
     /// <para/>This transaction is the only opportunity the NFTokenMinter has to specify any token fields that are defined as immutable (for example, the TokenFlags).
     /// </summary>
+    [JsonDerivedType(typeof(NFTokenMint), typeDiscriminator: nameof(NFTokenMint))]
     public class NFTokenMint : Transaction
     {
         /// <summary>
