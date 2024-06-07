@@ -55,6 +55,10 @@ namespace XRPL.Core.Domain.Methods.PathAndOrderBookMethods.PathFind
     /// Specifies a path from one possible source currency (held by the initiating account) to the destination account and currency.
     /// </summary>
     [JsonPolymorphic]
+    [JsonDerivedType(typeof(XrpAlternativePathSource), typeDiscriminator: nameof(XrpAlternativePathSource))]
+    [JsonDerivedType(typeof(FungibleTokenAlternativePathSource), typeDiscriminator: nameof(FungibleTokenAlternativePathSource))]
+    [JsonDerivedType(typeof(XrpAlternativePathDestination), typeDiscriminator: nameof(XrpAlternativePathDestination))]
+    [JsonDerivedType(typeof(FungibleTokenAlternativePathDestination), typeDiscriminator: nameof(FungibleTokenAlternativePathDestination))]
     public abstract class AlternativePath
     {
         /// <summary>
