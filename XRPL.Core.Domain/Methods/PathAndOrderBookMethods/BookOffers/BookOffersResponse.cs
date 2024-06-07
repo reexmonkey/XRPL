@@ -63,10 +63,11 @@ namespace XRPL.Core.Domain.Methods.PathAndOrderBookMethods.BookOffers
         ///given the funding status of the offer.
         ///</summary>
         [JsonPropertyName("taker_gets_funded")]
-        public TokenAmount? TakerGetsFunded {  get; set; } 
+        public TokenAmount? TakerGetsFunded {  get; set; }
 
         ///<summary>
-        ///
+        ///(Only included in partially-funded offers)
+        ///The maximum amount of currency that the taker would pay, given the funding status of the offer.
         ///</summary>
         [JsonPropertyName("taker_pays_funded")]
         public TokenAmount? TakerPaysFunded { get; set; }

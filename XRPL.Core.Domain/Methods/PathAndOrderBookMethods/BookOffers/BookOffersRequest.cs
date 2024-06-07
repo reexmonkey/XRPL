@@ -28,13 +28,13 @@ namespace XRPL.Core.Domain.Methods.PathAndOrderBookMethods.BookOffers
         ///The asset the account taking the Offer would receive, as a currency without an amount.
         ///</summary>
         [JsonPropertyName("taker_gets")]
-        public required TakerGetsCurrency TakerGets { get; set; }
+        public required TokenAmount TakerGets { get; set; }
 
         ///<summary>
         ///The asset the account taking the Offer would pay, as a currency without an amount.
         ///</summary>
         [JsonPropertyName("taker_pays")]
-        public required TakerPaysCurrency TakerPays { get; set; }
+        public required TokenAmount TakerPays { get; set; }
 
         ///<summary>
         ///A 20-byte hex string for the ledger version to use. (See Specifying Ledgers)
@@ -61,19 +61,5 @@ namespace XRPL.Core.Domain.Methods.PathAndOrderBookMethods.BookOffers
         ///</summary>
         [JsonPropertyName("taker")]
         public string? Taker { get; set; }
-    }
-
-    /// <summary>
-    /// The type of currency the receiver will get
-    /// </summary>
-    public class TakerGetsCurrency : Asset
-    {
-    }
-
-    /// <summary>
-    /// The type of currency the issuer will pay
-    /// </summary>
-    public class TakerPaysCurrency : Asset 
-    {
     }
 }
