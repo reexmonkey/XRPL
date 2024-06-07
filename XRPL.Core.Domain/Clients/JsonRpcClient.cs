@@ -12,6 +12,7 @@ using XRPL.Core.Domain.Methods.AccountMethods.AccountTx;
 using XRPL.Core.Domain.Methods.AccountMethods.GatewayBalances;
 using XRPL.Core.Domain.Methods.AccountMethods.NoRippleCheck;
 using XRPL.Core.Domain.Methods.PathAndOrderBookMethods.AmmInfo;
+using XRPL.Core.Domain.Methods.PathAndOrderBookMethods.BookOffers;
 using XRPL.Core.Domain.Methods.PathAndOrderBookMethods.DepositAuthorized;
 using XRPL.Core.Domain.Methods.PathAndOrderBookMethods.NftBuyOffers;
 using XRPL.Core.Domain.Methods.PathAndOrderBookMethods.NftSellOffers;
@@ -156,6 +157,12 @@ namespace XRPL.Core.Domain.Clients
 
         public Task<AmmInfoResponse?> PostAsync(AssetAmmInfoRequest request, CancellationToken cancellation)
             => PostAsync<AssetAmmInfoRequest, AmmInfoResponse>(request, cancellation);
+
+        public BookOffersResponse? Post(BookOffersRequest request, CancellationToken cancellation)
+            => Post<BookOffersRequest, BookOffersResponse>(request, cancellation);
+
+        public Task<BookOffersResponse?> PostAsync(BookOffersRequest request, CancellationToken cancellation)
+            => PostAsync<BookOffersRequest, BookOffersResponse>(request, cancellation);
 
         public DepositAuthorizedResponse? Post(DepositAuthorizedRequest request, CancellationToken cancellation)
             => Post<DepositAuthorizedRequest, DepositAuthorizedResponse>(request, cancellation);

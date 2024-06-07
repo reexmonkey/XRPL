@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <Folder Include="Methods\LedgerMethods\" />
+    <Folder Include="Methods\PathAndOrderBookMethods\PathFind\" />
     <Folder Include="Methods\SubscriptionMethods\" />
     <Folder Include="Methods\ServerInfoMethods\" />
   </ItemGroup>
