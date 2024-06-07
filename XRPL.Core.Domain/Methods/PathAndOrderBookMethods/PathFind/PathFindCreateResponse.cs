@@ -16,7 +16,7 @@ namespace XRPL.Core.Domain.Methods.PathAndOrderBookMethods.PathFind
     public class PathFindCreateResult : ResultBase
     {
         /// <summary>
-        /// Array of objects with suggested <see cref="paths"/> to take, as described below.
+        /// Array of objects with suggested <see cref="Path"/> to take, as described below.
         /// If empty, then there are no paths connecting the source and destination accounts.
         /// </summary>
         [JsonPropertyName("alternatives")]
@@ -30,13 +30,13 @@ namespace XRPL.Core.Domain.Methods.PathAndOrderBookMethods.PathFind
 
         ///<summary>
         ///Currency Amount that the destination would receive in a transaction.
-        ///</summary
+        ///</summary>
         [JsonPropertyName("destination_amount")]
         public required string DestinationAmount { get; set; }
 
         ///<summary>
         ///Unique address that would send a transaction.
-        ///</summary
+        ///</summary>
         [JsonPropertyName("source_account")]
         public required string SourceAccount { get; set; }
 
@@ -45,7 +45,7 @@ namespace XRPL.Core.Domain.Methods.PathAndOrderBookMethods.PathFind
         ///If true, then this is the best path found. (It is still theoretically possible that a better path could exist,
         ///but rippled won't find it.) Until you close the pathfinding request,
         ///rippled continues to send updates each time a new ledger closes.
-        ///</summary
+        ///</summary>
         [JsonPropertyName("full_reply")]
         public required bool FullReply { get; set; }
 

@@ -60,7 +60,7 @@ namespace XRPL.Core.Domain.Methods.PathAndOrderBookMethods.PathFind
 
         /// <summary>
         /// (Optional) Currency Amount that would be spent in the transaction.
-        /// <para/>Cannot be used with <see cref="SourceCurrencies"/>.
+        /// <para/>Cannot be used with source_urrencies.
         /// </summary>
         [JsonPropertyName("send_max")]
         public object? SendMax { get; set; }
@@ -91,7 +91,7 @@ namespace XRPL.Core.Domain.Methods.PathAndOrderBookMethods.PathFind
 
         /// <summary>
         /// (Optional) XRP drops that would be spent in the transaction.
-        /// <para/>Cannot be used with <see cref="PathFindCreateParameters.SourceCurrencies"/>.
+        /// <para/>Cannot be used with source_currencies.
         /// </summary>
         [JsonPropertyName("send_max")]
         public new string? SendMax { get => (string?)base.SendMax; set => base.SendMax = value; }
@@ -113,7 +113,7 @@ namespace XRPL.Core.Domain.Methods.PathAndOrderBookMethods.PathFind
 
         /// <summary>
         /// (Optional) Currency amount that would be spent in the transaction.
-        /// <para/>Cannot be used with <see cref="PathFindCreateParameters.SourceCurrencies"/>.
+        /// <para/>Cannot be used with source_currencies.
         /// </summary>
         [JsonPropertyName("send_max")]
         public new TokenAmount? SendMax { get => (TokenAmount?)base.SendMax; set => base.SendMax = value; }
