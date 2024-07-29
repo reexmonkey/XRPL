@@ -1,6 +1,5 @@
 ﻿using System.Text.Json.Serialization.Metadata;
-using XRPL.Core.Domain.Contexts;
-using XRPL.Core.Domain.Entries;
+using XRPL.Core.Domain.SerializerContexts;
 
 namespace XRPL.Core.Domain
 {
@@ -30,6 +29,5 @@ namespace XRPL.Core.Domain
 
             ];
         }
-
     }
 }
