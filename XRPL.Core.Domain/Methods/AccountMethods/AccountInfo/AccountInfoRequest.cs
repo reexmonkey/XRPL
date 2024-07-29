@@ -30,14 +30,14 @@ namespace XRPL.Core.Domain.Methods.AccountMethods.AccountInfo
     /// <summary>
     /// Represents the parameters of an <see cref="AccountInfoRequest"/> object.
     /// </summary>
-    
+
     public class AccountInfoRequestParameters : ParameterBase
     {
         /// <summary>
         /// The account to look up.
         /// </summary>
         [JsonPropertyName("account")]
-        public string? Account { get; set; }
+        public required string Account { get; set; }
 
         /// <summary>
         /// A 20-byte hex string for the ledger version to use

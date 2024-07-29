@@ -1,5 +1,4 @@
-﻿using System.Text.Json.Serialization;
-using XRPL.Core.Domain.Models;
+﻿using XRPL.Core.Domain.Models;
 
 namespace XRPL.Core.Domain.Transactions
 {
@@ -11,7 +10,6 @@ namespace XRPL.Core.Domain.Transactions
     /// You can only enable Allow Trust Line Clawback if you have a completely empty owner directory, meaning you must do so before you set up any trust lines, offers, escrows, payment channels, checks, or signer lists.
     /// After you enable Clawback, it cannot reverted: the account permanently gains the ability to claw back issued assets on trust lines.
     /// </summary>
-    [JsonDerivedType(typeof(Clawback), typeDiscriminator: nameof(Clawback))]
     public class Clawback : Transaction
     {
         /// <summary>

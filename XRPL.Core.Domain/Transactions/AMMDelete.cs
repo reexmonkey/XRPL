@@ -1,5 +1,4 @@
-﻿using System.Text.Json.Serialization;
-using XRPL.Core.Domain.Entries;
+﻿using XRPL.Core.Domain.Entries;
 using XRPL.Core.Domain.Models;
 
 namespace XRPL.Core.Domain.Transactions
@@ -8,7 +7,6 @@ namespace XRPL.Core.Domain.Transactions
     /// Represents a transaction that deletes an empty Automated Market Maker (AMM) instance that could not be fully deleted automatically.
     /// <para/>Normally, an AMMWithdraw transaction automatically deletes an AMM and all associated ledger entries when it withdraws all the assets from the AMM's pool. However, if there are too many trust lines to the AMM account to remove in one transaction, it may stop before fully removing the AMM. Similarly, an <see cref="AMMDelete"/> transaction removes up to a maximum of 512 trust lines; it may take several <see cref="AMMDelete"/> transactions to delete all the trust lines and the associated AMM. In all cases, only the last such transaction deletes the AMM and <see cref="AccountRoot"/> ledger entries.
     /// </summary>
-    [JsonDerivedType(typeof(AMMDelete), typeDiscriminator: nameof(AMMDelete))]
     public class AMMDelete : Transaction
     {
         /// <summary>

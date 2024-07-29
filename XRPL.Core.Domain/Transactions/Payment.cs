@@ -9,10 +9,6 @@ namespace XRPL.Core.Domain.Transactions
     /// This transaction type can be used for several types of payments.
     /// <para/>Payments are also the only way to create accounts.
     /// </summary>
-    [JsonPolymorphic]
-    [JsonDerivedType(typeof(Payment), typeDiscriminator: nameof(Payment))]
-    [JsonDerivedType(typeof(PaymentV1), typeDiscriminator: nameof(PaymentV1))]
-    [JsonDerivedType(typeof(PaymentV2), typeDiscriminator: nameof(PaymentV2))]
     public abstract class Payment : Transaction
     {
         /// <summary>
@@ -45,16 +41,6 @@ namespace XRPL.Core.Domain.Transactions
     /// <para/>Payments are also the only way to create accounts.
     /// <para/>Only applicable to API v1.
     /// </summary>
-    [JsonPolymorphic]
-    [JsonDerivedType(typeof(PaymentV1), typeDiscriminator: nameof(PaymentV1))]
-    [JsonDerivedType(typeof(DirectXrpPaymentV1), typeDiscriminator: nameof(DirectXrpPaymentV1))]
-    [JsonDerivedType(typeof(CreateOrRedeemTokensPaymentV1), typeDiscriminator: nameof(CreateOrRedeemTokensPaymentV1))]
-    [JsonDerivedType(typeof(XrpCrossCurrencyPaymentV1), typeDiscriminator: nameof(XrpCrossCurrencyPaymentV1))]
-    [JsonDerivedType(typeof(FungibleTokenCrossCurrencyPaymentV1), typeDiscriminator: nameof(FungibleTokenCrossCurrencyPaymentV1))]
-    [JsonDerivedType(typeof(XrpPartialPaymentV1), typeDiscriminator: nameof(XrpPartialPaymentV1))]
-    [JsonDerivedType(typeof(FungibleTokenPartialPaymentV1), typeDiscriminator: nameof(FungibleTokenPartialPaymentV1))]
-    [JsonDerivedType(typeof(XrpCurrencyConversionV1), typeDiscriminator: nameof(XrpCurrencyConversionV1))]
-    [JsonDerivedType(typeof(FungibleTokenCurrencyConversionV1), typeDiscriminator: nameof(FungibleTokenCurrencyConversionV1))]
     public abstract class PaymentV1 : Payment
     {
         /// <summary>
@@ -248,7 +234,6 @@ namespace XRPL.Core.Domain.Transactions
     /// if the transaction does not specify DeliverMin, it can succeed by delivering any positive amount.
     /// <para/>Only applicable to API v1.
     /// </summary>
-    [JsonDerivedType(typeof(FungibleTokenPartialPaymentV1), typeDiscriminator: nameof(FungibleTokenPartialPaymentV1))]
     public class FungibleTokenPartialPaymentV1 : PaymentV1
     {
         /// <summary>
@@ -290,7 +275,6 @@ namespace XRPL.Core.Domain.Transactions
     /// <para/>Payments are also the only way to create accounts.
     /// <para/>Only applicable to API v1.
     /// </summary>
-    [JsonDerivedType(typeof(XrpCurrencyConversionV1), typeDiscriminator: nameof(XrpCurrencyConversionV1))]
     public class XrpCurrencyConversionV1 : PaymentV1
     {
         /// <summary>
@@ -317,7 +301,6 @@ namespace XRPL.Core.Domain.Transactions
     /// <para/>Payments are also the only way to create accounts.
     /// <para/>Only applicable to API v1.
     /// </summary>
-    [JsonDerivedType(typeof(FungibleTokenCurrencyConversionV1), typeDiscriminator: nameof(FungibleTokenCurrencyConversionV1))]
     public class FungibleTokenCurrencyConversionV1 : PaymentV1
     {
         /// <summary>
@@ -348,7 +331,6 @@ namespace XRPL.Core.Domain.Transactions
     /// <para/>Payments are also the only way to create accounts.
     /// <para/>Only applicable to API v1.
     /// </summary>
-    [JsonDerivedType(typeof(DirectXrpPaymentV2), typeDiscriminator: nameof(DirectXrpPaymentV2))]
     public class DirectXrpPaymentV2 : PaymentV2
     {
         /// <summary>
@@ -366,7 +348,6 @@ namespace XRPL.Core.Domain.Transactions
     /// <para/>Payments are also the only way to create accounts.
     /// <para/>Only applicable to API v1.
     /// </summary>
-    [JsonDerivedType(typeof(CreateOrRedeemTokensPaymentV2), typeDiscriminator: nameof(CreateOrRedeemTokensPaymentV2))]
     public class CreateOrRedeemTokensPaymentV2 : PaymentV2
     {
         /// <summary>
@@ -396,7 +377,6 @@ namespace XRPL.Core.Domain.Transactions
     /// or currencies with the same currency code and different issuers.
     /// <para/>Only applicable to API v1.
     /// </summary>
-    [JsonDerivedType(typeof(XrpCrossCurrencyPaymentV2), typeDiscriminator: nameof(XrpCrossCurrencyPaymentV2))]
     public class XrpCrossCurrencyPaymentV2 : PaymentV2
     {
         /// <summary>
@@ -426,7 +406,6 @@ namespace XRPL.Core.Domain.Transactions
     /// or currencies with the same currency code and different issuers.
     /// <para/>Only applicable to API v1.
     /// </summary>
-    [JsonDerivedType(typeof(FungibleTokenCrossCurrencyPaymentV2), typeDiscriminator: nameof(FungibleTokenCrossCurrencyPaymentV2))]
     public class FungibleTokenCrossCurrencyPaymentV2 : PaymentV2
     {
         /// <summary>
@@ -455,7 +434,6 @@ namespace XRPL.Core.Domain.Transactions
     /// <para/>Payments are also the only way to create accounts.
     /// <para/>Only applicable to API v1.
     /// </summary>
-    [JsonDerivedType(typeof(XrpPartialPaymentV2), typeDiscriminator: nameof(XrpPartialPaymentV2))]
     public class XrpPartialPaymentV2 : PaymentV2
     {
         /// <summary>
@@ -496,7 +474,6 @@ namespace XRPL.Core.Domain.Transactions
     /// if the transaction does not specify DeliverMin, it can succeed by delivering any positive amount.
     /// <para/>Only applicable to API v1.
     /// </summary>
-    [JsonDerivedType(typeof(FungibleTokenPartialPaymentV2), typeDiscriminator: nameof(FungibleTokenPartialPaymentV2))]
     public class FungibleTokenPartialPaymentV2 : PaymentV2
     {
         /// <summary>
@@ -538,7 +515,6 @@ namespace XRPL.Core.Domain.Transactions
     /// <para/>Payments are also the only way to create accounts.
     /// <para/>Only applicable to API v1.
     /// </summary>
-    [JsonDerivedType(typeof(XrpCurrencyConversionV2), typeDiscriminator: nameof(XrpCurrencyConversionV2))]
     public class XrpCurrencyConversionV2 : PaymentV2
     {
         /// <summary>
@@ -565,7 +541,6 @@ namespace XRPL.Core.Domain.Transactions
     /// <para/>Payments are also the only way to create accounts.
     /// <para/>Only applicable to API v1.
     /// </summary>
-    [JsonDerivedType(typeof(FungibleTokenCurrencyConversionV2), typeDiscriminator: nameof(FungibleTokenCurrencyConversionV2))]
     public class FungibleTokenCurrencyConversionV2 : PaymentV2
     {
         /// <summary>

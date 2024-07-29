@@ -46,7 +46,7 @@ namespace XRPL.Core.Domain.Methods.AccountMethods.NoRippleCheck
         /// (Optional) The maximum number of trust line problems to include in the results. Defaults to 300.
         /// </summary>
         [JsonPropertyName("limit")]
-        public uint Limit { get; set; } = 300;
+        public uint? Limit { get; set; } = 300;
 
         /// <summary>
         /// (Optional) A 20-byte hex string for the ledger version to use.

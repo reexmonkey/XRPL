@@ -32,14 +32,14 @@ namespace XRPL.Core.Domain.Methods.AccountMethods.GatewayBalances
         /// <para/>The keys are addresses and the values are arrays of currency amounts they hold.
         /// </summary>
         [JsonPropertyName("balances")]
-        public Dictionary<string, TokenAmount[]> Balances { get; set; } = [];
+        public TokenAmount[] Balances { get; set; } = [];
 
         /// <summary>
         /// (Omitted if empty) Total amounts held that are issued by others.
         /// <para/>In the recommended configuration, the issuing address should have none.
         /// </summary>
         [JsonPropertyName("assets")]
-        public Dictionary<string, TokenAmount[]> Assets { get; set; } = [];
+        public TokenAsset[] Assets { get; set; } = [];
 
         /// <summary>
         /// (May be omitted) The identifying hash of the ledger version that was used to generate this response.

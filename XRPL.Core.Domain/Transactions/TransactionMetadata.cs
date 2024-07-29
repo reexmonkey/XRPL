@@ -10,9 +10,6 @@ namespace XRPL.Core.Domain.Transactions
     /// The transaction metadata describes the outcome of the transaction in detail.
     /// <para/> The changes described in transaction metadata are only final if the transaction is in a validated ledger version.
     /// </summary>
-    [JsonPolymorphic]
-    [JsonDerivedType(typeof(XrpTransactionMetadata), typeDiscriminator: nameof(XrpTransactionMetadata))]
-    [JsonDerivedType(typeof(FungibleTokenTransactionMetadata), typeDiscriminator: nameof(FungibleTokenTransactionMetadata))]
     public abstract class TransactionMetadata
     {
         /// <summary>
@@ -52,7 +49,6 @@ namespace XRPL.Core.Domain.Transactions
     /// The transaction metadata describes the outcome of the transaction in detail.
     /// <para/> The changes described in transaction metadata are only final if the transaction is in a validated ledger version.
     /// </summary>
-    [JsonDerivedType(typeof(XrpTransactionMetadata), typeDiscriminator: nameof(XrpTransactionMetadata))]
     public class XrpTransactionMetadata : TransactionMetadata
     {
         /// <summary>
@@ -112,7 +108,6 @@ namespace XRPL.Core.Domain.Transactions
     /// The transaction metadata describes the outcome of the transaction in detail.
     /// <para/> The changes described in transaction metadata are only final if the transaction is in a validated ledger version.
     /// </summary>
-    [JsonDerivedType(typeof(FungibleTokenTransactionMetadata), typeDiscriminator: nameof(FungibleTokenTransactionMetadata))]
     public class FungibleTokenTransactionMetadata : TransactionMetadata
     {
         /// <summary>

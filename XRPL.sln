@@ -5,9 +5,9 @@ VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XRPL.Core.Domain", "XRPL.Core.Domain\XRPL.Core.Domain.csproj", "{A5E613F0-5480-4C09-8CE7-908909E74AA1}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Core", "1 - Core", "{B9374048-080F-4C1B-BEBF-91D086248DF6}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{B9374048-080F-4C1B-BEBF-91D086248DF6}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Domain", "1 - Domain", "{7C1929F8-8FEE-4712-AFA3-FA7ED138FAEB}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{7C1929F8-8FEE-4712-AFA3-FA7ED138FAEB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

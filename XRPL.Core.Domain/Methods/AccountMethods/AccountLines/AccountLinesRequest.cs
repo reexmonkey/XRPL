@@ -28,7 +28,7 @@ namespace XRPL.Core.Domain.Methods.AccountMethods.AccountLines
         /// Look up trust lines connected to this account.
         /// </summary>
         [JsonPropertyName("account")]
-        public string? Account { get; set; }
+        public required string Account { get; set; }
 
         /// <summary>
         /// A 20-byte hex string for the ledger version to use
@@ -55,7 +55,7 @@ namespace XRPL.Core.Domain.Methods.AccountMethods.AccountLines
         /// Positive values outside this range are replaced with the closest valid option. The default is 200.
         /// </summary>
         [JsonPropertyName("limit")]
-        public uint Limit { get; set; }
+        public uint? Limit { get; set; }
 
         /// <summary>
         /// Value from a previous paginated response. Resume retrieving data where that response left off.

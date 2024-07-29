@@ -1,11 +1,8 @@
-﻿using System.Text.Json.Serialization;
-
-namespace XRPL.Core.Domain.PseudoTransactions
+﻿namespace XRPL.Core.Domain.PseudoTransactions
 {
     /// <summary>
     /// Represents a pseudo-transaction that marks a change to the Negative UNL, indicating that a trusted validator has gone offline or come back online.
     /// </summary>
-    [JsonDerivedType(typeof(UNLModify), typeDiscriminator: nameof(UNLModify))]
     public class UNLModify : PseudoTransaction
     {
         /// <summary>

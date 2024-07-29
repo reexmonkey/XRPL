@@ -24,13 +24,13 @@ namespace XRPL.Core.Domain.Methods.AccountMethods.AccountOffers
     public class AccountOffersParameters : ParameterBase
     {
         /// <summary>
-        /// Look up Offers placed by this account
+        /// Look up offers placed by this account.
         /// </summary>
         [JsonPropertyName("account")]
-        public string? Account { get; set; }
+        public required string Account { get; set; }
 
         /// <summary>
-        /// (Optional) A 20-byte hex string for the ledger version to use
+        /// A 20-byte hex string for the ledger version to use.
         /// </summary>
         [JsonPropertyName("ledger_hash")]
         public string? LedgerHash { get; set; }

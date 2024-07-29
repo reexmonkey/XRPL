@@ -31,7 +31,7 @@ namespace XRPL.Core.Domain.Methods.AccountMethods.GatewayBalances
         /// (Optional) If true, only accept an address or public key for the account parameter. Defaults to false.
         /// </summary>
         [JsonPropertyName("strict")]
-        public bool Strict { get; set; }
+        public bool? Strict { get; set; }
 
         /// <summary>
         /// (Optional) An operational address to exclude from the balances issued, or an array of such addresses.

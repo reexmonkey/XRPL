@@ -41,7 +41,7 @@ namespace XRPL.Core.Domain.Methods.AccountMethods.AccountObjects
         /// A unique identifier for the account, most commonly the account's Address.
         /// </summary>
         [JsonPropertyName("account")]
-        public string? Account { get; set; }
+        public required string Account { get; set; }
 
         /// <summary>
         /// If true, the response only includes objects that would block this account from being deleted. The default is false.
@@ -80,7 +80,7 @@ namespace XRPL.Core.Domain.Methods.AccountMethods.AccountObjects
         /// Filter results by a ledger entry type.
         /// <para/>The valid types are: check, deposit_preauth, escrow, nft_offer, nft_page, offer, payment_channel, signer_list, state (trust line), and ticket.
         /// </summary>
-        [JsonPropertyName("account")]
+        [JsonPropertyName("type")]
         public string? Type { get; set; }
     }
 }

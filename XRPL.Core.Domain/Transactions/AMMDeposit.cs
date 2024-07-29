@@ -1,5 +1,4 @@
-﻿using System.Text.Json.Serialization;
-using XRPL.Core.Domain.Models;
+﻿using XRPL.Core.Domain.Models;
 
 namespace XRPL.Core.Domain.Transactions
 {
@@ -7,11 +6,6 @@ namespace XRPL.Core.Domain.Transactions
     /// Specifies a transaction that deposits funds into an Automated Market Maker (AMM) instance and receive the AMM's liquidity provider tokens (LP Tokens) in exchange. You can deposit one or both of the assets in the AMM's pool.
     /// <para/> If successful, this transaction creates a trust line to the AMM Account (limit 0) to hold the LP Tokens.
     /// </summary>
-    [JsonPolymorphic]
-    [JsonDerivedType(typeof(AMMDeposit), typeDiscriminator: nameof(AMMDeposit))]
-    [JsonDerivedType(typeof(XrpFungibleTokenAMMDeposit), typeDiscriminator: nameof(XrpFungibleTokenAMMDeposit))]
-    [JsonDerivedType(typeof(FungibleTokenXrpAMMDeposit), typeDiscriminator: nameof(FungibleTokenXrpAMMDeposit))]
-    [JsonDerivedType(typeof(FungibleTokenAMMDeposit), typeDiscriminator: nameof(FungibleTokenAMMDeposit))]
     public abstract class AMMDeposit : Transaction
     {
         /// <summary>
@@ -61,7 +55,6 @@ namespace XRPL.Core.Domain.Transactions
     /// and receive the AMM's liquidity provider tokens (LP Tokens) in exchange. You can deposit one or both of the assets in the AMM's pool.
     /// <para/> If successful, this transaction creates a trust line to the AMM Account (limit 0) to hold the LP Tokens.
     /// </summary>
-    [JsonDerivedType(typeof(XrpFungibleTokenAMMDeposit), typeDiscriminator: nameof(XrpFungibleTokenAMMDeposit))]
     public sealed class XrpFungibleTokenAMMDeposit : AMMDeposit
     {
         /// <summary>
@@ -87,7 +80,6 @@ namespace XRPL.Core.Domain.Transactions
     /// and receive the AMM's liquidity provider tokens (LP Tokens) in exchange. You can deposit one or both of the assets in the AMM's pool.
     /// <para/> If successful, this transaction creates a trust line to the AMM Account (limit 0) to hold the LP Tokens.
     /// </summary>
-    [JsonDerivedType(typeof(FungibleTokenXrpAMMDeposit), typeDiscriminator: nameof(FungibleTokenXrpAMMDeposit))]
     public sealed class FungibleTokenXrpAMMDeposit : AMMDeposit
     {
         /// <summary>
@@ -112,7 +104,6 @@ namespace XRPL.Core.Domain.Transactions
     /// Represents a transaction that deposits pairs of fungible token funds into an Automated Market Maker (AMM) instance and receive the AMM's liquidity provider tokens (LP Tokens) in exchange. You can deposit one or both of the assets in the AMM's pool.
     /// <para/> If successful, this transaction creates a trust line to the AMM Account (limit 0) to hold the LP Tokens.
     /// </summary>
-    [JsonDerivedType(typeof(FungibleTokenAMMDeposit), typeDiscriminator: nameof(FungibleTokenAMMDeposit))]
     public sealed class FungibleTokenAMMDeposit : AMMDeposit
     {
         /// <summary>

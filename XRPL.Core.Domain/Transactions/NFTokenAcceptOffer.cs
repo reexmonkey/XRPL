@@ -1,5 +1,4 @@
-﻿using System.Text.Json.Serialization;
-using XRPL.Core.Domain.Models;
+﻿using XRPL.Core.Domain.Models;
 
 namespace XRPL.Core.Domain.Transactions
 {
@@ -8,12 +7,6 @@ namespace XRPL.Core.Domain.Transactions
     /// This mode allow two distinct offers, one offering to buy a given <see cref="NFToken"/>
     /// and the other offering to sell the same <see cref="NFToken"/>, to be accepted in an atomic fashion.
     /// </summary>
-    [JsonPolymorphic]
-    [JsonDerivedType(typeof(BrokeredModeNFTokenAcceptOffer), typeDiscriminator: nameof(BrokeredModeNFTokenAcceptOffer))]
-    [JsonDerivedType(typeof(XrpBrokeredModeNFTokenAcceptOffer), typeDiscriminator: nameof(XrpBrokeredModeNFTokenAcceptOffer))]
-    [JsonDerivedType(typeof(FungibleTokenBrokeredModeNFTokenAcceptOffer), typeDiscriminator: nameof(FungibleTokenBrokeredModeNFTokenAcceptOffer))]
-    [JsonDerivedType(typeof(DirectModeNFTokenBuyOffer), typeDiscriminator: nameof(DirectModeNFTokenBuyOffer))]
-    [JsonDerivedType(typeof(DirectModeNFTokenSellOffer), typeDiscriminator: nameof(DirectModeNFTokenSellOffer))]
     public abstract class BrokeredModeNFTokenAcceptOffer : Transaction
     {
         /// <summary>
@@ -45,7 +38,6 @@ namespace XRPL.Core.Domain.Transactions
     /// This mode allow two distinct offers, one offering to buy a given <see cref="NFToken"/>
     /// and the other offering to sell the same <see cref="NFToken"/>, to be accepted in an atomic fashion.
     /// </summary>
-    [JsonDerivedType(typeof(XrpBrokeredModeNFTokenAcceptOffer), typeDiscriminator: nameof(XrpBrokeredModeNFTokenAcceptOffer))]
     public sealed class XrpBrokeredModeNFTokenAcceptOffer : BrokeredModeNFTokenAcceptOffer
     {
         /// <summary>
@@ -62,7 +54,6 @@ namespace XRPL.Core.Domain.Transactions
     /// This mode allow two distinct offers, one offering to buy a given <see cref="NFToken"/>
     /// and the other offering to sell the same <see cref="NFToken"/>, to be accepted in an atomic fashion.
     /// </summary>
-    [JsonDerivedType(typeof(FungibleTokenBrokeredModeNFTokenAcceptOffer), typeDiscriminator: nameof(FungibleTokenBrokeredModeNFTokenAcceptOffer))]
     public sealed class FungibleTokenBrokeredModeNFTokenAcceptOffer : BrokeredModeNFTokenAcceptOffer
     {
         /// <summary>
@@ -78,7 +69,6 @@ namespace XRPL.Core.Domain.Transactions
     /// <summary>
     /// Represents a transaction that is used to accept offers to buy an <see cref="NFToken"/>.
     /// </summary>
-    [JsonDerivedType(typeof(DirectModeNFTokenBuyOffer), typeDiscriminator: nameof(DirectModeNFTokenBuyOffer))]
     public class DirectModeNFTokenBuyOffer : Transaction
     {
         /// <summary>
@@ -97,7 +87,6 @@ namespace XRPL.Core.Domain.Transactions
     /// <summary>
     /// Represents a transaction that is used to accept offers to sell an <see cref="NFToken"/>.
     /// </summary>
-    [JsonDerivedType(typeof(DirectModeNFTokenSellOffer), typeDiscriminator: nameof(DirectModeNFTokenSellOffer))]
     public class DirectModeNFTokenSellOffer : Transaction
     {
         /// <summary>

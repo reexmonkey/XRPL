@@ -21,14 +21,14 @@ namespace XRPL.Core.Domain.Methods.AccountMethods.AccountOffers
         /// Unique Address identifying the account that made the offers
         /// </summary>
         [JsonPropertyName("account")]
-        public string? Account { get; set; }
+        public required string Account { get; set; }
 
         /// <summary>
         /// Array of objects, where each object represents an offer made by this account that is outstanding as of the requested ledger version.
         /// If the number of offers is large, only returns up to limit at a time.
         /// </summary>
         [JsonPropertyName("offers")]
-        public AccountOfferBase[]? Offers { get; set; }
+        public required AccountOffer[] Offers { get; set; }
 
         /// <summary>
         /// (May be omitted) The identifying hash of the ledger version that was used when retrieving this data.
@@ -60,7 +60,7 @@ namespace XRPL.Core.Domain.Methods.AccountMethods.AccountOffers
     /// Specifies an an offer made by an account that is outstanding as of the requested ledger version.
     /// <para/>If the number of offers is large, only returns up to limit at a time.
     /// </summary>
-    public abstract class AccountOfferBase
+    public abstract class AccountOffer
     {
         /// <summary>
         /// Options set for this offer entry as bit-flags.
@@ -73,6 +73,20 @@ namespace XRPL.Core.Domain.Methods.AccountMethods.AccountOffers
         /// </summary>
         [JsonPropertyName("seq")]
         public uint Seq { get; set; }
+
+        /// <summary>
+        /// The amount the account accepting the offer receives, as a <see cref="string"/> representing an amount in XRP,
+        /// or a token specification object (<see cref="TokenAmount"/>).
+        /// </summary>
+        [JsonPropertyName("taker_gets")]
+        public object TakerGets { get; set; } = null!;
+
+        /// <summary>
+        /// The amount the account accepting the offer provides, as a <see cref="string"/> representing an amount in XRP,
+        /// or a token specification object (<see cref="TokenAmount"/>).
+        /// </summary>
+        [JsonPropertyName("taker_pays")]
+        public object TakerPays { get; set; } = null!;
 
         /// <summary>
         /// The exchange rate of the offer, as the ratio of the original taker_pays divided by the original taker_gets.
@@ -92,34 +106,20 @@ namespace XRPL.Core.Domain.Methods.AccountMethods.AccountOffers
     /// <summary>
     /// Specifies an an offer made by an account that is outstanding as of the requested ledger version.
     /// <para/>If the number of offers is large, only returns up to limit at a time.
-    /// </summary>
-    /// <typeparam name="TPays">The type of amount the account accepting the offer provides.</typeparam>
-    /// <typeparam name="TGets">The type of amount the account accepting the offer receives.</typeparam>
-    public abstract class AccountOffer<TPays, TGets> : AccountOfferBase
-        where TPays : class
-        where TGets : class
-    {
-        /// <summary>
-        /// The amount the account accepting the offer receives, as a <see cref="string"/> representing an amount in XRP, or a token specification object (<see cref="TokenAmount"/>).
-        /// </summary>
-        [JsonPropertyName("taker_gets")]
-        public TGets? TakerGets { get; set; }
-
-        /// <summary>
-        /// The amount the account accepting the offer provides, as a <see cref="string"/> representing an amount in XRP, or a token specification object (<see cref="TokenAmount"/>).
-        /// </summary>
-        [JsonPropertyName("taker_pays")]
-        public TPays? TakerPays { get; set; }
-    }
-
-    /// <summary>
-    /// Specifies an an offer made by an account that is outstanding as of the requested ledger version.
-    /// <para/>If the number of offers is large, only returns up to limit at a time.
     /// <para/> The account accepting the offer receives a <see cref="string"/> value representing the amount in XRP.
     /// <para/> The account accepting the offer provides a <see cref="TokenAmount"/> object representing the amount in a fungible token specification.
     /// </summary>
-    public sealed class XrpForTokenAccountOffer : AccountOffer<string, TokenAmount>
+    public sealed class XrpForTokenAccountOffer : AccountOffer
     {
+        /// <summary>
+        /// The amount the account accepting the offer receives as a token specification object (<see cref="TokenAmount"/>).
+        /// </summary>
+        public new TokenAmount TakerGets { get => (TokenAmount)base.TakerGets; set => base.TakerGets = value; }
+
+        /// <summary>
+        /// The amount the account accepting the offer provides a <see cref="string"/> representing an amount in XRP.
+        /// </summary>
+        public new string TakerPays { get => (string)base.TakerPays; set => base.TakerPays = value; }
     }
 
     /// <summary>
@@ -128,8 +128,19 @@ namespace XRPL.Core.Domain.Methods.AccountMethods.AccountOffers
     /// <para/> The account accepting the offer receives a <see cref="TokenAmount"/> object representing the amount in a fungible token specification.
     /// <para/> The account accepting the offer provides a <see cref="string"/> value representing the amount in XRP.
     /// </summary>
-    public sealed class TokenForXrpAccountOffer : AccountOffer<TokenAmount, string>
+    public sealed class TokenForXrpAccountOffer : AccountOffer
     {
+        /// <summary>
+        /// The amount the account accepting the offer receives as a <see cref="string"/> representing an amount in XRP.
+        /// </summary>
+        [JsonPropertyName("taker_gets")]
+        public new string TakerGets { get => (string)base.TakerGets; set => base.TakerGets = value; }
+
+        /// <summary>
+        /// The amount the account accepting the offer provides a token specification object (<see cref="TokenAmount"/>).
+        /// </summary>
+        [JsonPropertyName("taker_pays")]
+        public new TokenAmount TakerPays { get => (TokenAmount)base.TakerPays; set => base.TakerPays = value; }
     }
 
     /// <summary>
@@ -138,7 +149,17 @@ namespace XRPL.Core.Domain.Methods.AccountMethods.AccountOffers
     /// <para/> The account accepting the offer receives a <see cref="TokenAmount"/> object representing the amount in a token specification.
     /// <para/> The account accepting the offer provides a <see cref="TokenAmount"/> representing the amount in a fungible token specification.
     /// </summary>
-    public sealed class TokenForTokenAccountOffer : AccountOffer<TokenAmount, TokenAmount>
+    public sealed class TokenForTokenAccountOffer : AccountOffer
     {
+        /// <summary>
+        /// The amount the account accepting the offer receives as a token specification object (<see cref="TokenAmount"/>).
+        /// </summary>
+        public new TokenAmount TakerGets { get => (TokenAmount)base.TakerGets; set => base.TakerGets = value; }
+
+        /// <summary>
+        /// The amount the account accepting the offer provides a token specification object (<see cref="TokenAmount"/>).
+        /// </summary>
+        [JsonPropertyName("taker_pays")]
+        public new TokenAmount TakerPays { get => (TokenAmount)base.TakerPays; set => base.TakerPays = value; }
     }
 }

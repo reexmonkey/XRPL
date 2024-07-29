@@ -1,12 +1,9 @@
-﻿using System.Text.Json.Serialization;
-
-namespace XRPL.Core.Domain.PseudoTransactions
+﻿namespace XRPL.Core.Domain.PseudoTransactions
 {
     /// <summary>
     /// Represents a pseudo-transaction that marks a change in transaction cost or reserve requirements as a result of Fee Voting.
     /// <para/>Note: You cannot send a pseudo-transaction, but you may find one when processing ledgers.
     /// </summary>
-    [JsonDerivedType(typeof(SetFee), typeDiscriminator: nameof(SetFee))]
     public class SetFee : PseudoTransaction
     {
         /// <summary>
@@ -47,7 +44,6 @@ namespace XRPL.Core.Domain.PseudoTransactions
     /// Represents a pseudo-transaction (when the XRPFees amendment is enabled) that marks a change in transaction cost or reserve requirements as a result of Fee Voting.
     /// <para/>Note: You cannot send a pseudo-transaction, but you may find one when processing ledgers.
     /// </summary>
-    [JsonDerivedType(typeof(LastestSetFee), typeDiscriminator: nameof(LastestSetFee))]
     public class LastestSetFee : PseudoTransaction
     {
         /// <summary>

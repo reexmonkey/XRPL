@@ -1,12 +1,10 @@
-﻿using System.Text.Json.Serialization;
-using XRPL.Core.Domain.Entries;
+﻿using XRPL.Core.Domain.Entries;
 
 namespace XRPL.Core.Domain.Transactions
 {
     /// <summary>
     /// Represents a transaction that deletes the <see cref="DID"/> ledger entry associated with the specified Account field.
     /// </summary>
-    [JsonDerivedType(typeof(DIDDelete), typeDiscriminator: nameof(DIDDelete))]
     public class DIDDelete : Transaction
     {
         /// <summary>

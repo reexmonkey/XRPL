@@ -1,5 +1,3 @@
-using System.Text.Json.Serialization;
-
 namespace XRPL.Core.Domain.PseudoTransactions
 {
     /// <summary>
@@ -8,7 +6,6 @@ namespace XRPL.Core.Domain.PseudoTransactions
     /// <para/>- Loses supermajority approval.
     /// <para/>- Is enabled on the XRP Ledger protocol.
     /// </summary>
-    [JsonDerivedType(typeof(EnableAmendment), typeDiscriminator: nameof(EnableAmendment))]
     public class EnableAmendment : PseudoTransaction
     {
         /// <summary>

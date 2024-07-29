@@ -1,5 +1,4 @@
-﻿using System.Text.Json.Serialization;
-using XRPL.Core.Domain.Entries;
+﻿using XRPL.Core.Domain.Entries;
 
 namespace XRPL.Core.Domain.Transactions
 {
@@ -7,7 +6,6 @@ namespace XRPL.Core.Domain.Transactions
     /// Represents a transaction that deletes an account (<see cref="AccountRoot"/>) and any objects it owns in the XRP Ledger, if possible, sending the account's remaining XRP to a specified destination account.
     /// <para/>See Deleting Accounts (https://xrpl.org/docs/concepts/accounts/deleting-accounts/) for the requirements to delete an account.
     /// </summary>
-    [JsonDerivedType(typeof(AccountDelete), typeDiscriminator: nameof(AccountDelete))]
     public class AccountDelete : Transaction
     {
         /// <summary>

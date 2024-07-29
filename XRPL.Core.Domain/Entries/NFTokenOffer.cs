@@ -1,14 +1,10 @@
-﻿using System.Text.Json.Serialization;
-using XRPL.Core.Domain.Models;
+﻿using XRPL.Core.Domain.Models;
 
 namespace XRPL.Core.Domain.Entries
 {
     /// <summary>
     /// Represents an offer to buy, sell or transfer an NFT.
     /// </summary>
-    [JsonPolymorphic]
-    [JsonDerivedType(typeof(XrpForNFTokenOffer), typeDiscriminator: nameof(XrpForNFTokenOffer))]
-    [JsonDerivedType(typeof(FungibleTokenForNFTokenOffer), typeDiscriminator: nameof(FungibleTokenForNFTokenOffer))]
     public abstract class NFTokenOffer : LedgerEntryBase
     {
         /// <summary>
@@ -76,7 +72,6 @@ namespace XRPL.Core.Domain.Entries
     /// <summary>
     /// Represents an offer to buy, sell or transfer an NFT with an amount of XRPs.
     /// </summary>
-    [JsonDerivedType(typeof(XrpForNFTokenOffer), typeDiscriminator: nameof(XrpForNFTokenOffer))]
     public sealed class XrpForNFTokenOffer : NFTokenOffer
     {
         /// <summary>
@@ -90,7 +85,6 @@ namespace XRPL.Core.Domain.Entries
     /// <summary>
     /// Represents an offer to buy, sell or transfer an NFT with an amount of tokens.
     /// </summary>
-    [JsonDerivedType(typeof(FungibleTokenForNFTokenOffer), typeDiscriminator: nameof(FungibleTokenForNFTokenOffer))]
     public sealed class FungibleTokenForNFTokenOffer : NFTokenOffer
     {
         /// <summary>

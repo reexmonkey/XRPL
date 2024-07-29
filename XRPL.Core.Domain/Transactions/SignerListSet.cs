@@ -1,5 +1,4 @@
-﻿using System.Text.Json.Serialization;
-using XRPL.Core.Domain.Entries;
+﻿using XRPL.Core.Domain.Entries;
 
 namespace XRPL.Core.Domain.Transactions
 {
@@ -7,7 +6,6 @@ namespace XRPL.Core.Domain.Transactions
     /// Represents a transaction that creates, replaces, or removes a list of signers that can be used to multi-sign a transaction.
     /// <para/>This transaction type was introduced by the MultiSign amendment.
     /// </summary>
-    [JsonDerivedType(typeof(SignerList), typeDiscriminator: nameof(SignerList))]
     public class SignerListSet : Transaction
     {
         /// <summary>

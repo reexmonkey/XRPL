@@ -1,5 +1,4 @@
-﻿using System.Text.Json.Serialization;
-using XRPL.Core.Domain.Models;
+﻿using XRPL.Core.Domain.Models;
 
 namespace XRPL.Core.Domain.Transactions
 {
@@ -12,7 +11,6 @@ namespace XRPL.Core.Domain.Transactions
     /// If this operation empties the NFTokenPage holding the NFToken or results in consolidation,
     /// thus removing a NFTokenPage, the owner’s reserve requirement is reduced by one.
     /// </summary>
-    [JsonDerivedType(typeof(NFTokenBurn), typeDiscriminator: nameof(NFTokenBurn))]
     public class NFTokenBurn : Transaction
     {
         /// <summary>

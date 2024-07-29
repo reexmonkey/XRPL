@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace XRPL.Core.Domain.Transactions
+﻿namespace XRPL.Core.Domain.Transactions
 {
     /// <summary>
     /// Represents a transaction that claims XRP from a payment channel, adjust the payment channel's expiration, or both.
@@ -16,7 +14,6 @@ namespace XRPL.Core.Domain.Transactions
     /// <para/>Any address sending this transaction can:
     /// <para/>- Cause a channel to be closed if its Expiration or CancelAfter time is older than the previous ledger's close time. Any validly-formed PaymentChannelClaim transaction has this effect regardless of the contents of the transaction.
     /// </summary>
-    [JsonDerivedType(typeof(PaymentChannelClaim), typeDiscriminator: nameof(PaymentChannelClaim))]
     public class PaymentChannelClaim : Transaction
     {
         /// <summary>

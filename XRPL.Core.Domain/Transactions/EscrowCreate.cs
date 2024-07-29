@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace XRPL.Core.Domain.Transactions
+﻿namespace XRPL.Core.Domain.Transactions
 {
     /// <summary>
     /// Represents a transaction that returns escrowed XRP to the sender.
@@ -12,7 +10,6 @@ namespace XRPL.Core.Domain.Transactions
     /// This is like the way the Unix epoch works, except the Ripple Epoch is 946684800 seconds after the Unix Epoch.
     /// <para/>Don't convert Ripple Epoch times to UNIX Epoch times in 32-bit variables: this could lead to integer overflows.
     /// </summary>
-    [JsonDerivedType(typeof(EscrowCreate), typeDiscriminator: nameof(EscrowCreate))]
     public class EscrowCreate : Transaction
     {
         /// <summary>

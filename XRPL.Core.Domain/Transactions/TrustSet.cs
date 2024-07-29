@@ -5,7 +5,6 @@ namespace XRPL.Core.Domain.Transactions
     /// <summary>
     /// Represents a transaction that creates or modifies a trust line linking two accounts.
     /// </summary>
-    [JsonDerivedType(typeof(TrustSet), typeDiscriminator: nameof(TrustSet))]
     public class TrustSet : Transaction
     {
         /// <summary>

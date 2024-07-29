@@ -21,13 +21,13 @@ namespace XRPL.Core.Domain.Methods.AccountMethods.AccountInfo
         /// The AccountRoot ledger object with this account's information, as stored in the ledger.
         /// </summary>
         [JsonPropertyName("account_data")]
-        public AccountRoot? AccountData { get; set; }
+        public required AccountRoot AccountData { get; set; }
 
         /// <summary>
         /// The account's flag statuses (see below), based on the <see cref="LedgerEntryBase.Flags"/> field of the account.
         /// </summary>
         [JsonPropertyName("account_flags")]
-        public AccountFlags? AccountFlags { get; set; }
+        public required AccountFlags AccountFlags { get; set; }
 
         /// <summary>
         /// <para/>API v1: (Omitted unless the request specified <see cref="SignerLists"/>
@@ -39,7 +39,7 @@ namespace XRPL.Core.Domain.Methods.AccountMethods.AccountInfo
         /// Clio implements the API v2 behavior in all cases.
         /// </summary>
         [JsonPropertyName("signer_lists")]
-        public SignerList[]? SignerLists { get; set; }
+        public required SignerList[] SignerLists { get; set; }
 
         /// <summary>
         /// (Omitted if ledger_index is provided instead) The ledger index of the current in-progress ledger,
@@ -164,78 +164,33 @@ namespace XRPL.Core.Domain.Methods.AccountMethods.AccountInfo
     public class QueueData
     {
         /// <summary>
-        /// Number of queued transactions from this address.
-        /// </summary>
-        [JsonPropertyName("txn_count")]
-        public int TxnCount { get; set; }
-
-        /// <summary>
-        /// (May be omitted) Whether a transaction in the queue changes this address's ways of authorizing transactions.
-        /// If true, this address can queue no further transactions until that transaction has been executed or dropped from the queue.
-        /// </summary>
-        [JsonPropertyName("auth_change_queued")]
-        public bool? AuthChangeQueued { get; set; }
-
-        /// <summary>
-        /// (May be omitted) The lowest Sequence Number among transactions queued by this address.
-        /// </summary>
-        [JsonPropertyName("lowest_sequence")]
-        public int? LowestSequence { get; set; }
-
-        /// <summary>
-        /// (May be omitted) The highest Sequence Number among transactions queued by this address.
-        /// </summary>
-        [JsonPropertyName("highest_sequence")]
-        public int? HighestSequence { get; set; }
-
-        /// <summary>
-        /// (May be omitted) Integer amount of drops of XRP that could be debited from this address
-        /// if every transaction in the queue consumes the maximum amount of XRP possible.
-        /// </summary>
-        [JsonPropertyName("max_spend_drops_total")]
-        public string? MaxSpendDropsTotal { get; set; }
-
-        /// <summary>
-        /// (May be omitted) Information about each queued transaction from this address.
-        /// </summary>
-        [JsonPropertyName("transactions")]
-        public QueueDataTransaction[]? Transactions { get; set; }
-    }
-
-    /// <summary>
-    /// Represents information about each queued transaction from this address.
-    /// </summary>
-
-    public class QueueDataTransaction
-    {
-        /// <summary>
         /// Whether this transaction changes this address's ways of authorizing transactions.
         /// </summary>
         [JsonPropertyName("auth_change")]
-        public bool AuthChange { get; set; }
+        public required bool AuthChange { get; set; }
 
         /// <summary>
-        /// The Transaction Cost of this transaction, in drops of XRP.
+        /// The transaction cost of this transaction, in drops of XRP.
         /// </summary>
         [JsonPropertyName("fee")]
-        public string? Fee { get; set; }
+        public required string Fee { get; set; }
 
         /// <summary>
         /// The transaction cost of this transaction, relative to the minimum cost for this type of transaction, in fee levels.
         /// </summary>
         [JsonPropertyName("fee_level")]
-        public string? FeeLevel { get; set; }
+        public required string FeeLevel { get; set; }
 
         /// <summary>
         /// The maximum amount of XRP, in drops, this transaction could send or destroy.
         /// </summary>
-        [JsonPropertyName("max_spend_drops\t")]
-        public string? MaxSpendDrops { get; set; }
+        [JsonPropertyName("max_spend_drops")]
+        public required string MaxSpendDrops { get; set; }
 
         /// <summary>
-        /// The Sequence Number of this transaction.
+        /// The sequence number of this transaction.
         /// </summary>
         [JsonPropertyName("seq")]
-        public int Seq { get; set; }
+        public required int Seq { get; set; }
     }
 }

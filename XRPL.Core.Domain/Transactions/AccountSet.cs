@@ -1,12 +1,10 @@
-﻿using System.Text.Json.Serialization;
-using XRPL.Core.Domain.Entries;
+﻿using XRPL.Core.Domain.Entries;
 
 namespace XRPL.Core.Domain.Transactions
 {
     /// <summary>
     /// Represents a transaction that modifies the properties of an account (<see cref="AccountRoot"/>) in the XRP Ledger.
     /// </summary>
-    [JsonDerivedType(typeof(AccountSet), typeDiscriminator: nameof(AccountSet))]
     public class AccountSet : Transaction
     {
         /// <summary>

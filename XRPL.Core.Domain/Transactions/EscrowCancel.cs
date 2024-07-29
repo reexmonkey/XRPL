@@ -1,11 +1,8 @@
-﻿using System.Text.Json.Serialization;
-
-namespace XRPL.Core.Domain.Transactions
+﻿namespace XRPL.Core.Domain.Transactions
 {
     /// <summary>
     /// Represents a transaction that returns escrowed XRP to the sender.
     /// </summary>
-    [JsonDerivedType(typeof(EscrowCancel), typeDiscriminator: nameof(EscrowCancel))]
     public class EscrowCancel : Transaction
     {
         /// <summary>

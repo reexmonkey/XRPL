@@ -6,7 +6,6 @@ namespace XRPL.Core.Domain.Methods.AccountMethods.AccountCurrencies
     /// <summary>
     /// Represents the request to retrieve account currencies.
     /// </summary>
-
     public class AccountCurrenciesRequest : RequestBase<AccountCurrenciesParameters>, IExpect<AccountCurrenciesResponse>
     {
         /// <summary>
@@ -30,14 +29,14 @@ namespace XRPL.Core.Domain.Methods.AccountMethods.AccountCurrencies
     /// <summary>
     /// Represents the parameters of an <see cref="AccountCurrenciesRequest"/> object.
     /// </summary>
-    
+
     public class AccountCurrenciesParameters : ParameterBase
     {
         /// <summary>
         /// Look up currencies this account can send or receive.
         /// </summary>
         [JsonPropertyName("account")]
-        public string? Account { get; set; }
+        public required string Account { get; set; }
 
         /// <summary>
         /// A 20-byte hex string for the ledger version to use.

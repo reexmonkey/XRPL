@@ -1,12 +1,10 @@
-﻿using System.Text.Json.Serialization;
-using XRPL.Core.Domain.Entries;
+﻿using XRPL.Core.Domain.Entries;
 
 namespace XRPL.Core.Domain.Transactions
 {
     /// <summary>
     /// Represents a transaction that creates or modifies a trust line linking two accounts.
     /// </summary>
-    [JsonDerivedType(typeof(XChainAccountCreateCommit), typeDiscriminator: nameof(XChainAccountCreateCommit))]
     public class XChainAccountCreateCommit : Transaction
     {
         /// <summary>

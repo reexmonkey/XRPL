@@ -21,19 +21,19 @@ namespace XRPL.Core.Domain.Methods.AccountMethods.AccountObjects
         /// Unique Address of the account this request corresponds to.
         /// </summary>
         [JsonPropertyName("account")]
-        public string? Account { get; set; }
+        public required string Account { get; set; }
 
         /// <summary>
         /// Array of objects owned by this account. Each object is in its raw ledger format.
         /// </summary>
         [JsonPropertyName("account_objects")]
-        public LedgerEntryBase[]? AccountObjects { get; set; }
+        public required LedgerEntryBase[] AccountObjects { get; set; }
 
         /// <summary>
         /// (May be omitted) The identifying hash of the ledger that was used to generate this response.
         /// </summary>
         [JsonPropertyName("ledger_hash")]
-        public string? LedgerHash { get; set; }
+        public required string LedgerHash { get; set; }
 
         /// <summary>
         /// (May be omitted) The ledger index of the ledger that was used to generate this response.

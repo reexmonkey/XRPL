@@ -13,7 +13,7 @@ namespace XRPL.Core.Domain.Methods.AccountMethods.AccountLines
     /// <summary>
     /// Represents the result of an <see cref="AccountLinesResponse"/> object.
     /// </summary>
-    
+
     public class AccountLinesResult : ResultBase
     {
         /// <summary>
@@ -21,14 +21,14 @@ namespace XRPL.Core.Domain.Methods.AccountMethods.AccountLines
         /// <para/>This is the "perspective account" for purpose of the trust lines.
         /// </summary>
         [JsonPropertyName("account")]
-        public string? Account { get; set; }
+        public required string Account { get; set; }
 
         /// <summary>
         /// Array of trust line objects, as described below.
         /// <para/>If the number of trust lines is large, only returns up to the limit at a time.
         /// </summary>
         [JsonPropertyName("lines")]
-        public TrustLine[]? Lines { get; set; }
+        public required TrustLine[] Lines { get; set; }
 
         /// <summary>
         /// (Omitted if ledger_index is provided instead) The ledger index of the current in-progress ledger,
@@ -67,46 +67,46 @@ namespace XRPL.Core.Domain.Methods.AccountMethods.AccountLines
         /// The unique Address of the counterparty to this trust line.
         /// </summary>
         [JsonPropertyName("account")]
-        public string? Account { get; set; }
+        public required string Account { get; set; }
 
         /// <summary>
         /// Representation of the numeric balance currently held against this line.
         /// <para/>A positive balance means that the perspective account holds value; a negative balance means that the perspective account owes value.
         /// </summary>
         [JsonPropertyName("balance")]
-        public string? Balance { get; set; }
+        public required string Balance { get; set; }
 
         /// <summary>
-        /// A Token Code identifying what token this trust line can hold.
+        /// A currency code identifying what token this trust line can hold.
         /// </summary>
-        [JsonPropertyName("token")]
-        public string? Token { get; set; }
+        [JsonPropertyName("currency")]
+        public required string Currency { get; set; }
 
         /// <summary>
         /// The maximum amount of the given token that this account is willing to owe the peer account
         /// </summary>
         [JsonPropertyName("limit")]
-        public string? Limit { get; set; }
+        public required string Limit { get; set; }
 
         /// <summary>
         /// The maximum amount of token that the counterparty account is willing to owe the perspective account
         /// </summary>
         [JsonPropertyName("limit_peer")]
-        public string? LimitPeer { get; set; }
+        public required string LimitPeer { get; set; }
 
         /// <summary>
         /// Rate at which the account values incoming balances on this trust line, as a ratio of this value per 1 billion units.
         /// <para/>(For example, a value of 500 million represents a 0.5:1 ratio.) As a special case, 0 is treated as a 1:1 ratio
         /// </summary>
         [JsonPropertyName("quality_in")]
-        public uint QualityIn { get; set; }
+        public required uint QualityIn { get; set; }
 
         /// <summary>
         /// Rate at which the account values outgoing balances on this trust line, as a ratio of this value per 1 billion units.
         /// <para/>(For example, a value of 500 million represents a 0.5:1 ratio.) As a special case, 0 is treated as a 1:1 ratio.
         /// </summary>
         [JsonPropertyName("quality_out")]
-        public uint? QualityOut { get; set; }
+        public required uint QualityOut { get; set; }
 
         /// <summary>
         /// (May be omitted) If true, this account has enabled the No Ripple flag for this trust line.

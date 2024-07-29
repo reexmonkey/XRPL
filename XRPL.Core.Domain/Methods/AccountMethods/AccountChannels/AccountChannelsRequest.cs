@@ -38,7 +38,7 @@ namespace XRPL.Core.Domain.Methods.AccountMethods.AccountChannels
         /// Look up channels where this account is the channel's owner/source
         /// </summary>
         [JsonPropertyName("account")]
-        public string? Account { get; set; }
+        public required string Account { get; set; }
 
         /// <summary>
         /// A second account; if provided, filter results to payment channels whose destination is this account.

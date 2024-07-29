@@ -26,7 +26,7 @@ namespace XRPL.Core.Domain.Models
     /// Represents properties or other options associated with the NFToken object.
     /// </summary>
     [Flags]
-    public enum NFTokenFlags
+    public enum NFTokenFlags : uint
     {
         /// <summary>
         /// If enabled, the issuer (or an entity authorized by the issuer) can destroy this NFToken. The object's owner can always do so.

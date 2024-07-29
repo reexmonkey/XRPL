@@ -1,5 +1,4 @@
-﻿using System.Text.Json.Serialization;
-using XRPL.Core.Domain.Models;
+﻿using XRPL.Core.Domain.Models;
 
 namespace XRPL.Core.Domain.Transactions
 {
@@ -8,7 +7,6 @@ namespace XRPL.Core.Domain.Transactions
     /// <para/>If you win, you can trade against the AMM at a discounted fee until you are outbid or 24 hours have passed. If you are outbid before 24 hours have passed, you are refunded part of the cost of your bid based on how much time remains.
     /// <para/>You bid using the AMM's LP Tokens; the amount of a winning bid is returned to the AMM, decreasing the outstanding balance of LP Tokens.
     /// </summary>
-    [JsonDerivedType(typeof(AMMBid), typeDiscriminator: nameof(AMMBid))]
     public class AMMBid : Transaction
     {
         /// <summary>

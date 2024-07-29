@@ -50,6 +50,7 @@
         /// </summary>
         public virtual uint? Flags { get; set; }
     }
+
     /// <summary>
     /// Represents the type of operation a transaction is supposed to do.
     /// </summary>
@@ -66,7 +67,7 @@
         SetFee,
 
         /// <summary>
-        /// A UNLModify pseudo-transaction marks a change to the Negative UNL, indicating that a trusted validator has gone offline or come back online. 
+        /// A UNLModify pseudo-transaction marks a change to the Negative UNL, indicating that a trusted validator has gone offline or come back online.
         /// </summary>
         UNLModify = 0x0066,
     }

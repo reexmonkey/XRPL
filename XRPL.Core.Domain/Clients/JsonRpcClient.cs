@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization.Metadata;
 using XRPL.Core.Domain.Interfaces;
 using XRPL.Core.Domain.Methods;
 using XRPL.Core.Domain.Methods.AccountMethods.AccountChannels;
@@ -26,29 +27,25 @@ namespace XRPL.Core.Domain.Clients
     /// <summary>
     /// Represents a JSON-RPC client that can send requests to a rippled server.
     /// </summary>
-    public class JsonRpcClient : IDisposable
+    /// <remarks>
+    /// Initializes a new instance of the <see cref="JsonRpcClient"/> for the given endpoint.
+    /// </remarks>
+    /// <param name="uri">The URL of the rippled server to connect to</param>
+    /// <exception cref="ArgumentException"><paramref name="uri"/> is null.</exception>
+    public class JsonRpcClient(Uri uri) : IDisposable
     {
         private const string contentType = "application/json";
         private readonly HttpClient client = new();
-        private readonly Uri uri;
+        private readonly Uri uri = uri ?? throw new ArgumentNullException(nameof(uri));
         private readonly Encoding encoding = new UTF8Encoding(false, true);
 
         private static readonly JsonSerializerOptions serializerOptions = new()
         {
             WriteIndented = true,
+            TypeInfoResolver = JsonTypeInfoResolver.Combine(Providers.GetResolvers())
         };
 
         private bool disposedValue;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="JsonRpcClient"/> for the given endpoint.
-        /// </summary>
-        /// <param name="uri">The URL of the rippled server to connect to</param>
-        /// <exception cref="ArgumentException"><paramref name="uri"/> is null.</exception>
-        public JsonRpcClient(Uri uri)
-        {
-            this.uri = uri ?? throw new ArgumentNullException(nameof(uri));
-        }
 
         private TResponse? Post<TRequest, TResponse>(TRequest request, CancellationToken cancellation)
             where TRequest : RequestBase, IExpect<TResponse>
@@ -241,10 +238,7 @@ namespace XRPL.Core.Domain.Clients
 
         #endregion Transaction Methods
 
-        /// <summary>
-        ///
-        /// </summary>
-        /// <param name="disposing"></param>
+
         protected virtual void Dispose(bool disposing)
         {
             if (!disposedValue)

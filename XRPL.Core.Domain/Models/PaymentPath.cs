@@ -12,10 +12,6 @@ namespace XRPL.Core.Domain.Models
     /// All paths in a path set must start with the same currency, and must also end with the same currency as each other.
     /// <para/>Since XRP can be sent directly to any address, an XRP-to-XRP transaction does not use any paths.
     /// </summary>
-    [JsonPolymorphic]
-    [JsonDerivedType(typeof(AccountPaymentPath), typeDiscriminator: nameof(AccountPaymentPath))]
-    [JsonDerivedType(typeof(XrpPaymentPath), typeDiscriminator: nameof(XrpPaymentPath))]
-    [JsonDerivedType(typeof(FungibleTokenPaymentPath), typeDiscriminator: nameof(FungibleTokenPaymentPath))]
     public abstract class PaymentPath
     {
         /// <summary>
@@ -41,7 +37,6 @@ namespace XRPL.Core.Domain.Models
     /// All paths in a path set must start with the same currency, and must also end with the same currency as each other.
     /// <para/>Since XRP can be sent directly to any address, an XRP-to-XRP transaction does not use any paths.
     /// </summary>
-    [JsonDerivedType(typeof(AccountPaymentPath), typeDiscriminator: nameof(AccountPaymentPath))]
     public sealed class AccountPaymentPath : PaymentPath
     {
         /// <summary>
@@ -61,7 +56,6 @@ namespace XRPL.Core.Domain.Models
     /// All paths in a path set must start with the same currency, and must also end with the same currency as each other.
     /// <para/>Since XRP can be sent directly to any address, an XRP-to-XRP transaction does not use any paths.
     /// </summary>
-    [JsonDerivedType(typeof(XrpPaymentPath), typeDiscriminator: nameof(XrpPaymentPath))]
     public sealed class XrpPaymentPath : PaymentPath
     {
         /// <summary>
@@ -82,7 +76,6 @@ namespace XRPL.Core.Domain.Models
     /// All paths in a path set must start with the same currency, and must also end with the same currency as each other.
     /// <para/>Since XRP can be sent directly to any address, an XRP-to-XRP transaction does not use any paths.
     /// </summary>
-    [JsonDerivedType(typeof(FungibleTokenPaymentPath), typeDiscriminator: nameof(FungibleTokenPaymentPath))]
     public sealed class FungibleTokenPaymentPath : PaymentPath
     {
         /// <summary>

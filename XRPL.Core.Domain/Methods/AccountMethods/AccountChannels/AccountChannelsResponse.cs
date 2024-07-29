@@ -13,20 +13,20 @@ namespace XRPL.Core.Domain.Methods.AccountMethods.AccountChannels
     /// <summary>
     /// Represents the result of an <see cref="AccountChannelsResponse"/> object.
     /// </summary>
-    
+
     public class AccountChannelsResult : ResultBase
     {
         /// <summary>
         /// The address of the source/owner of the payment channels. This corresponds to the account field of the request.
         /// </summary>
         [JsonPropertyName("account")]
-        public string? Account { get; set; }
+        public required string Account { get; set; }
 
         /// <summary>
         /// Payment channels owned by this account.
         /// </summary>
         [JsonPropertyName("channels")]
-        public Channel[]? Channels { get; set; }
+        public required Channel[] Channels { get; set; }
 
         /// <summary>
         /// The identifying Hash of the ledger version used to generate this response.
@@ -63,41 +63,41 @@ namespace XRPL.Core.Domain.Methods.AccountMethods.AccountChannels
     /// <summary>
     /// Represents a payment channel.
     /// </summary>
-    
+
     public class Channel
     {
         /// <summary>
         /// The owner of the channel, as an address.
         /// </summary>
         [JsonPropertyName("account")]
-        public string? Account { get; set; }
+        public required string Account { get; set; }
 
         /// <summary>
         /// The total amount of XRP, in drops allocated to this channel.
         /// </summary>
         [JsonPropertyName("amount")]
-        public string? Amount { get; set; }
+        public required string Amount { get; set; }
 
         /// <summary>
         /// The total amount of XRP, in drops, paid out from this channel, as of the ledger version used.
         /// <para/>(You can calculate the amount of XRP left in the channel by subtracting balance from amount.)
         /// </summary>
         [JsonPropertyName("balance")]
-        public string? Balance { get; set; }
+        public required string Balance { get; set; }
 
         /// <summary>
         /// A unique ID for this channel, as a 64-character hexadecimal string.
         /// <para/>This is also the ID of the channel object in the ledger's state data.
         /// </summary>
         [JsonPropertyName("channel_id")]
-        public string? ChannelId { get; set; }
+        public required string ChannelId { get; set; }
 
         /// <summary>
         /// The destination account of the channel, as an Address.
         /// <para/>Only this account can receive the XRP in the channel while it is open.
         /// </summary>
         [JsonPropertyName("destination_account")]
-        public string? DestinationAccount { get; set; }
+        public required string DestinationAccount { get; set; }
 
         /// <summary>
         /// The number of seconds the payment channel must stay open after the owner of the channel requests to close it.

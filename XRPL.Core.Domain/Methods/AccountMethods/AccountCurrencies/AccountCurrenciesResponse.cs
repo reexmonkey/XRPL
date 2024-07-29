@@ -26,19 +26,19 @@ namespace XRPL.Core.Domain.Methods.AccountMethods.AccountCurrencies
         /// The ledger index of the ledger version used to retrieve this data.
         /// </summary>
         [JsonPropertyName("ledger_index")]
-        public string? LedgerIndex { get; set; }
+        public required int LedgerIndex { get; set; }
 
         /// <summary>
         /// Array of Token Codes for currencies that this account can receive.
         /// </summary>
         [JsonPropertyName("receive_currencies")]
-        public string[]? ReceiveCurrencies { get; set; }
+        public required string[] ReceiveCurrencies { get; set; }
 
         /// <summary>
         /// Array of Token Codes for currencies that this account can send.
         /// </summary>
         [JsonPropertyName("send_currencies")]
-        public string[]? SendCurrencies { get; set; }
+        public required string[] SendCurrencies { get; set; }
 
         /// <summary>
         /// If true, this data comes from a validated ledger.

@@ -28,7 +28,7 @@ namespace XRPL.Core.Domain.Methods.AccountMethods.AccountNFTs
         /// <para/>The request returns a list of NFTs owned by this account.
         /// </summary>
         [JsonPropertyName("account")]
-        public string? Account { get; set; }
+        public required string Account { get; set; }
 
         /// <summary>
         /// (Optional) A 20-byte hex string for the ledger version to use

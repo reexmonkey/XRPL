@@ -21,13 +21,13 @@ namespace XRPL.Core.Domain.Methods.AccountMethods.AccountNFTs
         /// The account that owns the list of NFTs.
         /// </summary>
         [JsonPropertyName("account")]
-        public string? Account { get; set; }
+        public required string Account { get; set; }
 
         /// <summary>
         /// A list of NFTs owned by the account, formatted as NFT Objects.
         /// </summary>
         [JsonPropertyName("account_nfts")]
-        public NFTObject[]? AccountNFTs { get; set; }
+        public required NFTObject[] AccountNFTs { get; set; }
 
         /// <summary>
         /// (May be omitted) The identifying hash of the ledger that was used to generate this response.
@@ -53,6 +53,14 @@ namespace XRPL.Core.Domain.Methods.AccountMethods.AccountNFTs
         /// </summary>
         [JsonPropertyName("validated")]
         public bool Validated { get; set; }
+
+        /// <summary>
+        /// Server-defined value indicating the response is paginated. 
+        /// <para/>Pass this to the next call to resume where this call left off. 
+        /// Omitted when there are no additional pages after this one.
+        /// </summary>
+        [JsonPropertyName("marker")]
+        public object? Marker { get; set; }
     }
 
     /// <summary>
@@ -63,33 +71,33 @@ namespace XRPL.Core.Domain.Methods.AccountMethods.AccountNFTs
         /// <summary>
         /// A bit-map of boolean flags enabled for this NFToken. See <see cref="NFTokenFlags"/> for possible values.
         /// </summary>
-        public NFTokenFlags Flags { get; set; }
+        public required uint Flags { get; set; }
 
         /// <summary>
         /// The account that issued this <see cref="NFToken"/>.
         /// </summary>
-        public string? Issuer { get; set; }
+        public required string Issuer { get; set; }
 
         /// <summary>
         /// The unique identifier of this <see cref="NFToken"/>, in hexadecimal.
         /// </summary>
-        public string? NFTokenID { get; set; }
+        public required string NFTokenID { get; set; }
 
         /// <summary>
         /// The unscrambled version of this token's taxon.
         /// <para/>Several tokens with the same taxon might represent instances of a limited series.
         /// </summary>
-        public uint NFTokenTaxon { get; set; }
+        public required uint NFTokenTaxon { get; set; }
 
         /// <summary>
         /// The URI data associated with this NFToken, in hexadecimal.
         /// </summary>
-        public string? URI { get; set; }
+        public required string URI { get; set; }
 
         /// <summary>
         /// The token sequence number of this NFToken, which is unique for its issuer.
         /// </summary>
         [JsonPropertyName("nft_serial")]
-        public uint NFTSerial { get; set; }
+        public required uint NFTSerial { get; set; }
     }
 }
