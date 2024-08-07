@@ -14,7 +14,6 @@ namespace XRPL.Core.Domain.Methods.PathAndOrderBookMethods.AmmInfo
     /// <summary>
     /// Represents a result of an <see cref="AmmInfoResponse"/> object.
     /// </summary>
-
     public abstract class AmmInfoResult : ResultBase
     {
         ///<summary>

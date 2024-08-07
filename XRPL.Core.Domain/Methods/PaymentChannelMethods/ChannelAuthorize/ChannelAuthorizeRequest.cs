@@ -24,11 +24,6 @@ namespace XRPL.Core.Domain.Methods.PaymentChannelMethods.ChannelAuthorize
     /// <summary>
     /// Specifies the parameters of an <see cref="ChannelAuthorizeRequest"/> object.
     /// </summary>
-    [JsonPolymorphic]
-    [JsonDerivedType(typeof(SecretChannelAuthorizeParameters), typeDiscriminator: nameof(SecretChannelAuthorizeParameters))]
-    [JsonDerivedType(typeof(SeedChannelAuthorizeParameters), typeDiscriminator: nameof(SeedChannelAuthorizeParameters))]
-    [JsonDerivedType(typeof(SeedHexChannelAuthorizeParameters), typeDiscriminator: nameof(SeedHexChannelAuthorizeParameters))]
-    [JsonDerivedType(typeof(PassphraseChannelAuthorizeParameters), typeDiscriminator: nameof(PassphraseChannelAuthorizeParameters))]
     public abstract class ChannelAuthorizeParameters : ParameterBase
     {
         /// <summary>
@@ -48,7 +43,6 @@ namespace XRPL.Core.Domain.Methods.PaymentChannelMethods.ChannelAuthorize
     /// <summary>
     /// Represents the parameters of an <see cref="ChannelAuthorizeRequest"/> object.
     /// </summary>
-    [JsonDerivedType(typeof(SecretChannelAuthorizeParameters), typeDiscriminator: nameof(SecretChannelAuthorizeParameters))]
     public sealed class SecretChannelAuthorizeParameters : ChannelAuthorizeParameters
     {
         /// <summary>
@@ -62,7 +56,6 @@ namespace XRPL.Core.Domain.Methods.PaymentChannelMethods.ChannelAuthorize
     /// <summary>
     /// Represents the parameters of an <see cref="ChannelAuthorizeRequest"/> object.
     /// </summary>
-    [JsonDerivedType(typeof(SeedChannelAuthorizeParameters), typeDiscriminator: nameof(SeedChannelAuthorizeParameters))]
     public sealed class SeedChannelAuthorizeParameters : ChannelAuthorizeParameters
     {
         /// <summary>
@@ -83,7 +76,6 @@ namespace XRPL.Core.Domain.Methods.PaymentChannelMethods.ChannelAuthorize
     /// <summary>
     /// Represents the parameters of an <see cref="ChannelAuthorizeRequest"/> object.
     /// </summary>
-    [JsonDerivedType(typeof(SeedHexChannelAuthorizeParameters), typeDiscriminator: nameof(SeedHexChannelAuthorizeParameters))]
     public sealed class SeedHexChannelAuthorizeParameters : ChannelAuthorizeParameters
     {
         /// <summary>
@@ -104,7 +96,6 @@ namespace XRPL.Core.Domain.Methods.PaymentChannelMethods.ChannelAuthorize
     /// <summary>
     /// Represents the parameters of an <see cref="ChannelAuthorizeRequest"/> object.
     /// </summary>
-    [JsonDerivedType(typeof(PassphraseChannelAuthorizeParameters), typeDiscriminator: nameof(PassphraseChannelAuthorizeParameters))]
     public sealed class PassphraseChannelAuthorizeParameters : ChannelAuthorizeParameters
     {
         /// <summary>

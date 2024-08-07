@@ -34,9 +34,6 @@ namespace XRPL.Core.Domain.Methods.TransactionMethods.Tx
     /// <summary>
     /// Specifies a result of a transaction response object.
     /// </summary>
-    [JsonPolymorphic(UnknownDerivedTypeHandling = JsonUnknownDerivedTypeHandling.FallBackToBaseType)]
-    [JsonDerivedType(typeof(TxResult), typeDiscriminator: nameof(TxResult))]
-    [JsonDerivedType(typeof(JsonTxResult), typeDiscriminator: nameof(JsonTxResult))]
     public abstract class TxResult : ResultBase
     {
         /// <summary>
@@ -67,8 +64,6 @@ namespace XRPL.Core.Domain.Methods.TransactionMethods.Tx
     /// <summary>
     /// Specifies a result of a transaction response object where the transaction metadata is a JSON object.
     /// </summary>
-    [JsonPolymorphic(UnknownDerivedTypeHandling = JsonUnknownDerivedTypeHandling.FallBackToBaseType)]
-    [JsonDerivedType(typeof(JsonTxResult), typeDiscriminator: nameof(JsonTxResult))]
     public abstract class JsonTxResult : TxResult
     {
         /// <summary>
@@ -81,8 +76,6 @@ namespace XRPL.Core.Domain.Methods.TransactionMethods.Tx
     /// <summary>
     /// Specifies a result of a transaction response object where the transaction metadata is a binary string.
     /// </summary>
-    [JsonPolymorphic(UnknownDerivedTypeHandling = JsonUnknownDerivedTypeHandling.FallBackToBaseType)]
-    [JsonDerivedType(typeof(BinaryTxResult), typeDiscriminator: nameof(BinaryTxResult))]
     public abstract class BinaryTxResult : TxResult
     {
         /// <summary>
@@ -95,7 +88,6 @@ namespace XRPL.Core.Domain.Methods.TransactionMethods.Tx
     /// <summary>
     /// Represents a <see cref="TxResult"/> with a compact transaction identifier of the transaction and a JSON-based transaction metadata.
     /// </summary>
-    [JsonDerivedType(typeof(CtidJsonTxResult), typeDiscriminator: nameof(CtidJsonTxResult))]
     public sealed class CtidJsonTxResult : JsonTxResult
     {
         /// <summary>
@@ -109,7 +101,6 @@ namespace XRPL.Core.Domain.Methods.TransactionMethods.Tx
     /// <summary>
     /// Represents a <see cref="TxResult"/> with a 256-bit hash of the transaction and a JSON-based transaction metadata.
     /// </summary>
-    [JsonDerivedType(typeof(HashJsonTxResult), typeDiscriminator: nameof(HashJsonTxResult))]
     public sealed class HashJsonTxResult : JsonTxResult
     {
         /// <summary>
@@ -122,7 +113,6 @@ namespace XRPL.Core.Domain.Methods.TransactionMethods.Tx
     /// <summary>
     /// Represents a <see cref="TxResult"/> with a compact transaction identifier of the transaction and a binary transaction metadata.
     /// </summary>
-    [JsonDerivedType(typeof(CtidBinaryTxResult), typeDiscriminator: nameof(CtidBinaryTxResult))]
     public sealed class CtidBinaryTxResult : BinaryTxResult
     {
         /// <summary>
@@ -136,7 +126,6 @@ namespace XRPL.Core.Domain.Methods.TransactionMethods.Tx
     /// <summary>
     /// Represents a <see cref="TxResult"/> with a 256-bit hash of the transaction and a binary transaction metadata.
     /// </summary>
-    [JsonDerivedType(typeof(HashBinaryTxResult), typeDiscriminator: nameof(HashBinaryTxResult))]
     public sealed class HashBinaryTxResult : BinaryTxResult
     {
         /// <summary>

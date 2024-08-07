@@ -52,10 +52,6 @@ namespace XRPL.Core.Domain.Methods.PathAndOrderBookMethods.AmmInfo
     /// <summary>
     /// Represents the parameters of an <see cref="AssetAmmInfoRequest"/> object.
     /// </summary>
-    [JsonPolymorphic()]
-    [JsonDerivedType(typeof(XrpFungibleTokenAmmInfoParameters), typeDiscriminator: nameof(XrpFungibleTokenAmmInfoParameters))]
-    [JsonDerivedType(typeof(FungibleTokenXrpAmmInfoParameters), typeDiscriminator: nameof(FungibleTokenXrpAmmInfoParameters))]
-    [JsonDerivedType(typeof(FungibleTokenAmmInfoParameters), typeDiscriminator: nameof(FungibleTokenAmmInfoParameters))]
     public abstract class AssetAmmInfoParameters : ParameterBase
     {
         /// <summary>
@@ -82,7 +78,6 @@ namespace XRPL.Core.Domain.Methods.PathAndOrderBookMethods.AmmInfo
     /// <summary>
     /// Represets the parameters of an <see cref="AssetAmmInfoRequest"/> for the AMM asset pair: XRP/Fungible Token Asset.
     /// </summary>
-    [JsonDerivedType(typeof(XrpFungibleTokenAmmInfoParameters), typeDiscriminator: nameof(XrpFungibleTokenAmmInfoParameters))]
     public class XrpFungibleTokenAmmInfoParameters : AssetAmmInfoParameters
     {
         ///<summary>
@@ -101,7 +96,6 @@ namespace XRPL.Core.Domain.Methods.PathAndOrderBookMethods.AmmInfo
     /// <summary>
     /// Represets the parameters of an <see cref="AssetAmmInfoRequest"/> for the AMM asset pair: Fungible Token Asset/XRP.
     /// </summary>
-    [JsonDerivedType(typeof(FungibleTokenXrpAmmInfoParameters), typeDiscriminator: nameof(FungibleTokenXrpAmmInfoParameters))]
     public sealed class FungibleTokenXrpAmmInfoParameters : AssetAmmInfoParameters
     {
         ///<summary>
@@ -120,7 +114,6 @@ namespace XRPL.Core.Domain.Methods.PathAndOrderBookMethods.AmmInfo
     /// <summary>
     /// Represets the parameters of an <see cref="AssetAmmInfoRequest"/> for the AMM asset pair: Fungible Token Asset/Fungible Token Asset.
     /// </summary>
-    [JsonDerivedType(typeof(FungibleTokenAmmInfoParameters), typeDiscriminator: nameof(FungibleTokenAmmInfoParameters))]
     public sealed class FungibleTokenAmmInfoParameters : AssetAmmInfoParameters
     {
         ///<summary>

@@ -25,9 +25,6 @@ namespace XRPL.Core.Domain.Methods.PathAndOrderBookMethods.RipplePathFind
     /// <summary>
     /// Represents the parameters of an <see cref="RipplePathFindRequest"/> object.
     /// </summary>
-    [JsonPolymorphic]
-    [JsonDerivedType(typeof(XrpRipplePathFindParameters), typeDiscriminator: nameof(XrpRipplePathFindParameters))]
-    [JsonDerivedType(typeof(FungibleTokenRipplePathFindParameters), typeDiscriminator: nameof(FungibleTokenRipplePathFindParameters))]
     public abstract class RipplePathFindParameters : ParameterBase
     {
         /// <summary>
@@ -82,7 +79,6 @@ namespace XRPL.Core.Domain.Methods.PathAndOrderBookMethods.RipplePathFind
     /// <summary>
     /// Represents a path from one possible source currency (held by the initiating account) to the destination account and currency.
     /// </summary>
-    [JsonDerivedType(typeof(XrpRipplePathFindParameters), typeDiscriminator: nameof(XrpRipplePathFindParameters))]
     public class XrpRipplePathFindParameters : RipplePathFindParameters
     {
         /// <summary>
@@ -104,7 +100,6 @@ namespace XRPL.Core.Domain.Methods.PathAndOrderBookMethods.RipplePathFind
     /// <summary>
     /// Represents a path from one possible source currency (held by the initiating account) to the destination account and currency.
     /// </summary>
-    [JsonDerivedType(typeof(FungibleTokenRipplePathFindParameters), typeDiscriminator: nameof(FungibleTokenRipplePathFindParameters))]
     public class FungibleTokenRipplePathFindParameters : RipplePathFindParameters
     {
         /// <summary>

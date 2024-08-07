@@ -1,5 +1,4 @@
-﻿using System.Text.Json.Serialization;
-using XRPL.Core.Domain.Models;
+﻿using XRPL.Core.Domain.Models;
 
 namespace XRPL.Core.Domain.Transactions
 {
@@ -58,16 +57,6 @@ namespace XRPL.Core.Domain.Transactions
     /// <para/>Payments are also the only way to create accounts.
     /// <para/>Only applicable to API v2.
     /// </summary>
-    [JsonPolymorphic]
-    [JsonDerivedType(typeof(PaymentV2), typeDiscriminator: nameof(PaymentV2))]
-    [JsonDerivedType(typeof(DirectXrpPaymentV2), typeDiscriminator: nameof(DirectXrpPaymentV2))]
-    [JsonDerivedType(typeof(CreateOrRedeemTokensPaymentV2), typeDiscriminator: nameof(CreateOrRedeemTokensPaymentV2))]
-    [JsonDerivedType(typeof(XrpCrossCurrencyPaymentV2), typeDiscriminator: nameof(XrpCrossCurrencyPaymentV2))]
-    [JsonDerivedType(typeof(FungibleTokenCrossCurrencyPaymentV2), typeDiscriminator: nameof(FungibleTokenCrossCurrencyPaymentV2))]
-    [JsonDerivedType(typeof(XrpPartialPaymentV2), typeDiscriminator: nameof(XrpPartialPaymentV2))]
-    [JsonDerivedType(typeof(FungibleTokenPartialPaymentV2), typeDiscriminator: nameof(FungibleTokenPartialPaymentV2))]
-    [JsonDerivedType(typeof(XrpCurrencyConversionV2), typeDiscriminator: nameof(XrpCurrencyConversionV2))]
-    [JsonDerivedType(typeof(FungibleTokenCurrencyConversionV2), typeDiscriminator: nameof(FungibleTokenCurrencyConversionV2))]
     public abstract class PaymentV2 : Payment
     {
         /// <summary>
@@ -87,7 +76,6 @@ namespace XRPL.Core.Domain.Transactions
     /// <para/>Payments are also the only way to create accounts.
     /// <para/>Only applicable to API v1.
     /// </summary>
-    [JsonDerivedType(typeof(DirectXrpPaymentV1), typeDiscriminator: nameof(DirectXrpPaymentV1))]
     public class DirectXrpPaymentV1 : PaymentV1
     {
         /// <summary>
@@ -105,7 +93,6 @@ namespace XRPL.Core.Domain.Transactions
     /// <para/>Payments are also the only way to create accounts.
     /// <para/>Only applicable to API v1.
     /// </summary>
-    [JsonDerivedType(typeof(CreateOrRedeemTokensPaymentV1), typeDiscriminator: nameof(CreateOrRedeemTokensPaymentV1))]
     public class CreateOrRedeemTokensPaymentV1 : PaymentV1
     {
         /// <summary>
@@ -135,7 +122,6 @@ namespace XRPL.Core.Domain.Transactions
     /// or currencies with the same currency code and different issuers.
     /// <para/>Only applicable to API v1.
     /// </summary>
-    [JsonDerivedType(typeof(XrpCrossCurrencyPaymentV1), typeDiscriminator: nameof(XrpCrossCurrencyPaymentV1))]
     public class XrpCrossCurrencyPaymentV1 : PaymentV1
     {
         /// <summary>
@@ -165,7 +151,6 @@ namespace XRPL.Core.Domain.Transactions
     /// or currencies with the same currency code and different issuers.
     /// <para/>Only applicable to API v1.
     /// </summary>
-    [JsonDerivedType(typeof(FungibleTokenCrossCurrencyPaymentV1), typeDiscriminator: nameof(FungibleTokenCrossCurrencyPaymentV1))]
     public class FungibleTokenCrossCurrencyPaymentV1 : PaymentV1
     {
         /// <summary>
@@ -194,7 +179,6 @@ namespace XRPL.Core.Domain.Transactions
     /// <para/>Payments are also the only way to create accounts.
     /// <para/>Only applicable to API v1.
     /// </summary>
-    [JsonDerivedType(typeof(XrpPartialPaymentV1), typeDiscriminator: nameof(XrpPartialPaymentV1))]
     public class XrpPartialPaymentV1 : PaymentV1
     {
         /// <summary>

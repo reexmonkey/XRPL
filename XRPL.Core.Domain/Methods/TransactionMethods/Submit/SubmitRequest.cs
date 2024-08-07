@@ -8,7 +8,6 @@ namespace XRPL.Core.Domain.Methods.TransactionMethods.Submit
     /// <summary>
     /// Represents a request that applies a transaction and sends it to the network to be confirmed and included in future ledgers.
     /// </summary>
-
     public class SubmitOnlyRequest : RequestBase<SubmitOnlyParameters>, IExpect<SubmitResponse>
     {
         /// <summary>
@@ -56,11 +55,6 @@ namespace XRPL.Core.Domain.Methods.TransactionMethods.Submit
     /// <summary>
     /// Specifies the parameters of an <see cref="SignAndSubmitRequest"/> object.
     /// </summary>
-    [JsonPolymorphic]
-    [JsonDerivedType(typeof(SecretSignAndSubmitParameters), typeDiscriminator: nameof(SecretSignAndSubmitParameters))]
-    [JsonDerivedType(typeof(SeedSignAndSubmitParameters), typeDiscriminator: nameof(SeedSignAndSubmitParameters))]
-    [JsonDerivedType(typeof(SeedHexSignAndSubmitParameters), typeDiscriminator: nameof(SeedHexSignAndSubmitParameters))]
-    [JsonDerivedType(typeof(PassphraseSignAndSubmitParameters), typeDiscriminator: nameof(PassphraseSignAndSubmitParameters))]
     public abstract class SignAndSubmitParameters : ParameterBase
     {
         /// <summary>
@@ -109,7 +103,6 @@ namespace XRPL.Core.Domain.Methods.TransactionMethods.Submit
     /// <summary>
     /// Represents the parameters of an <see cref="SignAndSubmitRequest"/> object.
     /// </summary>
-    [JsonDerivedType(typeof(SecretSignAndSubmitParameters), typeDiscriminator: nameof(SecretSignAndSubmitParameters))]
     public class SecretSignAndSubmitParameters : SignAndSubmitParameters
     {
         /// <summary>
@@ -123,7 +116,6 @@ namespace XRPL.Core.Domain.Methods.TransactionMethods.Submit
     /// <summary>
     /// Represents the parameters of an <see cref="SignAndSubmitRequest"/> object.
     /// </summary>
-    [JsonDerivedType(typeof(SeedSignAndSubmitParameters), typeDiscriminator: nameof(SeedSignAndSubmitParameters))]
     public class SeedSignAndSubmitParameters : SignAndSubmitParameters
     {
         /// <summary>
@@ -146,7 +138,6 @@ namespace XRPL.Core.Domain.Methods.TransactionMethods.Submit
     /// <summary>
     /// Represents the parameters of an <see cref="SignAndSubmitRequest"/> object that signs a transaction with a seed in hexadecimal format.
     /// </summary>
-    [JsonDerivedType(typeof(SeedHexSignAndSubmitParameters), typeDiscriminator: nameof(SeedHexSignAndSubmitParameters))]
     public class SeedHexSignAndSubmitParameters : SignAndSubmitParameters
     {
         /// <summary>
@@ -169,7 +160,6 @@ namespace XRPL.Core.Domain.Methods.TransactionMethods.Submit
     /// <summary>
     /// Represents the parameters of an <see cref="SignAndSubmitRequest"/> object that signs a transaction with a passphrase.
     /// </summary>
-    [JsonDerivedType(typeof(PassphraseSignAndSubmitParameters), typeDiscriminator: nameof(PassphraseSignAndSubmitParameters))]
     public class PassphraseSignAndSubmitParameters : SignAndSubmitParameters
     {
         /// <summary>

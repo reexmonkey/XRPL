@@ -38,9 +38,6 @@ namespace XRPL.Core.Domain.Methods.PathAndOrderBookMethods.RipplePathFind
     /// <summary>
     /// Specifies a path from one possible source currency (held by the initiating account) to the destination account and currency.
     /// </summary>
-    [JsonPolymorphic]
-    [JsonDerivedType(typeof(XrpAlternativePath), typeDiscriminator: nameof(XrpAlternativePath))]
-    [JsonDerivedType(typeof(FungibleTokenAlternativePath), typeDiscriminator: nameof(FungibleTokenAlternativePath))]
     public abstract class AlternativePath
     {
         /// <summary>
@@ -59,7 +56,6 @@ namespace XRPL.Core.Domain.Methods.PathAndOrderBookMethods.RipplePathFind
     /// <summary>
     /// Represents a path from one possible source currency (held by the initiating account) to the destination account and currency.
     /// </summary>
-    [JsonDerivedType(typeof(XrpAlternativePath), typeDiscriminator: nameof(XrpAlternativePath))]
     public class XrpAlternativePath : AlternativePath
     {
         /// <summary>
@@ -72,7 +68,6 @@ namespace XRPL.Core.Domain.Methods.PathAndOrderBookMethods.RipplePathFind
     /// <summary>
     /// Represents a path from one possible source currency (held by the initiating account) to the destination account and currency.
     /// </summary>
-    [JsonDerivedType(typeof(FungibleTokenAlternativePath), typeDiscriminator: nameof(FungibleTokenAlternativePath))]
     public class FungibleTokenAlternativePath : AlternativePath
     {
         /// <summary>

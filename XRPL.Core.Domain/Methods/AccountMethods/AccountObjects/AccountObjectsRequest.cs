@@ -20,7 +20,6 @@ namespace XRPL.Core.Domain.Methods.AccountMethods.AccountObjects
     /// <para/><see cref="NFTokenOffer"/> entries for offers to buy or sell an NFT.
     /// <para/><see cref="NFTokenPage"/> entries for collections of NFTs.
     /// </summary>
-
     public class AccountObjectsRequest : RequestBase<AccountObjectsParameters>, IExpect<AccountObjectsResponse>
     {
         /// <summary>
@@ -34,7 +33,6 @@ namespace XRPL.Core.Domain.Methods.AccountMethods.AccountObjects
     /// <summary>
     /// Represents parameters of an <see cref="AccountObjectsRequest"/> object.
     /// </summary>
-
     public class AccountObjectsParameters : ParameterBase
     {
         /// <summary>
