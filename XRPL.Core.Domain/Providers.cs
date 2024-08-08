@@ -9,12 +9,24 @@ namespace XRPL.Core.Domain
         {
             return
             [
-                //LedgerEntry resolvers
+                //Ledger Entry resolvers
                 CheckContext.Default,
                 NFTokenOfferContext.Default,
                 OfferContext.Default,
 
-                //TransactionResolvers
+                //Account Method resolvers
+                AccountObjectsResultContext.Default,
+                AccountOfferContext.Default,
+                AccountOfferContext.Default,
+                NoRippleCheckResultContext.Default,
+
+                //Path and Order Book Method resolvers
+                AssetAmmInfoParametersContext.Default,
+                RipplePathFindParametersContext.Default,
+                RiplePathFindResultContext.Default,
+                AlternativePathContext.Default,
+
+                //Transaction resolvers
                 AMMCreateContext.Default,
                 AMMDepositContext.Default,
                 AMMWithdrawContext.Default,
@@ -25,8 +37,14 @@ namespace XRPL.Core.Domain
                 OfferCreateContext.Default,
                 PaymentV1Context.Default,
                 PaymentV2Context.Default,
-                TransactionMetadataContext.Default
+                TransactionMetadataContext.Default,
 
+                //Transaction Method resolvers
+                SubmitResultContext.Default,
+                SubmitMultisignedResultContext.Default,
+                TransactionEntryResultContext.Default,
+                TxResultContext.Default,
+                JsonTxResultContext.Default
             ];
         }
     }
